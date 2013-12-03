@@ -27,6 +27,6 @@ public abstract class GameRulesModel {
 	public static final byte [] SCORES4 = { 50, 50 };
 	
 	public abstract void countScore ();
-	public abstract boolean isWinner (short score);
+	public abstract boolean isWinner ();
 	
 }

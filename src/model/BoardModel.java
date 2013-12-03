@@ -8,6 +8,7 @@ import model.game_rules.GameRulesModel;
 import model.player.ComputerPlayerModel;
 import model.player.HumanPlayerModel;
 import model.player.PlayerModel;
+import testeur_console.TesteurConsoleBoardModel;
 import view.console.ConsoleBoardView;
 
 public class BoardModel {
@@ -22,14 +23,12 @@ public class BoardModel {
 	private DrawPileModel drawPile;
 	private PlayerModel [] players;
 	private GameRulesFactoryModel gameRulesFactory;
-	private GameRulesModel gameRules;
-	private boolean hasWinner; 
+	private GameRulesModel gameRules; 
 
 	private BoardModel () {
 	    drawPile = DrawPileModel.getUniqueInstance();
 		discardPile = DiscardPileModel.getUniqueInstance();
 		gameRulesFactory = new GameRulesFactoryModel();
-		hasWinner = false;
 	}
 
 	public static BoardModel getUniqueInstance () {
@@ -106,15 +105,7 @@ public class BoardModel {
 	}
 
 	public void launchGame () {
-	    initRound();
-	    System.out.println(ConsoleBoardView.build());
-
-	    while ( !hasWinner() ) {
-    	        getPlayer().play();
-    	        if ( getPlayer().getPlayerHand().isEmpty() ) {
-    	            
-    	        }
-	    } 
+	    TesteurConsoleBoardModel.launchGame();
 	}
 	
 	public static void main (String [] args) {
@@ -164,9 +155,9 @@ public class BoardModel {
     public byte getDirectionOfPlay () {
         return directionOfPlay;
     }
-
-   	public boolean hasWinner () {
-        return hasWinner;
+    
+    public GameRulesModel getGameRules() {
+        return gameRules;
     }
     
     public void setPlayerCursor(byte playerCursor) {
@@ -175,10 +166,6 @@ public class BoardModel {
     
     public void setDirectionOfPlay () {
         directionOfPlay *= -1;
-    }
-
-    public void setHasWinner (boolean hasWinner) {
-        this.hasWinner = hasWinner;
     }
 
 }

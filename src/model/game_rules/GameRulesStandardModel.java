@@ -19,11 +19,9 @@ public class GameRulesStandardModel extends GameRulesModel {
     }
     
     @Override
-    public boolean isWinner (short score) {
-        if ( score >= GameRulesModel.SCORE_MAX ) {
-            BoardModel.getUniqueInstance().setHasWinner(true);
+    public boolean isWinner () {
+        if ( BoardModel.getUniqueInstance().getPlayer().getScore() >= GameRulesModel.SCORE_MAX )
             return true;
-        }
         return false;
     }
     

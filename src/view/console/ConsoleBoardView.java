@@ -17,6 +17,7 @@ public class ConsoleBoardView {
    
     public static String buildMiddle () {
         return  "****                                                                         ****\n"+
+                "****   "+ConsolePlayersView.getAboveHeads()+"\n"+
                 "****   "+ConsolePlayersView.getHeads()+"\n"+
                 "****   "+ConsolePlayersView.getMiddles()+"\n"+
                 "****   "+ConsolePlayersView.getTails()+"\n"+
