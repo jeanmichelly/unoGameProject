@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+encoding//src/model/BoardModel.java=UTF-8
+encoding//src/view/console/ConsoleBoardView.java=UTF-8
+encoding//src/view/console/ConsoleCardView.java=UTF-8
+encoding//src/view/console/ConsoleDeckView.java=UTF-8

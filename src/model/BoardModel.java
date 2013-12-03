@@ -23,14 +23,14 @@ public class BoardModel {
 	private PlayerModel [] players;
 	private GameRulesFactoryModel gameRulesFactory;
 	private GameRulesModel gameRules;
-	private boolean hasWinnerGame; 
-    private String playerWinnerGame;
+	private boolean hasWinner; 
+    private String playerWinner;
 
 	private BoardModel () {
 	    drawPile = DrawPileModel.getUniqueInstance();
 		discardPile = DiscardPileModel.getUniqueInstance();
 		gameRulesFactory = new GameRulesFactoryModel();
-		hasWinnerGame = false;
+		hasWinner = false;
 	}
 
 	public static BoardModel getUniqueInstance () {
@@ -71,7 +71,7 @@ public class BoardModel {
 	}
 
 	public void chooseRandomDealer () {
-		playerCursor = (byte)(Math.random() * (players.length)); // Formule utilisée : int random = (int)(Math.random() * (higher-lower)) + lower;
+		playerCursor = (byte)(Math.random() * (players.length)); // Formule utilis��e : int random = (int)(Math.random() * (higher-lower)) + lower;
 	}
 
 	public void dispenseCards () {
@@ -110,7 +110,7 @@ public class BoardModel {
 	public void launchGame () {
 	    System.out.println(ConsoleBoardView.build());
 
-	    while (!gameRules.hasWinner()) {
+	    //while (!gameRules.hasWinner()) {
     	        getPlayer().play();
 	    //} 
 	}
