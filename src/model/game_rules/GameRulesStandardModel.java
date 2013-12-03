@@ -7,18 +7,15 @@ import model.player.PlayerModel;
 public class GameRulesStandardModel extends GameRulesModel {
     
     @Override
-    public void countScoresEachPlayers () {
-        short score;
+    public void countScore () {
+        short score = 0;
         for ( PlayerModel player : BoardModel.getUniqueInstance().getPlayers() ) {
-            score = 0;
             for ( CardModel card : player.getPlayerHand().getCards() ) {
                 score += card.getScore();
             }
-            score += player.getScore();
-            if ( isWinner(score) )
-                BoardModel.getUniqueInstance().setPlayerWinner(player.getPseudonym());
-            player.setScore(score);
         }
+        score += BoardModel.getUniqueInstance().getPlayer().getScore();
+        BoardModel.getUniqueInstance().getPlayer().setScore(score);
     }
     
     @Override

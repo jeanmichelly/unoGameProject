@@ -47,5 +47,5 @@ public class ConsoleBoardView {
         
         return clear()+buildHead()+buildMiddle()+buildTail();
     }
-
+    
 }

@@ -24,7 +24,6 @@ public class BoardModel {
 	private GameRulesFactoryModel gameRulesFactory;
 	private GameRulesModel gameRules;
 	private boolean hasWinner; 
-    private String playerWinner;
 
 	private BoardModel () {
 	    drawPile = DrawPileModel.getUniqueInstance();
@@ -47,7 +46,6 @@ public class BoardModel {
 
 	public void initGame () {
         numberGame = 0;
-        initRound();
 	}
 
 	public void createPlayers () {
@@ -108,11 +106,15 @@ public class BoardModel {
 	}
 
 	public void launchGame () {
+	    initRound();
 	    System.out.println(ConsoleBoardView.build());
 
-	    //while (!gameRules.hasWinner()) {
+	    while ( !hasWinner() ) {
     	        getPlayer().play();
-	    //} 
+    	        if ( getPlayer().getPlayerHand().isEmpty() ) {
+    	            
+    	        }
+	    } 
 	}
 	
 	public static void main (String [] args) {
@@ -167,10 +169,6 @@ public class BoardModel {
         return hasWinner;
     }
     
-    public String getPlayerWinner () {
-        return playerWinner;
-    }
-    
     public void setPlayerCursor(byte playerCursor) {
         this.playerCursor = playerCursor;
     }
@@ -181,10 +179,6 @@ public class BoardModel {
 
     public void setHasWinner (boolean hasWinner) {
         this.hasWinner = hasWinner;
-    }
-    
-    public void setPlayerWinner (String playerWinner) {
-        this.playerWinner = playerWinner;
     }
 
 }

@@ -14,24 +14,21 @@ public class TesteurConsoleHumanPlayerModel {
                 System.out.println("Que voulez vous faire ? (j/n)");
                 switch(sc.next()) {
                     case "j":
-                        System.out.println("Vous avez décidé de jouer");
+                        System.out.println("Vous avez posé une carte");
                         BoardModel.getUniqueInstance().getPlayer().putDownCard();
-                        BoardModel.getUniqueInstance().moveCursorToNextPlayer();
                         break w1;
                     case "n":
-                        System.out.println("Vous avez décidé de ne pas jouer, vous allez alors piocher");
+                        System.out.println("Vous n'avez pas posé de carte, vous allez alors piocher");
                         BoardModel.getUniqueInstance().getPlayer().notToPlay();
                         w2: while (true) {
                             System.out.println("Que voulez vous faire ? (j/n)");
                             switch (sc.next()) {
                                 case "j":
-                                    System.out.println("Vous avez finalement joué une carte");
+                                    System.out.println("Vous avez finalement posé une carte");
                                     BoardModel.getUniqueInstance().getPlayer().putDownCard();
-                                    BoardModel.getUniqueInstance().moveCursorToNextPlayer();
                                     break w2;
                                 case "n":
                                     System.out.println("Vous passez votre tour");
-                                    BoardModel.getUniqueInstance().moveCursorToNextPlayer();
                                     break w2;
                             }
                         }
@@ -41,29 +38,26 @@ public class TesteurConsoleHumanPlayerModel {
          }
          else {
             w3: while (true) {
-                System.out.println("Pas de carte jouable, piocher carte");
+                System.out.println("Pas de carte jouable, vous allez alors piocher");
                 BoardModel.getUniqueInstance().getPlayer().pickCard();
-                if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasPlayableCard() ) { // à changer pour performance
-                    System.out.println("Carte jouable");
+                if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasPlayableCard() ) { // A changer pour performance
+                    System.out.println("La carte pioché est jouable");
                     w4: while (true) {
                         System.out.println("Que voulez vous faire ? (j/n)");
                         switch (sc.next()) {
                             case "j":
-                                System.out.println("jouer cette carte pioché");
+                                System.out.println("Vous avez posé cette carte");
                                 BoardModel.getUniqueInstance().getPlayer().putDownCard();
-                                BoardModel.getUniqueInstance().moveCursorToNextPlayer();
                                 break w4;
                             case "n":
-                                System.out.println("Ne pas jouer et passer le tour au prochain joueur");
-                                BoardModel.getUniqueInstance().moveCursorToNextPlayer();
+                                System.out.println("Vous passez votre tour");
                                 break w4;
                          }
                      }
                     break w3;
                  }
                 else {
-                    System.out.println("Vous n'avez toujours pas de carte jouable, au tour du prochain joueur");
-                    BoardModel.getUniqueInstance().moveCursorToNextPlayer();
+                    System.out.println("Vous n'avez toujours pas de carte jouable");
                     break;
                 }
              }

@@ -26,7 +26,7 @@ public abstract class GameRulesModel {
 	// Scores associés aux symboles du tableau SYMBOLS4
 	public static final byte [] SCORES4 = { 50, 50 };
 	
-	public abstract void countScoresEachPlayers ();
+	public abstract void countScore ();
 	public abstract boolean isWinner (short score);
 	
 }
