@@ -1,6 +1,8 @@
 package testeur_console;
 
 import java.util.Scanner;
+
+import view.console.ConsoleBoardView;
 import model.BoardModel;
 import model.card.ColorModel;
 import model.deck.DiscardPileModel;
@@ -14,17 +16,18 @@ public class TesteurConsoleHumanPlayerModel {
                 System.out.println("Que voulez vous faire ? (j/n)");
                 switch(sc.next()) {
                     case "j":
-                        System.out.println("Vous avez posé une carte");
+                        System.out.println("Vous avez avez décidé de poser une carte");
                         BoardModel.getUniqueInstance().getPlayer().putDownCard();
                         break w1;
                     case "n":
                         System.out.println("Vous n'avez pas posé de carte, vous allez alors piocher");
                         BoardModel.getUniqueInstance().getPlayer().notToPlay();
+                        System.out.println(ConsoleBoardView.build());
                         w2: while (true) {
                             System.out.println("Que voulez vous faire ? (j/n)");
                             switch (sc.next()) {
                                 case "j":
-                                    System.out.println("Vous avez finalement posé une carte");
+                                    System.out.println("Vous avez décidé, finalement de poser une carte");
                                     BoardModel.getUniqueInstance().getPlayer().putDownCard();
                                     break w2;
                                 case "n":
@@ -40,6 +43,7 @@ public class TesteurConsoleHumanPlayerModel {
             w3: while (true) {
                 System.out.println("Pas de carte jouable, vous allez alors piocher");
                 BoardModel.getUniqueInstance().getPlayer().pickCard();
+                System.out.println(ConsoleBoardView.build());
                 if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasPlayableCard() ) { // A changer pour performance
                     System.out.println("La carte pioché est jouable");
                     w4: while (true) {
@@ -70,8 +74,10 @@ public class TesteurConsoleHumanPlayerModel {
         try {
             System.out.println("Veuillez choisir une carte");
             int indexChoiceCard = sc.nextInt();
-            if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().get(indexChoiceCard).isPlayableCard() )
+            if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().get(indexChoiceCard).isPlayableCard() ) {
                 DiscardPileModel.getUniqueInstance().push(BoardModel.getUniqueInstance().getPlayer().getPlayerHand().remove(indexChoiceCard));
+                ConsoleBoardView.build();
+            }
             else
                 throw new Exception();
         } 

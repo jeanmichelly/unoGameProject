@@ -10,6 +10,13 @@ public class ConsoleDeckView {
     private static StringBuffer tailsCards = new StringBuffer();
     private static StringBuffer belowTailsCards = new StringBuffer();
     
+    public static void clear () {
+        headsCards = new StringBuffer();
+        middlesCards = new StringBuffer();
+        tailsCards = new StringBuffer();
+        belowTailsCards = new StringBuffer();
+    }
+    
     protected static void buildHeads () {
         headsCards.append(ConsoleCardView.buildHead()+"   ");
     }

@@ -11,6 +11,14 @@ public class ConsolePlayersView {
     private static StringBuffer tailsCards = new StringBuffer();
     private static StringBuffer belowTailsCards = new StringBuffer();
     
+    public static void clear () {
+        aboveHeadsCards = new StringBuffer();
+        headsCards = new StringBuffer();
+        middlesCards = new StringBuffer();
+        tailsCards = new StringBuffer();
+        belowTailsCards = new StringBuffer();
+    }
+    
     protected static void buildAboveHeads (int s) {
         aboveHeadsCards.append((s>9) ? " "+s+"   " : "  "+s+"     ");
     }

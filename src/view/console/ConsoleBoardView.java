@@ -6,6 +6,8 @@ import model.deck.DiscardPileModel;
 public class ConsoleBoardView {
     
     public static String clear () {
+        ConsoleDeckView.clear();
+        ConsolePlayersView.clear();
         return "\n\n";
     }
     
@@ -45,8 +47,9 @@ public class ConsoleBoardView {
     public static String build () {
         ConsolePlayerHandView.build();
         ConsolePlayersView.build();
+        String build = buildHead()+buildMiddle()+buildTail();
         
-        return clear()+buildHead()+buildMiddle()+buildTail();
+        return clear()+build;
     }
     
 }
