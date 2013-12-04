@@ -21,13 +21,13 @@ public class CardModel {
 	}
 	
 	public boolean isPlayableCard () {
-        if ( this.symbol.equals(DiscardPileModel.getUniqueInstance().peek().getSymbol()) || this.color.equals(DiscardPileModel.getUniqueInstance().peek().getColor()) )
+        if ( this.color==null || this.symbol.equals(DiscardPileModel.getUniqueInstance().peek().getSymbol()) || this.color.equals(DiscardPileModel.getUniqueInstance().peek().getColor()) )
             return true;
         return false;
     }
     
     public boolean isPlayableCard (CardModel card) {
-        if ( this.symbol.equals(card.getSymbol()) || this.color.equals(card.getColor()) )
+        if ( this.color==null || this.symbol.equals(card.getSymbol()) || this.color.equals(card.getColor()) )
             return true;
         return false;
     }

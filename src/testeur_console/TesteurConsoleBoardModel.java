@@ -22,10 +22,10 @@ public class TesteurConsoleBoardModel {
                 BoardModel.getUniqueInstance().applyCardEffect();
                 BoardModel.getUniqueInstance().moveCursorToNextPlayer();
             }
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) { }
-            ConsoleBoardView.build();
+            // try {
+            //     Thread.sleep(1000);
+            // } catch (InterruptedException e) { }
+            System.out.println(ConsoleBoardView.build());
         } 
         System.out.println(playerWinner+"a gagné la partie !!!");
     }

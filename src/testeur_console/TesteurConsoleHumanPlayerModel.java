@@ -66,7 +66,6 @@ public class TesteurConsoleHumanPlayerModel {
                 }
              }
          }
-        sc.close();
     }
 
     public static void putDownCard () {
@@ -83,9 +82,6 @@ public class TesteurConsoleHumanPlayerModel {
         } 
         catch (Exception e) {
             putDownCard();
-        }
-        finally {
-            sc.close();
         }
     }
 
@@ -108,7 +104,6 @@ public class TesteurConsoleHumanPlayerModel {
                     break w;
             }
         }
-        sc.close();
     }
     
 }

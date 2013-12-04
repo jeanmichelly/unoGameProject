@@ -81,14 +81,14 @@ public class BoardModel {
 	
    public byte getToNextPlayer () {
         if( directionOfPlay == 1 ) {
-            if( players.length-1 < playerCursor+1 ) {
+            if( playerCursor == players.length-1 ) {
                 return 0;
             } else {
                 return (byte)(playerCursor+1);
             }
         } 
         else {
-            if( playerCursor-1 < 0 ) {
+            if( playerCursor == 0 ) {
                 return (byte)(players.length-1);
             } else {
                 return (byte)(playerCursor-1);
