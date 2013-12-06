@@ -61,11 +61,13 @@ public class ConsolePlayersView {
     
     public static String build () {
         for ( PlayerModel player: BoardModel.getUniqueInstance().getPlayers() ) {
-            buildAboveHeads(player.getScore());
-            buildHeads();
-            buildMiddles();
-            buildTails();
-            buildBelowTails(player.getPlayerHand().size());
+            if ( !player.getPseudonym().equals(BoardModel.getUniqueInstance().getPlayer().getPseudonym() )) {
+                buildAboveHeads(player.getScore());
+                buildHeads();
+                buildMiddles();
+                buildTails();
+                buildBelowTails(player.getPlayerHand().size());
+            }
         }
         return headsCards+"\n"+
                middlesCards+"\n"+
