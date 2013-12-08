@@ -18,12 +18,12 @@ public class TesteurConsoleBoardModel {
         while ( !hasWinner ) {
             BoardModel.getUniqueInstance().getPlayer().play();
             if (! BoardModel.getUniqueInstance().getPlayer().getPlayerHand().isEmpty() ) {
-                if ( !DiscardPileModel.getUniqueInstance().hasApplyEffectLastCard() )
+                if ( !DiscardPileModel.getUniqueInstance().hasApplyEffectLastCard() ) // Appliquer l'effet d'une carte posé une seule fois
                     BoardModel.getUniqueInstance().applyCardEffect();
                 BoardModel.getUniqueInstance().moveCursorToNextPlayer();
             }
             else {
-                BoardModel.getUniqueInstance().applyCardEffect();
+                BoardModel.getUniqueInstance().applyCardEffect(); // Le joueur a forcément posé une carte
                 BoardModel.getUniqueInstance().getGameRules().countScore();
                 hasWinner = BoardModel.getUniqueInstance().getGameRules().isWinner();
                 playerWinner = BoardModel.getUniqueInstance().getPlayer().getPseudonym();

@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/model/BoardModel.java=UTF-8
+encoding//src/model/deck/DrawPileModel.java=UTF-8
 encoding//src/model/game_rules/GameRulesModel.java=UTF-8
 encoding//src/testeurConsole/TesteurConsoleBoardModel.java=UTF-8
 encoding//src/testeur_console/TesteurConsoleHumanPlayerModel.java=UTF-8
