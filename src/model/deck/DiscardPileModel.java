@@ -6,10 +6,11 @@ import model.card.CardModel;
 public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
 
 	private static DiscardPileModel uniqueInstance = null;
+	private boolean applyEffectLastCard;
 
 	private DiscardPileModel () {
 		super.cards = new Stack<CardModel>();
-		super.cards.push(DrawPileModel.getUniqueInstance().pop());
+		push(DrawPileModel.getUniqueInstance().pop());
 	}
 
 	public static DiscardPileModel getUniqueInstance () {
@@ -20,7 +21,8 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
 	}
 
 	public CardModel push (CardModel card) {
-		 return super.cards.push(card);
+	    applyEffectLastCard = false;
+		return super.cards.push(card);
 	}
 
 	public CardModel peek () {
@@ -36,6 +38,14 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
 	    Stack<CardModel> restCards = (Stack<CardModel>)super.cards; 
 	    super.add(topCard);
 	    return restCards;
+	}
+	
+	public boolean hasApplyEffectLastCard () {
+	    return applyEffectLastCard;
+	}
+
+	public void setApplyEffectLastCard (boolean applyEffectLastCard) {
+		this.applyEffectLastCard = applyEffectLastCard;
 	}
 	
 }

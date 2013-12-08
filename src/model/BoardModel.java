@@ -100,6 +100,7 @@ public class BoardModel {
 	
 	public void applyCardEffect () {
 	    discardPile.peek().getCompositeEffects().applyEffect();
+	    DiscardPileModel.getUniqueInstance().setApplyEffectLastCard(true);
 	}
 
    	public DrawPileModel getDrawPile () {

@@ -75,7 +75,7 @@ public class TesteurConsoleHumanPlayerModel {
             int indexChoiceCard = sc.nextInt();
             if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().get(indexChoiceCard).isPlayableCard() ) {
                 DiscardPileModel.getUniqueInstance().push(BoardModel.getUniqueInstance().getPlayer().getPlayerHand().remove(indexChoiceCard));
-                ConsoleBoardView.build();
+                System.out.println(ConsoleBoardView.build());
             }
             else
                 throw new Exception();
