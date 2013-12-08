@@ -1,4 +1,4 @@
-package test_unitaires.card;
+package testUnitaire.card;
 
 import static org.junit.Assert.*;
 import java.util.Stack;

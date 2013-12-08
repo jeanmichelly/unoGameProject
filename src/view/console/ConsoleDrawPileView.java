@@ -5,20 +5,20 @@ import model.deck.DrawPileModel;
 public class ConsoleDrawPileView {
     
     public static String buildHead () {
-        return "#####";
+        return "@@@@@@";
     }
     
     public static String buildMiddle () {
-        return "#####";
+        return "@@@@@@";
     }
     
     public static String buildTail () {
-        return "#####";  
+        return "@@@@@@";
     }
     
     public static String buildBelowTail () {
         byte sizeDrawPile =(byte) DrawPileModel.getUniqueInstance().getCards().size(); 
-        return (sizeDrawPile>9) ? " "+sizeDrawPile : "  "+sizeDrawPile;  
+        return (sizeDrawPile>9) ? "  "+sizeDrawPile : "  "+sizeDrawPile;
     }
     
     public static String build () {

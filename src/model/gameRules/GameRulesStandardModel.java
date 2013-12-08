@@ -1,4 +1,4 @@
-package model.game_rules;
+package model.gameRules;
 
 import model.BoardModel;
 import model.card.CardModel;
@@ -20,9 +20,7 @@ public class GameRulesStandardModel extends GameRulesModel {
     
     @Override
     public boolean isWinner () {
-        if ( BoardModel.getUniqueInstance().getPlayer().getScore() >= GameRulesModel.SCORE_MAX )
-            return true;
-        return false;
+        return BoardModel.getUniqueInstance().getPlayer().getScore() >= GameRulesModel.SCORE_MAX;
     }
     
 }

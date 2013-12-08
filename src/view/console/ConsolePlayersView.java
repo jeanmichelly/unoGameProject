@@ -24,19 +24,19 @@ public class ConsolePlayersView {
     }
     
     protected static void buildHeads () {
-        headsCards.append("#####   ");
+        headsCards.append(" /|\\    ");
     }
     
     protected static void buildMiddles () {
-        middlesCards.append("#####   ");
+        middlesCards.append("®®®®®   ");
     }
     
     protected static void buildTails () {
-        tailsCards.append("#####   ");
+        tailsCards.append(" \\|/    ");
     }
     
     public static void buildBelowTails (int s) {
-        belowTailsCards.append((s>9) ? " "+s+"   " : "  "+s+"     ");  
+        belowTailsCards.append((s>9) ? "  "+s+"    " : "  "+s+"     ");
     }
     
     protected static String getAboveHeads () {

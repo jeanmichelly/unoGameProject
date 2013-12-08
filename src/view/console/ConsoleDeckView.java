@@ -1,7 +1,8 @@
 package view.console;
 
-import java.util.List;
 import model.card.CardModel;
+
+import java.util.List;
 
 public class ConsoleDeckView {
     
@@ -9,6 +10,7 @@ public class ConsoleDeckView {
     private static StringBuffer middlesCards = new StringBuffer();
     private static StringBuffer tailsCards = new StringBuffer();
     private static StringBuffer belowTailsCards = new StringBuffer();
+    private static StringBuffer indexesCard = new StringBuffer();
     
     public static void clear () {
         headsCards = new StringBuffer();
@@ -47,6 +49,10 @@ public class ConsoleDeckView {
     
     protected static String getBelowTails () {
         return belowTailsCards.toString();    
+    }
+
+    protected static String getIndexes () {
+        return indexesCard.toString();
     }
     
     protected static String build(List<CardModel> deck) {

@@ -1,4 +1,4 @@
-package test_unitaires.card;
+package testUnitaire.card;
 
 import static org.junit.Assert.*;
 import java.util.Stack;
@@ -9,7 +9,7 @@ import model.card.ColorModel;
 import model.card.SymbolModel;
 import model.card.effect.*;
 import model.deck.DiscardPileModel;
-import model.game_rules.GameRulesModel;
+import model.gameRules.GameRulesModel;
 
 import org.junit.Test;
 

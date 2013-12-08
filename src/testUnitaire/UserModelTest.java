@@ -1,8 +1,8 @@
-package test_unitaires;
+package testUnitaire;
 
 import static org.junit.Assert.*;
 import model.UserModel;
-import model.game_rules.GameRulesFactoryModel;
+import model.gameRules.GameRulesFactoryModel;
 import org.junit.Test;
 
 public class UserModelTest {

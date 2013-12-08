@@ -3,13 +3,11 @@ package model;
 import model.card.effect.CompositeEffectModel;
 import model.deck.DiscardPileModel;
 import model.deck.DrawPileModel;
-import model.game_rules.GameRulesFactoryModel;
-import model.game_rules.GameRulesModel;
+import model.gameRules.GameRulesFactoryModel;
+import model.gameRules.GameRulesModel;
 import model.player.ComputerPlayerModel;
 import model.player.HumanPlayerModel;
 import model.player.PlayerModel;
-import testeur_console.TesteurConsoleBoardModel;
-import view.console.ConsoleBoardView;
 
 public class BoardModel {
 
@@ -68,7 +66,7 @@ public class BoardModel {
 	}
 
 	public void chooseRandomDealer () {
-		playerCursor = (byte)(Math.random() * (players.length)); // Formule utilis��e : int random = (int)(Math.random() * (higher-lower)) + lower;
+		playerCursor = (byte)(Math.random() * (players.length)); // Formule utilisée : int random = (int)(Math.random() * (higher-lower)) + lower;
 	}
 
 	public void dispenseCards () {
@@ -104,26 +102,6 @@ public class BoardModel {
 	    discardPile.peek().getCompositeEffects().applyEffect();
 	}
 
-	public void launchGame () {
-	    TesteurConsoleBoardModel.launchGame();
-	}
-	
-	public static void main (String [] args) {
-	    BoardModel board = BoardModel.getUniqueInstance();
-	    UserModel.initNumberPlayers();
-	    UserModel.initNumberHumanPlayers();
-	    UserModel.initPseudonymsHumanPlayers();
-	    UserModel.initChoiceGameRules();
-	    board.createPlayers();
-	    board.initHumanPlayers();
-	    board.initComputerPlayers();
-	    board.initGameRules();
-	    board.chooseRandomDealer();
-	    board.dispenseCards();
-	    board.initGame();
-	    board.launchGame();
-	}
-	
    	public DrawPileModel getDrawPile () {
         return drawPile;
     }

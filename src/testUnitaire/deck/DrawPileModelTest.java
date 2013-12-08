@@ -1,4 +1,4 @@
-package test_unitaires.deck;
+package testUnitaire.deck;
 
 import static org.junit.Assert.*;
 import java.util.HashMap;

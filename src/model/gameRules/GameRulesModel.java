@@ -1,4 +1,4 @@
-package model.game_rules;
+package model.gameRules;
 
 import model.card.ColorModel;
 import model.card.SymbolModel;
@@ -12,11 +12,11 @@ public abstract class GameRulesModel {
 	public static final byte TIME_LIMIT_PER_PLAYER = 5;
 
 	public static final short SCORE_MAX = 500;
-	// Tableaux de symboles présents 1 fois par couleur
+	// Tableau de symboles présents 1 fois par couleur
 	public static final SymbolModel [] SYMBOLS1 = { SymbolModel.ZERO }; 
-	// Tableaux de symboles présents 2 fois par couleur
+	// Tableau de symboles présents 2 fois par couleur
 	public static final SymbolModel [] SYMBOLS2 = { SymbolModel.ONE, SymbolModel.TWO, SymbolModel.THREE, SymbolModel.FOUR, SymbolModel.FIVE, SymbolModel.SIX, SymbolModel.SEVEN, SymbolModel.EIGHT, SymbolModel.NINE, SymbolModel.DRAW_TWO, SymbolModel.SKIP, SymbolModel.REVERSE };
-	// Tableaux de symboles présents 4 fois sans couleur
+	// Tableau de symboles présents 4 fois sans couleur
 	public static final SymbolModel [] SYMBOLS4 = { SymbolModel.WILD, SymbolModel.WILD_DRAW_FOUR };
 	public static final ColorModel [] COLORS = { ColorModel.YELLOW, ColorModel.RED, ColorModel.GREEN, ColorModel.BLUE };
 	// Scores associés aux symboles du tableau SYMBOLS1

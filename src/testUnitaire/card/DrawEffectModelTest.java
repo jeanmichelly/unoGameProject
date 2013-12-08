@@ -1,4 +1,4 @@
-package test_unitaires.card;
+package testUnitaire.card;
 
 import static org.junit.Assert.*;
 import java.util.Stack;
@@ -8,15 +8,15 @@ import model.card.CardModel;
 import model.card.ColorModel;
 import model.card.SymbolModel;
 import model.card.effect.CompositeEffectModel;
-import model.card.effect.WildEffectModel;
+import model.card.effect.DrawEffectModel;
 import model.deck.DiscardPileModel;
-import model.game_rules.GameRulesModel;
+
 import org.junit.Test;
 
-public class WildEffectModelTest {
+public class DrawEffectModelTest {
 
     @Test
-    public void applyEffectTest() {
+    public void applyEffectTest () {
         BoardModel board = BoardModel.getUniqueInstance();
         UserModel.setNumberPlayers((byte)3);
         UserModel.setNumberHumanPlayers((byte)3);
@@ -33,23 +33,13 @@ public class WildEffectModelTest {
         board.initRound();
         
         CompositeEffectModel effects = new CompositeEffectModel();
-        effects.addEffect(new WildEffectModel());
-        CardModel wildCard = new CardModel(SymbolModel.WILD, null, (byte)50, effects);
+        effects.addEffect(new DrawEffectModel());
+        CardModel drawCard = new CardModel(SymbolModel.DRAW_TWO, ColorModel.GREEN, (byte)20, effects);
         
-        DiscardPileModel.getUniqueInstance().push(wildCard);
-        
-        assertNull(DiscardPileModel.getUniqueInstance().peek().getColor());
-        
+        DiscardPileModel.getUniqueInstance().push(drawCard);
         board.applyCardEffect();
         
-        assertNotNull(DiscardPileModel.getUniqueInstance().peek().getColor());
-        
-        boolean existColor = false;
-        for ( ColorModel color : GameRulesModel.COLORS ) { // Verifie la couleur
-            if (color == DiscardPileModel.getUniqueInstance().peek().getColor())
-                existColor = true;
-        }
-        assertEquals(true, existColor);   
+        assertEquals(8, board.getNextPlayer().getPlayerHand().size()); // Verifie si le joueur suivant a 1 carte en plus     
     }
 
 }

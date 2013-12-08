@@ -1,6 +1,6 @@
 package model.player;
 
-import testeur_console.TesteurConsoleHumanPlayerModel;
+import testeurConsole.TesteurConsoleHumanPlayerModel;
 
 public class HumanPlayerModel extends PlayerModel {
     

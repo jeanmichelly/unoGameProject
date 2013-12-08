@@ -1,11 +1,12 @@
 package model.deck;
 
-import java.util.Stack;
 import model.card.CardModel;
 import model.card.ColorModel;
 import model.card.SymbolModel;
 import model.card.effect.*;
-import model.game_rules.GameRulesModel;
+import model.gameRules.GameRulesModel;
+
+import java.util.Stack;
 
 public class DrawPileModel extends DeckModel<Stack<CardModel>> {
 	
@@ -49,7 +50,7 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
 		}
 
 		i = 0;
-		// Generation des cards presentes 4 fois avec symbole et sans couleur(joker, +4)
+		// Generation des cartes presentes 4 fois avec symbole et sans couleur(joker, +4)
 		for ( SymbolModel symbol : GameRulesModel.SYMBOLS4 ) {
 			for ( int j=0; j<4; j++ ) {
                 CompositeEffectModel effects = new CompositeEffectModel();

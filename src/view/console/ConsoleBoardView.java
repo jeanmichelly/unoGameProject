@@ -13,35 +13,36 @@ public class ConsoleBoardView {
     
     public static String buildHead () {
         return "*********************************************************************************\n"+
-               "*************************************UNO GAME************************************\n"+
+               "§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§   UNO GAME   §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§\n"+
                "*********************************************************************************\n";
     }
    
     public static String buildMiddle () {
-        return  "****                                                                         ****\n"+
-                "****   "+ConsolePlayersView.getAboveHeads()+"\n"+
-                "****   "+ConsolePlayersView.getHeads()+"\n"+
-                "****   "+ConsolePlayersView.getMiddles()+"\n"+
-                "****   "+ConsolePlayersView.getTails()+"\n"+
-                "****   "+ConsolePlayersView.getBelowTails()+"\n"+
-                "****                                                                         ****\n"+
-                "****                            "+ConsoleDiscardPileView.buildHead()+"     "+ConsoleDrawPileView.buildHead()+"                            ****\n"+
-                "****                            "+ConsoleDiscardPileView.buildMiddle()+"     "+ConsoleDrawPileView.buildMiddle()+"                            ****\n"+
-                "****                            "+ConsoleDiscardPileView.buildTail()+"     "+ConsoleDrawPileView.buildTail()+"                            ****\n"+
-                "****                            "+ConsoleDiscardPileView.buildBelowTail((DiscardPileModel.getUniqueInstance().peek().getColor()==null) ? '•' : DiscardPileModel.getUniqueInstance().peek().getColor().getLabel())+"     "+ConsoleDrawPileView.buildBelowTail()+"                              ****\n"+
-                "****                                                                         ****\n"+
-                "****   Au tour de "+BoardModel.getUniqueInstance().getPlayer().getPseudonym()+"\n"+
-                "****   "+ConsolePlayerHandView.getHeads()+"\n"+
-                "****   "+ConsolePlayerHandView.getMiddles()+"\n"+
-                "****   "+ConsolePlayerHandView.getTails()+"\n"+
-                "****   "+ConsolePlayerHandView.getBelowTails()+"\n"+
-                "****                                                                         ****\n";
+        return  "\n"+
+                "     "+ConsolePlayersView.getAboveHeads()+"\n"+
+                "     "+ConsolePlayersView.getHeads()+"\n"+
+                "     "+ConsolePlayersView.getMiddles()+"\n"+
+                "     "+ConsolePlayersView.getTails()+"\n"+
+                "     "+ConsolePlayersView.getBelowTails()+"\n"+
+                "\n"+
+                "                              "+ConsoleDiscardPileView.buildHead()+"     "+ConsoleDrawPileView.buildHead()+"                            \n"+
+                "                              "+ConsoleDiscardPileView.buildMiddle()+"     "+ConsoleDrawPileView.buildMiddle()+"                            \n"+
+                "                              "+ConsoleDiscardPileView.buildTail()+"     "+ConsoleDrawPileView.buildTail()+"                            \n"+
+                "                              "+ConsoleDiscardPileView.buildBelowTail((DiscardPileModel.getUniqueInstance().peek().getColor()==null) ? '•' : DiscardPileModel.getUniqueInstance().peek().getColor().getLabel())+"     "+ConsoleDrawPileView.buildBelowTail()+"                              \n"+
+                "\n"+
+                "\n"+
+                "     Au tour de "+BoardModel.getUniqueInstance().getPlayer().getPseudonym()+"\n"+
+                "     ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\n"+
+                "     "+ConsolePlayerHandView.getHeads()+"\n"+
+                "     "+ConsolePlayerHandView.getMiddles()+"\n"+
+                "     "+ConsolePlayerHandView.getTails()+"\n"+
+                "     "+ConsolePlayerHandView.getBelowTails()+"\n"+
+                " \n";
     }
     
     public static String buildTail () {
-        return "*********************************************************************************\n"+
-               "*********************************************************************************\n"+
-               "*********************************************************************************";
+        return "_________________________________________________________________________________\n"+
+               "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\n";
     }
     
     public static String build () {

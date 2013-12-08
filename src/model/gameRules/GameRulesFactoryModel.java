@@ -1,4 +1,4 @@
-package model.game_rules;
+package model.gameRules;
 
 import model.UserModel;
 

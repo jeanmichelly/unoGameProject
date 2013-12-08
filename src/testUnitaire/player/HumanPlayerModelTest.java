@@ -1,4 +1,4 @@
-package test_unitaires.player;
+package testUnitaire.player;
 
 import model.BoardModel;
 import model.UserModel;
