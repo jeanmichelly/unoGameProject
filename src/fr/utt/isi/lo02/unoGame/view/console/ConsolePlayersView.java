@@ -28,7 +28,7 @@ public class ConsolePlayersView {
     }
     
     protected static void buildMiddles () {
-        middlesCards.append("®®®®®   ");
+        middlesCards.append("| | |   ");
     }
     
     protected static void buildTails () {
@@ -60,38 +60,12 @@ public class ConsolePlayersView {
     }
     
     public static String build () {
-        int playerCursor = BoardModel.getUniqueInstance().getPlayerCursor();
-        PlayerModel [] players = BoardModel.getUniqueInstance().getPlayers();
-        if (BoardModel.getUniqueInstance().getDirectionOfPlay() == 1) {
-            for ( int i=playerCursor+1; i<players.length; i++ ) {
-                buildAboveHeads(players[i].getScore());
-                buildHeads();
-                buildMiddles();
-                buildTails();
-                buildBelowTails(players[i].getPlayerHand().size());
-            }
-            for ( int i=0; i<playerCursor; i++ ) {
-                buildAboveHeads(players[i].getScore());
-                buildHeads();
-                buildMiddles();
-                buildTails();
-                buildBelowTails(players[i].getPlayerHand().size());
-            }
-        } else {
-            for ( int i=playerCursor-1; i>=0; i-- ) {
-                buildAboveHeads(players[i].getScore());
-                buildHeads();
-                buildMiddles();
-                buildTails();
-                buildBelowTails(players[i].getPlayerHand().size());
-            }
-            for ( int i=players.length-1; i>playerCursor; i-- ) {
-                buildAboveHeads(players[i].getScore());
-                buildHeads();
-                buildMiddles();
-                buildTails();
-                buildBelowTails(players[i].getPlayerHand().size());
-            }
+        for ( PlayerModel player: BoardModel.getUniqueInstance().getPlayers() ) {
+            buildAboveHeads(player.getScore());
+            buildHeads();
+            buildMiddles();
+            buildTails();
+            buildBelowTails(player.getPlayerHand().size());
         }
         return headsCards+"\n"+
                middlesCards+"\n"+

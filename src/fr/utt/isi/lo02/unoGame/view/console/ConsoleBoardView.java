@@ -21,6 +21,8 @@ public class ConsoleBoardView {
         String antiClockWiseDirection = "";
         String clockWiseDirection = "";
         String marginSupp = "";
+        String playerCursor=" ";
+
         if ( BoardModel.getUniqueInstance().getDirectionOfPlay() == 1 )
             clockWiseDirection = "---->";
         else {
@@ -28,31 +30,35 @@ public class ConsoleBoardView {
             marginSupp = "        ";
         }
         
-        return  "\n"+
-                "     "+marginSupp+ConsolePlayersView.getAboveHeads()+"\n"+
-                "     "+marginSupp+ConsolePlayersView.getHeads()+"\n"+
-                "     "+antiClockWiseDirection+ConsolePlayersView.getMiddles()+clockWiseDirection+"\n"+
-                "     "+marginSupp+ConsolePlayersView.getTails()+"\n"+
-                "     "+marginSupp+ConsolePlayersView.getBelowTails()+"\n"+
-                "\n"+
-                "                              "+ConsoleDiscardPileView.buildHead()+"     "+ConsoleDrawPileView.buildHead()+"                            \n"+
-                "                              "+ConsoleDiscardPileView.buildMiddle()+"     "+ConsoleDrawPileView.buildMiddle()+"                            \n"+
-                "                              "+ConsoleDiscardPileView.buildTail()+"     "+ConsoleDrawPileView.buildTail()+"                            \n"+
-                "                              "+ConsoleDiscardPileView.buildBelowTail((DiscardPileModel.getUniqueInstance().peek().getColor()==null) ? '•' : DiscardPileModel.getUniqueInstance().peek().getColor().getLabel())+"     "+ConsoleDrawPileView.buildBelowTail()+"                              \n"+
-                "\n"+
-                "\n"+
-                "     Au tour de "+BoardModel.getUniqueInstance().getPlayer().getPseudonym()+"\n"+
-                "     ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\n"+
-                "     "+ConsolePlayerHandView.getHeads()+"\n"+
-                "     "+ConsolePlayerHandView.getMiddles()+"\n"+
-                "     "+ConsolePlayerHandView.getTails()+"\n"+
-                "     "+ConsolePlayerHandView.getBelowTails()+"\n"+
-                "     "+ConsolePlayerHandView.getIndexs()+"\n"+
-                " \n";
+        if (BoardModel.getUniqueInstance().getPlayerCursor() != 0)
+            for (int i=0; i<BoardModel.getUniqueInstance().getPlayerCursor(); i++)
+                playerCursor += "        ";
+        
+        playerCursor += "~•~";
+        System.out.println(BoardModel.getUniqueInstance().getPlayerCursor());
+        return  "|     "+marginSupp+ConsolePlayersView.getAboveHeads()+"\n"+
+                "|     "+marginSupp+ConsolePlayersView.getHeads()+"\n"+
+                "|     "+antiClockWiseDirection+ConsolePlayersView.getMiddles()+clockWiseDirection+"\n"+
+                "|     "+marginSupp+ConsolePlayersView.getTails()+"\n"+
+                "|     "+marginSupp+ConsolePlayersView.getBelowTails()+"\n"+
+                "|     "+playerCursor+"\n"+
+                "|\n"+
+                "|                              "+ConsoleDiscardPileView.buildHead()+"     "+ConsoleDrawPileView.buildHead()+"                            \n"+
+                "|                              "+ConsoleDiscardPileView.buildMiddle()+"     "+ConsoleDrawPileView.buildMiddle()+"                            \n"+
+                "|                              "+ConsoleDiscardPileView.buildTail()+"     "+ConsoleDrawPileView.buildTail()+"                            \n"+
+                "|                              "+ConsoleDiscardPileView.buildBelowTail((DiscardPileModel.getUniqueInstance().peek().getColor()==null) ? '•' : DiscardPileModel.getUniqueInstance().peek().getColor().getLabel())+"     "+ConsoleDrawPileView.buildBelowTail()+"                              \n"+
+                "|\n"+
+                "|     Au tour de "+BoardModel.getUniqueInstance().getPlayer().getPseudonym()+"\n"+
+                "|     ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\n"+
+                "|     "+ConsolePlayerHandView.getHeads()+"\n"+
+                "|     "+ConsolePlayerHandView.getMiddles()+"\n"+
+                "|     "+ConsolePlayerHandView.getTails()+"\n"+
+                "|     "+ConsolePlayerHandView.getBelowTails()+"\n"+
+                "|     "+ConsolePlayerHandView.getIndexs()+"\n";
     }
     
     public static String buildTail () {
-        return "_________________________________________________________________________________\n"+
+        return "|________________________________________________________________________________\n"+
                "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\n";
     }
     
