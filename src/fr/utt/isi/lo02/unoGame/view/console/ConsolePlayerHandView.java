@@ -20,6 +20,10 @@ public class ConsolePlayerHandView {
         return ConsoleDeckView.getBelowTails();
     }
     
+    protected static String getIndexs () {
+        return ConsoleDeckView.getIndexs();
+    }
+    
     public static String build () {
         return ConsoleDeckView.build(BoardModel.getUniqueInstance().getPlayer().getPlayerHand().getCards());
     }

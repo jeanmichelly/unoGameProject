@@ -18,12 +18,22 @@ public class ConsoleBoardView {
     }
    
     public static String buildMiddle () {
+        String antiClockWiseDirection = "";
+        String clockWiseDirection = "";
+        String marginSupp = "";
+        if ( BoardModel.getUniqueInstance().getDirectionOfPlay() == 1 )
+            clockWiseDirection = "---->";
+        else {
+            antiClockWiseDirection = "<----   ";   
+            marginSupp = "        ";
+        }
+        
         return  "\n"+
-                "     "+ConsolePlayersView.getAboveHeads()+"\n"+
-                "     "+ConsolePlayersView.getHeads()+"\n"+
-                "     "+ConsolePlayersView.getMiddles()+"\n"+
-                "     "+ConsolePlayersView.getTails()+"\n"+
-                "     "+ConsolePlayersView.getBelowTails()+"\n"+
+                "     "+marginSupp+ConsolePlayersView.getAboveHeads()+"\n"+
+                "     "+marginSupp+ConsolePlayersView.getHeads()+"\n"+
+                "     "+antiClockWiseDirection+ConsolePlayersView.getMiddles()+clockWiseDirection+"\n"+
+                "     "+marginSupp+ConsolePlayersView.getTails()+"\n"+
+                "     "+marginSupp+ConsolePlayersView.getBelowTails()+"\n"+
                 "\n"+
                 "                              "+ConsoleDiscardPileView.buildHead()+"     "+ConsoleDrawPileView.buildHead()+"                            \n"+
                 "                              "+ConsoleDiscardPileView.buildMiddle()+"     "+ConsoleDrawPileView.buildMiddle()+"                            \n"+
@@ -37,6 +47,7 @@ public class ConsoleBoardView {
                 "     "+ConsolePlayerHandView.getMiddles()+"\n"+
                 "     "+ConsolePlayerHandView.getTails()+"\n"+
                 "     "+ConsolePlayerHandView.getBelowTails()+"\n"+
+                "     "+ConsolePlayerHandView.getIndexs()+"\n"+
                 " \n";
     }
     

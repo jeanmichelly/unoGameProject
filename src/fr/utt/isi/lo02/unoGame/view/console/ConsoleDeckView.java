@@ -11,13 +11,14 @@ public class ConsoleDeckView {
     private static StringBuffer middlesCards = new StringBuffer();
     private static StringBuffer tailsCards = new StringBuffer();
     private static StringBuffer belowTailsCards = new StringBuffer();
-    private static StringBuffer indexesCard = new StringBuffer();
+    private static StringBuffer indexCards = new StringBuffer();
     
     public static void clear () {
         headsCards = new StringBuffer();
         middlesCards = new StringBuffer();
         tailsCards = new StringBuffer();
         belowTailsCards = new StringBuffer();
+        indexCards = new StringBuffer();
     }
     
     protected static void buildHeads () {
@@ -34,6 +35,10 @@ public class ConsoleDeckView {
     
     protected static void buildBelowTails (char c) {
         belowTailsCards.append(ConsoleCardView.buildBelowTail(c)+"   ");
+    }
+    
+    protected static void buildIndexs (int i) {
+        indexCards.append("  (" + i + ")     ");
     }
 
     protected static String getHeads () {
@@ -52,21 +57,25 @@ public class ConsoleDeckView {
         return belowTailsCards.toString();    
     }
 
-    protected static String getIndexes () {
-        return indexesCard.toString();
+    protected static String getIndexs () {
+        return indexCards.toString();
     }
     
-    protected static String build(List<CardModel> deck) {
+    protected static String build (List<CardModel> deck) {
+        int i = 0;
         for ( CardModel card : deck ) {
             buildHeads();
             buildMiddles(card.getSymbol().getLabel());
             buildTails();
             buildBelowTails((card.getColor()==null) ? '•' : card.getColor().getLabel());
+            buildIndexs(i);
+            i++;
         }
         return headsCards+"\n"+
                middlesCards+"\n"+
                tailsCards+"\n"+
-               belowTailsCards;
+               belowTailsCards +
+               indexCards;
     }
     
 }

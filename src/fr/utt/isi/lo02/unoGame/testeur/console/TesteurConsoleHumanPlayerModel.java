@@ -15,7 +15,7 @@ public class TesteurConsoleHumanPlayerModel {
         if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasPlayableCard() ) {
             w1: while (true) {
                 System.out.print("Que voulez vous faire ? (j/n) : ");
-                switch(sc.next()) {
+                switch (sc.next()) {
                     case "j":
                         System.out.println("\n◊ Vous avez avez décidé de poser une carte \n");
                         BoardModel.getUniqueInstance().getPlayer().putDownCard();
