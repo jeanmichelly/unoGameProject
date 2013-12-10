@@ -3,6 +3,11 @@ package fr.utt.isi.lo02.unoGame.model;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
 
+/**
+ * 
+ * Cette classe sert à selectionner la langue utilise au cours de l'application.
+ *
+ */
 public class Expression {
 
     private static String language; //System.getProperty("user.language");

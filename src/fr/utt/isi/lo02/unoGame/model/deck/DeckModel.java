@@ -5,7 +5,12 @@ import java.util.List;
 
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 
-
+/**
+ * 
+ * Cette classe represente globalement ce que contient un paquet de carte.
+ *
+ * @param <T>
+ */
 public abstract class DeckModel <T extends List<CardModel>> {
     
     T cards;

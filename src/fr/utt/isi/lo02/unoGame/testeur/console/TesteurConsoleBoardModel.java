@@ -7,6 +7,11 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidGameRulesException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidPlayException;
 import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
 
+/**
+ * 
+ * Cette classe permet de tester et debugger l'application.
+ *
+ */
 public class TesteurConsoleBoardModel {
 
     public static void launchGame () throws InvalidPlayException, InvalidGameRulesException {
@@ -47,7 +52,7 @@ public class TesteurConsoleBoardModel {
 //            } catch (InterruptedException e) { }
             System.out.println(ConsoleBoardView.build());
         } 
-        System.out.println(playerWinner+"a gagn�� la partie !!!");
+        System.out.println(playerWinner+"a gagne la partie !!!");
     }
     
     public static void main (String [] args) {

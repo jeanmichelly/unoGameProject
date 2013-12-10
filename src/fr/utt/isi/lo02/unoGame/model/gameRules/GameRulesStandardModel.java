@@ -4,6 +4,12 @@ import fr.utt.isi.lo02.unoGame.model.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
 
+/**
+ * 
+ * Cette classe comporte un des modes du jeu Uno. 
+ * Elle permet de comptabiliser les points selon les regles standards du jeu
+ *
+ */
 public class GameRulesStandardModel extends GameRulesModel {
     
     @Override

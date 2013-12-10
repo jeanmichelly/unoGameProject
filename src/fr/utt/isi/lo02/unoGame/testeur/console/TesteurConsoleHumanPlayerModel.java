@@ -8,6 +8,11 @@ import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
 
+/**
+ * 
+ * @version JRE 1.7
+ *
+ */
 public class TesteurConsoleHumanPlayerModel {
     
     public static void play () {

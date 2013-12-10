@@ -5,6 +5,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 
+/**
+ * 
+ * Cette classe permet d'avoir un ensemble d'effet. Elle concerne par exemple une carte +4 composee de draw*4, skip et wild.
+ *
+ */
 public class CompositeEffectModel extends ComponentEffectModel {
 
 	private ArrayList<ComponentEffectModel> effects;

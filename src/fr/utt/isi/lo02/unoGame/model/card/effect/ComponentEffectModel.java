@@ -1,5 +1,10 @@
 package fr.utt.isi.lo02.unoGame.model.card.effect;
 
+/**
+ * 
+ * Cette classe utilise le patron composite pour permettre la gestion des effets d'une carte ou des penalites qu'il peut avoir au cours d'une partie de jeu.
+ *
+ */
 public abstract class ComponentEffectModel {
     
     protected byte priority;

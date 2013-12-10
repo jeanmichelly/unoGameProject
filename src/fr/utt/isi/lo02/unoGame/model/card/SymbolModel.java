@@ -1,5 +1,10 @@
 package fr.utt.isi.lo02.unoGame.model.card;
 
+/**
+ * 
+ * Cette classe permet de lister la representation des symboles d'une carte.
+ *
+ */
 public enum SymbolModel {
 
     ZERO           ('0'),

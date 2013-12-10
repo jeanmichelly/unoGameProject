@@ -4,6 +4,11 @@ import java.util.Stack;
 
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 
+/**
+ * 
+ * Cette classe represente le talon du jeu.
+ *
+ */
 public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
 
 	private static DiscardPileModel uniqueInstance = null;

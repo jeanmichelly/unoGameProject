@@ -1,11 +1,17 @@
 package fr.utt.isi.lo02.unoGame.model.player;
 
+import fr.utt.isi.lo02.unoGame.model.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.player.strategy.PriorityColorStrategyModel;
 import fr.utt.isi.lo02.unoGame.model.player.strategy.PriorityNumberStrategyModel;
 import fr.utt.isi.lo02.unoGame.model.player.strategy.PrioritySpecialityStrategyModel;
 import fr.utt.isi.lo02.unoGame.model.player.strategy.RandomStrategyModel;
 import fr.utt.isi.lo02.unoGame.model.player.strategy.StrategyModel;
 
+/**
+ * 
+ * Cette classe represente les joueurs ordinateurs. Les joueurs ordinateurs ont une intelligence artificielle et peuvent alors, jouer automatiquement.
+ *
+ */
 public class ComputerPlayerModel extends PlayerModel {
 
     private StrategyModel [] strategy;
@@ -21,7 +27,8 @@ public class ComputerPlayerModel extends PlayerModel {
     
     @Override
     public void play () {
-        
+        if ( BoardModel.getUniqueInstance().getNextPlayer().getPlayerHand().size() < 3 )
+            strategy[2].execute();
     }
 
     @Override

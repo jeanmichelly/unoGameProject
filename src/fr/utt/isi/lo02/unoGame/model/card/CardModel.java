@@ -5,6 +5,11 @@ import fr.utt.isi.lo02.unoGame.model.card.effect.ComponentEffectModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.CompositeEffectModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 
+/**
+ * 
+ * Cette classe permet de representer les cartes du jeu.
+ *
+ */
 public class CardModel {
     
     private SymbolModel symbol;

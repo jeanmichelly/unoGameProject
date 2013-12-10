@@ -1,5 +1,10 @@
 package fr.utt.isi.lo02.unoGame.model.card;
 
+/**
+ * 
+ * Cette classe permet de lister la representation des couleurs d'une carte.
+ *
+ */
 public enum ColorModel {
     
     YELLOW ('Y', new java.awt.Color(220, 215, 0)),

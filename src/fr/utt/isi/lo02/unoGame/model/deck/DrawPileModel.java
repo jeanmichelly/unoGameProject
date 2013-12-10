@@ -11,6 +11,11 @@ import fr.utt.isi.lo02.unoGame.model.card.effect.SkipEffectModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.WildEffectModel;
 import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
 
+/**
+ * 
+ * Cette classe represente la pioche du jeu.
+ *
+ */
 public class DrawPileModel extends DeckModel<Stack<CardModel>> {
 	
 	private static DrawPileModel uniqueInstance = null;

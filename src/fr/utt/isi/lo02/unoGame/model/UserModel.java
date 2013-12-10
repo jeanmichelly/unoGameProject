@@ -2,6 +2,11 @@ package fr.utt.isi.lo02.unoGame.model;
 
 import java.util.Stack;
 
+/**
+ * 
+ * Cette classe est exclusivement constituee de membres statiques. Elle definit l'utilisateur qui manipule l'application hormis le deroulement d'une partie.
+ *
+ */
 public class UserModel {
 	
 	private static  byte numberPlayers;
@@ -10,11 +15,11 @@ public class UserModel {
 	private static char choiceGameRules;
 	
     public static void initNumberPlayers () {
-        UserModel.numberPlayers = 3;
+        UserModel.numberPlayers = 2;
     }
 
     public static void initNumberHumanPlayers () {
-        UserModel.numberHumanPlayers = 3;    	
+        UserModel.numberHumanPlayers = 2;    	
     }
 
     public static void initPseudonymsHumanPlayers () {

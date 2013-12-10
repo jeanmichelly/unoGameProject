@@ -5,6 +5,11 @@ import java.util.Iterator;
 
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 
+/**
+ * 
+ * Cette classe represente les mains des joueurs.
+ *
+ */
 public class PlayerHandModel extends DeckModel<ArrayList<CardModel>> {
     
     public PlayerHandModel () {

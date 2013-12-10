@@ -2,6 +2,11 @@ package fr.utt.isi.lo02.unoGame.model.player;
 
 import fr.utt.isi.lo02.unoGame.testeur.console.TesteurConsoleHumanPlayerModel;
 
+/**
+ * 
+ * Cette classe represente les joueurs humains. Elle requiert donc une présence humaine pour effectuer les actions de jeu.
+ *
+ */
 public class HumanPlayerModel extends PlayerModel {
     
     public HumanPlayerModel (String pseudonym) {

@@ -9,6 +9,11 @@ import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
 import fr.utt.isi.lo02.unoGame.model.player.HumanPlayerModel;
 import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
 
+/**
+ * 
+ * Cette classe contient le coeur du déroulement du jeu Uno. Elle représente le plateau du jeu et elle est donc, instanciable qu'une fois.  
+ *
+ */
 public class BoardModel {
 
 	private static BoardModel uniqueInstance = null;

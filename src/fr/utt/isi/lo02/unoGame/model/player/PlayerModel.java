@@ -3,6 +3,11 @@ package fr.utt.isi.lo02.unoGame.model.player;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.PlayerHandModel;
 
+/**
+ * 
+ * Cette classe contient toute la description que peut avoir un joueur
+ *
+ */
 public abstract class PlayerModel {
 
 	protected String pseudonym;

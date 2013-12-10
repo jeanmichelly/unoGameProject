@@ -3,6 +3,11 @@ package fr.utt.isi.lo02.unoGame.model.gameRules;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
 
+/**
+ * 
+ * Cette classe permet de parametre de maniere ergonomique, les eventuels changements apporte pour l'application afin de prevoir des changements ou extension.
+ *
+ */
 public abstract class GameRulesModel {
 
 	public static final byte NUMBER_PLAYERS_MIN = 2;
