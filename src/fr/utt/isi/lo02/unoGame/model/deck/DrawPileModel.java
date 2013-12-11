@@ -1,10 +1,7 @@
 package fr.utt.isi.lo02.unoGame.model.deck;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Stack;
-
-import fr.utt.isi.lo02.unoGame.model.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
@@ -21,29 +18,19 @@ import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
  * Cette classe represente la pioche du jeu.
  *
  */
-=======
-import fr.utt.isi.lo02.unoGame.model.card.CardModel;
-import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
-import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
-import fr.utt.isi.lo02.unoGame.model.card.effect.*;
-import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
-
-import java.util.Stack;
-
->>>>>>> 04eac78af5ac873baaf07a474726a975474bb914
 public class DrawPileModel extends DeckModel<Stack<CardModel>> {
-	
-	private static DrawPileModel uniqueInstance = null;
+        
+    private static DrawPileModel uniqueInstance = null;
 
-	private DrawPileModel () {
-		super.cards = new Stack<CardModel>();
+    private DrawPileModel () {
+        super.cards = new Stack<CardModel>();
 
-		initCardsAppearsOneTimeWithSymbolAndColor();
-		initCardsAppearsTwoTimeWithSymbolAndColor();
-		initCardsAppearsOneTimeWithSymbolAndWithoutColor();
-		
-		super.shuffle();
-	}
+        initCardsAppearsOneTimeWithSymbolAndColor();
+        initCardsAppearsTwoTimeWithSymbolAndColor();
+        initCardsAppearsOneTimeWithSymbolAndWithoutColor();
+        
+        super.shuffle();
+    }
 
     public static DrawPileModel getUniqueInstance () {
         if ( uniqueInstance == null )
@@ -51,7 +38,7 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
         
         return uniqueInstance;
     }
-	
+        
     private void initCardsAppearsOneTimeWithSymbolAndColor () { // Generation des cards presentes 1 fois avec symbole et couleur (0)
         int i = 0;
         
@@ -112,37 +99,29 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
             i++;
         }
     }
-	
+        
     public void reshuffled () {
         addAll(DiscardPileModel.getUniqueInstance().reshuffled());
         shuffle();
     }
 
-	private CardModel push (CardModel card) {
-		return super.cards.push(card);
-	}
-	
-	public boolean addAll (ArrayList<CardModel> cards) {
+    private CardModel push (CardModel card) {
+            return super.cards.push(card);
+    }
+        
+    public boolean addAll (ArrayList<CardModel> cards) {
         return this.cards.addAll(cards);
     }
 
-	public CardModel pop () throws DrawPileIsEmptyAfterReshuffledException {
-	    if ( size() == 1 ) {
-	        System.out.println("Plus de carte dans la pioche, on doit alors remélanger grâce au talon");
-	        reshuffled();
-	        if (cards.size() == 1)
-	            throw new DrawPileIsEmptyAfterReshuffledException();
-	    }
-	    
-		return super.cards.pop();
-	}
-<<<<<<< HEAD
-=======
-
-	public void reshuffle (Stack<CardModel> cardsReshuffledOfDiscardPile) {
-	    super.addAll(cardsReshuffledOfDiscardPile);
-	    super.shuffle();
-	}
->>>>>>> 04eac78af5ac873baaf07a474726a975474bb914
-	
+    public CardModel pop () throws DrawPileIsEmptyAfterReshuffledException {
+        if ( size() == 1 ) {
+            System.out.println("Plus de carte dans la pioche, on doit alors remélanger grâce au talon");
+            reshuffled();
+            if (cards.size() == 1)
+                throw new DrawPileIsEmptyAfterReshuffledException();
+        }
+        
+        return super.cards.pop();
+    }
+    
 }

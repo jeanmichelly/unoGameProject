@@ -27,15 +27,8 @@ public class TesteurConsoleBoardModel {
         Stack<String>playersWinnerGame = new Stack<String>();
         int numberGame = 4;
 
-<<<<<<< HEAD
         while ( BoardModel.getUniqueInstance().getNumberGame() <= numberGame ) {
             System.out.println(ConsoleBoardView.build());
-=======
-        while ( !hasWinner ) {
-            if(BoardModel.getUniqueInstance().getDrawPile().size() == 0){
-                BoardModel.getUniqueInstance().getDrawPile().reshuffle(BoardModel.getUniqueInstance().getDiscardPile().reshuffle());
-            }
->>>>>>> 04eac78af5ac873baaf07a474726a975474bb914
             try {
                 BoardModel.getUniqueInstance().getPlayer().play();
             } catch (InvalidActionPutDownCardException e) {
@@ -45,15 +38,10 @@ public class TesteurConsoleBoardModel {
                 ipe.initCause(e);
                 throw ipe;
             }
-<<<<<<< HEAD
 
             if (!BoardModel.getUniqueInstance().getPlayer().getPlayerHand().isEmpty()) {
 
                 if (!DiscardPileModel.getUniqueInstance().hasApplyEffectLastCard()) // Appliquer l'effet d'une carte posé une seule fois
-=======
-            if (! BoardModel.getUniqueInstance().getPlayer().getPlayerHand().isEmpty() ) {
-                if ( !DiscardPileModel.getUniqueInstance().hasApplyEffectLastCard() ) // Appliquer l'effet d'une carte posée une seule fois
->>>>>>> 04eac78af5ac873baaf07a474726a975474bb914
                     BoardModel.getUniqueInstance().applyCardEffect();
                 BoardModel.getUniqueInstance().moveCursorToNextPlayer();
             } else {
