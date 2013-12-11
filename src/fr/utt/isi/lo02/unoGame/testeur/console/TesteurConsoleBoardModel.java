@@ -18,6 +18,9 @@ public class TesteurConsoleBoardModel {
         System.out.println(ConsoleBoardView.build());
 
         while ( !hasWinner ) {
+            if(BoardModel.getUniqueInstance().getDrawPile().size() == 0){
+                BoardModel.getUniqueInstance().getDrawPile().reshuffle(BoardModel.getUniqueInstance().getDiscardPile().reshuffle());
+            }
             try {
                 BoardModel.getUniqueInstance().getPlayer().play();
             } catch (Exception e) {
@@ -26,7 +29,7 @@ public class TesteurConsoleBoardModel {
                 throw ipe;
             }
             if (! BoardModel.getUniqueInstance().getPlayer().getPlayerHand().isEmpty() ) {
-                if ( !DiscardPileModel.getUniqueInstance().hasApplyEffectLastCard() ) // Appliquer l'effet d'une carte posé une seule fois
+                if ( !DiscardPileModel.getUniqueInstance().hasApplyEffectLastCard() ) // Appliquer l'effet d'une carte posée une seule fois
                     BoardModel.getUniqueInstance().applyCardEffect();
                 BoardModel.getUniqueInstance().moveCursorToNextPlayer();
             }

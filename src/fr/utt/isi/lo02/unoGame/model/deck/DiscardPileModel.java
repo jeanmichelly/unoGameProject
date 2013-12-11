@@ -1,8 +1,8 @@
 package fr.utt.isi.lo02.unoGame.model.deck;
 
-import java.util.Stack;
-
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
+
+import java.util.Stack;
 
 public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
 
@@ -34,11 +34,13 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
 	    return super.cards.pop();
 	}
 	
-	public Stack<CardModel> reshuffled () {
-	    CardModel topCard = pop();
-	    Stack<CardModel> restCards = (Stack<CardModel>)super.cards; 
-	    super.add(topCard);
-	    return restCards;
+	public Stack<CardModel> reshuffle () {
+        Stack<CardModel> remainingCards = new Stack<CardModel>();
+        remainingCards.addAll((Stack<CardModel>)super.cards);
+        CardModel topCard = pop();
+        super.cards.clear();
+        super.cards.add(topCard);
+	    return remainingCards;
 	}
 	
 	public boolean hasApplyEffectLastCard () {

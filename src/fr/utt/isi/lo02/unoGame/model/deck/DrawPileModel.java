@@ -1,15 +1,12 @@
 package fr.utt.isi.lo02.unoGame.model.deck;
 
-import java.util.Stack;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
-import fr.utt.isi.lo02.unoGame.model.card.effect.CompositeEffectModel;
-import fr.utt.isi.lo02.unoGame.model.card.effect.DrawEffectModel;
-import fr.utt.isi.lo02.unoGame.model.card.effect.ReverseEffectModel;
-import fr.utt.isi.lo02.unoGame.model.card.effect.SkipEffectModel;
-import fr.utt.isi.lo02.unoGame.model.card.effect.WildEffectModel;
+import fr.utt.isi.lo02.unoGame.model.card.effect.*;
 import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
+
+import java.util.Stack;
 
 public class DrawPileModel extends DeckModel<Stack<CardModel>> {
 	
@@ -97,7 +94,7 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
 		return super.cards.pop();
 	}
 
-	public void reshuffled (Stack<CardModel> cardsReshuffledOfDiscardPile) {
+	public void reshuffle (Stack<CardModel> cardsReshuffledOfDiscardPile) {
 	    super.addAll(cardsReshuffledOfDiscardPile);
 	    super.shuffle();
 	}
