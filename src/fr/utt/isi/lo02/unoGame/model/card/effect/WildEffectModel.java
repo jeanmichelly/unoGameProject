@@ -1,6 +1,7 @@
 package fr.utt.isi.lo02.unoGame.model.card.effect;
 
 import fr.utt.isi.lo02.unoGame.model.BoardModel;
+import fr.utt.isi.lo02.unoGame.testeur.console.TesteurConsoleHumanPlayerModel;
 
 /**
  * 

@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
+
 /**
  * 
  * Cette classe permet d'avoir un ensemble d'effet. Elle concerne par exemple une carte +4 composee de draw*4, skip et wild.
@@ -20,7 +22,7 @@ public class CompositeEffectModel extends ComponentEffectModel {
 	}
 
     @Override
-    public void applyEffect () {
+    public void applyEffect () throws InvalidActionPickCardException {
         Iterator<ComponentEffectModel> iter = effects.iterator();
         while (iter.hasNext())
             iter.next().applyEffect();
@@ -42,6 +44,15 @@ public class CompositeEffectModel extends ComponentEffectModel {
 
     public boolean hasEffect () {
         return !effects.isEmpty();
+    }
+    
+    public boolean containsWildEffect () {
+        Iterator<ComponentEffectModel> iter = effects.iterator();
+        while (iter.hasNext()) {
+            if ( iter.next() instanceof WildEffectModel )
+                return true;
+        }
+        return false;
     }
     
     public void sortEffectsByPriority () {

@@ -17,8 +17,7 @@ public class ConsoleDrawPileView {
     }
     
     public static String buildBelowTail () {
-        byte sizeDrawPile =(byte) DrawPileModel.getUniqueInstance().getCards().size(); 
-        return (sizeDrawPile>9) ? "  "+sizeDrawPile : "  "+sizeDrawPile;
+        return "  "+(byte) DrawPileModel.getUniqueInstance().getCards().size();
     }
     
     public static String build () {

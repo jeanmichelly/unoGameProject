@@ -1,8 +1,13 @@
 package fr.utt.isi.lo02.unoGame.model;
 
+import java.util.Iterator;
+
+import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.CompositeEffectModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
+import fr.utt.isi.lo02.unoGame.model.exception.DrawPileIsEmptyAfterReshuffledException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesFactoryModel;
 import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
 import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
@@ -42,11 +47,33 @@ public class BoardModel {
 	
 	public void initRound () {
         directionOfPlay = 1; 
-        numberRound = 0;
+        numberRound = 1;
 	}
 
 	public void initGame () {
-        numberGame = 0;
+        numberGame = 1;
+        initRound();
+	}
+
+	public void nextRound () throws InvalidActionPickCardException, DrawPileIsEmptyAfterReshuffledException {
+	    this.numberRound++;
+	    for ( PlayerModel player : players ) {
+	        DrawPileModel.getUniqueInstance().addAll(player.getPlayerHand().getCards());
+	        player.getPlayerHand().clear();
+	    }
+	    DrawPileModel.getUniqueInstance().addAll(DiscardPileModel.getUniqueInstance().getCards());
+	    DiscardPileModel.getUniqueInstance().clear();
+	    this.chooseRandomDealer();
+        this.dispenseCards();
+        DiscardPileModel.getUniqueInstance().add(DrawPileModel.getUniqueInstance().pop());
+	}
+
+	public void nextGame () throws InvalidActionPickCardException, DrawPileIsEmptyAfterReshuffledException {
+	    this.numberGame++;
+	    this.numberRound = 0;
+	    for ( PlayerModel player : players )
+	        player.setScore((short)0);
+	    this.nextRound();
 	}
 
 	public void createPlayers () {
@@ -73,7 +100,7 @@ public class BoardModel {
 		playerCursor = (byte)(Math.random() * (players.length)); // Formule utilisée : int random = (int)(Math.random() * (higher-lower)) + lower;
 	}
 
-	public void dispenseCards () {
+	public void dispenseCards () throws InvalidActionPickCardException {
 	    for ( PlayerModel player : players ) {
     	        for ( int i=0; i<GameRulesModel.CARD_NUMBER_DISTRIBUTED_PER_PLAYER; i++ ) {
     	            player.pickCard();
@@ -103,44 +130,48 @@ public class BoardModel {
 	}
 	
 	public void applyCardEffect () {
-	    discardPile.peek().getCompositeEffects().applyEffect();
+	    try {
+            discardPile.peek().getCompositeEffects().applyEffect();
+        } catch (InvalidActionPickCardException e) {
+            e.printStackTrace();
+        }
 	    DiscardPileModel.getUniqueInstance().setApplyEffectLastCard(true);
 	}
-
-   	public DrawPileModel getDrawPile () {
-        return drawPile;
-    }
-
-    public DiscardPileModel getDiscardPile () {
-        return discardPile;
-    }
     
     public PlayerModel getPlayer () {
-        return players[playerCursor];
+        return this.players[playerCursor];
     }
     
     public PlayerModel getPlayer (int index) {
-        return players[index];
+        return this.players[index];
     }
 
     public PlayerModel getNextPlayer () {
-        return players[getToNextPlayer()];
+        return this.players[getToNextPlayer()];
     }
     
     public PlayerModel [] getPlayers () {
-        return players;
+        return this.players;
     }
     
     public byte getPlayerCursor() {
-        return playerCursor;
+        return this.playerCursor;
     }
     
     public byte getDirectionOfPlay () {
-        return directionOfPlay;
+        return this.directionOfPlay;
     }
     
     public GameRulesModel getGameRules() {
-        return gameRules;
+        return this.gameRules;
+    }
+    
+    public short getNumberGame () {
+        return this.numberGame;
+    }
+    
+    public short getNumberRound () {
+        return this.numberRound;
     }
     
     public void setPlayerCursor(byte playerCursor) {
@@ -148,7 +179,7 @@ public class BoardModel {
     }
     
     public void setDirectionOfPlay () {
-        directionOfPlay *= -1;
+        this.directionOfPlay *= -1;
     }
 
 }

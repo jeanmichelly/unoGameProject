@@ -1,8 +1,10 @@
 package fr.utt.isi.lo02.unoGame.model.deck;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
+import fr.utt.isi.lo02.unoGame.model.exception.DrawPileIsEmptyAfterReshuffledException;
 
 /**
  * 
@@ -16,7 +18,11 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
 
 	private DiscardPileModel () {
 		super.cards = new Stack<CardModel>();
-		push(DrawPileModel.getUniqueInstance().pop());
+		try {
+            push(DrawPileModel.getUniqueInstance().pop());
+        } catch (DrawPileIsEmptyAfterReshuffledException e) {
+            e.printStackTrace();
+        }
 	}
 
 	public static DiscardPileModel getUniqueInstance () {
@@ -28,6 +34,10 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
 
 	public CardModel push (CardModel card) {
 	    applyEffectLastCard = false;
+	    try {
+	        if ( peek().getCompositeEffects().containsWildEffect() )
+	            this.peek().setColor(null);
+	    } catch (EmptyStackException e){ }
 		return super.cards.push(card);
 	}
 
@@ -41,13 +51,15 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
 	
 	public Stack<CardModel> reshuffled () {
 	    CardModel topCard = pop();
-	    Stack<CardModel> restCards = (Stack<CardModel>)super.cards; 
+	    Stack<CardModel> restCards = super.cards; 
+	    super.cards = new Stack<CardModel>();
 	    super.add(topCard);
+
 	    return restCards;
 	}
 	
 	public boolean hasApplyEffectLastCard () {
-	    return applyEffectLastCard;
+	    return this.applyEffectLastCard;
 	}
 
 	public void setApplyEffectLastCard (boolean applyEffectLastCard) {

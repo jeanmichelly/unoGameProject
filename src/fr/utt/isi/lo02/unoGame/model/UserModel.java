@@ -15,11 +15,11 @@ public class UserModel {
 	private static char choiceGameRules;
 	
     public static void initNumberPlayers () {
-        UserModel.numberPlayers = 2;
+        UserModel.numberPlayers = 3;
     }
 
     public static void initNumberHumanPlayers () {
-        UserModel.numberHumanPlayers = 2;    	
+        UserModel.numberHumanPlayers = 0;    	
     }
 
     public static void initPseudonymsHumanPlayers () {

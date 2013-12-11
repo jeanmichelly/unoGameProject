@@ -1,7 +1,18 @@
 package fr.utt.isi.lo02.unoGame.model.player;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import fr.utt.isi.lo02.unoGame.model.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.card.CardModel;
+import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
+import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.PlayerHandModel;
+import fr.utt.isi.lo02.unoGame.model.exception.DrawPileIsEmptyAfterReshuffledException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
+import fr.utt.isi.lo02.unoGame.testeur.console.TesteurConsoleHumanPlayerModel;
 
 /**
  * 
@@ -20,17 +31,32 @@ public abstract class PlayerModel {
 	    playerHand = new PlayerHandModel();
 	}
 	
-	public void pickCard () {
-		playerHand.add(DrawPileModel.getUniqueInstance().pop());
+    public void putDownCard (int indexChoiceCard) throws InvalidActionPutDownCardException {
+        if ( !BoardModel.getUniqueInstance().getPlayer().getPlayerHand().get(indexChoiceCard).isPlayableCard() )
+            throw new InvalidActionPutDownCardException();
+        DiscardPileModel.getUniqueInstance().push(BoardModel.getUniqueInstance().getPlayer().getPlayerHand().remove(indexChoiceCard));
+    }
+	
+	public void pickCard () throws InvalidActionPickCardException {
+	    if ( DrawPileModel.getUniqueInstance().size() == 0 )
+	        throw new InvalidActionPickCardException();
+		try {
+            playerHand.add(DrawPileModel.getUniqueInstance().pop());
+        } catch (DrawPileIsEmptyAfterReshuffledException e) {
+            e.printStackTrace();
+        }
 	}
+	
+	public void chooseColor (ColorModel choiceColor) {
+	    DiscardPileModel.getUniqueInstance().peek().setColor(choiceColor);
+    }
 
-	public void notToPlay () {
+	public void notToPlay () throws InvalidActionPickCardException {
 	    pickCard();
 	}
 	
-    public abstract void play ();
-    public abstract void putDownCard ();
-	public abstract void chooseColor ();
+    public abstract void play () throws InvalidActionPickCardException, InvalidActionPutDownCardException;
+    public abstract void chooseColor();
 	public abstract void signalUno ();
 	public abstract void againstUno ();
 	public abstract void challengeAgainstWildDrawFourCard ();

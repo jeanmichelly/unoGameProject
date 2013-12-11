@@ -20,7 +20,18 @@ public class ConsolePlayersView {
     }
     
     protected static void buildAboveHeads (int s) {
-        aboveHeadsCards.append((s>9) ? " "+s+"   " : "  "+s+"     ");
+        String marginLeft = "", marginRight = "";
+        if ( s < 10 ) {
+            marginLeft = "  ";
+            marginRight = "     ";
+        } else if ( s < 100 ) {
+            marginLeft = " ";
+            marginRight = "     ";
+        } else {
+            marginLeft = " ";
+            marginRight = "    ";
+        }
+        aboveHeadsCards.append(marginLeft+s+marginRight);
     }
     
     protected static void buildHeads () {

@@ -33,15 +33,17 @@ public class ConsoleBoardView {
         if (BoardModel.getUniqueInstance().getPlayerCursor() != 0)
             for (int i=0; i<BoardModel.getUniqueInstance().getPlayerCursor(); i++)
                 playerCursor += "        ";
-        
         playerCursor += "~•~";
-        System.out.println(BoardModel.getUniqueInstance().getPlayerCursor());
-        return  "|     "+marginSupp+ConsolePlayersView.getAboveHeads()+"\n"+
+
+        return  
+                "|                              Partie n°"+BoardModel.getUniqueInstance().getNumberGame()+" | Round n°"+BoardModel.getUniqueInstance().getNumberRound()+"\n"+
+                "|\n"+
+                "|     "+marginSupp+ConsolePlayersView.getAboveHeads()+"\n"+
                 "|     "+marginSupp+ConsolePlayersView.getHeads()+"\n"+
                 "|     "+antiClockWiseDirection+ConsolePlayersView.getMiddles()+clockWiseDirection+"\n"+
                 "|     "+marginSupp+ConsolePlayersView.getTails()+"\n"+
                 "|     "+marginSupp+ConsolePlayersView.getBelowTails()+"\n"+
-                "|     "+playerCursor+"\n"+
+                "|     "+marginSupp+playerCursor+"\n"+
                 "|\n"+
                 "|                              "+ConsoleDiscardPileView.buildHead()+"     "+ConsoleDrawPileView.buildHead()+"                            \n"+
                 "|                              "+ConsoleDiscardPileView.buildMiddle()+"     "+ConsoleDrawPileView.buildMiddle()+"                            \n"+

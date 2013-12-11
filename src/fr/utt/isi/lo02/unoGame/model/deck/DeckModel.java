@@ -16,27 +16,31 @@ public abstract class DeckModel <T extends List<CardModel>> {
     T cards;
 
     public boolean add (CardModel card) {
-        return cards.add(card);
+        return this.cards.add(card);
     }
     
     public boolean addAll (T cards) {
         return this.cards.addAll(cards);
     }
     
+    public void clear () {
+        this.cards.clear();
+    }
+    
     public int size () {
-        return cards.size();
+        return this.cards.size();
     }
     
     public void shuffle () {
-        Collections.shuffle(cards);
+        Collections.shuffle(this.cards);
     }
     
     public boolean isEmpty () {
-        return cards.isEmpty();
+        return this.cards.isEmpty();
     }
 
     public T getCards () {
-        return cards;       
+        return this.cards;       
     }
     
 }

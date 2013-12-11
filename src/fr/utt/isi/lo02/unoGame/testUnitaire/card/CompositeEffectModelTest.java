@@ -13,12 +13,13 @@ import fr.utt.isi.lo02.unoGame.model.card.effect.DrawEffectModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.SkipEffectModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.WildEffectModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
 
 public class CompositeEffectModelTest {
 
     @Test
-    public void applyWildDrawFourEffectsTest () {
+    public void applyWildDrawFourEffectsTest () throws InvalidActionPickCardException {
         BoardModel board = BoardModel.getUniqueInstance();
         UserModel.setNumberPlayers((byte)3);
         UserModel.setNumberHumanPlayers((byte)3);
@@ -61,7 +62,7 @@ public class CompositeEffectModelTest {
     }
     
     @Test
-    public void  applyWildDrawTwoEffectsTest () {
+    public void  applyWildDrawTwoEffectsTest () throws InvalidActionPickCardException {
         BoardModel board = BoardModel.getUniqueInstance();
         UserModel.setNumberPlayers((byte)3);
         UserModel.setNumberHumanPlayers((byte)3);

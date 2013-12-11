@@ -17,17 +17,10 @@ public class HumanPlayerModel extends PlayerModel {
     public void play () {
         TesteurConsoleHumanPlayerModel.play();
     }
-
-    public void putDownCard () {
-        TesteurConsoleHumanPlayerModel.putDownCard();
-    }
     
-    public void chooseColor () {
+    @Override
+    public void chooseColor () { // Changer pour interface (Afficher les couleurs à choisir)
         TesteurConsoleHumanPlayerModel.chooseColor();
-    }
-    
-    public void notToPlay () {
-        pickCard();
     }
 
     @Override

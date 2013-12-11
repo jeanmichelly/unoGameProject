@@ -1,6 +1,9 @@
 package fr.utt.isi.lo02.unoGame.model.deck;
 
+import java.util.ArrayList;
 import java.util.Stack;
+
+import fr.utt.isi.lo02.unoGame.model.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
@@ -9,6 +12,7 @@ import fr.utt.isi.lo02.unoGame.model.card.effect.DrawEffectModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.ReverseEffectModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.SkipEffectModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.WildEffectModel;
+import fr.utt.isi.lo02.unoGame.model.exception.DrawPileIsEmptyAfterReshuffledException;
 import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
 
 /**
@@ -26,11 +30,20 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
 		initCardsAppearsOneTimeWithSymbolAndColor();
 		initCardsAppearsTwoTimeWithSymbolAndColor();
 		initCardsAppearsOneTimeWithSymbolAndWithoutColor();
+		
 		super.shuffle();
 	}
+
+    public static DrawPileModel getUniqueInstance () {
+        if ( uniqueInstance == null )
+            uniqueInstance = new DrawPileModel();
+        
+        return uniqueInstance;
+    }
 	
     private void initCardsAppearsOneTimeWithSymbolAndColor () { // Generation des cards presentes 1 fois avec symbole et couleur (0)
         int i = 0;
+        
         for ( SymbolModel symbol : GameRulesModel.SYMBOLS1 ) {
             for ( ColorModel color : GameRulesModel.COLORS ) {
                 push(new CardModel(symbol, color, GameRulesModel.SCORES1[i], new CompositeEffectModel()));
@@ -41,6 +54,7 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
     
     private void initCardsAppearsTwoTimeWithSymbolAndColor () { // Generation des cards presentes 2 fois avec symbole et couleur(Tout sauf 0, joker, +4)
         int i = 0;
+        
         for ( int j=0; j<2; j++, i=0 ) {
             for ( SymbolModel symbol : GameRulesModel.SYMBOLS2 ) {
                 for ( ColorModel color : GameRulesModel.COLORS ) {
@@ -67,6 +81,7 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
     
     private void initCardsAppearsOneTimeWithSymbolAndWithoutColor () { // Generation des cartes presentes 4 fois avec symbole et sans couleur(joker, +4)
         int i = 0;
+        
         for ( SymbolModel symbol : GameRulesModel.SYMBOLS4 ) {
             for ( int j=0; j<4; j++ ) {
                 CompositeEffectModel effects = new CompositeEffectModel();
@@ -86,25 +101,29 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
             i++;
         }
     }
-
-	public static DrawPileModel getUniqueInstance () {
-	    if ( uniqueInstance == null ) {
-	        uniqueInstance = new DrawPileModel();
-	    }
-	    return uniqueInstance;
-	}
+	
+    public void reshuffled () {
+        addAll(DiscardPileModel.getUniqueInstance().reshuffled());
+        shuffle();
+    }
 
 	private CardModel push (CardModel card) {
-		 return super.cards.push(card);
+		return super.cards.push(card);
 	}
+	
+	public boolean addAll (ArrayList<CardModel> cards) {
+        return this.cards.addAll(cards);
+    }
 
-	public CardModel pop () {
+	public CardModel pop () throws DrawPileIsEmptyAfterReshuffledException {
+	    if ( size() == 1 ) {
+	        System.out.println("Plus de carte dans la pioche, on doit alors remélanger grâce au talon");
+	        reshuffled();
+	        if (cards.size() == 1)
+	            throw new DrawPileIsEmptyAfterReshuffledException();
+	    }
+	    
 		return super.cards.pop();
-	}
-
-	public void reshuffled (Stack<CardModel> cardsReshuffledOfDiscardPile) {
-	    super.addAll(cardsReshuffledOfDiscardPile);
-	    super.shuffle();
 	}
 	
 }

@@ -9,6 +9,8 @@ import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.CompositeEffectModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
 
 public class HumanPlayerModelTest {
 
@@ -30,10 +32,16 @@ public class HumanPlayerModelTest {
         
         BoardModel.getUniqueInstance().getPlayer().getPlayerHand().add(c1);
         BoardModel.getUniqueInstance().getPlayer().getPlayerHand().add(c2);
-        BoardModel.getUniqueInstance().getPlayer().play();
-        
-        DiscardPileModel.getUniqueInstance().push(c3);
-        BoardModel.getUniqueInstance().getPlayer().play();
+        try {
+            BoardModel.getUniqueInstance().getPlayer().play();
+            DiscardPileModel.getUniqueInstance().push(c3);
+            BoardModel.getUniqueInstance().getPlayer().play();
+        } 
+        catch (InvalidActionPickCardException e) {
+            e.printStackTrace();
+        } catch (InvalidActionPutDownCardException e) {
+            e.printStackTrace();
+        }
     }
 
 }
