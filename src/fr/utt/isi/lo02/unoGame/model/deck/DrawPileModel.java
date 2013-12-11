@@ -1,5 +1,6 @@
 package fr.utt.isi.lo02.unoGame.model.deck;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -20,6 +21,16 @@ import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
  * Cette classe represente la pioche du jeu.
  *
  */
+=======
+import fr.utt.isi.lo02.unoGame.model.card.CardModel;
+import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
+import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
+import fr.utt.isi.lo02.unoGame.model.card.effect.*;
+import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
+
+import java.util.Stack;
+
+>>>>>>> 04eac78af5ac873baaf07a474726a975474bb914
 public class DrawPileModel extends DeckModel<Stack<CardModel>> {
 	
 	private static DrawPileModel uniqueInstance = null;
@@ -125,5 +136,13 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
 	    
 		return super.cards.pop();
 	}
+<<<<<<< HEAD
+=======
+
+	public void reshuffle (Stack<CardModel> cardsReshuffledOfDiscardPile) {
+	    super.addAll(cardsReshuffledOfDiscardPile);
+	    super.shuffle();
+	}
+>>>>>>> 04eac78af5ac873baaf07a474726a975474bb914
 	
 }

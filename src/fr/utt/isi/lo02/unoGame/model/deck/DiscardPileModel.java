@@ -1,16 +1,24 @@
 package fr.utt.isi.lo02.unoGame.model.deck;
 
+<<<<<<< HEAD
 import java.util.EmptyStackException;
 import java.util.Stack;
 
+=======
+>>>>>>> 04eac78af5ac873baaf07a474726a975474bb914
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.exception.DrawPileIsEmptyAfterReshuffledException;
 
+<<<<<<< HEAD
 /**
  * 
  * Cette classe represente le talon du jeu.
  *
  */
+=======
+import java.util.Stack;
+
+>>>>>>> 04eac78af5ac873baaf07a474726a975474bb914
 public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
 
 	private static DiscardPileModel uniqueInstance = null;
@@ -49,6 +57,7 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
 	    return super.cards.pop();
 	}
 	
+<<<<<<< HEAD
 	public Stack<CardModel> reshuffled () {
 	    CardModel topCard = pop();
 	    Stack<CardModel> restCards = super.cards; 
@@ -56,6 +65,15 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
 	    super.add(topCard);
 
 	    return restCards;
+=======
+	public Stack<CardModel> reshuffle () {
+        Stack<CardModel> remainingCards = new Stack<CardModel>();
+        remainingCards.addAll((Stack<CardModel>)super.cards);
+        CardModel topCard = pop();
+        super.cards.clear();
+        super.cards.add(topCard);
+	    return remainingCards;
+>>>>>>> 04eac78af5ac873baaf07a474726a975474bb914
 	}
 	
 	public boolean hasApplyEffectLastCard () {
