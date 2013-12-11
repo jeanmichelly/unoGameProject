@@ -1,10 +1,6 @@
 package fr.utt.isi.lo02.unoGame.model.player;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import fr.utt.isi.lo02.unoGame.model.BoardModel;
-import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
@@ -12,7 +8,6 @@ import fr.utt.isi.lo02.unoGame.model.deck.PlayerHandModel;
 import fr.utt.isi.lo02.unoGame.model.exception.DrawPileIsEmptyAfterReshuffledException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
-import fr.utt.isi.lo02.unoGame.testeur.console.TesteurConsoleHumanPlayerModel;
 
 /**
  * 

@@ -1,13 +1,9 @@
 package fr.utt.isi.lo02.unoGame.testeur.console;
 
-
 import java.util.Scanner;
-
 import fr.utt.isi.lo02.unoGame.model.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
-import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
-import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
 import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
 
 /**

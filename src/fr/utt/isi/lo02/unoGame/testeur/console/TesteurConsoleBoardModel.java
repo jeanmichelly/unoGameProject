@@ -1,9 +1,6 @@
 package fr.utt.isi.lo02.unoGame.testeur.console;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Stack;
-
 import fr.utt.isi.lo02.unoGame.model.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.UserModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
@@ -49,7 +46,7 @@ public class TesteurConsoleBoardModel {
                 String playerWinnerRound = BoardModel.getUniqueInstance().getPlayer().getPseudonym(); 
                 try {
                     BoardModel.getUniqueInstance().getGameRules().countScore();
-                    if ( BoardModel.getUniqueInstance().getGameRules().isWinner() ) {
+                    if ( !BoardModel.getUniqueInstance().getGameRules().isWinner() ) {
                         System.out.println(ConsoleBoardView.build());
                         BoardModel.getUniqueInstance().nextRound();
                         System.out.println(playerWinnerRound + "a gagne la manche !!!");
