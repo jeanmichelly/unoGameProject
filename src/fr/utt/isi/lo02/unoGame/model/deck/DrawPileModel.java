@@ -117,7 +117,7 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
         if ( size() == 1 ) {
             System.out.println("Plus de carte dans la pioche, on doit alors remélanger grâce au talon");
             reshuffled();
-            if (cards.size() == 1)
+            if ( cards.size() == 1 )
                 throw new DrawPileIsEmptyAfterReshuffledException();
         }
         

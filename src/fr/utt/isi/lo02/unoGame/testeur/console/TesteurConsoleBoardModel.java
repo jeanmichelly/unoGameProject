@@ -1,6 +1,7 @@
 package fr.utt.isi.lo02.unoGame.testeur.console;
 
 import java.util.Stack;
+
 import fr.utt.isi.lo02.unoGame.model.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.UserModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
@@ -9,6 +10,9 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidGameRulesException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidPlayException;
 import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
+import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView.ConsoleBoardController;
+import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayerHandView;
+import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayersView;
 
 /**
  * 
@@ -20,12 +24,17 @@ public class TesteurConsoleBoardModel {
     public static void launchGame () throws InvalidPlayException, 
                                             InvalidActionPutDownCardException, 
                                             InvalidGameRulesException {
-
+        
+        ConsoleBoardView boardView = new ConsoleBoardView(); 
+        ConsolePlayerHandView consolePlayerHandView = new ConsolePlayerHandView();
+        ConsolePlayersView consolePlayersView = new ConsolePlayersView();
+        
         Stack<String>playersWinnerGame = new Stack<String>();
         int numberGame = 4;
 
         while ( BoardModel.getUniqueInstance().getNumberGame() <= numberGame ) {
-            System.out.println(ConsoleBoardView.build());
+            BoardModel.getUniqueInstance().setChanged();
+            BoardModel.getUniqueInstance().notifyObservers();
             try {
                 BoardModel.getUniqueInstance().getPlayer().play();
             } catch (InvalidActionPutDownCardException e) {
@@ -47,14 +56,14 @@ public class TesteurConsoleBoardModel {
                 try {
                     BoardModel.getUniqueInstance().getGameRules().countScore();
                     if ( !BoardModel.getUniqueInstance().getGameRules().isWinner() ) {
-                        System.out.println(ConsoleBoardView.build());
-                        BoardModel.getUniqueInstance().nextRound();
+                        BoardModel.getUniqueInstance().setChanged();
+                        BoardModel.getUniqueInstance().notifyObservers();                        BoardModel.getUniqueInstance().nextRound();
                         System.out.println(playerWinnerRound + "a gagne la manche !!!");
                     }
                     else {
                         playersWinnerGame.push(playerWinnerRound);
-                        System.out.println(ConsoleBoardView.build());
-                        BoardModel.getUniqueInstance().nextGame();
+                        BoardModel.getUniqueInstance().setChanged();
+                        BoardModel.getUniqueInstance().notifyObservers();                        BoardModel.getUniqueInstance().nextGame();
                         for (int i=0; i<playersWinnerGame.size(); i++)
                             System.out.println("Gagnant de la partie n°"+(i+1)+" : "+playersWinnerGame.get(i));
                         System.out.println(playersWinnerGame.peek() + " a gagne cette partie !!!");

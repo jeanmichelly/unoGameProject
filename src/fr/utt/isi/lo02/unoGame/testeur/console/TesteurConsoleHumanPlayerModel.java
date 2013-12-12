@@ -38,7 +38,10 @@ public class TesteurConsoleHumanPlayerModel {
                 case "n":
                     System.out.println("\n◊ Vous n'avez pas posé de carte, vous allez alors piocher");
                     BoardModel.getUniqueInstance().getPlayer().notToPlay();
-                    System.out.println(ConsoleBoardView.build());
+                    BoardModel.getUniqueInstance().setChanged();
+                    BoardModel.getUniqueInstance().notifyObservers();
+
+                    //System.out.println(ConsoleBoardView.build());
                     w2: while (true) {
                         System.out.print("Que voulez vous faire ? (j/n) : ");
                         switch (sc.next()) {
@@ -61,7 +64,9 @@ public class TesteurConsoleHumanPlayerModel {
         w1: while (true) {
             System.out.println("\n◊ Pas de carte jouable, vous allez alors piocher");
             BoardModel.getUniqueInstance().getPlayer().pickCard();
-            System.out.println(ConsoleBoardView.build());
+            BoardModel.getUniqueInstance().setChanged();
+            BoardModel.getUniqueInstance().notifyObservers();
+            //System.out.println(ConsoleBoardView.build());
             if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasPlayableCard() ) { // A changer pour performance
                 System.out.println("\n◊ La carte piochée est jouable");
                 w2: while (true) {
@@ -92,7 +97,9 @@ public class TesteurConsoleHumanPlayerModel {
             int indexChoiceCard = sc.nextInt();
             if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().get(indexChoiceCard).isPlayableCard() ) {
                 BoardModel.getUniqueInstance().getPlayer().putDownCard(indexChoiceCard);
-                System.out.println(ConsoleBoardView.build());
+                BoardModel.getUniqueInstance().setChanged();
+                BoardModel.getUniqueInstance().notifyObservers();
+                //System.out.println(ConsoleBoardView.build());
             }
             else
                 throw new Exception();

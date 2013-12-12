@@ -1,5 +1,7 @@
 package fr.utt.isi.lo02.unoGame.model;
 
+import java.util.Observable;
+
 import fr.utt.isi.lo02.unoGame.model.card.effect.CompositeEffectModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
@@ -16,7 +18,7 @@ import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
  * Cette classe contient le coeur du déroulement du jeu Uno. Elle représente le plateau du jeu et elle est donc, instanciable qu'une fois.  
  *
  */
-public class BoardModel {
+public class BoardModel extends Observable {
 
 	private static BoardModel uniqueInstance = null;
 	private byte playerCursor;
@@ -39,6 +41,7 @@ public class BoardModel {
 	public static BoardModel getUniqueInstance () {
 	    if ( uniqueInstance == null )
 	        uniqueInstance = new BoardModel();
+
 	    return uniqueInstance;
 	}
 	
@@ -173,6 +176,10 @@ public class BoardModel {
     
     public void setPlayerCursor(byte playerCursor) {
         this.playerCursor = playerCursor;
+    }
+    
+    public void setChanged () {
+        super.setChanged();
     }
     
     public void setDirectionOfPlay () {

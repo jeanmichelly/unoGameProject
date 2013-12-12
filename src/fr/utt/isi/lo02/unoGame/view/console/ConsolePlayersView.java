@@ -1,15 +1,22 @@
 package fr.utt.isi.lo02.unoGame.view.console;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import fr.utt.isi.lo02.unoGame.model.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
 
-public class ConsolePlayersView {
+public class ConsolePlayersView implements Observer {
     
     private static StringBuffer aboveHeadsCards = new StringBuffer();
     private static StringBuffer headsCards = new StringBuffer();
     private static StringBuffer middlesCards = new StringBuffer();
     private static StringBuffer tailsCards = new StringBuffer();
     private static StringBuffer belowTailsCards = new StringBuffer();
+    
+    public ConsolePlayersView () {
+        BoardModel.getUniqueInstance().addObserver(this);
+    }
     
     public static void clear () {
         aboveHeadsCards = new StringBuffer();
@@ -82,6 +89,11 @@ public class ConsolePlayersView {
                middlesCards+"\n"+
                tailsCards+"\n"+
                belowTailsCards;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        ConsolePlayersView.build();
     }
     
 }

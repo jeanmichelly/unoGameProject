@@ -46,10 +46,12 @@ public class ComputerPlayerModel extends PlayerModel {
             int i = playerHand.size();
             strategy[3].execute();
             // A retiré mode interface
+            
             if ( playerHand.size() < i )
                 System.out.println(ConsoleBoardView.build()+"◊ "+pseudonym+" a posé une carte");
             else
                 System.out.println(ConsoleBoardView.build()+"◊ "+pseudonym+" a passé son tour, il a alors pioché une carte");
+            
         }
     }
     

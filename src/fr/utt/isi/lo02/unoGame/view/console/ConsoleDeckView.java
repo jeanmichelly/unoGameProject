@@ -2,16 +2,24 @@ package fr.utt.isi.lo02.unoGame.view.console;
 
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
+import fr.utt.isi.lo02.unoGame.model.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 
-public class ConsoleDeckView {
+public class ConsoleDeckView implements Observer {
     
     private static StringBuffer headsCards = new StringBuffer();
     private static StringBuffer middlesCards = new StringBuffer();
     private static StringBuffer tailsCards = new StringBuffer();
     private static StringBuffer belowTailsCards = new StringBuffer();
     private static StringBuffer indexCards = new StringBuffer();
+    
+    public ConsoleDeckView () {
+        BoardModel.getUniqueInstance().addObserver(this);
+        update(BoardModel.getUniqueInstance(), null);
+    }
     
     public static void clear () {
         headsCards = new StringBuffer();
@@ -76,6 +84,12 @@ public class ConsoleDeckView {
                tailsCards+"\n"+
                belowTailsCards +
                indexCards;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        // TODO Auto-generated method stub
+        
     }
     
 }

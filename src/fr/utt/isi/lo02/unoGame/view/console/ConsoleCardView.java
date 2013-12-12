@@ -1,8 +1,17 @@
 package fr.utt.isi.lo02.unoGame.view.console;
 
+import java.util.Observable;
+import java.util.Observer;
+
+import fr.utt.isi.lo02.unoGame.model.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 
-public class ConsoleCardView {
+public class ConsoleCardView implements Observer {
+    
+    public ConsoleCardView () {
+        BoardModel.getUniqueInstance().addObserver(this);
+        update(BoardModel.getUniqueInstance(), null);
+    }
     
     public static String buildHead () {
         return "|¯¯¯¯¯|";
@@ -25,6 +34,11 @@ public class ConsoleCardView {
                buildMiddle(card.getSymbol().getLabel())+"\n"+
                buildTail()+"\n"+
                buildBelowTail( (card.getColor()==null) ? '•' : card.getColor().getLabel() );
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        
     }
     
 }

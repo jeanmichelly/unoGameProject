@@ -1,8 +1,17 @@
 package fr.utt.isi.lo02.unoGame.view.console;
 
+import java.util.Observable;
+import java.util.Observer;
+
+import fr.utt.isi.lo02.unoGame.model.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
 
-public class ConsoleDrawPileView {
+public class ConsoleDrawPileView implements Observer {
+    
+    public ConsoleDrawPileView () {
+        BoardModel.getUniqueInstance().addObserver(this);
+        update(BoardModel.getUniqueInstance(), null);
+    }
     
     public static String buildHead () {
         return "@@@@@@";
@@ -25,6 +34,12 @@ public class ConsoleDrawPileView {
                buildMiddle()+"\n"+
                buildTail()+"\n"+
                buildBelowTail();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        // TODO Auto-generated method stub
+        
     }
     
 }

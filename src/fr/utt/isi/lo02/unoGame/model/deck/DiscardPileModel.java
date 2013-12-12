@@ -34,7 +34,7 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
     public CardModel push (CardModel card) {
         applyEffectLastCard = false;
         try {
-            if ( peek().getCompositeEffects().containsWildEffect() )
+            if ( peek().getCompositeEffects().containsWildEffect() ) // Reinitialise les couleurs des cartes joker
                 this.peek().setColor(null);
         } catch (EmptyStackException e){ }
         
