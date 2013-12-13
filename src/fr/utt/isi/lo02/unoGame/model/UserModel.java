@@ -19,7 +19,7 @@ public class UserModel {
     }
 
     public static void initNumberHumanPlayers () {
-        UserModel.numberHumanPlayers = 3;    	
+        UserModel.numberHumanPlayers = 0;    	
     }
 
     public static void initPseudonymsHumanPlayers () {

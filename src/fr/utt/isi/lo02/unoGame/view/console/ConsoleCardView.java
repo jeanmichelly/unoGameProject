@@ -10,7 +10,6 @@ public class ConsoleCardView implements Observer {
     
     public ConsoleCardView () {
         BoardModel.getUniqueInstance().addObserver(this);
-        update(BoardModel.getUniqueInstance(), null);
     }
     
     public static String buildHead () {
@@ -37,8 +36,6 @@ public class ConsoleCardView implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        
-    }
+    public void update(Observable o, Object arg) { }
     
 }

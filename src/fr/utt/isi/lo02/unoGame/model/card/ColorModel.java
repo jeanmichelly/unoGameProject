@@ -25,11 +25,11 @@ public enum ColorModel {
     }
     
     public byte getId () {
-        return id;
+        return this.id;
     }
 
     public char getLabel () {
-        return label;
+        return this.label;
     }
     
     public static ColorModel getColorModel (byte index) throws InvalidColorModelException{
@@ -48,7 +48,7 @@ public enum ColorModel {
     }
 
     public java.awt.Color getColor () {
-        return color;
+        return this.color;
     }
     
 }

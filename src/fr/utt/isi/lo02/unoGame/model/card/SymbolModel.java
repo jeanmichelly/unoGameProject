@@ -30,7 +30,7 @@ public enum SymbolModel {
     }
     
     public char getLabel () {
-        return label;
+        return this.label;
     }
     
 }

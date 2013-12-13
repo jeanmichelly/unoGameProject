@@ -10,7 +10,6 @@ public class ConsoleDrawPileView implements Observer {
     
     public ConsoleDrawPileView () {
         BoardModel.getUniqueInstance().addObserver(this);
-        update(BoardModel.getUniqueInstance(), null);
     }
     
     public static String buildHead () {
@@ -37,9 +36,6 @@ public class ConsoleDrawPileView implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void update(Observable o, Object arg) { }
     
 }

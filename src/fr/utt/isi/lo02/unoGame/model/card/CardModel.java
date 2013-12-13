@@ -49,30 +49,30 @@ public class CardModel {
     }
 
 	public SymbolModel getSymbol () {
-		return symbol;
+		return this.symbol;
 	}
 
 	public ColorModel getColor () {
-		return color;
+		return this.color;
 	}
 
 	public byte getScore () {
-		return score;
+		return this.score;
 	}
 	
 	public CompositeEffectModel getCompositeEffects () {
-	    return compositeEffects;
+	    return this.compositeEffects;
 	}
 	
-	public String getCard() {
-        return getSymbol()+" "+getColor()+" "+getScore()+" "+getEffects();
+	public String getCard () {
+        return this.getSymbol()+" "+this.getColor()+" "+this.getScore()+" "+this.getEffects();
 	}
 
 	public String getEffects () {
-	    Iterator<ComponentEffectModel> iter = compositeEffects.getEffects().iterator();
+	    Iterator<ComponentEffectModel> iter = this.compositeEffects.getEffects().iterator();
 	    ComponentEffectModel effect;
 	    String effects="";
-	    while( iter.hasNext() ) {
+	    while ( iter.hasNext() ) {
 	        effect = iter.next();
 	        effects += effect.getClass().getSimpleName()+" "+effect.getPriority();
 	    }

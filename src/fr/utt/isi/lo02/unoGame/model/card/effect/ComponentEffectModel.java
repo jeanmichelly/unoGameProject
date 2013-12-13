@@ -11,14 +11,14 @@ public abstract class ComponentEffectModel {
     
     protected byte priority;
     
-    public ComponentEffectModel (byte priority) {
+    protected ComponentEffectModel (byte priority) {
         this.priority = priority;
     }
 
     public byte getPriority () {
-    	    return priority;
+    	    return this.priority;
     }
     
-    public abstract void applyEffect () throws InvalidActionPickCardException;
+    protected abstract void applyEffect () throws InvalidActionPickCardException;
     
 }

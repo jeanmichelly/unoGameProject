@@ -18,24 +18,24 @@ public class CompositeEffectModel extends ComponentEffectModel {
 
 	public CompositeEffectModel () {
 	    super((byte)-1);
-		effects = new ArrayList<ComponentEffectModel>();
+		this.effects = new ArrayList<ComponentEffectModel>();
 	}
 
     @Override
     public void applyEffect () throws InvalidActionPickCardException {
-        Iterator<ComponentEffectModel> iter = effects.iterator();
-        while (iter.hasNext())
+        Iterator<ComponentEffectModel> iter = this.effects.iterator();
+        while ( iter.hasNext() )
             iter.next().applyEffect();
     }
 
     public boolean addEffect (ComponentEffectModel effect) {
-    	    return effects.add(effect);
+    	    return this.effects.add(effect);
     }
     
     public boolean addEffect (ComponentEffectModel effect, int factor) {
         boolean response = true;
         for ( int i=0; i<factor; i++ ) {
-            response = addEffect(effect);               
+            response = this.addEffect(effect);               
             if ( !response )
                 return response;
         }
@@ -43,12 +43,12 @@ public class CompositeEffectModel extends ComponentEffectModel {
     }
 
     public boolean hasEffect () {
-        return !effects.isEmpty();
+        return !this.effects.isEmpty();
     }
     
     public boolean containsWildEffect () {
-        Iterator<ComponentEffectModel> iter = effects.iterator();
-        while (iter.hasNext()) {
+        Iterator<ComponentEffectModel> iter = this.effects.iterator();
+        while ( iter.hasNext() ) {
             if ( iter.next() instanceof WildEffectModel )
                 return true;
         }
@@ -65,7 +65,7 @@ public class CompositeEffectModel extends ComponentEffectModel {
     }
     
     public ArrayList<ComponentEffectModel> getEffects () {
-        return effects;
+        return this.effects;
     }
     
 }

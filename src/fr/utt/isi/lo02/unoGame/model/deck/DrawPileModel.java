@@ -12,6 +12,7 @@ import fr.utt.isi.lo02.unoGame.model.card.effect.SkipEffectModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.WildEffectModel;
 import fr.utt.isi.lo02.unoGame.model.exception.DrawPileIsEmptyAfterReshuffledException;
 import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
+import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
 
 /**
  * 
@@ -25,9 +26,9 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
     private DrawPileModel () {
         super.cards = new Stack<CardModel>();
 
-        initCardsAppearsOneTimeWithSymbolAndColor();
-        initCardsAppearsTwoTimeWithSymbolAndColor();
-        initCardsAppearsOneTimeWithSymbolAndWithoutColor();
+        this.initCardsAppearsOneTimeWithSymbolAndColor();
+        this.initCardsAppearsTwoTimeWithSymbolAndColor();
+        this.initCardsAppearsOneTimeWithSymbolAndWithoutColor();
         
         super.shuffle();
     }
@@ -44,7 +45,7 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
         
         for ( SymbolModel symbol : GameRulesModel.SYMBOLS1 ) {
             for ( ColorModel color : GameRulesModel.COLORS ) {
-                push(new CardModel(symbol, color, GameRulesModel.SCORES1[i], new CompositeEffectModel()));
+                this.push(new CardModel(symbol, color, GameRulesModel.SCORES1[i], new CompositeEffectModel()));
             }
             i++;
         }
@@ -70,7 +71,7 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
                         default:
                             break;
                     }
-                    push(new CardModel(symbol, color, GameRulesModel.SCORES2[i], effects));
+                    this.push(new CardModel(symbol, color, GameRulesModel.SCORES2[i], effects));
                 }
                 i++;
             }
@@ -94,30 +95,30 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
                     default:
                         break;
                 }
-                push(new CardModel(symbol, null, GameRulesModel.SCORES4[i], effects));
+                this.push(new CardModel(symbol, null, GameRulesModel.SCORES4[i], effects));
             }
             i++;
         }
     }
         
     public void reshuffled () {
-        addAll(DiscardPileModel.getUniqueInstance().reshuffled());
-        shuffle();
+        super.addAll(DiscardPileModel.getUniqueInstance().reshuffled());
+        super.shuffle();
     }
 
     private CardModel push (CardModel card) {
-            return super.cards.push(card);
+        return super.cards.push(card);
     }
         
     public boolean addAll (ArrayList<CardModel> cards) {
-        return this.cards.addAll(cards);
+        return super.cards.addAll(cards);
     }
 
     public CardModel pop () throws DrawPileIsEmptyAfterReshuffledException {
-        if ( size() == 1 ) {
-            System.out.println("Plus de carte dans la pioche, on doit alors remélanger grâce au talon");
+        if ( super.size() == 1 ) {
+            ConsoleBoardView.update("Plus de carte dans la pioche, on doit alors remélanger grâce au talon");
             reshuffled();
-            if ( cards.size() == 1 )
+            if ( super.cards.size() == 1 )
                 throw new DrawPileIsEmptyAfterReshuffledException();
         }
         

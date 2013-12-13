@@ -18,7 +18,7 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
     private DiscardPileModel () {
         super.cards = new Stack<CardModel>();
         try {
-            push(DrawPileModel.getUniqueInstance().pop());
+            this.push(DrawPileModel.getUniqueInstance().pop());
         } catch (DrawPileIsEmptyAfterReshuffledException e) {
             e.printStackTrace();
         }
@@ -32,9 +32,9 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
     }
 
     public CardModel push (CardModel card) {
-        applyEffectLastCard = false;
+        this.applyEffectLastCard = false;
         try {
-            if ( peek().getCompositeEffects().containsWildEffect() ) // Reinitialise les couleurs des cartes joker
+            if ( this.peek().getCompositeEffects().containsWildEffect() ) // Reinitialise les couleurs des cartes joker
                 this.peek().setColor(null);
         } catch (EmptyStackException e){ }
         
@@ -50,7 +50,7 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
     }
     
     public Stack<CardModel> reshuffled () {
-        CardModel topCard = pop();
+        CardModel topCard = this.pop();
         Stack<CardModel> remainingCards = super.cards; 
         super.cards = new Stack<CardModel>();
         super.add(topCard);

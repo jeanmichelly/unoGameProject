@@ -22,8 +22,8 @@ public abstract class PlayerModel {
 	
 	public PlayerModel (String pseudonym) {
 	    this.pseudonym = pseudonym;
-	    score = 0;
-	    playerHand = new PlayerHandModel();
+	    this.score = 0;
+	    this.playerHand = new PlayerHandModel();
 	}
 	
     public void putDownCard (int indexChoiceCard) throws InvalidActionPutDownCardException {
@@ -36,7 +36,7 @@ public abstract class PlayerModel {
 	    if ( DrawPileModel.getUniqueInstance().size() == 0 )
 	        throw new InvalidActionPickCardException();
 		try {
-            playerHand.add(DrawPileModel.getUniqueInstance().pop());
+		    this.playerHand.add(DrawPileModel.getUniqueInstance().pop());
         } catch (DrawPileIsEmptyAfterReshuffledException e) {
             e.printStackTrace();
         }
@@ -47,7 +47,7 @@ public abstract class PlayerModel {
     }
 
 	public void notToPlay () throws InvalidActionPickCardException {
-	    pickCard();
+	    this.pickCard();
 	}
 	
     public abstract void play () throws InvalidActionPickCardException, InvalidActionPutDownCardException;
@@ -57,15 +57,15 @@ public abstract class PlayerModel {
 	public abstract void challengeAgainstWildDrawFourCard ();
 	
 	public String getPseudonym () {
-	    return pseudonym;
+	    return this.pseudonym;
 	}
 	
 	public short getScore () {
-	    return score;
+	    return this.score;
 	}
 	
 	public PlayerHandModel getPlayerHand () {
-        return playerHand;
+        return this.playerHand;
     }
 
     public void setScore (short score) {

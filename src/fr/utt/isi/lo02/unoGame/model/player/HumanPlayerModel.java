@@ -1,6 +1,7 @@
 package fr.utt.isi.lo02.unoGame.model.player;
 
-import fr.utt.isi.lo02.unoGame.testeur.console.TesteurConsoleHumanPlayerModel;
+import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
+import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayerHandView;
 
 /**
  * 
@@ -14,13 +15,13 @@ public class HumanPlayerModel extends PlayerModel {
     }
     
     @Override
-    public void play () {
-        TesteurConsoleHumanPlayerModel.play();
+    public void play () { // Changer pour interface
+        ConsolePlayerHandView.ConsolePlayerHandController.playHumanPlayerModel();
     }
     
     @Override
     public void chooseColor () { // Changer pour interface (Afficher les couleurs à choisir)
-        TesteurConsoleHumanPlayerModel.chooseColor();
+        ConsolePlayerHandView.ConsolePlayerHandController.chooseColor();
     }
 
     @Override

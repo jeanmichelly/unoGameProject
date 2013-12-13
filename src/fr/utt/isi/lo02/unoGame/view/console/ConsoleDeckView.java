@@ -18,7 +18,6 @@ public class ConsoleDeckView implements Observer {
     
     public ConsoleDeckView () {
         BoardModel.getUniqueInstance().addObserver(this);
-        update(BoardModel.getUniqueInstance(), null);
     }
     
     public static void clear () {
@@ -87,9 +86,6 @@ public class ConsoleDeckView implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void update(Observable o, Object arg) { }
     
 }

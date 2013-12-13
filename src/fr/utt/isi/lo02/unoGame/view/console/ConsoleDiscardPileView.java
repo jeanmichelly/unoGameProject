@@ -10,7 +10,6 @@ public class ConsoleDiscardPileView implements Observer {
 
     public ConsoleDiscardPileView () {
         BoardModel.getUniqueInstance().addObserver(this);
-        update(BoardModel.getUniqueInstance(), null);
     }
     
 	public static String buildHead () {
@@ -34,9 +33,6 @@ public class ConsoleDiscardPileView implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void update(Observable o, Object arg) { }
     
 }
