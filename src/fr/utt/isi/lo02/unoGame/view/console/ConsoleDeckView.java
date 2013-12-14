@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import fr.utt.isi.lo02.unoGame.model.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 
 public class ConsoleDeckView implements Observer {

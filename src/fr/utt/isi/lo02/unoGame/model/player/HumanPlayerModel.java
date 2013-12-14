@@ -26,11 +26,6 @@ public class HumanPlayerModel extends PlayerModel {
     }
 
     @Override
-    public void signalUno () {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
     public void againstUno () {
         // TODO Auto-generated method stub
         

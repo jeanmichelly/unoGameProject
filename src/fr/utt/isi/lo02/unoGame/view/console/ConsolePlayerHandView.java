@@ -4,7 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
 
-import fr.utt.isi.lo02.unoGame.model.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
@@ -46,7 +46,7 @@ public class ConsolePlayerHandView implements Observer {
     }
     
     public static class ConsolePlayerHandController {
-        
+                
         public static void playHumanPlayerModel () throws InvalidActionPickCardException {
             if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasPlayableCard() ) {
                 hasPlayableCards();
@@ -82,6 +82,9 @@ public class ConsolePlayerHandView implements Observer {
                 switch (sc.next()) {
                     case "j":
                         ConsoleBoardView.update("\n◊ Vous avez avez décidé de poser une carte \n\n");
+                        // Rends le joueur vulnérable pour un contre uno
+                        if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().size() == 2 && !BoardModel.getUniqueInstance().getPlayer().getUno() )
+                            BoardModel.getUniqueInstance().getPlayer().canReceiveAgainstUno();
                         putDownCard();
                         break w1;
                     case "n":
@@ -100,7 +103,7 @@ public class ConsolePlayerHandView implements Observer {
                                     ConsoleBoardView.update("\n◊ Vous passez votre tour\n");
                                     break w2;
                             }
-                        }
+                        }                        
                         break w1;
                 }
             }
@@ -138,9 +141,16 @@ public class ConsolePlayerHandView implements Observer {
 
         private static void putDownCard () {
             Scanner sc = new Scanner(System.in);
+
             try {
                 ConsoleBoardView.update("Veuillez choisir une carte : ");
                 int indexChoiceCard = sc.nextInt();
+                 
+                // Le joueur s'immunise contre le contre uno
+                if ( indexChoiceCard == -1 && BoardModel.getUniqueInstance().getPlayer().getUno() ) {
+                    BoardModel.getUniqueInstance().getPlayer().signalUno();
+                    ConsoleBoardView.update(BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" a dit Uno !!!\n");
+                }
                 if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().get(indexChoiceCard).isPlayableCard() ) {
                     BoardModel.getUniqueInstance().getPlayer().putDownCard(indexChoiceCard);
                     BoardModel.getUniqueInstance().setChanged();

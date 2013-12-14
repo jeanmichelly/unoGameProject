@@ -1,4 +1,4 @@
-package fr.utt.isi.lo02.unoGame.model;
+package fr.utt.isi.lo02.unoGame.model.board;
 
 import java.util.Observable;
 
@@ -13,6 +13,7 @@ import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
 import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
 import fr.utt.isi.lo02.unoGame.model.player.HumanPlayerModel;
 import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
+import fr.utt.isi.lo02.unoGame.model.user.UserModel;
 import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
 
 /**
@@ -62,6 +63,7 @@ public class BoardModel extends Observable {
 	    for ( PlayerModel player : this.players ) {
 	        DrawPileModel.getUniqueInstance().addAll(player.getPlayerHand().getCards());
 	        player.getPlayerHand().clear();
+	        player.signalUno();
 	    }
 	    DrawPileModel.getUniqueInstance().addAll(DiscardPileModel.getUniqueInstance().getCards());
 	    DiscardPileModel.getUniqueInstance().clear();

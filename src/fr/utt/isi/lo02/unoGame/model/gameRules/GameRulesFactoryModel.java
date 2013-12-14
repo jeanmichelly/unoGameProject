@@ -1,6 +1,6 @@
 package fr.utt.isi.lo02.unoGame.model.gameRules;
 
-import fr.utt.isi.lo02.unoGame.model.UserModel;
+import fr.utt.isi.lo02.unoGame.model.user.UserModel;
 
 /**
  * 

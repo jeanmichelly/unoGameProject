@@ -1,12 +1,12 @@
 package fr.utt.isi.lo02.unoGame;
 
-import fr.utt.isi.lo02.unoGame.model.BoardModel;
-import fr.utt.isi.lo02.unoGame.model.UserModel;
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidGameRulesException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidPlayException;
+import fr.utt.isi.lo02.unoGame.model.user.UserModel;
 import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
 import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayerHandView;
 import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayersView;

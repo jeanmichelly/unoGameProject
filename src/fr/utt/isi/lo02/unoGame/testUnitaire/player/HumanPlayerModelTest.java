@@ -2,8 +2,7 @@ package fr.utt.isi.lo02.unoGame.testUnitaire.player;
 
 import org.junit.Test;
 
-import fr.utt.isi.lo02.unoGame.model.BoardModel;
-import fr.utt.isi.lo02.unoGame.model.UserModel;
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
@@ -11,6 +10,7 @@ import fr.utt.isi.lo02.unoGame.model.card.effect.CompositeEffectModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
+import fr.utt.isi.lo02.unoGame.model.user.UserModel;
 
 public class HumanPlayerModelTest {
 

@@ -5,7 +5,7 @@ import java.util.Observer;
 import java.util.Scanner;
 import java.util.Stack;
 
-import fr.utt.isi.lo02.unoGame.model.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
@@ -111,8 +111,7 @@ public class ConsoleBoardView implements Observer {
             
             try {
                 BoardModel.getUniqueInstance().getPlayer().play();
-            }  
-            catch (Exception e) {
+            } catch (Exception e) {
                 InvalidPlayException ipe = new InvalidPlayException();
                 ipe.initCause(e);
                 throw ipe;

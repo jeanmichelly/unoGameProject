@@ -2,7 +2,8 @@ package fr.utt.isi.lo02.unoGame.model.player;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import fr.utt.isi.lo02.unoGame.model.BoardModel;
+
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;

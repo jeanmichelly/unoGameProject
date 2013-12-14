@@ -1,4 +1,4 @@
-package fr.utt.isi.lo02.unoGame.model;
+package fr.utt.isi.lo02.unoGame.model.language;
 
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
