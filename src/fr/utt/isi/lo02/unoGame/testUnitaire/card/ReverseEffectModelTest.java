@@ -14,11 +14,13 @@ import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.CompositeEffectModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.ReverseEffectModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 
 public class ReverseEffectModelTest {
 
     @Test
-    public void applyEffectTest () {
+    public void applyEffectTest () throws InvalidActionPickCardException, InvalidColorModelException {
 		BoardModel board = BoardModel.getUniqueInstance();
 	    UserModel.setNumberPlayers((byte)3);
 	    UserModel.setNumberHumanPlayers((byte)3);

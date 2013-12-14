@@ -1,5 +1,6 @@
 package fr.utt.isi.lo02.unoGame.model.player;
 
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
 import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayerHandView;
 
@@ -15,7 +16,7 @@ public class HumanPlayerModel extends PlayerModel {
     }
     
     @Override
-    public void play () { // Changer pour interface
+    public void play () throws InvalidActionPickCardException { // Changer pour interface
         ConsolePlayerHandView.ConsolePlayerHandController.playHumanPlayerModel();
     }
     

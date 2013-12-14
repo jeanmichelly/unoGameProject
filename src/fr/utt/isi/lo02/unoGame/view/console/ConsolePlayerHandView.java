@@ -47,25 +47,17 @@ public class ConsolePlayerHandView implements Observer {
     
     public static class ConsolePlayerHandController {
         
-        public static void playHumanPlayerModel () {
-            try {
-                if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasPlayableCard() ) {
-                    hasPlayableCards();
-                } else {
-                    notPlayableCards();
-                }
-            } catch (InvalidActionPickCardException e) {
-                e.printStackTrace();
+        public static void playHumanPlayerModel () throws InvalidActionPickCardException {
+            if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasPlayableCard() ) {
+                hasPlayableCards();
+            } else {
+                notPlayableCards();
             }
         }
         
-        public static void playComputerPlayerModel () throws InvalidActionPutDownCardException, InvalidActionPickCardException {
+        public static void playComputerPlayerModel () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
             if ( !BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasPlayableCard() ) {
-                try {
-                    BoardModel.getUniqueInstance().getPlayer().pickCard();
-                } catch (InvalidActionPickCardException e) {
-                    e.printStackTrace();
-                }
+                BoardModel.getUniqueInstance().getPlayer().pickCard();
                 BoardModel.getUniqueInstance().setChanged();
                 BoardModel.getUniqueInstance().notifyObservers(); 
                 ConsoleBoardView.update("◊ "+BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" n'a pas de carte jouable, il a alors pioché une carte");

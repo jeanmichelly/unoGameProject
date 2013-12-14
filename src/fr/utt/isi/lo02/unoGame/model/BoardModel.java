@@ -7,6 +7,7 @@ import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.DrawPileIsEmptyAfterReshuffledException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesFactoryModel;
 import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
 import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
@@ -56,7 +57,7 @@ public class BoardModel extends Observable {
         this.initRound();
 	}
 
-	public void nextRound () throws InvalidActionPickCardException, DrawPileIsEmptyAfterReshuffledException {
+	public void nextRound () throws InvalidActionPickCardException {
 	    this.numberRound++;
 	    for ( PlayerModel player : this.players ) {
 	        DrawPileModel.getUniqueInstance().addAll(player.getPlayerHand().getCards());
@@ -66,10 +67,14 @@ public class BoardModel extends Observable {
 	    DiscardPileModel.getUniqueInstance().clear();
 	    this.chooseRandomDealer();
         this.dispenseCards();
-        DiscardPileModel.getUniqueInstance().add(DrawPileModel.getUniqueInstance().pop());
+        try {
+            DiscardPileModel.getUniqueInstance().add(DrawPileModel.getUniqueInstance().pop());
+        } catch (DrawPileIsEmptyAfterReshuffledException e) {
+            e.printStackTrace();
+        }
 	}
 
-	public void nextGame () throws InvalidActionPickCardException, DrawPileIsEmptyAfterReshuffledException {
+	public void nextGame () throws InvalidActionPickCardException {
 	    this.numberGame++;
 	    this.numberRound = 0;
 	    for ( PlayerModel player : this.players )
@@ -130,12 +135,8 @@ public class BoardModel extends Observable {
 		return this.playerCursor = this.getToNextPlayer();
 	}
 	
-	public void applyCardEffect () {
-	    try {
-	        this.discardPile.peek().getCompositeEffects().applyEffect();
-        } catch (InvalidActionPickCardException e) {
-            e.printStackTrace();
-        }
+	public void applyCardEffect () throws InvalidActionPickCardException, InvalidColorModelException {
+        this.discardPile.peek().getCompositeEffects().applyEffect();
 	    DiscardPileModel.getUniqueInstance().setApplyEffectLastCard(true);
 	}
     

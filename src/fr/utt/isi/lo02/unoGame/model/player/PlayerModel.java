@@ -8,6 +8,7 @@ import fr.utt.isi.lo02.unoGame.model.deck.PlayerHandModel;
 import fr.utt.isi.lo02.unoGame.model.exception.DrawPileIsEmptyAfterReshuffledException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 
 /**
  * 
@@ -51,7 +52,7 @@ public abstract class PlayerModel {
 	}
 	
     public abstract void play () throws InvalidActionPickCardException, InvalidActionPutDownCardException;
-    public abstract void chooseColor();
+    public abstract void chooseColor() throws InvalidColorModelException;
 	public abstract void signalUno ();
 	public abstract void againstUno ();
 	public abstract void challengeAgainstWildDrawFourCard ();

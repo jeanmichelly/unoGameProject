@@ -4,6 +4,7 @@ import fr.utt.isi.lo02.unoGame.model.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.UserModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidGameRulesException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidPlayException;
 import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
@@ -17,9 +18,7 @@ import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayersView;
  */
 public class TesteurConsole {
 
-    public static void launchGame () throws InvalidPlayException, 
-                                            InvalidActionPutDownCardException, 
-                                            InvalidGameRulesException, InvalidActionPickCardException {
+    public static void launchGame () throws InvalidActionPickCardException, InvalidColorModelException, InvalidGameRulesException, InvalidPlayException {
         
         ConsoleBoardView consoleBoardView = new ConsoleBoardView(); 
         ConsolePlayerHandView consolePlayerHandView = new ConsolePlayerHandView();
@@ -28,10 +27,10 @@ public class TesteurConsole {
         ConsoleBoardView.ConsoleBoardController.play();
     }
 
-    public static void main(String[] args) throws   InvalidPlayException, 
-                                                    InvalidActionPutDownCardException, 
-                                                    InvalidActionPickCardException, 
-                                                    InvalidGameRulesException {
+    public static void main(String[] args) throws   InvalidActionPickCardException, 
+                                                    InvalidColorModelException, 
+                                                    InvalidGameRulesException, 
+                                                    InvalidPlayException {
         
         BoardModel board = BoardModel.getUniqueInstance();
         UserModel.initNumberPlayers();
@@ -46,6 +45,7 @@ public class TesteurConsole {
         board.dispenseCards();
         board.initGame();
         TesteurConsole.launchGame();
+        
     }
 
 }

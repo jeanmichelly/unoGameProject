@@ -16,7 +16,7 @@ public class DrawEffectModel extends ComponentEffectModel {
     
     @Override
     public void applyEffect () throws InvalidActionPickCardException {
-        BoardModel.getUniqueInstance().getNextPlayer().pickCard();
+            BoardModel.getUniqueInstance().getNextPlayer().pickCard();
     }
     
 }

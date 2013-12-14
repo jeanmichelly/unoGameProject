@@ -17,7 +17,7 @@ import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
 public class RandomStrategyModel implements StrategyModel {
 
     @Override
-    public void execute () throws InvalidActionPutDownCardException, InvalidActionPickCardException {
+    public void execute () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
         ArrayList<CardModel> playableCards = ((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getPlayableCards();
         int sizePlayableCards = playableCards.size();
         int random = (int)(Math.random() * (sizePlayableCards+1));

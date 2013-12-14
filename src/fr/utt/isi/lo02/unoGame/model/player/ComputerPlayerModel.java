@@ -44,13 +44,8 @@ public class ComputerPlayerModel extends PlayerModel {
     }
     
     @Override
-    public void chooseColor() {
-        try {
-            super.chooseColor(getMaxCountEachColorCard());
-        } catch (InvalidColorModelException e) {
-            e.printStackTrace();
-            e.getMessage();
-        }
+    public void chooseColor() throws InvalidColorModelException {
+        super.chooseColor(getMaxCountEachColorCard());
     }
 
     @Override

@@ -15,7 +15,7 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException
 public class HumanPlayerModelTest {
 
     @Test
-    public void playTest () {
+    public void playTest () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
         CardModel c1 = new CardModel(SymbolModel.ONE, ColorModel.BLUE, (byte)1, new CompositeEffectModel());
         CardModel c2 = new CardModel(SymbolModel.TWO, ColorModel.GREEN, (byte)2, new CompositeEffectModel());
         CardModel c3 = new CardModel(SymbolModel.THREE, ColorModel.YELLOW, (byte)3, new CompositeEffectModel());
@@ -32,16 +32,9 @@ public class HumanPlayerModelTest {
         
         BoardModel.getUniqueInstance().getPlayer().getPlayerHand().add(c1);
         BoardModel.getUniqueInstance().getPlayer().getPlayerHand().add(c2);
-        try {
-            BoardModel.getUniqueInstance().getPlayer().play();
-            DiscardPileModel.getUniqueInstance().push(c3);
-            BoardModel.getUniqueInstance().getPlayer().play();
-        } 
-        catch (InvalidActionPickCardException e) {
-            e.printStackTrace();
-        } catch (InvalidActionPutDownCardException e) {
-            e.printStackTrace();
-        }
+        BoardModel.getUniqueInstance().getPlayer().play();
+        DiscardPileModel.getUniqueInstance().push(c3);
+        BoardModel.getUniqueInstance().getPlayer().play();
     }
 
 }

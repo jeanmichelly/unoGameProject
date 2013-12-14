@@ -1,6 +1,7 @@
 package fr.utt.isi.lo02.unoGame.model.card.effect;
 
 import fr.utt.isi.lo02.unoGame.model.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 
 /**
  * 
@@ -14,7 +15,7 @@ public class WildEffectModel extends ComponentEffectModel {
     }
 
     @Override
-    public void applyEffect () {
+    public void applyEffect () throws InvalidColorModelException {
         BoardModel.getUniqueInstance().getPlayer().chooseColor();
     }
     

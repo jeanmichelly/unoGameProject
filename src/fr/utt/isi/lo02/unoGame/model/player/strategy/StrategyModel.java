@@ -10,6 +10,6 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException
  */
 public interface StrategyModel {
 
-    public void execute () throws InvalidActionPutDownCardException, InvalidActionPickCardException;
+    public void execute () throws InvalidActionPickCardException, InvalidActionPutDownCardException;
     
 }
