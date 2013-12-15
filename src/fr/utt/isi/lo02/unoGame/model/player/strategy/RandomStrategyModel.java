@@ -15,7 +15,7 @@ import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
  * Elle permet de jouer n'importe quelle carte jouable ou ne pas jouer et a titre egal. 
  *
  */
-public class RandomStrategyModel implements StrategyModel {
+public class RandomStrategyModel extends StrategyModel {
 
     @Override
     public void execute () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
@@ -28,24 +28,11 @@ public class RandomStrategyModel implements StrategyModel {
         } else {
             if ( random == sizePlayableCards )
                 random--;
-            int indexPlayingCard = researchIndexPlayingCard (playableCards.get(random));
+            int indexPlayingCard = super.researchIndexPlayingCard (playableCards.get(random));
             if ( indexPlayingCard == -1 )
                 throw new InvalidActionPutDownCardException();
             BoardModel.getUniqueInstance().getPlayer().putDownCard(indexPlayingCard);
         }
-    }
-    
-    private int researchIndexPlayingCard (CardModel choiceCard) {
-        int i = 0; 
-        Iterator<CardModel> iter = BoardModel.getUniqueInstance().getPlayer().getPlayerHand().getCards().iterator();
-        while ( iter.hasNext() ) {
-            if ( iter.next().equals(choiceCard) ) {
-                return i;
-            }
-            i++;
-        }    
-        
-        return -1;
     }
     
 }

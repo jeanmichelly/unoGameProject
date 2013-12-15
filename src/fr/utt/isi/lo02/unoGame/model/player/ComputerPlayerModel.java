@@ -50,19 +50,7 @@ public class ComputerPlayerModel extends PlayerModel {
     }
 
     @Override
-    public void signalUno() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
     public void againstUno() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void challengeAgainstWildDrawFourCard() {
         // TODO Auto-generated method stub
         
     }

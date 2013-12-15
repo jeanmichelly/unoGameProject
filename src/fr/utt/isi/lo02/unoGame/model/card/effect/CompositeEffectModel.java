@@ -28,6 +28,12 @@ public class CompositeEffectModel extends ComponentEffectModel {
         while ( iter.hasNext() )
             iter.next().applyEffect();
     }
+    
+    public void applyEffect (int i) throws InvalidActionPickCardException {
+        Iterator<ComponentEffectModel> iter = this.effects.iterator();
+        while ( iter.hasNext() )
+            ((DrawEffectModel)iter.next()).applyEffect(i);
+    }
 
     public boolean addEffect (ComponentEffectModel effect) {
     	    return this.effects.add(effect);

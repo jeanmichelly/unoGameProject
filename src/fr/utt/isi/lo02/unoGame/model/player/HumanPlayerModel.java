@@ -1,6 +1,8 @@
 package fr.utt.isi.lo02.unoGame.model.player;
 
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
 import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayerHandView;
 
@@ -16,7 +18,7 @@ public class HumanPlayerModel extends PlayerModel {
     }
     
     @Override
-    public void play () throws InvalidActionPickCardException { // Changer pour interface
+    public void play () throws InvalidActionPickCardException, InvalidColorModelException { // Changer pour interface
         ConsolePlayerHandView.ConsolePlayerHandController.playHumanPlayerModel();
     }
     
@@ -26,14 +28,11 @@ public class HumanPlayerModel extends PlayerModel {
     }
 
     @Override
-    public void againstUno () {
-        // TODO Auto-generated method stub
-        
+    public void againstUno () throws InvalidActionPickCardException {
+        BoardModel.getUniqueInstance().applyPenaltyAgainstUno();        
     }
 
-    @Override
     public void challengeAgainstWildDrawFourCard () {
-        // TODO Auto-generated method stub
         
     }
     

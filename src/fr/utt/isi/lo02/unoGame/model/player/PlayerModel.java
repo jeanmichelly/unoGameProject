@@ -55,10 +55,9 @@ public abstract class PlayerModel {
 	    this.pickCard();
 	}
 	
-    public abstract void play () throws InvalidActionPickCardException, InvalidActionPutDownCardException;
+    public abstract void play () throws InvalidActionPickCardException, InvalidActionPutDownCardException, InvalidColorModelException;
     public abstract void chooseColor() throws InvalidColorModelException;
-	public abstract void againstUno ();
-	public abstract void challengeAgainstWildDrawFourCard ();
+	public abstract void againstUno () throws InvalidActionPickCardException;
 	
     public void canReceiveAgainstUno () {
         this.uno = true;

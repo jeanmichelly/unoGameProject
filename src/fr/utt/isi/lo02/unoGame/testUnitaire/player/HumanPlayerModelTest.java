@@ -10,12 +10,13 @@ import fr.utt.isi.lo02.unoGame.model.card.effect.CompositeEffectModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.model.user.UserModel;
 
 public class HumanPlayerModelTest {
 
     @Test
-    public void playTest () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
+    public void playTest () throws InvalidActionPickCardException, InvalidActionPutDownCardException, InvalidColorModelException {
         CardModel c1 = new CardModel(SymbolModel.ONE, ColorModel.BLUE, (byte)1, new CompositeEffectModel());
         CardModel c2 = new CardModel(SymbolModel.TWO, ColorModel.GREEN, (byte)2, new CompositeEffectModel());
         CardModel c3 = new CardModel(SymbolModel.THREE, ColorModel.YELLOW, (byte)3, new CompositeEffectModel());

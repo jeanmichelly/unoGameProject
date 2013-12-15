@@ -6,7 +6,7 @@ package fr.utt.isi.lo02.unoGame.model.player.strategy;
  * Elle permet de jouer en priorite les cartes jouables possedant la couleur appropriee
  *
  */
-public class PriorityColorStrategyModel implements StrategyModel {
+public class PriorityColorStrategyModel extends StrategyModel {
 
     @Override
     public void execute () {        
