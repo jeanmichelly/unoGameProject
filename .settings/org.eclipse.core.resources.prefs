@@ -1,9 +1,0 @@
-eclipse.preferences.version=1
-encoding//src/fr/utt/isi/lo02/unoGame/model/BoardModel.java=UTF-8
-encoding//src/fr/utt/isi/lo02/unoGame/model/deck/DrawPileModel.java=UTF-8
-encoding//src/fr/utt/isi/lo02/unoGame/testeur/console/TesteurConsoleBoardModel.java=UTF-8
-encoding//src/fr/utt/isi/lo02/unoGame/view/console/ConsoleBoardView.java=UTF-8
-encoding//src/fr/utt/isi/lo02/unoGame/view/console/ConsoleCardView.java=UTF-8
-encoding//src/fr/utt/isi/lo02/unoGame/view/console/ConsoleDeckView.java=UTF-8
-encoding//src/model/game_rules/GameRulesModel.java=UTF-8
-encoding//src/testeur_console/TesteurConsoleHumanPlayerModel.java=UTF-8
