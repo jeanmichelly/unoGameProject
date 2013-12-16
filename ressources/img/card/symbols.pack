@@ -1,0 +1,26 @@
+
+symbols.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+0
+  rotate: false
+  xy: 0, 0
+  size: 70, 82
+  orig: 70, 82
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 70, 0
+  size: 64, 82
+  orig: 64, 82
+  offset: 0, 0
+  index: -1
+1
+  rotate: false
+  xy: 134, 0
+  size: 49, 82
+  orig: 49, 82
+  offset: 0, 0
+  index: -1
