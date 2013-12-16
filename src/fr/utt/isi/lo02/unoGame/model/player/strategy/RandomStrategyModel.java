@@ -2,7 +2,8 @@ package fr.utt.isi.lo02.unoGame.model.player.strategy;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import fr.utt.isi.lo02.unoGame.model.BoardModel;
+
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
@@ -14,10 +15,10 @@ import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
  * Elle permet de jouer n'importe quelle carte jouable ou ne pas jouer et a titre egal. 
  *
  */
-public class RandomStrategyModel implements StrategyModel {
+public class RandomStrategyModel extends StrategyModel {
 
     @Override
-    public void execute () throws InvalidActionPutDownCardException, InvalidActionPickCardException {
+    public void execute () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
         ArrayList<CardModel> playableCards = ((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getPlayableCards();
         int sizePlayableCards = playableCards.size();
         int random = (int)(Math.random() * (sizePlayableCards+1));
@@ -27,24 +28,11 @@ public class RandomStrategyModel implements StrategyModel {
         } else {
             if ( random == sizePlayableCards )
                 random--;
-            int indexPlayingCard = researchIndexPlayingCard (playableCards.get(random));
+            int indexPlayingCard = super.researchIndexPlayingCard (playableCards.get(random));
             if ( indexPlayingCard == -1 )
                 throw new InvalidActionPutDownCardException();
             BoardModel.getUniqueInstance().getPlayer().putDownCard(indexPlayingCard);
         }
-    }
-    
-    private int researchIndexPlayingCard (CardModel choiceCard) {
-        int i = 0; 
-        Iterator<CardModel> iter = BoardModel.getUniqueInstance().getPlayer().getPlayerHand().getCards().iterator();
-        while ( iter.hasNext() ) {
-            if ( iter.next().equals(choiceCard) ) {
-                return i;
-            }
-            i++;
-        }    
-        
-        return -1;
     }
     
 }

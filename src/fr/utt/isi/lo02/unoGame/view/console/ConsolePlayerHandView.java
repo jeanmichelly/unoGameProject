@@ -4,11 +4,13 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
 
-import fr.utt.isi.lo02.unoGame.model.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
+import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
 
 public class ConsolePlayerHandView implements Observer {
         
@@ -46,50 +48,49 @@ public class ConsolePlayerHandView implements Observer {
     }
     
     public static class ConsolePlayerHandController {
-        
-        public static void playHumanPlayerModel () {
-            try {
-                if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasPlayableCard() ) {
-                    hasPlayableCards();
-                } else {
-                    notPlayableCards();
-                }
-            } catch (InvalidActionPickCardException e) {
-                e.printStackTrace();
+                
+        public static void playHumanPlayerModel () throws InvalidActionPickCardException, InvalidColorModelException {
+            if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasPlayableCard() ) {
+                hasPlayableCards();
+            } else {
+                notPlayableCards();
             }
         }
         
-        public static void playComputerPlayerModel () throws InvalidActionPutDownCardException, InvalidActionPickCardException {
+        public static void playComputerPlayerModel () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
             if ( !BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasPlayableCard() ) {
-                try {
-                    BoardModel.getUniqueInstance().getPlayer().pickCard();
-                } catch (InvalidActionPickCardException e) {
-                    e.printStackTrace();
-                }
+                BoardModel.getUniqueInstance().getPlayer().pickCard();
                 BoardModel.getUniqueInstance().setChanged();
                 BoardModel.getUniqueInstance().notifyObservers(); 
                 ConsoleBoardView.update("◊ "+BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" n'a pas de carte jouable, il a alors pioché une carte");
             }
             else {
-                int i = BoardModel.getUniqueInstance().getPlayer().getPlayerHand().size();
-                ((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getStrategy(3).execute();
-                
+                int sizePlayerHandBeforePlaying = BoardModel.getUniqueInstance().getPlayer().getPlayerHand().size();
+
+                if ( BoardModel.getUniqueInstance().getNextPlayer().getPlayerHand().size() < 3 )
+                    ((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getStrategy(2).execute();
+                else {
+                    ((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getStrategy(3).execute();
+                }
                 BoardModel.getUniqueInstance().setChanged();
                 BoardModel.getUniqueInstance().notifyObservers(); 
-                if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().size() < i )
+                if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().size() < sizePlayerHandBeforePlaying )
                     ConsoleBoardView.update("◊ "+BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" a posé une carte");
                 else
                     ConsoleBoardView.update(ConsoleBoardView.build()+"◊ "+BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" a passé son tour, il a alors pioché une carte");
             }
         }
         
-        private static void hasPlayableCards () throws InvalidActionPickCardException {
+        private static void hasPlayableCards () throws InvalidActionPickCardException, InvalidColorModelException {
             Scanner sc = new Scanner(System.in);
             w1: while (true) {
                 ConsoleBoardView.update("Que voulez vous faire ? (j/n) : ");
                 switch (sc.next()) {
                     case "j":
                         ConsoleBoardView.update("\n◊ Vous avez avez décidé de poser une carte \n\n");
+                        // Rends le joueur vulnérable pour un contre uno
+                        if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().size() == 2 && !BoardModel.getUniqueInstance().getPlayer().getUno() )
+                            BoardModel.getUniqueInstance().getPlayer().canReceiveAgainstUno();
                         putDownCard();
                         break w1;
                     case "n":
@@ -108,8 +109,11 @@ public class ConsolePlayerHandView implements Observer {
                                     ConsoleBoardView.update("\n◊ Vous passez votre tour\n");
                                     break w2;
                             }
-                        }
+                        }                        
                         break w1;
+                    case "-2":
+                        ConsoleBoardView.update(BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" a dit contre uno !");
+                        BoardModel.getUniqueInstance().getPlayer().againstUno();
                 }
             }
         }
@@ -146,9 +150,16 @@ public class ConsolePlayerHandView implements Observer {
 
         private static void putDownCard () {
             Scanner sc = new Scanner(System.in);
+
             try {
                 ConsoleBoardView.update("Veuillez choisir une carte : ");
                 int indexChoiceCard = sc.nextInt();
+                 
+                // Le joueur s'immunise contre le contre uno
+                if ( indexChoiceCard == -1 && BoardModel.getUniqueInstance().getPlayer().getUno() ) {
+                    BoardModel.getUniqueInstance().getPlayer().signalUno();
+                    ConsoleBoardView.update(BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" a dit Uno !!!\n");
+                }
                 if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().get(indexChoiceCard).isPlayableCard() ) {
                     BoardModel.getUniqueInstance().getPlayer().putDownCard(indexChoiceCard);
                     BoardModel.getUniqueInstance().setChanged();

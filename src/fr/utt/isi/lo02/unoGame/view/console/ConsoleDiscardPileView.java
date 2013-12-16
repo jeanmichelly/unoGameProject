@@ -3,7 +3,7 @@ package fr.utt.isi.lo02.unoGame.view.console;
 import java.util.Observable;
 import java.util.Observer;
 
-import fr.utt.isi.lo02.unoGame.model.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 
 public class ConsoleDiscardPileView implements Observer {

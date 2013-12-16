@@ -1,6 +1,6 @@
 package fr.utt.isi.lo02.unoGame.model.gameRules;
 
-import fr.utt.isi.lo02.unoGame.model.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
 

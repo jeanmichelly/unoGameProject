@@ -1,17 +1,20 @@
-package fr.utt.isi.lo02.unoGame.model;
+package fr.utt.isi.lo02.unoGame.model.board;
 
 import java.util.Observable;
 
 import fr.utt.isi.lo02.unoGame.model.card.effect.CompositeEffectModel;
+import fr.utt.isi.lo02.unoGame.model.card.effect.DrawEffectModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.DrawPileIsEmptyAfterReshuffledException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesFactoryModel;
 import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
 import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
 import fr.utt.isi.lo02.unoGame.model.player.HumanPlayerModel;
 import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
+import fr.utt.isi.lo02.unoGame.model.user.UserModel;
 import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
 
 /**
@@ -26,7 +29,7 @@ public class BoardModel extends Observable {
 	private byte directionOfPlay;
 	private short numberRound;
 	private short numberGame;
-	private CompositeEffectModel penaltys;
+	private CompositeEffectModel [] penaltys;
 	private DiscardPileModel discardPile;
 	private DrawPileModel drawPile;
 	private PlayerModel [] players;
@@ -37,6 +40,7 @@ public class BoardModel extends Observable {
 	    this.drawPile = DrawPileModel.getUniqueInstance();
 	    this.discardPile = DiscardPileModel.getUniqueInstance();
 		this.gameRulesFactory = new GameRulesFactoryModel();
+		this.initPenaltys();
 	}
 
 	public static BoardModel getUniqueInstance () {
@@ -56,20 +60,25 @@ public class BoardModel extends Observable {
         this.initRound();
 	}
 
-	public void nextRound () throws InvalidActionPickCardException, DrawPileIsEmptyAfterReshuffledException {
+	public void nextRound () throws InvalidActionPickCardException {
 	    this.numberRound++;
 	    for ( PlayerModel player : this.players ) {
 	        DrawPileModel.getUniqueInstance().addAll(player.getPlayerHand().getCards());
 	        player.getPlayerHand().clear();
+	        player.setUno(false);
 	    }
 	    DrawPileModel.getUniqueInstance().addAll(DiscardPileModel.getUniqueInstance().getCards());
 	    DiscardPileModel.getUniqueInstance().clear();
 	    this.chooseRandomDealer();
         this.dispenseCards();
-        DiscardPileModel.getUniqueInstance().add(DrawPileModel.getUniqueInstance().pop());
+        try {
+            DiscardPileModel.getUniqueInstance().add(DrawPileModel.getUniqueInstance().pop());
+        } catch (DrawPileIsEmptyAfterReshuffledException e) {
+            e.printStackTrace();
+        }
 	}
 
-	public void nextGame () throws InvalidActionPickCardException, DrawPileIsEmptyAfterReshuffledException {
+	public void nextGame () throws InvalidActionPickCardException {
 	    this.numberGame++;
 	    this.numberRound = 0;
 	    for ( PlayerModel player : this.players )
@@ -96,6 +105,18 @@ public class BoardModel extends Observable {
 	public void initGameRules () {
 	    this.gameRules = this.gameRulesFactory.createGameRules();
 	}
+	
+	public void initPenaltys () {
+        CompositeEffectModel againstUno = new CompositeEffectModel();
+        againstUno.addEffect(new DrawEffectModel(), 2);
+        
+        CompositeEffectModel againstWildDrawFourCard = new CompositeEffectModel();
+        againstWildDrawFourCard.addEffect(new DrawEffectModel(), 4);
+        
+        this.penaltys = new CompositeEffectModel [2];  
+        this.penaltys[0] = againstUno;
+        this.penaltys[1] = againstWildDrawFourCard;
+    }
 
 	public void chooseRandomDealer () {
 	    this.playerCursor = (byte)(Math.random() * (this.players.length)); // Formule utilisée : int random = (int)(Math.random() * (higher-lower)) + lower;
@@ -130,14 +151,22 @@ public class BoardModel extends Observable {
 		return this.playerCursor = this.getToNextPlayer();
 	}
 	
-	public void applyCardEffect () {
-	    try {
-	        this.discardPile.peek().getCompositeEffects().applyEffect();
-        } catch (InvalidActionPickCardException e) {
-            e.printStackTrace();
-        }
+	public void applyCardEffect () throws InvalidActionPickCardException, InvalidColorModelException {
+        this.discardPile.peek().getCompositeEffects().applyEffect();
 	    DiscardPileModel.getUniqueInstance().setApplyEffectLastCard(true);
 	}
+	
+    public void applyPenaltyAgainstUno () throws InvalidActionPickCardException {
+        for (int i=0; i<players.length; i++) {
+            if ( players[i].getUno() ) {
+                penaltys[0].applyEffect(i);
+                setChanged();
+                notifyObservers();
+                ConsoleBoardView.update(players[i].getPseudonym()+" a pioché 2 cartes\n");
+                players[i].setUno(false);
+            }
+        }
+    }
     
     public PlayerModel getPlayer () {
         return this.players[playerCursor];

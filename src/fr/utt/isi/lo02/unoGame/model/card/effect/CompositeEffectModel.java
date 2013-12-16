@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 
 /**
  * 
@@ -22,10 +23,16 @@ public class CompositeEffectModel extends ComponentEffectModel {
 	}
 
     @Override
-    public void applyEffect () throws InvalidActionPickCardException {
+    public void applyEffect () throws InvalidActionPickCardException, InvalidColorModelException {
         Iterator<ComponentEffectModel> iter = this.effects.iterator();
         while ( iter.hasNext() )
             iter.next().applyEffect();
+    }
+    
+    public void applyEffect (int i) throws InvalidActionPickCardException {
+        Iterator<ComponentEffectModel> iter = this.effects.iterator();
+        while ( iter.hasNext() )
+            ((DrawEffectModel)iter.next()).applyEffect(i);
     }
 
     public boolean addEffect (ComponentEffectModel effect) {

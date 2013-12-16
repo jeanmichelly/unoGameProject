@@ -32,7 +32,7 @@ public enum ColorModel {
         return this.label;
     }
     
-    public static ColorModel getColorModel (byte index) throws InvalidColorModelException{
+    public static ColorModel getColorModel (byte index) throws InvalidColorModelException {
         switch ( index ) {
             case 0 :
                 return ColorModel.YELLOW;

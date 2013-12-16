@@ -1,10 +1,10 @@
-package fr.utt.isi.lo02.unoGame.testUnitaire;
+package fr.utt.isi.lo02.unoGame.testUnitaire.user;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import fr.utt.isi.lo02.unoGame.model.UserModel;
 import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesFactoryModel;
+import fr.utt.isi.lo02.unoGame.model.user.UserModel;
 
 public class UserModelTest {
 

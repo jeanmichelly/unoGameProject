@@ -1,6 +1,6 @@
 package fr.utt.isi.lo02.unoGame.model.player;
 
-import fr.utt.isi.lo02.unoGame.model.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
@@ -8,6 +8,7 @@ import fr.utt.isi.lo02.unoGame.model.deck.PlayerHandModel;
 import fr.utt.isi.lo02.unoGame.model.exception.DrawPileIsEmptyAfterReshuffledException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 
 /**
  * 
@@ -19,11 +20,13 @@ public abstract class PlayerModel {
 	protected String pseudonym;
 	protected short score;
 	protected PlayerHandModel playerHand;
+	protected boolean uno;
 	
 	public PlayerModel (String pseudonym) {
 	    this.pseudonym = pseudonym;
 	    this.score = 0;
 	    this.playerHand = new PlayerHandModel();
+	    this.uno = false;
 	}
 	
     public void putDownCard (int indexChoiceCard) throws InvalidActionPutDownCardException {
@@ -37,6 +40,8 @@ public abstract class PlayerModel {
 	        throw new InvalidActionPickCardException();
 		try {
 		    this.playerHand.add(DrawPileModel.getUniqueInstance().pop());
+		    if ( this.playerHand.size() == 2 )
+		        this.uno = false;
         } catch (DrawPileIsEmptyAfterReshuffledException e) {
             e.printStackTrace();
         }
@@ -50,11 +55,17 @@ public abstract class PlayerModel {
 	    this.pickCard();
 	}
 	
-    public abstract void play () throws InvalidActionPickCardException, InvalidActionPutDownCardException;
-    public abstract void chooseColor();
-	public abstract void signalUno ();
-	public abstract void againstUno ();
-	public abstract void challengeAgainstWildDrawFourCard ();
+    public abstract void play () throws InvalidActionPickCardException, InvalidActionPutDownCardException, InvalidColorModelException;
+    public abstract void chooseColor() throws InvalidColorModelException;
+	public abstract void againstUno () throws InvalidActionPickCardException;
+	
+    public void canReceiveAgainstUno () {
+        this.uno = true;
+    }
+    
+    public void signalUno () {
+        this.uno = false;
+    }
 	
 	public String getPseudonym () {
 	    return this.pseudonym;
@@ -67,9 +78,17 @@ public abstract class PlayerModel {
 	public PlayerHandModel getPlayerHand () {
         return this.playerHand;
     }
+	
+	public boolean getUno() {
+	    return this.uno;
+    }
 
     public void setScore (short score) {
         this.score = score;
+    }
+    
+    public void setUno (boolean uno) {
+        this.uno = uno;
     }
 	
 }

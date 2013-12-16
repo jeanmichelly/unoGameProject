@@ -2,7 +2,8 @@ package fr.utt.isi.lo02.unoGame.model.player;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import fr.utt.isi.lo02.unoGame.model.BoardModel;
+
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
@@ -44,29 +45,12 @@ public class ComputerPlayerModel extends PlayerModel {
     }
     
     @Override
-    public void chooseColor() {
-        try {
-            super.chooseColor(getMaxCountEachColorCard());
-        } catch (InvalidColorModelException e) {
-            e.printStackTrace();
-            e.getMessage();
-        }
-    }
-
-    @Override
-    public void signalUno() {
-        // TODO Auto-generated method stub
-        
+    public void chooseColor() throws InvalidColorModelException {
+        super.chooseColor(getMaxCountEachColorCard());
     }
 
     @Override
     public void againstUno() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void challengeAgainstWildDrawFourCard() {
         // TODO Auto-generated method stub
         
     }

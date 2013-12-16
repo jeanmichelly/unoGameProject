@@ -5,14 +5,13 @@ import java.util.Observer;
 import java.util.Scanner;
 import java.util.Stack;
 
-import fr.utt.isi.lo02.unoGame.model.BoardModel;
-import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidGameRulesException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidPlayException;
-import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
 
 public class ConsoleBoardView implements Observer {
         
@@ -102,14 +101,16 @@ public class ConsoleBoardView implements Observer {
         private static Stack<String> playersWinnerGame = new Stack<String>();
         static int numberGame = 4;
         
-        public static void play () throws InvalidPlayException, InvalidActionPutDownCardException, InvalidActionPickCardException, InvalidGameRulesException {
+        public static void play () throws   InvalidActionPickCardException, 
+                                            InvalidColorModelException, 
+                                            InvalidGameRulesException, 
+                                            InvalidPlayException {
+            
             BoardModel.getUniqueInstance().setChanged();
             BoardModel.getUniqueInstance().notifyObservers();
             
             try {
                 BoardModel.getUniqueInstance().getPlayer().play();
-            } catch (InvalidActionPutDownCardException e) {
-                throw e;
             } catch (Exception e) {
                 InvalidPlayException ipe = new InvalidPlayException();
                 ipe.initCause(e);
@@ -118,27 +119,21 @@ public class ConsoleBoardView implements Observer {
             controlStateRound();
         }
     
-        public static void controlStateRound () throws InvalidActionPickCardException, InvalidActionPutDownCardException, InvalidGameRulesException {
+        public static void controlStateRound () throws InvalidActionPickCardException, InvalidColorModelException, InvalidGameRulesException, InvalidPlayException {
             if ( !BoardModel.getUniqueInstance().getPlayer().getPlayerHand().isEmpty() )
                 roundNotFinish();
             else
                 roundFinish();
         }
             
-        private static void roundNotFinish () {
+        private static void roundNotFinish () throws InvalidActionPickCardException, InvalidColorModelException, InvalidGameRulesException, InvalidPlayException {
             if ( !DiscardPileModel.getUniqueInstance().hasApplyEffectLastCard() ) // Appliquer l'effet d'une carte posé une seule fois
                 BoardModel.getUniqueInstance().applyCardEffect();
             BoardModel.getUniqueInstance().moveCursorToNextPlayer();
-            try {
-                play();
-            } catch (InvalidPlayException | InvalidActionPutDownCardException
-                    | InvalidActionPickCardException
-                    | InvalidGameRulesException e) {
-                e.printStackTrace();
-            }     
+            play();  
         }
     
-        private static void roundFinish () throws InvalidGameRulesException {
+        private static void roundFinish () throws InvalidActionPickCardException, InvalidColorModelException, InvalidGameRulesException {
             BoardModel.getUniqueInstance().applyCardEffect(); // Le joueur a forcément posé une carte
             String playerWinnerRound = BoardModel.getUniqueInstance().getPlayer().getPseudonym(); 
             try {
