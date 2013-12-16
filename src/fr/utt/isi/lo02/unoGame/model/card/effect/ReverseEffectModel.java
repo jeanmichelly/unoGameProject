@@ -3,18 +3,21 @@ package fr.utt.isi.lo02.unoGame.model.card.effect;
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 
 /**
- * 
- * Cette classe permet d'effectuer un effet pour inverser le sens du jeu.
- *
+ * Permet d'effectuer un effet pour inverser le sens du jeu.
  */
 public class ReverseEffectModel extends ComponentEffectModel {
 
+    /**
+     * Construit un effet pour inverser le sens du jeu avec une priorite de 10
+     */
 	public ReverseEffectModel () {
 		super((byte)10);
 	}
 
-    @Override
-    public void applyEffect () {
+    /**
+     * Applique l'effet pour inverser le sens du jeu
+     */    
+	public void applyEffect () {
         BoardModel.getUniqueInstance().setDirectionOfPlay();
     }
 

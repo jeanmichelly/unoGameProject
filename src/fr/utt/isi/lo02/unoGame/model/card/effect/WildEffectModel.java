@@ -4,8 +4,7 @@ import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 
 /**
- * 
- * Cette classe permet d'effectuer un effet joker. Il assure le choix de la couleur.
+ * Permet d'effectuer un effet joker et donc, assure le choix de la couleur.
  *
  */
 public class WildEffectModel extends ComponentEffectModel {
@@ -14,8 +13,9 @@ public class WildEffectModel extends ComponentEffectModel {
         super((byte)30);
     }
 
-    @Override
-    public void applyEffect () throws InvalidColorModelException {
+    /**
+     * Applique l'effet pour choisir une couleur
+     */      public void applyEffect () throws InvalidColorModelException {
         BoardModel.getUniqueInstance().getPlayer().chooseColor();
     }
     
