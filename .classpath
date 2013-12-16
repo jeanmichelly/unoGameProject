@@ -3,5 +3,11 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/librairies"/>
+	<classpathentry kind="lib" path="librairies/gdx-backend-lwjgl-natives.jar"/>
+	<classpathentry kind="lib" path="librairies/gdx-backend-lwjgl.jar"/>
+	<classpathentry kind="lib" path="librairies/gdx-natives.jar"/>
+	<classpathentry kind="lib" path="librairies/gdx.jar"/>
+	<classpathentry kind="lib" path="librairies/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="librairies/tween-engine-api.jar"/>
 	<classpathentry kind="output" path="out/production/unoGameProject"/>
 </classpath>
