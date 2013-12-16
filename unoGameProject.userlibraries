@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <eclipse-userlibraries>
+  <library name="junit-4.11">
+    <archive path="D:/Git/unoGameProject/librairies/junit-4.11.jar" />
+  </library>
+  <library name="gdx">
+    <archive path="D:/Git/unoGameProject/librairies/gdx.jar" />
+  </library>
+  <library name="tween-engine-api">
+    <archive path="D:/Git/unoGameProject/librairies/tween-engine-api.jar" />
+  </library>
   <library name="gdx-backend-lwjgl">
     <archive path="D:/Git/unoGameProject/librairies/gdx-backend-lwjgl.jar" />
   </library>
@@ -9,13 +18,12 @@
   <library name="gdx-natives">
     <archive path="D:/Git/unoGameProject/librairies/gdx-natives.jar" />
   </library>
-  <library name="gdx">
+  <library name="librairies">
+    <archive path="D:/Git/unoGameProject/librairies/gdx-natives.jar" />
     <archive path="D:/Git/unoGameProject/librairies/gdx.jar" />
-  </library>
-  <library name="junit-4.11">
+    <archive path="D:/Git/unoGameProject/librairies/gdx-backend-lwjgl.jar" />
     <archive path="D:/Git/unoGameProject/librairies/junit-4.11.jar" />
-  </library>
-  <library name="tween-engine-api">
+    <archive path="D:/Git/unoGameProject/librairies/gdx-backend-lwjgl-natives.jar" />
     <archive path="D:/Git/unoGameProject/librairies/tween-engine-api.jar" />
   </library>
 </eclipse-userlibraries>

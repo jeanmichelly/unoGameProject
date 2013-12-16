@@ -2,11 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/gdx-backend-lwjgl"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/gdx-backend-lwjgl-natives"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/gdx-natives"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/gdx"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/junit-4.11"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/tween-engine-api"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/librairies"/>
 	<classpathentry kind="output" path="out/production/unoGameProject"/>
 </classpath>
