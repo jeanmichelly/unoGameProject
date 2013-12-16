@@ -3,19 +3,16 @@ package fr.utt.isi.lo02.unoGame.model.player;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
-import fr.utt.isi.lo02.unoGame.model.exception.InvalidGameRulesException;
 import fr.utt.isi.lo02.unoGame.model.player.strategy.PriorityColorStrategyModel;
 import fr.utt.isi.lo02.unoGame.model.player.strategy.PriorityNumberStrategyModel;
 import fr.utt.isi.lo02.unoGame.model.player.strategy.PrioritySpecialityStrategyModel;
 import fr.utt.isi.lo02.unoGame.model.player.strategy.RandomStrategyModel;
 import fr.utt.isi.lo02.unoGame.model.player.strategy.StrategyModel;
-import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
 import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayerHandView;
 
 /**
@@ -39,20 +36,12 @@ public class ComputerPlayerModel extends PlayerModel {
     
     @Override
     public void play () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
-        // if ( BoardModel.getUniqueInstance().getNextPlayer().getPlayerHand().size() < 3 )
-        //     strategy[2].execute();
         ConsolePlayerHandView.ConsolePlayerHandController.playComputerPlayerModel();
     }
     
     @Override
     public void chooseColor() throws InvalidColorModelException {
         super.chooseColor(getMaxCountEachColorCard());
-    }
-
-    @Override
-    public void againstUno() {
-        // TODO Auto-generated method stub
-        
     }
     
     public StrategyModel getStrategy (int i) {

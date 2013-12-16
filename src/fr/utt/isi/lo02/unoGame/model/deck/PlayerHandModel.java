@@ -23,6 +23,10 @@ public class PlayerHandModel extends DeckModel<ArrayList<CardModel>> {
                 return true;
         return false;
     }
+    
+    public boolean add (CardModel card) { // Pour reprendre un +4 avec tentative de bluff
+        return super.cards.add(card);
+    }
 
     public CardModel remove (int index) {
     	    return super.cards.remove(index);

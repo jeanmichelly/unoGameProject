@@ -1,9 +1,12 @@
 package fr.utt.isi.lo02.unoGame.testUnitaire.deck;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 import java.util.HashMap;
 import java.util.Stack;
+
 import org.junit.Test;
+
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;

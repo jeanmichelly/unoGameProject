@@ -10,7 +10,6 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
-import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
 
 public class ConsolePlayerHandView implements Observer {
         
@@ -49,7 +48,9 @@ public class ConsolePlayerHandView implements Observer {
     
     public static class ConsolePlayerHandController {
                 
-        public static void playHumanPlayerModel () throws InvalidActionPickCardException, InvalidColorModelException {
+        public static void playHumanPlayerModel () throws   InvalidActionPickCardException, 
+                                                            InvalidColorModelException {
+            
             if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasPlayableCard() ) {
                 hasPlayableCards();
             } else {
@@ -57,7 +58,13 @@ public class ConsolePlayerHandView implements Observer {
             }
         }
         
-        public static void playComputerPlayerModel () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
+        public static void playComputerPlayerModel () throws    InvalidActionPickCardException, 
+                                                                InvalidActionPutDownCardException {
+            
+            if ( BoardModel.getUniqueInstance().hasVulnerablePlayer() ) {
+                ConsoleBoardView.update(BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" a dit contre uno !");
+                BoardModel.getUniqueInstance().getPlayer().againstUno();
+            }
             if ( !BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasPlayableCard() ) {
                 BoardModel.getUniqueInstance().getPlayer().pickCard();
                 BoardModel.getUniqueInstance().setChanged();
@@ -81,7 +88,9 @@ public class ConsolePlayerHandView implements Observer {
             }
         }
         
-        private static void hasPlayableCards () throws InvalidActionPickCardException, InvalidColorModelException {
+        private static void hasPlayableCards () throws  InvalidActionPickCardException, 
+                                                        InvalidColorModelException {
+            
             Scanner sc = new Scanner(System.in);
             w1: while (true) {
                 ConsoleBoardView.update("Que voulez vous faire ? (j/n) : ");
@@ -89,8 +98,9 @@ public class ConsolePlayerHandView implements Observer {
                     case "j":
                         ConsoleBoardView.update("\n◊ Vous avez avez décidé de poser une carte \n\n");
                         // Rends le joueur vulnérable pour un contre uno
-                        if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().size() == 2 && !BoardModel.getUniqueInstance().getPlayer().getUno() )
+                        if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().size() == 2 && !BoardModel.getUniqueInstance().getPlayer().getUno() ) {
                             BoardModel.getUniqueInstance().getPlayer().canReceiveAgainstUno();
+                        }
                         putDownCard();
                         break w1;
                     case "n":
@@ -137,6 +147,9 @@ public class ConsolePlayerHandView implements Observer {
                             case "n":
                                 ConsoleBoardView.update("\n◊ Vous passez votre tour\n");
                                 break w2;
+                            case "-2":
+                                ConsoleBoardView.update(BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" a dit contre uno !");
+                                BoardModel.getUniqueInstance().getPlayer().againstUno();
                          }
                      }
                     break w1;
@@ -193,7 +206,6 @@ public class ConsolePlayerHandView implements Observer {
                 }
             }
         }
-        
     }
     
 }

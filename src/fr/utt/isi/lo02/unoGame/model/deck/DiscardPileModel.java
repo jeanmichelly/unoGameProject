@@ -2,7 +2,10 @@ package fr.utt.isi.lo02.unoGame.model.deck;
 
 import java.util.EmptyStackException;
 import java.util.Stack;
+
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
+import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
+import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
 import fr.utt.isi.lo02.unoGame.model.exception.DrawPileIsEmptyAfterReshuffledException;
 
 /**
@@ -14,6 +17,7 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
 
     private static DiscardPileModel uniqueInstance = null;
     private boolean applyEffectLastCard;
+    private ColorModel colorBeforeWildDrawFour; 
 
     private DiscardPileModel () {
         super.cards = new Stack<CardModel>();
@@ -37,6 +41,8 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
             if ( this.peek().getCompositeEffects().containsWildEffect() ) // Reinitialise les couleurs des cartes joker
                 this.peek().setColor(null);
         } catch (EmptyStackException e){ }
+        if ( card.getSymbol() == SymbolModel.WILD_DRAW_FOUR )
+            colorBeforeWildDrawFour = this.peek().getColor();
         
         return super.cards.push(card);
     }
@@ -45,7 +51,7 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
         return super.cards.peek();
     }
     
-    private CardModel pop () {
+    public CardModel pop () { // Public pour reprendre la carte si un poseur de +4 a bluffé
         return super.cards.pop();
     }
     
@@ -60,6 +66,10 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
     
     public boolean hasApplyEffectLastCard () {
         return this.applyEffectLastCard;
+    }
+    
+    public ColorModel getColorBeforeWildDrawFour () {
+        return this.colorBeforeWildDrawFour;
     }
 
     public void setApplyEffectLastCard (boolean applyEffectLastCard) {

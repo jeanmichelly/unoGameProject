@@ -1,6 +1,9 @@
 package fr.utt.isi.lo02.unoGame.model.player;
 
+import java.util.Iterator;
+
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
@@ -22,6 +25,10 @@ public abstract class PlayerModel {
 	protected PlayerHandModel playerHand;
 	protected boolean uno;
 	
+	/**
+	 * @param pseudonym
+	 * Initialise un joueur humain avec son pseudonym
+	 */
 	public PlayerModel (String pseudonym) {
 	    this.pseudonym = pseudonym;
 	    this.score = 0;
@@ -40,7 +47,7 @@ public abstract class PlayerModel {
 	        throw new InvalidActionPickCardException();
 		try {
 		    this.playerHand.add(DrawPileModel.getUniqueInstance().pop());
-		    if ( this.playerHand.size() == 2 )
+		    if ( this.playerHand.size() >= 2 )
 		        this.uno = false;
         } catch (DrawPileIsEmptyAfterReshuffledException e) {
             e.printStackTrace();
@@ -57,8 +64,20 @@ public abstract class PlayerModel {
 	
     public abstract void play () throws InvalidActionPickCardException, InvalidActionPutDownCardException, InvalidColorModelException;
     public abstract void chooseColor() throws InvalidColorModelException;
-	public abstract void againstUno () throws InvalidActionPickCardException;
-	
+
+    public void againstUno () throws InvalidActionPickCardException {
+        BoardModel.getUniqueInstance().applyPenaltyAgainstUno();        
+    }	
+    
+    public boolean hasColorBeforeWildDrawFour () {
+        Iterator<CardModel> iter = this.playerHand.getCards().iterator();
+        while ( iter.hasNext() ) {
+            if ( iter.next().getColor() == DiscardPileModel.getUniqueInstance().getColorBeforeWildDrawFour() )
+                return true;
+        }
+        return false;
+    }
+    
     public void canReceiveAgainstUno () {
         this.uno = true;
     }

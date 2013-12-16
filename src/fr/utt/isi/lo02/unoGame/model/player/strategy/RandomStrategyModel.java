@@ -1,7 +1,6 @@
 package fr.utt.isi.lo02.unoGame.model.player.strategy;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;

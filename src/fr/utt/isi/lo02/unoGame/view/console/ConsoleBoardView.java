@@ -6,12 +6,13 @@ import java.util.Scanner;
 import java.util.Stack;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
-import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidGameRulesException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidPlayException;
+import fr.utt.isi.lo02.unoGame.model.player.HumanPlayerModel;
 
 public class ConsoleBoardView implements Observer {
         
@@ -99,7 +100,7 @@ public class ConsoleBoardView implements Observer {
     public static class ConsoleBoardController {
         
         private static Stack<String> playersWinnerGame = new Stack<String>();
-        static int numberGame = 4;
+        private static int numberGame = 4;
         
         public static void play () throws   InvalidActionPickCardException, 
                                             InvalidColorModelException, 
@@ -119,21 +120,65 @@ public class ConsoleBoardView implements Observer {
             controlStateRound();
         }
     
-        public static void controlStateRound () throws InvalidActionPickCardException, InvalidColorModelException, InvalidGameRulesException, InvalidPlayException {
+        public static void controlStateRound () throws  InvalidActionPickCardException, 
+                                                        InvalidColorModelException, 
+                                                        InvalidGameRulesException, 
+                                                        InvalidPlayException {
+            
             if ( !BoardModel.getUniqueInstance().getPlayer().getPlayerHand().isEmpty() )
                 roundNotFinish();
             else
                 roundFinish();
         }
             
-        private static void roundNotFinish () throws InvalidActionPickCardException, InvalidColorModelException, InvalidGameRulesException, InvalidPlayException {
-            if ( !DiscardPileModel.getUniqueInstance().hasApplyEffectLastCard() ) // Appliquer l'effet d'une carte posé une seule fois
-                BoardModel.getUniqueInstance().applyCardEffect();
+        private static void roundNotFinish () throws    InvalidActionPickCardException, 
+                                                        InvalidColorModelException, 
+                                                        InvalidGameRulesException, 
+                                                        InvalidPlayException {
+            
+            if ( !DiscardPileModel.getUniqueInstance().hasApplyEffectLastCard() ) {// Appliquer l'effet d'une carte posee une seule fois
+                if ( DiscardPileModel.getUniqueInstance().peek().getSymbol() == SymbolModel.WILD_DRAW_FOUR 
+                        && BoardModel.getUniqueInstance().getNextPlayer() instanceof HumanPlayerModel) {
+                    String launcherWildDrawFourCard = BoardModel.getUniqueInstance().getPlayer().getPseudonym();
+                    String targetWildDrawFourCard = BoardModel.getUniqueInstance().getNextPlayer().getPseudonym();
+                    Scanner sc = new Scanner(System.in);
+                    
+                    w: while (true) {
+                        update(launcherWildDrawFourCard+" a joué une carte +4 sur "+targetWildDrawFourCard+"\n");
+                        update(targetWildDrawFourCard+", pensez vous que "+
+                                launcherWildDrawFourCard+" a une carte de la même couleur que la carte précédente ? (o/n)\n");
+                        switch (sc.next()) {  
+                            case "o":
+                                BoardModel.getUniqueInstance().applyCardEffect();
+                                break w;
+                            case "n":
+                                if ( BoardModel.getUniqueInstance().getPlayer().hasColorBeforeWildDrawFour() ) {
+                                    BoardModel.getUniqueInstance().getPlayer().getPlayerHand().add(DiscardPileModel.getUniqueInstance().pop());
+                                    BoardModel.getUniqueInstance().applyPenaltyAgainstLauncherWildDrawFourCard();
+                                    ConsoleBoardView.update(launcherWildDrawFourCard+
+                                            " a la couleur de la carte précédente, il a alors pioché 4 cartes et repris sa carte +4\n");
+                                } else {
+                                    BoardModel.getUniqueInstance().applyPenaltyAgainstWildDrawFourCard();
+                                    update(launcherWildDrawFourCard + " : ");
+                                    BoardModel.getUniqueInstance().applyCardEffect();
+                                    ConsoleBoardView.update(launcherWildDrawFourCard+" n'a pas la couleur de la carte précédente, "+
+                                           targetWildDrawFourCard+" a alors piocher 6 cartes\n");
+                                }
+                                break w;
+                         }
+                     }
+                } else {
+                    BoardModel.getUniqueInstance().applyCardEffect();
+                }
+            }
             BoardModel.getUniqueInstance().moveCursorToNextPlayer();
             play();  
         }
     
-        private static void roundFinish () throws InvalidActionPickCardException, InvalidColorModelException, InvalidGameRulesException {
+        private static void roundFinish () throws   InvalidActionPickCardException, 
+                                                    InvalidColorModelException, 
+                                                    InvalidGameRulesException {
+            
             BoardModel.getUniqueInstance().applyCardEffect(); // Le joueur a forcément posé une carte
             String playerWinnerRound = BoardModel.getUniqueInstance().getPlayer().getPseudonym(); 
             try {
@@ -142,7 +187,7 @@ public class ConsoleBoardView implements Observer {
                     BoardModel.getUniqueInstance().setChanged();
                     BoardModel.getUniqueInstance().notifyObservers();
                     BoardModel.getUniqueInstance().nextRound();
-                    update(playerWinnerRound + "a gagne la manche !!!\n");
+                    update(playerWinnerRound + " a gagne la manche !!!\n");
                 }
                 else {
                     playersWinnerGame.push(playerWinnerRound);
