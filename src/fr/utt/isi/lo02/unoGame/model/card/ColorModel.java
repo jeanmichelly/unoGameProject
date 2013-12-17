@@ -68,25 +68,4 @@ public enum ColorModel {
         return this.color;
     }
     
-    /**
-     * Obtenir la couleur par un nombre correspondant au choix de l'utilisateur
-     * @param index nombre choisit par l'utilisateur
-     * @return la couleur correspondant au nombre choisit par l'utilisateur
-     * @throws InvalidColorModelException
-     */
-    public static ColorModel getColorModel (byte index) throws InvalidColorModelException {
-        switch ( index ) {
-            case 0 :
-                return ColorModel.YELLOW;
-            case 1 :
-                return ColorModel.RED;
-            case 2 :
-                return ColorModel.GREEN;
-            case 3 :
-                return ColorModel.BLUE;
-            default :
-                throw new InvalidColorModelException();
-        }
-    }
-    
 }

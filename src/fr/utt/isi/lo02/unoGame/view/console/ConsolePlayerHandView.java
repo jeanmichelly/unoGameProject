@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
+import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
@@ -202,6 +203,39 @@ public class ConsolePlayerHandView implements Observer {
                         break w;
                     case "v":
                         BoardModel.getUniqueInstance().getPlayer().chooseColor(ColorModel.GREEN);
+                        break w;
+                }
+            }
+        }
+
+        public static void challengeAgainstWildDrawFourCard () throws   InvalidActionPickCardException, 
+                                                                        InvalidColorModelException {
+            
+            String launcherWildDrawFourCard = BoardModel.getUniqueInstance().getPlayer().getPseudonym();
+            String targetWildDrawFourCard = BoardModel.getUniqueInstance().getNextPlayer().getPseudonym();
+            Scanner sc = new Scanner(System.in);
+            
+            w: while (true) {
+                ConsoleBoardView.update(launcherWildDrawFourCard+" a joué une carte +4 sur "+targetWildDrawFourCard+"\n");
+                ConsoleBoardView.update(targetWildDrawFourCard+", pensez vous que "+
+                        launcherWildDrawFourCard+" a une carte de la même couleur que la carte précédente ? (o/n)\n");
+                switch (sc.next()) {  
+                    case "o":
+                        BoardModel.getUniqueInstance().applyCardEffect();
+                        break w;
+                    case "n":
+                        if ( BoardModel.getUniqueInstance().getPlayer().hasColorBeforeWildDrawFour() ) {
+                            BoardModel.getUniqueInstance().getPlayer().getPlayerHand().addCard(DiscardPileModel.getUniqueInstance().pop());
+                            BoardModel.getUniqueInstance().applyPenaltyAgainstLauncherWildDrawFourCard();
+                            ConsoleBoardView.update(launcherWildDrawFourCard+
+                                    " a la couleur de la carte précédente, il a alors pioché 4 cartes et repris sa carte +4\n");
+                        } else {
+                            BoardModel.getUniqueInstance().applyPenaltyAgainstWildDrawFourCard();
+                            ConsoleBoardView.update(launcherWildDrawFourCard + " : ");
+                            BoardModel.getUniqueInstance().applyCardEffect();
+                            ConsoleBoardView.update(launcherWildDrawFourCard+" n'a pas la couleur de la carte précédente, "+
+                                   targetWildDrawFourCard+" a alors piocher 6 cartes\n");
+                        }
                         break w;
                 }
             }

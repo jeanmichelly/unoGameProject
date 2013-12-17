@@ -10,28 +10,16 @@ import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
 
 /**
  * 
- * Cette classe correspond a l'une des strategies que peut utiliser un joueur ordinateur. Elle permet, par exemple, de jouer agressif lorsqu'il reste peu de carte au joueur qui le suit. 
+ * Correspond a l'une des strategies que peut utiliser un joueur ordinateur. 
+ * Elle permet, par exemple, de jouer agressif lorsqu'il reste peu de carte au prochain joueur. 
  * Elle passe en priorite les cartes avec des effets.
- *
  */
 public class PrioritySpecialityStrategyModel extends StrategyModel {
 
-    @Override
-    public void execute () throws InvalidActionPickCardException, InvalidActionPutDownCardException { 
-        ArrayList<CardModel> playableCards = ((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getPlayableCards();
-        int sizePlayableCards = playableCards.size();
-        int random = (int)(Math.random() * (sizePlayableCards+1));
-        
-        if ( random == sizePlayableCards && sizePlayableCards > 3 ) {
-            BoardModel.getUniqueInstance().getPlayer().notToPlay();
-        } else {
-            if ( random == sizePlayableCards )
-                random--;
-            int indexPlayingCard = researchIndexPlayingCard (playableCards.get(random));
-            if ( indexPlayingCard == -1 )
-                throw new InvalidActionPutDownCardException();
-            BoardModel.getUniqueInstance().getPlayer().putDownCard(indexPlayingCard);
-        }
+    /**
+     * Execute la strategie qui donne la priorite aux cartes avec des effets
+     */
+    public void execute () { 
     }
     
 }

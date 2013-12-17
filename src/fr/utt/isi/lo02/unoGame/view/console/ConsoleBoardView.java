@@ -139,34 +139,7 @@ public class ConsoleBoardView implements Observer {
             if ( !DiscardPileModel.getUniqueInstance().hasApplyEffectLastCard() ) {// Appliquer l'effet d'une carte posee une seule fois
                 if ( DiscardPileModel.getUniqueInstance().peek().getSymbol() == SymbolModel.WILD_DRAW_FOUR 
                         && BoardModel.getUniqueInstance().getNextPlayer() instanceof HumanPlayerModel) {
-                    String launcherWildDrawFourCard = BoardModel.getUniqueInstance().getPlayer().getPseudonym();
-                    String targetWildDrawFourCard = BoardModel.getUniqueInstance().getNextPlayer().getPseudonym();
-                    Scanner sc = new Scanner(System.in);
-                    
-                    w: while (true) {
-                        update(launcherWildDrawFourCard+" a joué une carte +4 sur "+targetWildDrawFourCard+"\n");
-                        update(targetWildDrawFourCard+", pensez vous que "+
-                                launcherWildDrawFourCard+" a une carte de la même couleur que la carte précédente ? (o/n)\n");
-                        switch (sc.next()) {  
-                            case "o":
-                                BoardModel.getUniqueInstance().applyCardEffect();
-                                break w;
-                            case "n":
-                                if ( BoardModel.getUniqueInstance().getPlayer().hasColorBeforeWildDrawFour() ) {
-                                    BoardModel.getUniqueInstance().getPlayer().getPlayerHand().addCard(DiscardPileModel.getUniqueInstance().pop());
-                                    BoardModel.getUniqueInstance().applyPenaltyAgainstLauncherWildDrawFourCard();
-                                    ConsoleBoardView.update(launcherWildDrawFourCard+
-                                            " a la couleur de la carte précédente, il a alors pioché 4 cartes et repris sa carte +4\n");
-                                } else {
-                                    BoardModel.getUniqueInstance().applyPenaltyAgainstWildDrawFourCard();
-                                    update(launcherWildDrawFourCard + " : ");
-                                    BoardModel.getUniqueInstance().applyCardEffect();
-                                    ConsoleBoardView.update(launcherWildDrawFourCard+" n'a pas la couleur de la carte précédente, "+
-                                           targetWildDrawFourCard+" a alors piocher 6 cartes\n");
-                                }
-                                break w;
-                         }
-                     }
+                    ((HumanPlayerModel)BoardModel.getUniqueInstance().getNextPlayer()).challengeAgainstWildDrawFourCard();
                 } else {
                     BoardModel.getUniqueInstance().applyCardEffect();
                 }
