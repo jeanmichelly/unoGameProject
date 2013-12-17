@@ -1,6 +1,7 @@
 package fr.utt.isi.lo02.unoGame.testUnitaire.card;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 import java.util.Stack;
 
 import org.junit.Test;
@@ -42,7 +43,7 @@ public class DrawEffectModelTest {
         DiscardPileModel.getUniqueInstance().push(drawCard);
         board.applyCardEffect();
         
-        assertEquals(8, board.getNextPlayer().getPlayerHand().size()); // Verifie si le joueur suivant a 1 carte en plus     
+        assertEquals(8, board.getNextPlayer().getPlayerHand().numberCards()); // Verifie si le joueur suivant a 1 carte en plus     
     }
 
 }

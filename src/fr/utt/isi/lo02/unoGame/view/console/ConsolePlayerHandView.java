@@ -6,11 +6,11 @@ import java.util.Scanner;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
+import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
-import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
 
 public class ConsolePlayerHandView implements Observer {
         
@@ -49,7 +49,9 @@ public class ConsolePlayerHandView implements Observer {
     
     public static class ConsolePlayerHandController {
                 
-        public static void playHumanPlayerModel () throws InvalidActionPickCardException, InvalidColorModelException {
+        public static void playHumanPlayerModel () throws   InvalidActionPickCardException, 
+                                                            InvalidColorModelException {
+            
             if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasPlayableCard() ) {
                 hasPlayableCards();
             } else {
@@ -57,7 +59,13 @@ public class ConsolePlayerHandView implements Observer {
             }
         }
         
-        public static void playComputerPlayerModel () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
+        public static void playComputerPlayerModel () throws    InvalidActionPickCardException, 
+                                                                InvalidActionPutDownCardException {
+            
+            if ( BoardModel.getUniqueInstance().hasVulnerablePlayer() ) {
+                ConsoleBoardView.update(BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" a dit contre uno !");
+                BoardModel.getUniqueInstance().getPlayer().againstUno();
+            }
             if ( !BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasPlayableCard() ) {
                 BoardModel.getUniqueInstance().getPlayer().pickCard();
                 BoardModel.getUniqueInstance().setChanged();
@@ -65,23 +73,25 @@ public class ConsolePlayerHandView implements Observer {
                 ConsoleBoardView.update("◊ "+BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" n'a pas de carte jouable, il a alors pioché une carte");
             }
             else {
-                int sizePlayerHandBeforePlaying = BoardModel.getUniqueInstance().getPlayer().getPlayerHand().size();
+                int sizePlayerHandBeforePlaying = BoardModel.getUniqueInstance().getPlayer().getPlayerHand().numberCards();
 
-                if ( BoardModel.getUniqueInstance().getNextPlayer().getPlayerHand().size() < 3 )
+                if ( BoardModel.getUniqueInstance().getNextPlayer().getPlayerHand().numberCards() < 3 )
                     ((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getStrategy(2).execute();
                 else {
                     ((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getStrategy(3).execute();
                 }
                 BoardModel.getUniqueInstance().setChanged();
                 BoardModel.getUniqueInstance().notifyObservers(); 
-                if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().size() < sizePlayerHandBeforePlaying )
+                if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().numberCards() < sizePlayerHandBeforePlaying )
                     ConsoleBoardView.update("◊ "+BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" a posé une carte");
                 else
                     ConsoleBoardView.update(ConsoleBoardView.build()+"◊ "+BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" a passé son tour, il a alors pioché une carte");
             }
         }
         
-        private static void hasPlayableCards () throws InvalidActionPickCardException, InvalidColorModelException {
+        private static void hasPlayableCards () throws  InvalidActionPickCardException, 
+                                                        InvalidColorModelException {
+            
             Scanner sc = new Scanner(System.in);
             w1: while (true) {
                 ConsoleBoardView.update("Que voulez vous faire ? (j/n) : ");
@@ -89,8 +99,9 @@ public class ConsolePlayerHandView implements Observer {
                     case "j":
                         ConsoleBoardView.update("\n◊ Vous avez avez décidé de poser une carte \n\n");
                         // Rends le joueur vulnérable pour un contre uno
-                        if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().size() == 2 && !BoardModel.getUniqueInstance().getPlayer().getUno() )
+                        if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().numberCards() == 2 && !BoardModel.getUniqueInstance().getPlayer().getUno() ) {
                             BoardModel.getUniqueInstance().getPlayer().canReceiveAgainstUno();
+                        }
                         putDownCard();
                         break w1;
                     case "n":
@@ -137,6 +148,9 @@ public class ConsolePlayerHandView implements Observer {
                             case "n":
                                 ConsoleBoardView.update("\n◊ Vous passez votre tour\n");
                                 break w2;
+                            case "-2":
+                                ConsoleBoardView.update(BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" a dit contre uno !");
+                                BoardModel.getUniqueInstance().getPlayer().againstUno();
                          }
                      }
                     break w1;
@@ -160,7 +174,7 @@ public class ConsolePlayerHandView implements Observer {
                     BoardModel.getUniqueInstance().getPlayer().signalUno();
                     ConsoleBoardView.update(BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" a dit Uno !!!\n");
                 }
-                if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().get(indexChoiceCard).isPlayableCard() ) {
+                if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().getCard(indexChoiceCard).isPlayableCard() ) {
                     BoardModel.getUniqueInstance().getPlayer().putDownCard(indexChoiceCard);
                     BoardModel.getUniqueInstance().setChanged();
                     BoardModel.getUniqueInstance().notifyObservers();
@@ -193,7 +207,39 @@ public class ConsolePlayerHandView implements Observer {
                 }
             }
         }
-        
+
+        public static void challengeAgainstWildDrawFourCard () throws   InvalidActionPickCardException, 
+                                                                        InvalidColorModelException {
+            
+            String launcherWildDrawFourCard = BoardModel.getUniqueInstance().getPlayer().getPseudonym();
+            String targetWildDrawFourCard = BoardModel.getUniqueInstance().getNextPlayer().getPseudonym();
+            Scanner sc = new Scanner(System.in);
+            
+            w: while (true) {
+                ConsoleBoardView.update(launcherWildDrawFourCard+" a joué une carte +4 sur "+targetWildDrawFourCard+"\n");
+                ConsoleBoardView.update(targetWildDrawFourCard+", pensez vous que "+
+                        launcherWildDrawFourCard+" a une carte de la même couleur que la carte précédente ? (o/n)\n");
+                switch (sc.next()) {  
+                    case "o":
+                        BoardModel.getUniqueInstance().applyCardEffect();
+                        break w;
+                    case "n":
+                        if ( BoardModel.getUniqueInstance().getPlayer().hasColorBeforeWildDrawFour() ) {
+                            BoardModel.getUniqueInstance().getPlayer().getPlayerHand().addCard(DiscardPileModel.getUniqueInstance().pop());
+                            BoardModel.getUniqueInstance().applyPenaltyAgainstLauncherWildDrawFourCard();
+                            ConsoleBoardView.update(launcherWildDrawFourCard+
+                                    " a la couleur de la carte précédente, il a alors pioché 4 cartes et repris sa carte +4\n");
+                        } else {
+                            BoardModel.getUniqueInstance().applyPenaltyAgainstWildDrawFourCard();
+                            ConsoleBoardView.update(launcherWildDrawFourCard + " : ");
+                            BoardModel.getUniqueInstance().applyCardEffect();
+                            ConsoleBoardView.update(launcherWildDrawFourCard+" n'a pas la couleur de la carte précédente, "+
+                                   targetWildDrawFourCard+" a alors piocher 6 cartes\n");
+                        }
+                        break w;
+                }
+            }
+        }
     }
     
 }

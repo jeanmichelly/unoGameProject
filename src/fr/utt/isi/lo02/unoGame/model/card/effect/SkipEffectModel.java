@@ -3,17 +3,20 @@ package fr.utt.isi.lo02.unoGame.model.card.effect;
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 
 /**
- * 
- * Cette classe permet d'effectuer un effet pour sauter le tour d'un joueur.
- *
+ * Permet d'effectuer un effet pour sauter le tour d'un joueur.
  */
 public class SkipEffectModel extends ComponentEffectModel {
     
+    /**
+     * Construit un effet pour sauter le tour d'un joueur avec une priorite de 0
+     */
     public SkipEffectModel () {
         super((byte)0);
     }
     
-    @Override
+    /**
+     * Applique l'effet pour sauter le tour d'un joueur
+     */  
     public void applyEffect () {
         BoardModel.getUniqueInstance().moveCursorToNextPlayer();
     }

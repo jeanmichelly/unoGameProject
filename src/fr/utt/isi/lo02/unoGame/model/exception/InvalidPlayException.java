@@ -5,7 +5,7 @@ public class InvalidPlayException extends Exception {
     private static final long serialVersionUID = 1L;
     
     public InvalidPlayException() {
-        super("Problème pouvant être dans putDownCard, chooseColor, notToPlay");
+        super("Probleme pouvant etre dans putDownCard, chooseColor, notToPlay");
     }
     
 }
