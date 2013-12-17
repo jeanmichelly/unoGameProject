@@ -5,14 +5,13 @@ import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
 
 /**
- * 
- * Cette classe comporte un des modes du jeu Uno. 
- * Elle permet de comptabiliser les points selon les regles standards du jeu
- *
+ * Comporte le mode de jeu standard du jeu Uno.
  */
 public class GameRulesStandardModel extends GameRulesModel {
-    
-    @Override
+
+    /**
+     * Comptabilisation des points pour chaque joueur du mode de jeu standard.
+     */
     public void countScore () {
         short score = 0;
         for ( PlayerModel player : BoardModel.getUniqueInstance().getPlayers() ) {
@@ -24,7 +23,9 @@ public class GameRulesStandardModel extends GameRulesModel {
         BoardModel.getUniqueInstance().getPlayer().setScore(score);
     }
     
-    @Override
+    /**
+     * Definit le seuil a atteindre pour considerer qu'un joueur a gagne une partie.
+     */
     public boolean isWinner () {
         return BoardModel.getUniqueInstance().getPlayer().getScore() >= GameRulesModel.SCORE_MAX;
     }

@@ -5,7 +5,7 @@ public class InvalidGameRulesException extends Exception {
     private static final long serialVersionUID = 1L;
 
     public InvalidGameRulesException() {
-        super("Problème de comptabilisation des points");
+        super("Probleme de comptabilisation des points");
     }
     
 }

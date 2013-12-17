@@ -1,6 +1,8 @@
 package fr.utt.isi.lo02.unoGame.testUnitaire.user;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.Test;
 
 import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesFactoryModel;
