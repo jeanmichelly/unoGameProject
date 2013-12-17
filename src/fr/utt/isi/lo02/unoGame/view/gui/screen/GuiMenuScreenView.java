@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
 
-public class GuiMenuView implements Screen {
+public class GuiMenuScreenView implements Screen {
 
     private Stage stage;
     private TextureAtlas atlas;
@@ -55,7 +55,7 @@ public class GuiMenuView implements Screen {
 
         buttonPlay.addListener(new ClickListener(){
            public void clicked(InputEvent event, float x, float y){
-               GuiMasterView.changeScreen(new GuiBoardView());
+               GuiMasterView.setScreen(2);
            }
         });
         buttonExit.addListener(new ClickListener(){

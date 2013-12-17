@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
 import fr.utt.isi.lo02.unoGame.view.gui.tween.SpriteAccessor;
 
-public class GuiSplashView implements Screen {
+public class GuiSplashScreenView implements Screen {
 
     private SpriteBatch batch;
     private Sprite splash;
@@ -43,14 +43,13 @@ public class GuiSplashView implements Screen {
 
         Texture splashTexture = new Texture(Gdx.files.internal("ressources/img/misc/splashScreen.png"));
         splash = new Sprite(splashTexture);
-        splash.setSize(400, 500);
-        splash.setPosition(400,120);
+        splash.setPosition(0,0);
 
         Tween.set(splash, SpriteAccessor.ALPHA).target(0).start(tweenManager);
         Tween.to(splash, SpriteAccessor.ALPHA, .2f).target(1).repeatYoyo(1,.1f).setCallback(new TweenCallback() {
             @Override
             public void onEvent(int i, BaseTween<?> baseTween) {
-                GuiMasterView.changeScreen(new GuiMenuView());
+                GuiMasterView.setScreen(1);
             }
         }).start(tweenManager);
     }
