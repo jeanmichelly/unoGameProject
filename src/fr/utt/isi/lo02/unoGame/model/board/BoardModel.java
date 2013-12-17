@@ -19,7 +19,7 @@ import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
 
 /**
  * <u>Pattern Singleton : </u> </br> 
- * <b>Cette classe contient le coeur du deroulement du jeu Uno. Elle represente le plateau du jeu et elle est donc, instanciable qu'une fois. </b> </br>
+ * <b>Cette classe contient le coeur du deroulement du jeu Uno. Elle represente le plateau du jeu et elle n'est donc, instanciable qu'une fois. </b> </br>
  * <p> Le plateau est physiquement caracterise par une pioche, un talon et des joueurs.
  *  Pour la gestion du jeu, le plateau comporte egalement :
  *  <ul> 
@@ -296,17 +296,17 @@ public class BoardModel extends Observable {
     public void nextRound () throws InvalidActionPickCardException {
         this.numberRound++;
         for ( PlayerModel player : this.players ) {
-            DrawPileModel.getUniqueInstance().addAll(player.getPlayerHand().getCards());
+            DrawPileModel.getUniqueInstance().addCards(player.getPlayerHand().getCards());
             player.getPlayerHand().clear();
             player.setUno(false);
         }
-        DrawPileModel.getUniqueInstance().addAll(DiscardPileModel.getUniqueInstance().getCards());
+        DrawPileModel.getUniqueInstance().addCards(DiscardPileModel.getUniqueInstance().getCards());
         DiscardPileModel.getUniqueInstance().clear();
         DrawPileModel.getUniqueInstance().shuffle();
         this.chooseRandomDealer();
         this.dispenseCards();
         try {
-            DiscardPileModel.getUniqueInstance().add(DrawPileModel.getUniqueInstance().pop());
+            DiscardPileModel.getUniqueInstance().addCard(DrawPileModel.getUniqueInstance().pop());
         } catch (DrawPileIsEmptyAfterReshuffledException e) {
             e.printStackTrace();
         }

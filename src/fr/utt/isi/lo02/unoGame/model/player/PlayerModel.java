@@ -37,17 +37,17 @@ public abstract class PlayerModel {
 	}
 	
     public void putDownCard (int indexChoiceCard) throws InvalidActionPutDownCardException {
-        if ( !BoardModel.getUniqueInstance().getPlayer().getPlayerHand().get(indexChoiceCard).isPlayableCard() )
+        if ( !BoardModel.getUniqueInstance().getPlayer().getPlayerHand().getCard(indexChoiceCard).isPlayableCard() )
             throw new InvalidActionPutDownCardException();
-        DiscardPileModel.getUniqueInstance().push(BoardModel.getUniqueInstance().getPlayer().getPlayerHand().remove(indexChoiceCard));
+        DiscardPileModel.getUniqueInstance().push(BoardModel.getUniqueInstance().getPlayer().getPlayerHand().removeCard(indexChoiceCard));
     }
 	
 	public void pickCard () throws InvalidActionPickCardException {
-	    if ( DrawPileModel.getUniqueInstance().size() == 0 )
+	    if ( DrawPileModel.getUniqueInstance().numberCards() == 0 )
 	        throw new InvalidActionPickCardException();
 		try {
-		    this.playerHand.add(DrawPileModel.getUniqueInstance().pop());
-		    if ( this.playerHand.size() >= 2 )
+		    this.playerHand.addCard(DrawPileModel.getUniqueInstance().pop());
+		    if ( this.playerHand.numberCards() >= 2 )
 		        this.uno = false;
         } catch (DrawPileIsEmptyAfterReshuffledException e) {
             e.printStackTrace();

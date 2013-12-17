@@ -125,7 +125,7 @@ public class ConsoleBoardView implements Observer {
                                                         InvalidGameRulesException, 
                                                         InvalidPlayException {
             
-            if ( !BoardModel.getUniqueInstance().getPlayer().getPlayerHand().isEmpty() )
+            if ( !BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasNotCard() )
                 roundNotFinish();
             else
                 roundFinish();
@@ -153,7 +153,7 @@ public class ConsoleBoardView implements Observer {
                                 break w;
                             case "n":
                                 if ( BoardModel.getUniqueInstance().getPlayer().hasColorBeforeWildDrawFour() ) {
-                                    BoardModel.getUniqueInstance().getPlayer().getPlayerHand().add(DiscardPileModel.getUniqueInstance().pop());
+                                    BoardModel.getUniqueInstance().getPlayer().getPlayerHand().addCard(DiscardPileModel.getUniqueInstance().pop());
                                     BoardModel.getUniqueInstance().applyPenaltyAgainstLauncherWildDrawFourCard();
                                     ConsoleBoardView.update(launcherWildDrawFourCard+
                                             " a la couleur de la carte précédente, il a alors pioché 4 cartes et repris sa carte +4\n");

@@ -72,16 +72,16 @@ public class ConsolePlayerHandView implements Observer {
                 ConsoleBoardView.update("◊ "+BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" n'a pas de carte jouable, il a alors pioché une carte");
             }
             else {
-                int sizePlayerHandBeforePlaying = BoardModel.getUniqueInstance().getPlayer().getPlayerHand().size();
+                int sizePlayerHandBeforePlaying = BoardModel.getUniqueInstance().getPlayer().getPlayerHand().numberCards();
 
-                if ( BoardModel.getUniqueInstance().getNextPlayer().getPlayerHand().size() < 3 )
+                if ( BoardModel.getUniqueInstance().getNextPlayer().getPlayerHand().numberCards() < 3 )
                     ((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getStrategy(2).execute();
                 else {
                     ((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getStrategy(3).execute();
                 }
                 BoardModel.getUniqueInstance().setChanged();
                 BoardModel.getUniqueInstance().notifyObservers(); 
-                if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().size() < sizePlayerHandBeforePlaying )
+                if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().numberCards() < sizePlayerHandBeforePlaying )
                     ConsoleBoardView.update("◊ "+BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" a posé une carte");
                 else
                     ConsoleBoardView.update(ConsoleBoardView.build()+"◊ "+BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" a passé son tour, il a alors pioché une carte");
@@ -98,7 +98,7 @@ public class ConsolePlayerHandView implements Observer {
                     case "j":
                         ConsoleBoardView.update("\n◊ Vous avez avez décidé de poser une carte \n\n");
                         // Rends le joueur vulnérable pour un contre uno
-                        if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().size() == 2 && !BoardModel.getUniqueInstance().getPlayer().getUno() ) {
+                        if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().numberCards() == 2 && !BoardModel.getUniqueInstance().getPlayer().getUno() ) {
                             BoardModel.getUniqueInstance().getPlayer().canReceiveAgainstUno();
                         }
                         putDownCard();
@@ -173,7 +173,7 @@ public class ConsolePlayerHandView implements Observer {
                     BoardModel.getUniqueInstance().getPlayer().signalUno();
                     ConsoleBoardView.update(BoardModel.getUniqueInstance().getPlayer().getPseudonym()+" a dit Uno !!!\n");
                 }
-                if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().get(indexChoiceCard).isPlayableCard() ) {
+                if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().getCard(indexChoiceCard).isPlayableCard() ) {
                     BoardModel.getUniqueInstance().getPlayer().putDownCard(indexChoiceCard);
                     BoardModel.getUniqueInstance().setChanged();
                     BoardModel.getUniqueInstance().notifyObservers();

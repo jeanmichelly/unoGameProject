@@ -5,7 +5,7 @@ public class InvalidColorModelException extends Exception{
     private static final long serialVersionUID = 1L;
 
     public InvalidColorModelException() {
-        super("Problème de color");
+        super("Probleme de color");
     }
     
 }

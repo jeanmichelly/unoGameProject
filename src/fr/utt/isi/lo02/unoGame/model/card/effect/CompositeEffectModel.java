@@ -26,7 +26,7 @@ public class CompositeEffectModel extends ComponentEffectModel {
 	private ArrayList<ComponentEffectModel> effects;
 
 	/**
-	 * Initialise l'ensemble à vide et qui contiendra les effets de bas niveau
+	 * Initialise l'ensemble a vide et qui contiendra les effets de bas niveau
 	 */
 	public CompositeEffectModel () {
 	    super((byte)-1);
@@ -66,7 +66,7 @@ public class CompositeEffectModel extends ComponentEffectModel {
      * Ajoute un effet de bas niveau selon un facteur au composite
      * @param effect effet de bas niveau
      * @param factor determine le nombre d'effet a ajouter
-     * @return true si les ajouts de l'effet a bien aboutie, false sinon
+     * @return true si les ajouts de l'effet ont bien aboutie, false sinon
      */
     public boolean addEffect (ComponentEffectModel effect, int factor) {
         boolean response = true;

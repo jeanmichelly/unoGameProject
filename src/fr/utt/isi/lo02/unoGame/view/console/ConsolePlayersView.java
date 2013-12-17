@@ -83,7 +83,7 @@ public class ConsolePlayersView implements Observer {
             buildHeads();
             buildMiddles();
             buildTails();
-            buildBelowTails(player.getPlayerHand().size());
+            buildBelowTails(player.getPlayerHand().numberCards());
         }
         return headsCards+"\n"+
                middlesCards+"\n"+

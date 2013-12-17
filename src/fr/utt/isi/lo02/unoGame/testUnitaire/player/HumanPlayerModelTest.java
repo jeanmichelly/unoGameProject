@@ -31,8 +31,8 @@ public class HumanPlayerModelTest {
         BoardModel.getUniqueInstance().chooseRandomDealer();
         DiscardPileModel.getUniqueInstance().push(c9);
         
-        BoardModel.getUniqueInstance().getPlayer().getPlayerHand().add(c1);
-        BoardModel.getUniqueInstance().getPlayer().getPlayerHand().add(c2);
+        BoardModel.getUniqueInstance().getPlayer().getPlayerHand().addCard(c1);
+        BoardModel.getUniqueInstance().getPlayer().getPlayerHand().addCard(c2);
         BoardModel.getUniqueInstance().getPlayer().play();
         DiscardPileModel.getUniqueInstance().push(c3);
         BoardModel.getUniqueInstance().getPlayer().play();

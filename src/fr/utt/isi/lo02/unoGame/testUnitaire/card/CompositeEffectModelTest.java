@@ -54,7 +54,7 @@ public class CompositeEffectModelTest {
         
         board.applyCardEffect();
         
-        assertEquals(11, board.getPlayer(0).getPlayerHand().size()); // Verifie si le joueur suivant a 4 carte en plus     
+        assertEquals(11, board.getPlayer(0).getPlayerHand().numberCards()); // Verifie si le joueur suivant a 4 carte en plus     
 
         assertNotNull(DiscardPileModel.getUniqueInstance().peek().getColor()); // Verifie la couleur
         boolean existColor = false;
@@ -92,7 +92,7 @@ public class CompositeEffectModelTest {
         DiscardPileModel.getUniqueInstance().push(drawTwoCard);
         board.applyCardEffect();
         
-        assertEquals(9, board.getPlayer(0).getPlayerHand().size()); // Verifie si le joueur suivant a 2 carte en plus
+        assertEquals(9, board.getPlayer(0).getPlayerHand().numberCards()); // Verifie si le joueur suivant a 2 carte en plus
         assertEquals(0, board.getPlayerCursor()); // Verifie si le curseur se déplace bien 
     }
 }

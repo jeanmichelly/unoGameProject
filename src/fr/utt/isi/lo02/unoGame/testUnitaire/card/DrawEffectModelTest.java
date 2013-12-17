@@ -43,7 +43,7 @@ public class DrawEffectModelTest {
         DiscardPileModel.getUniqueInstance().push(drawCard);
         board.applyCardEffect();
         
-        assertEquals(8, board.getNextPlayer().getPlayerHand().size()); // Verifie si le joueur suivant a 1 carte en plus     
+        assertEquals(8, board.getNextPlayer().getPlayerHand().numberCards()); // Verifie si le joueur suivant a 1 carte en plus     
     }
 
 }
