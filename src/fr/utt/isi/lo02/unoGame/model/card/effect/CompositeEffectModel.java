@@ -112,6 +112,14 @@ public class CompositeEffectModel extends ComponentEffectModel {
     }
     
     /**
+     * Informe sur le nombre d'effet de bas niveau que contient le composite
+     * @return le nombre d'effet de bas niveau que contient le composite
+     */
+    public int numberEffects () {
+        return this.effects.size();
+    }
+    
+    /**
      * Obtenir le composite 
      * @return la liste constituee des effets de bas niveau
      */

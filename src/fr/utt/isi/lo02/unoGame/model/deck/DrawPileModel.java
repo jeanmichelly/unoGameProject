@@ -18,6 +18,7 @@ import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
 /**
  * <u>Pattern Singleton : </u> </br> 
  * Represente la pioche du jeu par une pile de carte. Elle n'est instanciable qu'une seule fois.
+ * @see DeckModel
  */
 public class DrawPileModel extends DeckModel<Stack<CardModel>> {
      

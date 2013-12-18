@@ -30,6 +30,12 @@ import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
  *      <li>Un mode de jeu choisit par l'utilisateur</li>
  *      <li>Des penalites pour gerer les contre uno et les eventuelles contestations des cartes +4</li>
  *  </ul>
+ * @see CompositeEffectModel
+ * @see DiscardPileModel
+ * @see DrawPileModel
+ * @see PlayerModel
+ * @see GameRulesFactoryModel
+ * @see GameRulesModel
  */
 public class BoardModel extends Observable {
     /**
@@ -54,32 +60,26 @@ public class BoardModel extends Observable {
 	private short numberGame;
 	/**
 	 * Comporte les differentes penalites (contre uno ou carte +4)
-	 * @see CompositeEffectModel
 	 */
 	private CompositeEffectModel [] penaltys;
 	/**
 	 * Le talon correspond a une pile de carte dont le sommet est visible par les joueurs
-	 * @see DiscardPileModel
 	 */
 	private DiscardPileModel discardPile;
 	/**
 	 * La pioche correspond a une pile de carte non visible par les joueurs.
-	 * @see DrawPileModel
 	 */
 	private DrawPileModel drawPile;
 	/**
 	 * Stock les joueurs dans un tableau. Si on considere qu'un joueur humain quitte la partie, on le remplace par un ordinateur.
-	 * @see PlayerModel
 	 */
 	private PlayerModel [] players;
 	/**
 	 * Choix dynamique du mode de jeu
-	 * @see GameRulesFactoryModel
 	 */
 	private GameRulesFactoryModel gameRulesFactory;
 	/**
 	 * Correspond au mode de jeu choisit par l'utilisateur
-	 * @see GameRulesModel
 	 */
 	private GameRulesModel gameRules; 
 
@@ -295,6 +295,8 @@ public class BoardModel extends Observable {
      */
     public void nextRound () throws InvalidActionPickCardException {
         this.numberRound++;
+        
+        // Remise des cartes restantes des mains des joueurs et celles du talon dans la pioche
         for ( PlayerModel player : this.players ) {
             DrawPileModel.getUniqueInstance().addCards(player.getPlayerHand().getCards());
             player.getPlayerHand().clear();
@@ -302,10 +304,14 @@ public class BoardModel extends Observable {
         }
         DrawPileModel.getUniqueInstance().addCards(DiscardPileModel.getUniqueInstance().getCards());
         DiscardPileModel.getUniqueInstance().clear();
+        
         DrawPileModel.getUniqueInstance().shuffle();
+        
         this.chooseRandomDealer();
+        
         this.dispenseCards();
-        try {
+        
+        try { // Initialisation du talon
             DiscardPileModel.getUniqueInstance().addCard(DrawPileModel.getUniqueInstance().pop());
         } catch (DrawPileIsEmptyAfterReshuffledException e) {
             e.printStackTrace();

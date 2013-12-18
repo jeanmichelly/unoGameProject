@@ -75,11 +75,10 @@ public class ConsolePlayerHandView implements Observer {
             else {
                 int sizePlayerHandBeforePlaying = BoardModel.getUniqueInstance().getPlayer().getPlayerHand().numberCards();
 
-                if ( BoardModel.getUniqueInstance().getNextPlayer().getPlayerHand().numberCards() < 3 )
-                    ((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getStrategy(2).execute();
-                else {
+                // if ( BoardModel.getUniqueInstance().getNextPlayer().getPlayerHand().numberCards() < 3 )
+                //     ((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getStrategy(2).execute();
+                // else
                     ((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getStrategy(3).execute();
-                }
                 BoardModel.getUniqueInstance().setChanged();
                 BoardModel.getUniqueInstance().notifyObservers(); 
                 if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().numberCards() < sizePlayerHandBeforePlaying )

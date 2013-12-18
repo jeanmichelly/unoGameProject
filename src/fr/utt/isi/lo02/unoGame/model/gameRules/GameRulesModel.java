@@ -5,6 +5,10 @@ import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
 
 /**
  * Permet le parametrage du deroulement du jeu de maniere ergonomique.
+ * @see GameRulesFactoryModel
+ * @see GameRulesStandardModel
+ * @see ColorModel
+ * @see SymbolModel
  */
 public abstract class GameRulesModel {
     /**

@@ -4,6 +4,7 @@ import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 
 /**
  * Permet d'effectuer un effet pour inverser le sens du jeu.
+ * @see ComponentEffectModel
  */
 public class ReverseEffectModel extends ComponentEffectModel {
 

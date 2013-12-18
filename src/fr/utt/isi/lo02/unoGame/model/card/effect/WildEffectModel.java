@@ -5,7 +5,7 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 
 /**
  * Permet d'effectuer un effet joker et donc, assure le choix de la couleur.
- *
+ * @see ComponentEffectModel
  */
 public class WildEffectModel extends ComponentEffectModel {
 

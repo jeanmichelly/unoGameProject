@@ -22,6 +22,12 @@ public class ComputerPlayerModel extends PlayerModel {
 
     /**
      * Comporte differentes strategies
+     * @see PlayerModel
+     * @see StrategyModel
+     * @see PriorityColorStrategyModel
+     * @see PriorityNumberStrategyModel
+     * @see PrioritySpecialityStrategyModel
+     * @see RandomStrategyModel
      */
     private StrategyModel [] strategy;
     
@@ -70,21 +76,6 @@ public class ComputerPlayerModel extends PlayerModel {
     }
     
     /**
-     * Obtenir l'ensemble des cartes qui sont jouables.
-     * @return les cartes qui sont jouables
-     */
-    public ArrayList<CardModel> getPlayableCards () {
-        Iterator<CardModel> iter = super.playerHand.getCards().iterator();
-        ArrayList<CardModel> playableCards = new ArrayList<CardModel>();
-        while (iter.hasNext()) {
-            CardModel card = iter.next();
-            if (card.isPlayableCard())
-                playableCards.add(card);
-        }
-        return playableCards;
-    }
-    
-    /**
      * Obtenir l'indice du maximum de l'ensemble
      * @param array ensemble auquel on va rechercher l'indice du maximum
      * @return l'indice du maximum
@@ -103,27 +94,6 @@ public class ComputerPlayerModel extends PlayerModel {
     }
     
     /**
-     * Obtenir la couleur par une cle avec un format nombre 
-     * @param index nombre correspondant a une couleur
-     * @return la couleur correspondant au nombre 
-     * @throws InvalidColorModelException
-     */
-    private ColorModel getColorModel (byte index) throws InvalidColorModelException {
-        switch ( index ) {
-            case 0 :
-                return ColorModel.YELLOW;
-            case 1 :
-                return ColorModel.RED;
-            case 2 :
-                return ColorModel.GREEN;
-            case 3 :
-                return ColorModel.BLUE;
-            default :
-                throw new InvalidColorModelException();
-        }
-    }
-    
-    /**
      * Comptabilisation du nombre de carte pour chaque couleur
      * @return la couleur la plus frequente
      * @throws InvalidColorModelException
@@ -136,7 +106,7 @@ public class ComputerPlayerModel extends PlayerModel {
             if ( c.getColor() != null)
                 countColor[c.getColor().getId()]++;
         }
-        return getColorModel(getIndexOfMax(countColor));
+        return ColorModel.getColor(getIndexOfMax(countColor));
     }
 
 }

@@ -1,6 +1,7 @@
 package fr.utt.isi.lo02.unoGame.model.player.strategy;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
@@ -19,7 +20,36 @@ public class PrioritySpecialityStrategyModel extends StrategyModel {
     /**
      * Execute la strategie qui donne la priorite aux cartes avec des effets
      */
-    public void execute () { 
+    public boolean execute () { 
+        CardModel playableSpecialityCard = getPlayableSpecialityCard(); 
+        
+        if ( playableSpecialityCard == null )
+            return false;
+        
+        return true;
     }
     
+    private CardModel getPlayableSpecialityCard () {
+        Iterator<CardModel> iterPlayerHand = BoardModel.getUniqueInstance().getPlayer().getPlayerHand().getCards().iterator();
+        ArrayList<CardModel> playableSpecialityCards = new ArrayList<CardModel>();
+        
+        while ( iterPlayerHand.hasNext() ) {
+            CardModel card = iterPlayerHand.next();
+            
+            // Donne la priorite aux cartes +2 
+            if ( card.isPlayableCard() && card.getCompositeEffects().numberEffects() == 3 )
+                return card;
+            else if ( card.isPlayableCard() && card.getCompositeEffects().hasEffect() ) {
+                playableSpecialityCards.add(card);
+            }
+        }
+        
+        int sizePlayableSpecialityCards = playableSpecialityCards.size();
+        
+        if ( sizePlayableSpecialityCards == 0 )
+            return null;
+
+        return playableSpecialityCards.get((int)(Math.random() * (sizePlayableSpecialityCards)));
+    }
+        
 }

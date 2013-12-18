@@ -15,10 +15,17 @@ public abstract class StrategyModel {
 
     /**
      * Execute une strategie 
+     * 
+     * @return true si la strategie a pu faire une action :
+     *  <ul>
+     *      <li>Poser une carte jouable correspondant a la strategie</li>
+     *      <li>Passer son tour</li>    
+     *  </ul>, 
+     *  false sinon.
      * @throws InvalidActionPickCardException
      * @throws InvalidActionPutDownCardException
      */
-    public abstract void execute () throws InvalidActionPickCardException, InvalidActionPutDownCardException;
+    public abstract boolean execute () throws InvalidActionPickCardException, InvalidActionPutDownCardException;
     
     /**
      * Recherche l'indice d'une carte en particulier

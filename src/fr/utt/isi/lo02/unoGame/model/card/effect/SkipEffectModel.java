@@ -4,6 +4,7 @@ import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 
 /**
  * Permet d'effectuer un effet pour sauter le tour d'un joueur.
+ * @see ComponentEffectModel
  */
 public class SkipEffectModel extends ComponentEffectModel {
     

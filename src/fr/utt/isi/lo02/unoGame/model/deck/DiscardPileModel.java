@@ -11,6 +11,7 @@ import fr.utt.isi.lo02.unoGame.model.exception.DrawPileIsEmptyAfterReshuffledExc
 /**
  * <u>Pattern Singleton : </u> </br> 
  * Represente le talon du jeu par une pile de carte dont le sommet est visible. Elle n'est instanciable qu'une seule fois.
+ * @see DeckModel
  */
 public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
 
@@ -95,8 +96,8 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
      * Permet le remelange de la pioche en conservant son sommet
      * @return le reste des cartes presente en dessous du sommet
      */
-    public Stack<CardModel> reshuffled () {
-        CardModel topCard = this.pop();
+    public Stack<CardModel> reshuffled () { // Conserve uniquement son sommet
+        CardModel topCard = this.pop(); 
         Stack<CardModel> remainingCards = super.cards; 
         super.cards = new Stack<CardModel>();
         super.addCard(topCard);

@@ -7,6 +7,7 @@ import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 
 /**
  * Represente les mains des joueurs.
+ * @see DeckModel
  */
 public class PlayerHandModel extends DeckModel<ArrayList<CardModel>> {
     

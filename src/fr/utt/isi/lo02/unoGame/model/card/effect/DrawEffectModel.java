@@ -5,6 +5,7 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 
 /**
  * Permet d'effectuer un effet pour faire piocher une carte au prochain joueur.
+ * @see ComponentEffectModel
  */
 public class DrawEffectModel extends ComponentEffectModel {
 

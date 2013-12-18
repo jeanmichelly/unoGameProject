@@ -17,7 +17,10 @@ import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayersView;
  */
 public class TesteurConsole {
 
-    public static void launchGame () throws InvalidActionPickCardException, InvalidColorModelException, InvalidGameRulesException, InvalidPlayException {
+    public static void launchGame () throws InvalidActionPickCardException, 
+                                            InvalidColorModelException, 
+                                            InvalidGameRulesException, 
+                                            InvalidPlayException {
         
         ConsoleBoardView consoleBoardView = new ConsoleBoardView(); 
         ConsolePlayerHandView consolePlayerHandView = new ConsolePlayerHandView();
