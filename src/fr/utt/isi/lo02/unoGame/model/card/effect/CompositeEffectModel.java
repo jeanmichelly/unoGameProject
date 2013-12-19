@@ -19,18 +19,67 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
  * @see WildEffectModel
  */
 public class CompositeEffectModel extends ComponentEffectModel {
+    
+    /**
+     * Liste d'effet correspondant a un effet du jeu officiel
+     */
+    private static ArrayList<ComponentEffectModel> wildDrawFourEffect = new ArrayList<ComponentEffectModel>();
+    private static ArrayList<ComponentEffectModel> wildEffect = new ArrayList<ComponentEffectModel>();
+    private static ArrayList<ComponentEffectModel> drawTwoEffect = new ArrayList<ComponentEffectModel>();
+    private static ArrayList<ComponentEffectModel> skipEffect = new ArrayList<ComponentEffectModel>();
+    private static ArrayList<ComponentEffectModel> reverseEffect = new ArrayList<ComponentEffectModel>();
 
     /**
-     * Liste d'effet correspondant a un effet du jeu
+     * Liste d'effet 
      */
 	private ArrayList<ComponentEffectModel> effects;
-
+		
 	/**
 	 * Initialise l'ensemble a vide et qui contiendra les effets de bas niveau
 	 */
 	public CompositeEffectModel () {
 	    super((byte)-1);
 		this.effects = new ArrayList<ComponentEffectModel>();
+	}
+	
+    public CompositeEffectModel (ArrayList<ComponentEffectModel> effects) {
+        super((byte)-1);
+        this.effects = effects;
+    }
+	
+	private static void initWildDrawFourEffect() {
+	    CompositeEffectModel.wildDrawFourEffect.add(new WildEffectModel());
+	    CompositeEffectModel.wildDrawFourEffect.add(new DrawEffectModel());
+	    CompositeEffectModel.wildDrawFourEffect.add(new DrawEffectModel());
+	    CompositeEffectModel.wildDrawFourEffect.add(new DrawEffectModel());
+	    CompositeEffectModel.wildDrawFourEffect.add(new DrawEffectModel());
+	    CompositeEffectModel.wildDrawFourEffect.add(new SkipEffectModel());
+	}
+	
+	private static void initWildEffect() {
+        CompositeEffectModel.wildEffect.add(new WildEffectModel());
+    }
+	
+	private static void initDrawTwoEffect () {
+        CompositeEffectModel.drawTwoEffect.add(new DrawEffectModel());
+        CompositeEffectModel.drawTwoEffect.add(new DrawEffectModel());
+        CompositeEffectModel.drawTwoEffect.add(new SkipEffectModel());
+    }
+	
+	private static void initSkipEffect () {
+        CompositeEffectModel.skipEffect.add(new SkipEffectModel());
+    }
+	
+	private static void initReverseEffect () {
+        CompositeEffectModel.reverseEffect.add(new ReverseEffectModel());
+    }
+	
+	public static void initGameEffect () {
+	    initWildDrawFourEffect();
+	    initWildEffect();
+	    initDrawTwoEffect();
+	    initSkipEffect();
+	    initReverseEffect();
 	}
 
 	/**
@@ -125,6 +174,26 @@ public class CompositeEffectModel extends ComponentEffectModel {
      */
     public ArrayList<ComponentEffectModel> getEffects () {
         return this.effects;
+    }
+    
+    public static ArrayList<ComponentEffectModel> getWildDrawFourEffect () {
+        return CompositeEffectModel.wildDrawFourEffect;
+    }
+    
+    public static ArrayList<ComponentEffectModel> getWildEffect () {
+        return CompositeEffectModel.wildEffect;
+    }
+    
+    public static ArrayList<ComponentEffectModel> getDrawTwoEffect () {
+        return CompositeEffectModel.drawTwoEffect;
+    }
+    
+    public static ArrayList<ComponentEffectModel> getSkipEffect () {
+        return CompositeEffectModel.skipEffect;
+    }
+    
+    public static ArrayList<ComponentEffectModel> getReverseEffect () {
+        return CompositeEffectModel.reverseEffect;
     }
     
 }

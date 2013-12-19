@@ -74,18 +74,19 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
         for ( int j=0; j<2; j++, i=0 ) {
             for ( SymbolModel symbol : GameRulesModel.SYMBOLS2 ) {
                 for ( ColorModel color : GameRulesModel.COLORS ) {
-                    CompositeEffectModel effects = new CompositeEffectModel();
+                    CompositeEffectModel effects;
                     switch ( symbol ) {
                         case REVERSE : 
-                            effects.addEffect(new ReverseEffectModel());
+                            effects = new CompositeEffectModel(CompositeEffectModel.getReverseEffect());
                             break;
                         case DRAW_TWO :
-                            effects.addEffect(new DrawEffectModel(), 2);
+                            effects = new CompositeEffectModel(CompositeEffectModel.getDrawTwoEffect());
+                            break;
                         case SKIP :
-                            effects.addEffect(new SkipEffectModel());
-                            effects.sortEffectsByPriority(); // permet de classer les effets par ordre de priorite : deux effets consecutifs peuvent avoir un impact different si il sont effectuees dans un ordre different
+                            effects = new CompositeEffectModel(CompositeEffectModel.getSkipEffect());
                             break;
                         default:
+                            effects = new CompositeEffectModel();
                             break;
                     }
                     this.push(new CardModel(symbol, color, GameRulesModel.SCORES2[i], effects));
@@ -103,16 +104,16 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
         
         for ( SymbolModel symbol : GameRulesModel.SYMBOLS4 ) {
             for ( int j=0; j<4; j++ ) {
-                CompositeEffectModel effects = new CompositeEffectModel();
+                CompositeEffectModel effects;
                 switch ( symbol ) {
                     case WILD_DRAW_FOUR :
-                        effects.addEffect(new DrawEffectModel(), 4);
-                        effects.addEffect(new SkipEffectModel());
+                        effects = new CompositeEffectModel(CompositeEffectModel.getWildDrawFourEffect());
+                        break;
                     case WILD :
-                        effects.addEffect(new WildEffectModel());
-                        effects.sortEffectsByPriority(); // permet de classer les effets par ordre de priorite : deux effets consecutifs peuvent avoir un impact different si il sont effectuees dans un ordre different
+                        effects = new CompositeEffectModel(CompositeEffectModel.getWildEffect());
                         break;
                     default:
+                        effects = new CompositeEffectModel();
                         break;
                 }
                 this.push(new CardModel(symbol, null, GameRulesModel.SCORES4[i], effects));

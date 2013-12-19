@@ -92,6 +92,7 @@ public class BoardModel extends Observable {
 	    this.discardPile = DiscardPileModel.getUniqueInstance();
 		this.gameRulesFactory = new GameRulesFactoryModel();
 		this.initPenaltys();
+		CompositeEffectModel.initGameEffect();
 	}
 
 	/**
