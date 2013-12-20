@@ -14,7 +14,7 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 
 /**
- * Definit le modele commun d'un joueur
+ * Définit le modèle commun d'un joueur
  */
 public abstract class PlayerModel {
 
@@ -27,18 +27,18 @@ public abstract class PlayerModel {
 	 */
 	protected short score;
 	/**
-	 * Chaque joueur possede des cartes
+	 * Chaque joueur possède des cartes
 	 */
 	protected PlayerHandModel playerHand;
 	/**
-	 * Flag qui informe si un joueur est vulnerable. Cela permet la gestion d'un contre uno.
+	 * Flag qui informe si un joueur est vulnérable. Cela permet la gestion d'un contre uno.
 	 */
 	protected boolean uno;
 	
 	/**
 	 * Construit un joueur humain avec son pseudonym. 
-	 * Il initialise son score a 0, sa main a vide et le flag a false
-	 * @param pseudonym represente le pseudo du joueur
+	 * Il initialise son score a 0, sa main à vide et le flag à false
+	 * @param pseudonym représente le pseudo du joueur
 	 */
 	public PlayerModel (String pseudonym) {
 	    this.pseudonym = pseudonym;
@@ -61,8 +61,8 @@ public abstract class PlayerModel {
     }
 	
     /**
-     * Permet de piocher une carte. Si le joueur a 2 cartes ou plus, le flag passe ou reste a false.
-     * Si la pioche n'a pas assez de carte meme apres un remelange grace au talon, alors on ignore
+     * Permet de piocher une carte. Si le joueur a 2 cartes ou plus, le flag passe ou reste à false.
+     * Si la pioche n'a pas assez de carte même après un remélange grâce au talon, alors on ignore
      * @throws InvalidActionPickCardException
      */
 	public void pickCard () throws InvalidActionPickCardException {
@@ -118,7 +118,7 @@ public abstract class PlayerModel {
     }	
     
     /**
-     * Permet de savoir si le joueur a la couleur du sommet avant qu'il est jouee une carte +4 
+     * Permet de savoir si le joueur a la couleur du sommet avant qu'il est jouée une carte +4 
      * @return
      */
     public boolean hasColorBeforeWildDrawFour () {
@@ -131,7 +131,7 @@ public abstract class PlayerModel {
     }
     
     /**
-     * Rends vulnerable le joueur contre le uno
+     * Rend vulnérable le joueur contre le uno
      */
     public void canReceiveAgainstUno () {
         this.uno = true;
@@ -170,8 +170,8 @@ public abstract class PlayerModel {
     }
 	
 	/**
-	 * Informe sur l'etat de vulnerabilite du joueur
-	 * @return true si le joueur est vulnerable, false sinon
+	 * Informe sur l'état de vulnérabilite du joueur
+	 * @return true si le joueur est vulnérable, false sinon
 	 */
 	public boolean getUno() {
 	    return this.uno;
@@ -179,7 +179,7 @@ public abstract class PlayerModel {
 
 	/**
 	 * Modifie le score du joueur
-	 * @param score mise a jour du score du joueur
+	 * @param score mise à jour du score du joueur
 	 */
     public void setScore (short score) {
         this.score = score;
@@ -187,7 +187,7 @@ public abstract class PlayerModel {
     
     /**
      * Modifie le flag de vulnerabilite
-     * @param uno mise a jour du flag, true si le joueur est vulnerable, false sinon.
+     * @param uno mise à jour du flag, true si le joueur est vulnerable, false sinon.
      */
     public void setUno (boolean uno) {
         this.uno = uno;

@@ -1,14 +1,14 @@
 package fr.utt.isi.lo02.unoGame.model.card;
 
 /**
- * Permet de lister la representation des couleurs que peut avoir une carte : 
+ * Permet de lister la représentation des couleurs que peut avoir une carte : 
  * <ul>
  *      <li>Jaune</li>
  *      <li>Rouge</li>
  *      <li>Vert</li>
  *      <li>Bleu</li>
  * </ul>
- * Une couleur est representee par un identifiant, un label, et une composante couleur RGB
+ * Une couleur est representée par un identifiant, un label, et une composante couleur RGB
  */
 public enum ColorModel {
     
@@ -22,7 +22,7 @@ public enum ColorModel {
      */
     private byte id;
     /**
-     * Identifie une couleur par un caractere
+     * Identifie une couleur par un caractère
      */
     private char label;
     /**
@@ -56,8 +56,8 @@ public enum ColorModel {
     }
 
     /**
-     * Obtenir le caractere identifiant la couleur
-     * @return le caractere identifiant la couleur
+     * Obtenir le caractère identifiant la couleur
+     * @return le caractère identifiant la couleur
      */
     public char getLabel () {
         return this.label;

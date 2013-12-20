@@ -10,7 +10,7 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 public class DrawEffectModel extends ComponentEffectModel {
 
     /**
-     * Construit un effet pour piocher avec une priorite de 20
+     * Construit un effet pour piocher avec une priorité de 20
      */
     public DrawEffectModel () {
         super((byte)20);
@@ -24,8 +24,8 @@ public class DrawEffectModel extends ComponentEffectModel {
     }
     
     /**
-     * Applique l'effet de faire piocher a un joueur en particulier (pour les penalites)
-     * @param i indique l'indice du joueur a faire piocher
+     * Applique l'effet de faire piocher à un joueur en particulier (pour les pénalités)
+     * @param i indique l'indice du joueur à faire piocher
      * @throws InvalidActionPickCardException
      */
     public void applyEffect (int index) throws InvalidActionPickCardException {

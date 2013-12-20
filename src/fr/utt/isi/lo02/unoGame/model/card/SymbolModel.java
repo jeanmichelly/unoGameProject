@@ -1,17 +1,17 @@
 package fr.utt.isi.lo02.unoGame.model.card;
 /**
- * Permet de lister la representation des symboles q peut avoir une carte : 
+ * Permet de lister la représentation des symboles que peut avoir une carte : 
  * <ul>
  *      <li>Jaune</li>
  *      <li>Rouge</li>
  *      <li>Vert</li>
  *      <li>Bleu</li>
  * </ul>
- * Une couleur est representee par un identifiant, un label, et une composante couleur RGB
+ * Une couleur est representée par un identifiant, un label, et une composante couleur RGB
  */
 /**
  * 
- * Permet de lister la representation des symboles que peut avoir une carte :
+ * Permet de lister la représentation des symboles que peut avoir une carte :
  * <ul>
  *      <li>ZERO</li>
  *      <li>ONE</li>
@@ -29,7 +29,7 @@ package fr.utt.isi.lo02.unoGame.model.card;
  *      <li>WILD</li>
  *      <li>WILD_DRAW_FOUR</li>
  * </ul>
- * Un symbole est represente par un label
+ * Un symbole est representé par un label
  */
 public enum SymbolModel {
 
@@ -50,21 +50,21 @@ public enum SymbolModel {
     WILD_DRAW_FOUR ('F');
 
     /**
-     * Identifie un symbole par un caractere
+     * Identifie un symbole par un caractère
      */
     private char label;
 
     /**
      * Construit un symbole que peut avoir une carte du jeu
-     * @param label identifie le symbole par un caractere
+     * @param label identifie le symbole par un caractère
      */
     private SymbolModel (char label) {
         this.label = label;
     }
     
     /**
-     * Obtenir le caractere identifiant le symbole
-     * @return le caractere identifiant le symbole
+     * Obtenir le caractère identifiant le symbole
+     * @return le caractère identifiant le symbole
      */
     public char getLabel () {
         return this.label;

@@ -26,7 +26,7 @@ public class GameRulesStandardModel extends GameRulesModel {
     }
     
     /**
-     * Definit le seuil a atteindre pour considerer qu'un joueur a gagne une partie.
+     * Définit le seuil à atteindre pour considérer qu'un joueur a gagné une partie.
      */
     public boolean isWinner () {
         return BoardModel.getUniqueInstance().getPlayer().getScore() >= GameRulesModel.SCORE_MAX;

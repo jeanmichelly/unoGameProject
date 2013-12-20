@@ -5,7 +5,7 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayerHandView;
 
 /**
- * Represente les joueurs humains. Elle requiert donc une presence humaine pour effectuer les actions de jeu.
+ * Représente les joueurs humains. Elle requiert donc une présence humaine pour effectuer les actions de jeu.
  * @see PlayerModel
  */
 public class HumanPlayerModel extends PlayerModel {
@@ -33,7 +33,7 @@ public class HumanPlayerModel extends PlayerModel {
     }
 
     /**
-     * Permet au joueur humain de contester si un autre joueur a pose une carte +4 contre lui
+     * Permet au joueur humain de contester si un autre joueur a posé une carte +4 contre lui
      * @throws InvalidActionPickCardException
      * @throws InvalidColorModelException
      */

@@ -6,9 +6,9 @@ import java.util.List;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 
 /**
- * Represente ce que contient un paquet de carte. 
- * Un paquet de carte peut etre le talon, la pioche ou les mains des joueurs
- * @param <T> specifie le type de paquet de carte qui peut etre un stack ou un arrayList pour eviter de caster
+ * Représente ce que contient un paquet de carte. 
+ * Un paquet de carte peut être le talon, la pioche ou les mains des joueurs
+ * @param <T> specifie le type de paquet de cartes qui peut être un stack ou un arrayList pour éviter de caster
  * @see fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel
  * @see DrawPileModel
  * @see PlayerHandModel
@@ -22,7 +22,7 @@ public abstract class DeckModel <T extends List<CardModel>> {
 
     /**
      * Ajoute une carte au paquet
-     * @param card carte a ajouter au paquet
+     * @param card carte à ajouter au paquet
      * @return true si l'ajout de la carte a bien aboutie, false sinon
      */
     public boolean addCard (CardModel card) {
@@ -31,7 +31,7 @@ public abstract class DeckModel <T extends List<CardModel>> {
     
     /**
      * Ajoute un ensemble de carte au paquet
-     * @param cards ensemble de carte a ajouter au paquet
+     * @param cards ensemble de carte à ajouter au paquet
      * @return true si les ajouts des cartes ont bien aboutie, false sinon
      */
     public boolean addCards (T cards) {
@@ -54,14 +54,14 @@ public abstract class DeckModel <T extends List<CardModel>> {
     }
     
     /**
-     * Melange le paquet de carte
+     * Mélange le paquet de carte
      */
     public void shuffle () {
         Collections.shuffle(this.cards);
     }
     
     /**
-     * Informe sur l'etat (vide ou pas) du paquet
+     * Informe sur l'état (vide ou pas) du paquet
      * @return true si le paquet ne contient pas de carte, false sinon
      */
     public boolean hasNotCard () {

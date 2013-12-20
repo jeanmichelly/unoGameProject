@@ -8,13 +8,13 @@ import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
 
 /**
- * Correspond a l'une des strategies que peut utiliser un joueur ordinateur.
- * Elle permet de jouer en priorite les cartes avec une couleur jouables avec le score le plus eleve.
+ * Correspond à l'une des stratégies que peut utiliser un joueur ordinateur.
+ * Elle permet de jouer en priorité les cartes avec une couleur jouables avec le score le plus élevé.
  */
 public class PriorityColorStrategyModel extends StrategyModel {
 
     /**
-     * Execute la strategie qui donne la priorite aux couleurs
+     * Exécute la stratégie qui donne la priorité aux couleurs
      */
     public boolean execute () throws InvalidActionPutDownCardException {
         CardModel playableColorCard = getPlayableColorCardWithScoreHighestLevel();
