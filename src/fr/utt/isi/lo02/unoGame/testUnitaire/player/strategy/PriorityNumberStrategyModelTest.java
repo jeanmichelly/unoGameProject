@@ -1,9 +1,5 @@
 package fr.utt.isi.lo02.unoGame.testUnitaire.player.strategy;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
@@ -14,6 +10,9 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
 import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
 import fr.utt.isi.lo02.unoGame.model.user.UserModel;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class PriorityNumberStrategyModelTest {
 
@@ -25,6 +24,7 @@ public class PriorityNumberStrategyModelTest {
         board.createPlayers();
         board.initComputerPlayers();
         board.setPlayerCursor((byte)0);
+
         DiscardPileModel.getUniqueInstance().addCard(new CardModel(SymbolModel.SIX, ColorModel.BLUE, (byte)6, new CompositeEffectModel()));
         BoardModel.getUniqueInstance().getPlayer().getPlayerHand().addCard( new CardModel(SymbolModel.NINE, ColorModel.BLUE, (byte)9, new CompositeEffectModel()));
         assertEquals(false, ((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getStrategy(1).execute());
