@@ -40,7 +40,7 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
     private DiscardPileModel () {
         super.cards = new Stack<CardModel>();
         try {
-            this.push(DrawPileModel.getUniqueInstance().pop());
+            super.cards.push(DrawPileModel.getUniqueInstance().pop());
         } catch (DrawPileIsEmptyAfterReshuffledException e) {
             e.printStackTrace();
         }
@@ -76,7 +76,6 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
             System.out.println(this.peek());
             colorBeforeWildDrawFour = this.peek().getColor();
         }
-
         
         return super.cards.push(card);
     }
