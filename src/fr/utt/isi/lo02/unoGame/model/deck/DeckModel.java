@@ -6,8 +6,12 @@ import java.util.List;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 
 /**
- * Represente ce que contient un paquet de carte. Un paquet de carte peut etre le talon, la pioche ou les mains des joueurs
+ * Represente ce que contient un paquet de carte. 
+ * Un paquet de carte peut etre le talon, la pioche ou les mains des joueurs
  * @param <T> specifie le type de paquet de carte qui peut etre un stack ou un arrayList pour eviter de caster
+ * @see fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel
+ * @see DrawPileModel
+ * @see PlayerHandModel
  */
 public abstract class DeckModel <T extends List<CardModel>> {
     

@@ -5,9 +5,8 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayerHandView;
 
 /**
- * 
  * Represente les joueurs humains. Elle requiert donc une presence humaine pour effectuer les actions de jeu.
- *
+ * @see PlayerModel
  */
 public class HumanPlayerModel extends PlayerModel {
     

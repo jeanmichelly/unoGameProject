@@ -43,7 +43,8 @@ public class CardModel {
 	 * @return true si la carte est jouable, false sinon
 	 */
 	public boolean isPlayableCard () {
-        if ( this.color==null || this.symbol.equals(DiscardPileModel.getUniqueInstance().peek().getSymbol()) || this.color.equals(DiscardPileModel.getUniqueInstance().peek().getColor()) )
+        if ( this.color==null || this.symbol.equals(DiscardPileModel.getUniqueInstance().peek().getSymbol()) 
+                || this.color.equals(DiscardPileModel.getUniqueInstance().peek().getColor()) )
             return true;
         return false;
     }
@@ -65,9 +66,11 @@ public class CardModel {
      * @return true si la carte est jouable, false sinon
      */
     public boolean equals (CardModel card) {
-        if ( this.symbol == card.getSymbol() && this.color == card.getColor() && ((Byte)this.score).equals((Byte)card.getScore()) && this.compositeEffects.getEffects().size() == card.getCompositeEffects().getEffects().size() ) {
+        if ( this.symbol == card.getSymbol() && this.color == card.getColor() && ((Byte)this.score).equals((Byte)card.getScore()) 
+                && this.compositeEffects.getEffects().size() == card.getCompositeEffects().getEffects().size() ) {
           	Iterator<ComponentEffectModel> thisIter = this.compositeEffects.getEffects().iterator();
           	Iterator<ComponentEffectModel> cardIter = card.getCompositeEffects().getEffects().iterator();
+          	
           	while ( thisIter.hasNext() )
               	if ( !(thisIter.next().getPriority() == cardIter.next().getPriority()) )
                   	return false;

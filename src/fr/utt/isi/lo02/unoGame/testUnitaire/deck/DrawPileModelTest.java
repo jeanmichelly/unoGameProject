@@ -22,6 +22,7 @@ public class DrawPileModelTest {
     @Test
     public void DrawPileModelTest () {
 
+        CompositeEffectModel.initGameEffect();
         final int NUMBER_CARDS = 108;
 
         CompositeEffectModel emptyEffects = new CompositeEffectModel();    

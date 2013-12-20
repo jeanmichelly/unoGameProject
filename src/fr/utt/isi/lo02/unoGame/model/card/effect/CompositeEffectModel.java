@@ -10,8 +10,10 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 
 /**
  * <u>Pattern Composite/Strategy : </u> </br>
- * Permet d'avoir des effets du jeu correspondant a un ensemble d'effet dit de bas niveau. Par exemple l'effet d'une carte +4 est composee de draw*4, skip et wild.
- * De ce fait, la manipulation des cartes peut se faire de maniere tres flexible pour eventuellement prevoir un maximum d'extension possible.
+ * Permet d'avoir des effets du jeu correspondant a un ensemble d'effet dit de bas niveau. 
+ * Par exemple l'effet d'une carte +4 est composee de draw*4, skip et wild.
+ * De ce fait, la manipulation des cartes peut se faire de maniere tres flexible 
+ * pour eventuellement prevoir un maximum d'extension possible.
  * Cela permet egalement d'avoir des effets pour les penalites.
  * @see DrawEffectModel
  * @see ReverseEffectModel
@@ -19,18 +21,67 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
  * @see WildEffectModel
  */
 public class CompositeEffectModel extends ComponentEffectModel {
+    
+    /**
+     * Liste d'effet correspondant a un effet du jeu officiel
+     */
+    private static ArrayList<ComponentEffectModel> wildDrawFourEffect = new ArrayList<ComponentEffectModel>();
+    private static ArrayList<ComponentEffectModel> wildEffect = new ArrayList<ComponentEffectModel>();
+    private static ArrayList<ComponentEffectModel> drawTwoEffect = new ArrayList<ComponentEffectModel>();
+    private static ArrayList<ComponentEffectModel> skipEffect = new ArrayList<ComponentEffectModel>();
+    private static ArrayList<ComponentEffectModel> reverseEffect = new ArrayList<ComponentEffectModel>();
 
     /**
-     * Liste d'effet correspondant a un effet du jeu
+     * Liste d'effet 
      */
 	private ArrayList<ComponentEffectModel> effects;
-
+		
 	/**
 	 * Initialise l'ensemble a vide et qui contiendra les effets de bas niveau
 	 */
 	public CompositeEffectModel () {
 	    super((byte)-1);
 		this.effects = new ArrayList<ComponentEffectModel>();
+	}
+	
+    public CompositeEffectModel (ArrayList<ComponentEffectModel> effects) {
+        super((byte)-1);
+        this.effects = effects;
+    }
+	
+	private static void initWildDrawFourEffect() {
+	    CompositeEffectModel.wildDrawFourEffect.add(new WildEffectModel());
+	    CompositeEffectModel.wildDrawFourEffect.add(new DrawEffectModel());
+	    CompositeEffectModel.wildDrawFourEffect.add(new DrawEffectModel());
+	    CompositeEffectModel.wildDrawFourEffect.add(new DrawEffectModel());
+	    CompositeEffectModel.wildDrawFourEffect.add(new DrawEffectModel());
+	    CompositeEffectModel.wildDrawFourEffect.add(new SkipEffectModel());
+	}
+	
+	private static void initWildEffect() {
+        CompositeEffectModel.wildEffect.add(new WildEffectModel());
+    }
+	
+	private static void initDrawTwoEffect () {
+        CompositeEffectModel.drawTwoEffect.add(new DrawEffectModel());
+        CompositeEffectModel.drawTwoEffect.add(new DrawEffectModel());
+        CompositeEffectModel.drawTwoEffect.add(new SkipEffectModel());
+    }
+	
+	private static void initSkipEffect () {
+        CompositeEffectModel.skipEffect.add(new SkipEffectModel());
+    }
+	
+	private static void initReverseEffect () {
+        CompositeEffectModel.reverseEffect.add(new ReverseEffectModel());
+    }
+	
+	public static void initGameEffect () {
+	    initWildDrawFourEffect();
+	    initWildEffect();
+	    initDrawTwoEffect();
+	    initSkipEffect();
+	    initReverseEffect();
 	}
 
 	/**
@@ -112,11 +163,52 @@ public class CompositeEffectModel extends ComponentEffectModel {
     }
     
     /**
+     * Informe sur le nombre d'effet de bas niveau que contient le composite
+     * @return le nombre d'effet de bas niveau que contient le composite
+     */
+    public int numberEffects () {
+        return this.effects.size();
+    }
+    
+    public boolean isWildDrawFourEffect () {
+        Iterator<ComponentEffectModel> wildDrawFourEffectIter = wildDrawFourEffect.iterator();
+        Iterator<ComponentEffectModel> thisIter = this.getEffects().iterator();
+
+        if ( !thisIter.hasNext() || wildDrawFourEffect.size() != this.getEffects().size() )
+            return false;
+        
+        while ( thisIter.hasNext() )
+            if ( !(thisIter.next().getPriority() == wildDrawFourEffectIter.next().getPriority()) )
+                return false;
+        return true;
+    }
+    
+    /**
      * Obtenir le composite 
      * @return la liste constituee des effets de bas niveau
      */
     public ArrayList<ComponentEffectModel> getEffects () {
         return this.effects;
+    }
+    
+    public static ArrayList<ComponentEffectModel> getWildDrawFourEffect () {
+        return CompositeEffectModel.wildDrawFourEffect;
+    }
+    
+    public static ArrayList<ComponentEffectModel> getWildEffect () {
+        return CompositeEffectModel.wildEffect;
+    }
+    
+    public static ArrayList<ComponentEffectModel> getDrawTwoEffect () {
+        return CompositeEffectModel.drawTwoEffect;
+    }
+    
+    public static ArrayList<ComponentEffectModel> getSkipEffect () {
+        return CompositeEffectModel.skipEffect;
+    }
+    
+    public static ArrayList<ComponentEffectModel> getReverseEffect () {
+        return CompositeEffectModel.reverseEffect;
     }
     
 }

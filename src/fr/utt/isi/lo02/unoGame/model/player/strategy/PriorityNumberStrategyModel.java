@@ -1,17 +1,70 @@
 package fr.utt.isi.lo02.unoGame.model.player.strategy;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.card.CardModel;
+import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
  
 /**
  * Correspond a l'une des strategies que peut utiliser un joueur ordinateur.
- * Elle permet de jouer en priorite les cartes jouables avec des nombres.
- * Elle choisit la carte ayant le meme nombre que celle posee sur le talon si il existe.
- * Sinon elle choisit le nombre superieur.
+ * Elle permet de jouer en priorite les cartes jouables avec des nombres avec la couleur la plus frequente.
  */
 public class PriorityNumberStrategyModel extends StrategyModel {
 
     /**
      * Execute la strategie qui donne la priorite aux nombres
+     * @throws InvalidActionPutDownCardException 
      */
-    public void execute () {        
+    public boolean execute () throws InvalidActionPutDownCardException {   
+        CardModel playableNumberCard = getPlayableNumberCardWithColorFrequentHighest();
+        
+        if ( playableNumberCard == null )
+            return false;
+        
+        int indexPlayingCard = super.researchIndexPlayingCard (playableNumberCard);
+        if ( indexPlayingCard == -1 )
+            throw new InvalidActionPutDownCardException();
+        
+        BoardModel.getUniqueInstance().getPlayer().putDownCard(indexPlayingCard); 
+        return true;
+    }
+    
+    private CardModel getPlayableNumberCardWithColorFrequentHighest () {
+        Iterator<CardModel> iterPlayerHand = BoardModel.getUniqueInstance().getPlayer().getPlayerHand().getCards().iterator();
+        ArrayList<CardModel> playableNumberCards = new ArrayList<CardModel>();
+        byte [] countColor = new byte [4];
+
+        while ( iterPlayerHand.hasNext() ) {
+            CardModel card = iterPlayerHand.next();
+            if ( card.getColor() != null ) // Compte le nombre de carte par couleur
+                countColor[card.getColor().getId()]++;
+            
+            // Stock les cartes avec le meme symbole nombre que le talon 
+            if ( card.getSymbol() == DiscardPileModel.getUniqueInstance().peek().getSymbol() 
+                    && !card.getCompositeEffects().hasEffect() )
+                playableNumberCards.add(card);
+        }
+        
+        Iterator<CardModel> iterPlayableNumberCards = playableNumberCards.iterator();
+        byte maxColorCardsForNumber = 0;
+        CardModel playableNumberCard = null;
+        
+        // Recupere la carte symbole nombre ou il y a le plus de carte couleur
+        while ( iterPlayableNumberCards.hasNext() ) {
+            CardModel c = iterPlayableNumberCards.next();
+            if ( countColor[c.getColor().getId()] > maxColorCardsForNumber ) {
+                maxColorCardsForNumber = countColor[c.getColor().getId()]; 
+                playableNumberCard = c;
+            }
+        }
+        
+        if ( playableNumberCards.size() != 0 )
+            return playableNumberCard;
+        
+        return null;
     }
     
 }

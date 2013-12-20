@@ -19,7 +19,8 @@ import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
 
 /**
  * <u>Pattern Singleton : </u> </br> 
- * <b>Cette classe contient le coeur du deroulement du jeu Uno. Elle represente le plateau du jeu et elle n'est donc, instanciable qu'une fois. </b> </br>
+ * <b>Cette classe contient le coeur du deroulement du jeu Uno. 
+ * Elle represente le plateau du jeu et elle n'est donc, instanciable qu'une fois. </b> </br>
  * <p> Le plateau est physiquement caracterise par une pioche, un talon et des joueurs.
  *  Pour la gestion du jeu, le plateau comporte egalement :
  *  <ul> 
@@ -30,6 +31,12 @@ import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
  *      <li>Un mode de jeu choisit par l'utilisateur</li>
  *      <li>Des penalites pour gerer les contre uno et les eventuelles contestations des cartes +4</li>
  *  </ul>
+ * @see CompositeEffectModel
+ * @see DiscardPileModel
+ * @see DrawPileModel
+ * @see PlayerModel
+ * @see GameRulesFactoryModel
+ * @see GameRulesModel
  */
 public class BoardModel extends Observable {
     /**
@@ -54,32 +61,27 @@ public class BoardModel extends Observable {
 	private short numberGame;
 	/**
 	 * Comporte les differentes penalites (contre uno ou carte +4)
-	 * @see CompositeEffectModel
 	 */
 	private CompositeEffectModel [] penaltys;
 	/**
 	 * Le talon correspond a une pile de carte dont le sommet est visible par les joueurs
-	 * @see DiscardPileModel
 	 */
 	private DiscardPileModel discardPile;
 	/**
 	 * La pioche correspond a une pile de carte non visible par les joueurs.
-	 * @see DrawPileModel
 	 */
 	private DrawPileModel drawPile;
 	/**
-	 * Stock les joueurs dans un tableau. Si on considere qu'un joueur humain quitte la partie, on le remplace par un ordinateur.
-	 * @see PlayerModel
+	 * Stock les joueurs dans un tableau. 
+	 * Si on considere qu'un joueur humain quitte la partie, on le remplace par un ordinateur.
 	 */
 	private PlayerModel [] players;
 	/**
 	 * Choix dynamique du mode de jeu
-	 * @see GameRulesFactoryModel
 	 */
 	private GameRulesFactoryModel gameRulesFactory;
 	/**
 	 * Correspond au mode de jeu choisit par l'utilisateur
-	 * @see GameRulesModel
 	 */
 	private GameRulesModel gameRules; 
 
@@ -92,6 +94,7 @@ public class BoardModel extends Observable {
 	    this.discardPile = DiscardPileModel.getUniqueInstance();
 		this.gameRulesFactory = new GameRulesFactoryModel();
 		this.initPenaltys();
+		CompositeEffectModel.initGameEffect();
 	}
 
 	/**
@@ -158,7 +161,8 @@ public class BoardModel extends Observable {
 	 * <ul>
 	 *     <li>Contre uno : +2 cartes sur les joueurs etant vulnerable (flag du joueur a true)</li>
 	 *     <li>Contre +4 : Si le poseur de la carte a bluffe et a ete conteste : +4 cartes contre lui meme</li>
-	 *     <li>Contre +4 : Contestation echouee par la cible : +2 cartes de penalite + 4 cartes de l'effet de la carte, soit 6 cartes</li>
+	 *     <li>Contre +4 : Contestation echouee par la cible : +2 cartes de penalite + 4 cartes de l'effet de la carte, 
+	 *         soit 6 cartes</li>
 	 * </ul> 
 	 */
 	public void initPenaltys () {
@@ -181,7 +185,8 @@ public class BoardModel extends Observable {
 	 * Choix aleatoire du joueur qui va commencer
 	 */
 	public void chooseRandomDealer () {
-	    this.playerCursor = (byte)(Math.random() * (this.players.length)); // Formule utilisee : int random = (int)(Math.random() * (higher-lower)) + lower;
+	    // Formule utilisee : int random = (int)(Math.random() * (higher-lower)) + lower;
+	    this.playerCursor = (byte)(Math.random() * (this.players.length)); 
 	}
 
 	/**
@@ -254,7 +259,8 @@ public class BoardModel extends Observable {
     }
     
     /**
-     * Applique l'effet de la penalite contre un poseur de carte +4 ayant bluffe et decouvert par la cible(+4 cartes sur lui meme)
+     * Applique l'effet de la penalite contre un poseur de carte +4 ayant bluffe et decouvert par la cible
+     * (+4 cartes sur lui meme)
      * @throws InvalidActionPickCardException
      */
     public void applyPenaltyAgainstLauncherWildDrawFourCard () throws InvalidActionPickCardException {
@@ -262,7 +268,8 @@ public class BoardModel extends Observable {
     }
     
     /**
-     * Applique l'effet de la penalite d'une carte +4 sur la cible ayant contestee (+2 cartes en supplement de l'effet de la carte, soit 6 cartes)
+     * Applique l'effet de la penalite d'une carte +4 sur la cible ayant contestee 
+     * (+2 cartes en supplement de l'effet de la carte, soit 6 cartes)
      * @throws InvalidActionPickCardException
      */
     public void applyPenaltyAgainstWildDrawFourCard () throws InvalidActionPickCardException {
@@ -295,6 +302,8 @@ public class BoardModel extends Observable {
      */
     public void nextRound () throws InvalidActionPickCardException {
         this.numberRound++;
+        
+        // Remise des cartes restantes des mains des joueurs et celles du talon dans la pioche
         for ( PlayerModel player : this.players ) {
             DrawPileModel.getUniqueInstance().addCards(player.getPlayerHand().getCards());
             player.getPlayerHand().clear();
@@ -302,10 +311,14 @@ public class BoardModel extends Observable {
         }
         DrawPileModel.getUniqueInstance().addCards(DiscardPileModel.getUniqueInstance().getCards());
         DiscardPileModel.getUniqueInstance().clear();
+        
         DrawPileModel.getUniqueInstance().shuffle();
+        
         this.chooseRandomDealer();
+        
         this.dispenseCards();
-        try {
+        
+        try { // Initialisation du talon
             DiscardPileModel.getUniqueInstance().addCard(DrawPileModel.getUniqueInstance().pop());
         } catch (DrawPileIsEmptyAfterReshuffledException e) {
             e.printStackTrace();

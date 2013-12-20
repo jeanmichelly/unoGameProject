@@ -3,7 +3,8 @@ package fr.utt.isi.lo02.unoGame.model.user;
 import java.util.Stack;
 
 /**
- * Exclusivement constituee de membres statiques. Elle definit l'utilisateur qui manipule l'application hormis le deroulement d'une partie.
+ * Exclusivement constituee de membres statiques. 
+ * Elle definit l'utilisateur qui manipule l'application hormis le deroulement d'une partie.
  */
 public class UserModel {
 	

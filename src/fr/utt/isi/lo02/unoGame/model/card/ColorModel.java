@@ -1,7 +1,5 @@
 package fr.utt.isi.lo02.unoGame.model.card;
 
-import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
-
 /**
  * Permet de lister la representation des couleurs que peut avoir une carte : 
  * <ul>
@@ -31,6 +29,11 @@ public enum ColorModel {
      * Identifie une couleur par une composante couleur RGB
      */
     private java.awt.Color color;
+    
+    /**
+     * Obtenir la couleur par un indice 
+     */
+    private static ColorModel [] colors = {YELLOW, RED, GREEN, BLUE}; 
 
     /**
      * Construit une couleur que peut avoir une carte du jeu
@@ -68,4 +71,8 @@ public enum ColorModel {
         return this.color;
     }
     
+    public static ColorModel getColor (byte index) {
+        return ColorModel.colors[index];
+    }
+   
 }

@@ -6,6 +6,8 @@ import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
 
 /**
  * Comporte le mode de jeu standard du jeu Uno.
+ * @see GameRulesFactoryModel
+ * @see GameRulesModel
  */
 public class GameRulesStandardModel extends GameRulesModel {
 
