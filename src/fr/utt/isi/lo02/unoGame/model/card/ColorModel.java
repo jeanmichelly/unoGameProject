@@ -14,10 +14,10 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
  */
 public enum ColorModel {
     
-    YELLOW ((byte)0, 'Y', new java.awt.Color(220, 215, 0)),
-    RED    ((byte)1, 'R', new java.awt.Color(199, 25, 25)),
-    GREEN  ((byte)2, 'G', new java.awt.Color(11, 154, 35)),
-    BLUE   ((byte)3, 'B', new java.awt.Color(25, 91, 199));
+    YELLOW ((byte)0, 'Y', new com.badlogic.gdx.graphics.Color(.86f, .84f,  0,    1)),
+    RED    ((byte)1, 'R', new com.badlogic.gdx.graphics.Color(.78f, .098f, .098f,1)),
+    GREEN  ((byte)2, 'G', new com.badlogic.gdx.graphics.Color(.043f,.60f,  .13f, 1)),
+    BLUE   ((byte)3, 'B', new com.badlogic.gdx.graphics.Color(.098f,.35f,  .78f, 1));
     
     /**
      * Identifie une couleur par un nombre
@@ -30,7 +30,7 @@ public enum ColorModel {
     /**
      * Identifie une couleur par une composante couleur RGB
      */
-    private java.awt.Color color;
+    private com.badlogic.gdx.graphics.Color color;
 
     /**
      * Construit une couleur que peut avoir une carte du jeu
@@ -38,7 +38,7 @@ public enum ColorModel {
      * @param label identifie la couleur par un caractere
      * @param color identifie la couleur par une composite couleur RGB
      */
-    private ColorModel (byte id, char label, java.awt.Color color) {
+    private ColorModel (byte id, char label, com.badlogic.gdx.graphics.Color color) {
         this.id = id;
         this.color = color;
         this.label = label;
@@ -64,7 +64,7 @@ public enum ColorModel {
      * Obtenir la composante couleur RGB
      * @return la composante couleur RGB
      */
-    public java.awt.Color getColor () {
+    public com.badlogic.gdx.graphics.Color getColor () {
         return this.color;
     }
     

@@ -1,38 +1,84 @@
 package fr.utt.isi.lo02.unoGame.view.gui.card;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.physics.box2d.Shape;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
+import fr.utt.isi.lo02.unoGame.view.gui.utils.AtlasLoader;
+import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureLoader;
 
 public class GuiCardView extends Actor {
+
+    public final static int NATIVE_CARD_WIDTH = 200;
+    public final static int NATIVE_CARD_HEIGHT = 288;
 
     private Sprite pattern;
     private Sprite symbol;
     private TextureAtlas atlas;
-    private Shape cardColor;
-    private float rotation;
+    private TextureRegion symbolRegion;
+    private CardModel cardModel;
+
+    private boolean flipped = false;
+    private boolean upped = false;
 
     public GuiCardView(CardModel cardModel){
-        atlas = new TextureAtlas("ressources/img/card/symbols.pack");
-        pattern = new Sprite(new Texture(Gdx.files.internal("ressources/img/card/elements/cardPattern.png")));
-        symbol = new Sprite(atlas.findRegion("0"));
+        this.cardModel = cardModel;
+        this.setSize(GuiCardView.NATIVE_CARD_WIDTH, GuiCardView.NATIVE_CARD_HEIGHT);
+    }
+
+    public void toggleUpped(){
+        this.upped = !this.upped;
+        if(this.upped){
+            super.setY(super.getY() + 40);
+        } else {
+            super.setY(super.getY() - 40);
+        }
+    }
+
+    public void flipCard(){
+        this.flipped = !this.flipped;
+    }
+
+    public void build(){
+        this.atlas = AtlasLoader.ATLAS_SYMBOLS;
+        this.symbolRegion = atlas.findRegion(Character.toString(this.cardModel.getSymbol().getLabel()));
+        this.symbol = new Sprite(symbolRegion);
+    }
+
+    public void resize(float factor){
+        this.setSize(super.getWidth() * factor, super.getHeight() * factor);
     }
 
     public void draw(SpriteBatch spriteBatch, float v) {
-        pattern.setPosition(super.getX() - pattern.getRegionWidth()/2, super.getY() - pattern.getRegionHeight()/2);
-//        pattern.setRotation(super.getRotation());
-        pattern.setSize(super.getWidth(), super.getHeight());
-        symbol.setPosition(super.getX() - symbol.getRegionWidth()/2, super.getY() - symbol.getRegionHeight()/2);
-//        symbol.setRotation(super.getRotation());
-        symbol.setSize(super.getWidth(), super.getHeight());
-        pattern.draw(spriteBatch);
-        symbol.draw(spriteBatch);
+        if(flipped){
+            this.pattern = new Sprite(TextureLoader.TEXTURE_CARD_PATTERN_FLIPPED);
+            pattern.setSize(super.getWidth(), super.getHeight());
+            pattern.setPosition(super.getX(), super.getY());
+            pattern.setOrigin(super.getOriginX(), super.getOriginY());
+            pattern.setRotation(super.getRotation());
+            pattern.draw(spriteBatch);
+        } else {
+            this.pattern = new Sprite(TextureLoader.TEXTURE_CARD_PATTERN);
+            pattern.setSize(super.getWidth(), super.getHeight());
+            pattern.setPosition(super.getX(), super.getY());
+            pattern.setOrigin(super.getOriginX(), super.getOriginY());
+            pattern.setRotation(super.getRotation());
+
+            Vector2 symbolSize = new Vector2(symbolRegion.getRegionWidth() / (NATIVE_CARD_WIDTH / super.getWidth()), symbolRegion.getRegionHeight() / (NATIVE_CARD_HEIGHT / super.getHeight()));
+            symbol.setSize(symbolSize.x, symbolSize.y);
+            symbol.setPosition(super.getX() + super.getWidth() / 2 - symbol.getWidth() / 2 , super.getY() + super.getHeight() / 2 - symbol.getHeight() / 2);
+            symbol.setOrigin(super.getOriginX(), super.getOriginY());
+            symbol.setRotation(super.getRotation());
+
+            if(cardModel.getColor() != null){
+                symbol.setColor(cardModel.getColor().getColor());
+            }
+            pattern.draw(spriteBatch);
+            symbol.draw(spriteBatch);
+        }
+
     }
 }
