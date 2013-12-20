@@ -13,19 +13,19 @@ import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
 
 /**
  * <u>Pattern Singleton : </u> </br> 
- * Represente la pioche du jeu par une pile de carte. Elle n'est instanciable qu'une seule fois.
+ * Représente la pioche du jeu par une pile de cartes. Elle n'est instanciable qu'une seule fois.
  * @see DeckModel
  */
 public class DrawPileModel extends DeckModel<Stack<CardModel>> {
      
     /**
-     * Rends la pioche instanciable une seule fois 
+     * Rend la pioche instanciable une seule fois 
      */
     private static DrawPileModel uniqueInstance = null;
 
     /**
-     * Construit l'unique pioche et ne peut etre appele qu'une seule fois. 
-     * Lors de la creation de la pioche, on construit toute les cartes du jeu puis on les melange.
+     * Construit l'unique pioche et ne peut être appelé qu'une seule fois. 
+     * Lors de la création de la pioche, on construit toute les cartes du jeu puis on les mélange.
      */
     private DrawPileModel () {
         super.cards = new Stack<CardModel>();
@@ -49,7 +49,7 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
     }
         
     /**
-     * Generation des cartes presentes 1 fois avec symbole et couleur (0)
+     * Génération des cartes presentes 1 fois avec symbole et couleur (0)
      */
     private void initCardsAppearsOneTimeWithSymbolAndColor () { 
         int i = 0;
@@ -62,7 +62,7 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
         }
     }
     /**
-     * Generation des cartes presentes 2 fois avec symbole et couleur(Tout sauf 0, joker, +4)
+     * Génération des cartes présentes 2 fois avec symbole et couleur(Tout sauf 0, joker, +4)
      */
     private void initCardsAppearsTwoTimeWithSymbolAndColor () {
         int i = 0;
@@ -93,7 +93,7 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
     }
     
     /**
-     * Generation des cartes presentes 4 fois avec symbole et sans couleur (joker, +4)
+     * Génération des cartes présentes 4 fois avec symbole et sans couleur (joker, +4)
      */
     private void initCardsAppearsOneTimeWithSymbolAndWithoutColor () {
         int i = 0;
@@ -119,7 +119,7 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
     }
         
     /**
-     * Permet le remelange de la pioche lorsqu'elle n'a plus assez de carte
+     * Permet le remélange de la pioche lorsqu'elle n'a plus assez de carte
      */
     public void reshuffled () {
         super.addCards(DiscardPileModel.getUniqueInstance().reshuffled());
@@ -127,17 +127,17 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
     }
 
     /**
-     * Ajoute une carte a la pioche
-     * @param card carte a ajouter a la pioche
-     * @return la carte ajoute a la pioche
+     * Ajoute une carte à la pioche
+     * @param card carte à ajouter à la pioche
+     * @return la carte ajouté à la pioche
      */
     private CardModel push (CardModel card) {
         return super.cards.push(card);
     }
         
     /**
-     * Ajoute un ensemble de carte a la pioche
-     * @param cards ensemble de carte a ajouter a la pioche
+     * Ajoute un ensemble de cartes à la pioche
+     * @param cards ensemble de carte à ajouter à la pioche
      * @return true si les ajouts des cartes ont bien aboutie, false sinon
      */
     public boolean addCards (ArrayList<CardModel> cards) {
@@ -145,10 +145,10 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
     }
 
     /**
-     * Retire la carte presente sur le sommet de la pioche
-     * S'il n'y a pas assez de carte, on remelange la pioche grace au talon.
-     * S'il n'y a pas assez de carte suite au remelange avec le talon, on ignore en capturant l'exception
-     * @return la carte presente sur le sommet de la pioche
+     * Retire la carte présente sur le sommet de la pioche
+     * S'il n'y a pas assez de carte, on remélange la pioche grâce au talon.
+     * S'il n'y a pas assez de carte suite au remélange avec le talon, on ignore en capturant l'exception
+     * @return la carte présente sur le sommet de la pioche
      */
     public CardModel pop () throws DrawPileIsEmptyAfterReshuffledException {
         if ( super.numberCards() == 1 ) {

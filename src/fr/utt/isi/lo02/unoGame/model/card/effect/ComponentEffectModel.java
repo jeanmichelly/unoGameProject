@@ -4,12 +4,12 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 
 /**
- * Represente le modele des effets de bas niveau
+ * Représente le modèle des effets de bas niveau
  */
 public abstract class ComponentEffectModel {
     
     /**
-     * La priorite d'un effet doit etre defini car l'execution d'un composite d'effet peut changer en fonction de l'ordre des effets
+     * La priorité d'un effet doit être defini car l'exécution d'un composite d'effet peut changer en fonction de l'ordre des effets
      * @see CompositeEffectModel
      */
     protected byte priority;
@@ -23,8 +23,8 @@ public abstract class ComponentEffectModel {
     }
 
     /**
-     * Obtenir la priorite affecte a un effet de bas niveau
-     * @return la priorite effecte a un effet de bas niveau
+     * Obtenir la priorité affecté à un effet de bas niveau
+     * @return la priorité affecté à un effet de bas niveau
      */
     public byte getPriority () {
     	    return this.priority;

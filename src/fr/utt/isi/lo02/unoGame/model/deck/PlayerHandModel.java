@@ -6,7 +6,7 @@ import java.util.Iterator;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 
 /**
- * Represente les mains des joueurs.
+ * Représente les mains des joueurs.
  * @see DeckModel
  */
 public class PlayerHandModel extends DeckModel<ArrayList<CardModel>> {
@@ -19,7 +19,7 @@ public class PlayerHandModel extends DeckModel<ArrayList<CardModel>> {
     }
     
     /**
-     * Informe sur la possibilite de jouer
+     * Informe sur la possibilité de jouer
      * @return true si la main du joueur a une carte jouable, false sinon
      */
     public boolean hasPlayableCard () {
@@ -32,8 +32,8 @@ public class PlayerHandModel extends DeckModel<ArrayList<CardModel>> {
 
     /**
      * Retire une carte de la main du joueur
-     * @param index indice de la carte devant etre retire de la main du joueur
-     * @return la carte retire de la main du joueur
+     * @param index indice de la carte devant être retiré de la main du joueur
+     * @return la carte retiré de la main du joueur
      */
     public CardModel removeCard (int index) {
     	    return super.cards.remove(index);
@@ -41,8 +41,8 @@ public class PlayerHandModel extends DeckModel<ArrayList<CardModel>> {
     
     /**
      * Obtenir une carte en particulier
-     * @param index indice de la carte souhaitee
-     * @return la carte souhaitee
+     * @param index indice de la carte souhaitée
+     * @return la carte souhaitée
      */
     public CardModel getCard (int index) {
         return super.cards.get(index);

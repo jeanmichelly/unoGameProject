@@ -11,7 +11,7 @@ import fr.utt.isi.lo02.unoGame.model.user.UserModel;
 public class GameRulesFactoryModel {
 
     /**
-     * Creer le mode de jeu choisit par l'utilisateur
+     * Créer le mode de jeu choisit par l'utilisateur
      * @return le mode de jeu choisit par l'utilisateur
      */
     public GameRulesModel createGameRules () {

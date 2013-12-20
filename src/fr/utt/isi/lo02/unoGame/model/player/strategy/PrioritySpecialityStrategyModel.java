@@ -9,14 +9,14 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException
 
 /**
  * 
- * Correspond a l'une des strategies que peut utiliser un joueur ordinateur. 
+ * Correspond à l'une des stratégies que peut utiliser un joueur ordinateur. 
  * Elle permet, par exemple, de jouer agressif lorsqu'il reste peu de carte au prochain joueur. 
- * Elle passe en priorite les cartes avec des effets.
+ * Elle passe en priorité les cartes avec des effets.
  */
 public class PrioritySpecialityStrategyModel extends StrategyModel {
 
     /**
-     * Execute la strategie qui donne la priorite aux cartes avec des effets
+     * Exécute la stratégie qui donne la priorité aux cartes avec des effets
      * @throws InvalidActionPutDownCardException 
      */
     public boolean execute () throws InvalidActionPutDownCardException { 
@@ -40,7 +40,7 @@ public class PrioritySpecialityStrategyModel extends StrategyModel {
         while ( iterPlayerHand.hasNext() ) {
             CardModel card = iterPlayerHand.next();
             
-            // Donne la priorite aux cartes +2 
+            // Donne la priorité aux cartes +2 
             if ( card.isPlayableCard() && card.getCompositeEffects().numberEffects() == 3 )
                 return card;
             else if ( card.isPlayableCard() && card.getCompositeEffects().hasEffect() ) {

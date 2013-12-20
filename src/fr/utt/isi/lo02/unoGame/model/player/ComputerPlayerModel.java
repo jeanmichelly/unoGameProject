@@ -15,13 +15,13 @@ import fr.utt.isi.lo02.unoGame.model.player.strategy.StrategyModel;
 import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayerHandView;
 
 /**
- * Represente les joueurs ordinateurs. 
+ * Représente les joueurs ordinateurs. 
  * Les joueurs ordinateurs ont une intelligence artificielle et peuvent alors, jouer automatiquement.
  */
 public class ComputerPlayerModel extends PlayerModel {
 
     /**
-     * Comporte differentes strategies
+     * Comporte différentes stratégies
      * @see PlayerModel
      * @see StrategyModel
      * @see PriorityColorStrategyModel
@@ -32,14 +32,14 @@ public class ComputerPlayerModel extends PlayerModel {
     private StrategyModel [] strategy;
     
     /**
-     * Construit un joueur ordinateur avec differentes strategies : 
+     * Construit un joueur ordinateur avec différentes strategies : 
      * <ul>
-     *      <li>Priorite aux couleurs</li>
-     *      <li>Priorite aux nombres</li>
-     *      <li>Priorite aux cartes avec des effets</li>
+     *      <li>Priorité aux couleurs</li>
+     *      <li>Priorité aux nombres</li>
+     *      <li>Priorité aux cartes avec des effets</li>
      *      <li>Choix aleatoire</li>
      * </ul>
-     * @param pseudonym represente le pseudo du joueur
+     * @param pseudonym représente le pseudo du joueur
      */
     public ComputerPlayerModel (String pseudonym) {
         super(pseudonym);
@@ -53,23 +53,23 @@ public class ComputerPlayerModel extends PlayerModel {
     
     /**
      * Permettre la gestion du moteur d'un joueur ordinateur 
-     * en choisissant de maniere intelligente le choix de la strategie au cours du temps.
+     * en choisissant de manière intelligente le choix de la stratégie au cours du temps.
      */
     public void play () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
         ConsolePlayerHandView.ConsolePlayerHandController.playComputerPlayerModel();
     }
     
     /**
-     * Choisit la couleur la plus frequente dans la main du joueur.
+     * Choisit la couleur la plus fréquente dans la main du joueur.
      */
     public void chooseColor() throws InvalidColorModelException {
         super.chooseColor(getMaxCountEachColorCard());
     }
     
     /**
-     * Obtenir une strategie en particulier
-     * @param i indice de la strategie souhaitee
-     * @return la strategie souhaitee
+     * Obtenir une stratégie en particulier
+     * @param i indice de la stratégie souhaitée
+     * @return la stratégie souhaitée
      */
     public StrategyModel getStrategy (int i) {
         return this.strategy[i];
@@ -95,7 +95,7 @@ public class ComputerPlayerModel extends PlayerModel {
     
     /**
      * Comptabilisation du nombre de carte pour chaque couleur
-     * @return la couleur la plus frequente
+     * @return la couleur la plus fréquente
      * @throws InvalidColorModelException
      */
     private ColorModel getMaxCountEachColorCard () throws InvalidColorModelException {

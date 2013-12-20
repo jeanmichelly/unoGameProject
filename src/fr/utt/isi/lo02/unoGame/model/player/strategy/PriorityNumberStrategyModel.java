@@ -9,13 +9,13 @@ import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
  
 /**
- * Correspond a l'une des strategies que peut utiliser un joueur ordinateur.
- * Elle permet de jouer en priorite les cartes jouables avec des nombres avec la couleur la plus frequente.
+ * Correspond a l'une des stratégies que peut utiliser un joueur ordinateur.
+ * Elle permet de jouer en priorité les cartes jouables avec des nombres avec la couleur la plus fréquente.
  */
 public class PriorityNumberStrategyModel extends StrategyModel {
 
     /**
-     * Execute la strategie qui donne la priorite aux nombres
+     * Exécute la stratégie qui donne la priorité aux nombres
      * @throws InvalidActionPutDownCardException 
      */
     public boolean execute () throws InvalidActionPutDownCardException {   
@@ -42,7 +42,7 @@ public class PriorityNumberStrategyModel extends StrategyModel {
             if ( card.getColor() != null ) // Compte le nombre de carte par couleur
                 countColor[card.getColor().getId()]++;
             
-            // Stock les cartes avec le meme symbole nombre que le talon 
+            // Stock les cartes avec le même symbole nombre que le talon 
             if ( card.getSymbol() == DiscardPileModel.getUniqueInstance().peek().getSymbol() 
                     && !card.getCompositeEffects().hasEffect() )
                 playableNumberCards.add(card);
@@ -52,7 +52,7 @@ public class PriorityNumberStrategyModel extends StrategyModel {
         byte maxColorCardsForNumber = 0;
         CardModel playableNumberCard = null;
         
-        // Recupere la carte symbole nombre ou il y a le plus de carte couleur
+        // Recupère la carte symbole nombre où il y a le plus de carte couleur
         while ( iterPlayableNumberCards.hasNext() ) {
             CardModel c = iterPlayableNumberCards.next();
             if ( countColor[c.getColor().getId()] > maxColorCardsForNumber ) {

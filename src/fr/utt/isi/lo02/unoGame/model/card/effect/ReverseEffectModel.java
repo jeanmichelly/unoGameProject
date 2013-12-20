@@ -9,7 +9,7 @@ import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 public class ReverseEffectModel extends ComponentEffectModel {
 
     /**
-     * Construit un effet pour inverser le sens du jeu avec une priorite de 10
+     * Construit un effet pour inverser le sens du jeu avec une priorité de 10
      */
 	public ReverseEffectModel () {
 		super((byte)10);

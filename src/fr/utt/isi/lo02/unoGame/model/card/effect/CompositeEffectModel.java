@@ -10,11 +10,11 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 
 /**
  * <u>Pattern Composite/Strategy : </u> </br>
- * Permet d'avoir des effets du jeu correspondant a un ensemble d'effet dit de bas niveau. 
- * Par exemple l'effet d'une carte +4 est composee de draw*4, skip et wild.
- * De ce fait, la manipulation des cartes peut se faire de maniere tres flexible 
- * pour eventuellement prevoir un maximum d'extension possible.
- * Cela permet egalement d'avoir des effets pour les penalites.
+ * Permet d'avoir des effets du jeu correspondant à un ensemble d'effet dit de bas niveau. 
+ * Par exemple l'effet d'une carte +4 est composée de draw*4, skip et wild.
+ * De ce fait, la manipulation des cartes peut se faire de manière très flexible 
+ * pour éventuellement prévoir un maximum d'extension possible.
+ * Cela permet également d'avoir des effets pour les pénalités.
  * @see DrawEffectModel
  * @see ReverseEffectModel
  * @see SkipEffectModel
@@ -23,7 +23,7 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 public class CompositeEffectModel extends ComponentEffectModel {
     
     /**
-     * Liste d'effet correspondant a un effet du jeu officiel
+     * Liste d'effet correspondant à un effet du jeu officiel
      */
     private static ArrayList<ComponentEffectModel> wildDrawFourEffect = new ArrayList<ComponentEffectModel>();
     private static ArrayList<ComponentEffectModel> wildEffect = new ArrayList<ComponentEffectModel>();
@@ -37,7 +37,7 @@ public class CompositeEffectModel extends ComponentEffectModel {
 	private ArrayList<ComponentEffectModel> effects;
 		
 	/**
-	 * Initialise l'ensemble a vide et qui contiendra les effets de bas niveau
+	 * Initialise l'ensemble à vide et qui contiendra les effets de bas niveau
 	 */
 	public CompositeEffectModel () {
 	    super((byte)-1);
@@ -94,8 +94,8 @@ public class CompositeEffectModel extends ComponentEffectModel {
     }
     
     /**
-     * Applique l'effet d'une penalite du jeu a un joueur en particulier
-     * @param index indice du joueur sur lequel l'effet d'une penalite va s'appliquer 
+     * Applique l'effet d'une pénalité du jeu à un joueur en particulier
+     * @param index indice du joueur sur lequel l'effet d'une pénalité va s'appliquer 
      * @throws InvalidActionPickCardException
      */
     public void applyEffect (int index) throws InvalidActionPickCardException {
@@ -116,7 +116,7 @@ public class CompositeEffectModel extends ComponentEffectModel {
     /**
      * Ajoute un effet de bas niveau selon un facteur au composite
      * @param effect effet de bas niveau
-     * @param factor determine le nombre d'effet a ajouter
+     * @param factor determine le nombre d'effet à ajouter
      * @return true si les ajouts de l'effet ont bien aboutie, false sinon
      */
     public boolean addEffect (ComponentEffectModel effect, int factor) {
@@ -130,7 +130,7 @@ public class CompositeEffectModel extends ComponentEffectModel {
     }
 
     /**
-     * Determine si le composite est constitue d'effet
+     * Determine si le composite est constitué d'effet
      * @return true si le composite a des effets, false sinon
      */
     public boolean hasEffect () {
@@ -151,7 +151,7 @@ public class CompositeEffectModel extends ComponentEffectModel {
     }
     
     /**
-     * Trie les effets de bas niveau par ordre de priorite
+     * Trie les effets de bas niveau par ordre de priorité
      */
     public void sortEffectsByPriority () {
         Collections.sort(this.effects, new Comparator<ComponentEffectModel>() {
@@ -185,7 +185,7 @@ public class CompositeEffectModel extends ComponentEffectModel {
     
     /**
      * Obtenir le composite 
-     * @return la liste constituee des effets de bas niveau
+     * @return la liste constituée des effets de bas niveau
      */
     public ArrayList<ComponentEffectModel> getEffects () {
         return this.effects;

@@ -3,21 +3,21 @@ package fr.utt.isi.lo02.unoGame.model.user;
 import java.util.Stack;
 
 /**
- * Exclusivement constituee de membres statiques. 
- * Elle definit l'utilisateur qui manipule l'application hormis le deroulement d'une partie.
+ * Exclusivement constituée de membres statiques. 
+ * Elle définit l'utilisateur qui manipule l'application hormis le deroulement d'une partie.
  */
 public class UserModel {
 	
     /**
-     * Stock le nombre de joueur participant a une partie
+     * Stock le nombre de joueur participant à une partie
      */
 	private static  byte numberPlayers;
 	/**
-	 * Stock le nombre de joueur humain participant a une partie
+	 * Stock le nombre de joueur humain participant à une partie
 	 */
 	private static byte numberHumanPlayers;
 	/**
-	 * Stock les pseudo associes a chaque joueur humain
+	 * Stock les pseudo associés à chaque joueur humain
 	 */
 	private static Stack<String> pseudonymsHumanPlayers = new Stack<String>();
 	/**
@@ -36,11 +36,11 @@ public class UserModel {
      * Initialise le nombre de joueur humain
      */
     public static void initNumberHumanPlayers () {
-        UserModel.numberHumanPlayers = 3;
+        UserModel.numberHumanPlayers = 0;    	
     }
 
     /**
-     * Initialise les pseudo associes a chaque joueur humain
+     * Initialise les pseudo associés à chaque joueur humain
      */
     public static void initPseudonymsHumanPlayers () {
         UserModel.pseudonymsHumanPlayers.push("Pablo");
@@ -56,24 +56,24 @@ public class UserModel {
     }
     
     /**
-     * Obtenir le nombre de joueur participant a une partie
-     * @return le nombre de joueur participant a une partie
+     * Obtenir le nombre de joueur participant à une partie
+     * @return le nombre de joueur participant à une partie
      */
     public static byte getNumberPlayers () {
         return UserModel.numberPlayers;
     }
 
     /**
-     * Obtenir le nombre de joueur humain participant a une partie
-     * @return le nombre de joueur humain participant a une partie
+     * Obtenir le nombre de joueur humain participant à une partie
+     * @return le nombre de joueur humain participant à une partie
      */
     public static byte getNumberHumanPlayers () {
         return UserModel.numberHumanPlayers;
     }
 
     /**
-     * Obtenir les pseudo des joueurs humain participant a une partie
-     * @return les pseudo des joueurs humain participant a une partie
+     * Obtenir les pseudo des joueurs humain participant à une partie
+     * @return les pseudo des joueurs humain participant à une partie
      */
     public static Stack<String> getPseudonymsHumanPlayer () {
         return UserModel.pseudonymsHumanPlayers;
@@ -96,24 +96,24 @@ public class UserModel {
     }
     
     /**
-     * Modifie le nombre de joueur participant a une partie
-     * @param numberPlayers mise a jour du nombre de joueur participant a une partie
+     * Modifie le nombre de joueur participant à une partie
+     * @param numberPlayers mise à jour du nombre de joueur participant à une partie
      */
     public static void setNumberPlayers (byte numberPlayers) {
         UserModel.numberPlayers = numberPlayers;
     }
     
     /**
-     * Modifie le nombre de joueur humain participant a une partie
-     * @param numberHumanPlayers mise a jour du nombre de joueur humain participant a une partie
+     * Modifie le nombre de joueur humain participant à une partie
+     * @param numberHumanPlayers mise à jour du nombre de joueur humain participant à une partie
      */
     public static void setNumberHumanPlayers (byte numberHumanPlayers) {
         UserModel.numberHumanPlayers = numberHumanPlayers;
     }
     
     /**
-     * Modifie l'ensemble des pseudo des joueurs humain participant a une partie
-     * @param pseudonymsHumanPlayers mise a jour des pseudo des joueurs humain participant a une partie
+     * Modifie l'ensemble des pseudo des joueurs humain participant à une partie
+     * @param pseudonymsHumanPlayers mise à jour des pseudo des joueurs humain participant à une partie
      */
     public static void setPseudonymsHumanPlayers(Stack<String> pseudonymsHumanPlayers) {
         UserModel.pseudonymsHumanPlayers = pseudonymsHumanPlayers;

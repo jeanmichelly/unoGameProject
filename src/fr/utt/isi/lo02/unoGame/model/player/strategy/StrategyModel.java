@@ -9,16 +9,16 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException
 
 /**
  * <u>Pattern Strategy : </u> </br>
- *  Definit le modele commun des strategies
+ *  Définit le modèle commun des stratégies
  */
 public abstract class StrategyModel {
 
     /**
-     * Execute une strategie 
+     * Exécute une stratégie 
      * 
-     * @return true si la strategie a pu faire une action :
+     * @return true si la stratégie a pu faire une action :
      *  <ul>
-     *      <li>Poser une carte jouable correspondant a la strategie</li>
+     *      <li>Poser une carte jouable correspondant à la strategie</li>
      *      <li>Passer son tour</li>    
      *  </ul>, 
      *  false sinon.

@@ -38,7 +38,11 @@ import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
  */
 public class BoardModel extends Observable {
     /**
+<<<<<<< HEAD
      * Contient l'instance unique du plateau de jeu
+=======
+     * Rend le plateau instanciable une seule fois 
+>>>>>>> bc71ce491c6168fb75be4cc85972db122305f8b6
      */
 	private static BoardModel uniqueInstance = null;
 	/**
@@ -83,8 +87,8 @@ public class BoardModel extends Observable {
 	private GameRulesModel gameRules; 
 
 	/**
-	 * Construit l'unique plateau et ne peut etre appele qu'une seule fois. 
-	 * Lors de la creation du plateau, on créer également la pioche, le talon, le mode de jeu et les penalités.
+	 * Construit l'unique plateau et ne peut être appelé qu'une seule fois. 
+	 * Lors de la création du plateau, on crée également la pioche, le talon, le mode de jeu et les pénalités.
 	 */
 	private BoardModel () {
 	    this.drawPile = DrawPileModel.getUniqueInstance();
@@ -178,10 +182,10 @@ public class BoardModel extends Observable {
     }
 
 	/**
-	 * Choix aléatoire du joueur qui joue en premier
+	 * Choix aléatoire du joueur qui va commencer
 	 */
 	public void chooseRandomDealer () {
-	    // Formule utilisee : int random = (int)(Math.random() * (higher-lower)) + lower;
+	    // Formule utilisée : int random = (int)(Math.random() * (higher-lower)) + lower;
 	    this.playerCursor = (byte)(Math.random() * (this.players.length)); 
 	}
 
@@ -239,7 +243,7 @@ public class BoardModel extends Observable {
 	}
     
 	/**
-	 * Applique l'effet de la penalite contre le uno (+2 cartes sur les joueurs n'ayant pas dit uno a temps)
+	 * Applique l'effet de la pénalité contre le uno (+2 cartes sur les joueurs n'ayant pas dit uno à temps)
 	 * @throws InvalidActionPickCardException
 	 */
     public void applyPenaltyAgainstUno () throws InvalidActionPickCardException {
@@ -255,8 +259,8 @@ public class BoardModel extends Observable {
     }
     
     /**
-     * Applique l'effet de la penalite contre un poseur de carte +4 ayant bluffe et decouvert par la cible
-     * (+4 cartes sur lui meme)
+     * Applique l'effet de la pénalité contre un poseur de carte +4 ayant bluffé et découvert par la cible
+     * (+4 cartes sur lui même)
      * @throws InvalidActionPickCardException
      */
     public void applyPenaltyAgainstLauncherWildDrawFourCard () throws InvalidActionPickCardException {
@@ -264,7 +268,7 @@ public class BoardModel extends Observable {
     }
     
     /**
-     * Applique l'effet de la penalite d'une carte +4 sur la cible ayant contestee 
+     * Applique l'effet de la pénalité d'une carte +4 sur la cible ayant contestée 
      * (+2 cartes en supplement de l'effet de la carte, soit 6 cartes)
      * @throws InvalidActionPickCardException
      */
@@ -273,8 +277,8 @@ public class BoardModel extends Observable {
     }
     
     /**
-     * Indique s'il y a un joueur vulnerable (joueur auquel on peut dire contre uno)
-     * @return true s'il y un joueur vulnerable, false sinon
+     * Indique s'il y a un joueur vulnérable (joueur auquel on peut dire contre uno)
+     * @return true s'il y un joueur vulnérable, false sinon
      */
     public boolean hasVulnerablePlayer () {
         for ( PlayerModel player : players )
@@ -284,13 +288,13 @@ public class BoardModel extends Observable {
     }
 
     /**
-     * Permet de passer d'une manche a une autre :
+     * Permet de passer d'une manche à une autre :
      * <ul>
-     *     <li>Incrementation du nombre de manche jouee</li>
+     *     <li>Incrémentation du nombre de manche jouée</li>
      *     <li>Remise des cartes restantes des mains des joueurs et celles du talon dans la pioche</li>
-     *     <li>Melange de la pioche</li>
-     *     <li>Initialisation des flag de vulnerabilite (pour le contre uno) des joueurs par la valeur de defaut (false)</li>
-     *     <li>Choix du joueur qui va commencer a jouer pour la nouvelle manche</li>
+     *     <li>Mélange de la pioche</li>
+     *     <li>Initialisation des flag de vulnérabilité (pour le contre uno) des joueurs par la valeur de défaut (false)</li>
+     *     <li>Choix du joueur qui va commencer à jouer pour la nouvelle manche</li>
      *     <li>Distribution des cartes</li>
      *     <li>Initialisation du talon</li>
      * </ul>
@@ -322,11 +326,11 @@ public class BoardModel extends Observable {
     }
 
     /**
-     * Permet de passer d'une partie a une autre
+     * Permet de passer d'une partie à une autre
      * <ul>
-     *      <li>Incrementation du nombre de partie jouee</li>
+     *      <li>Incrémentation du nombre de partie jouée</li>
      *      <li>Initialisation de la premiere manche</li>
-     *      <li>Initialisation des scores des joueurs par la valeur de defaut (0)</li>
+     *      <li>Initialisation des scores des joueurs par la valeur de défaut (0)</li>
      * </ul>
      * @throws InvalidActionPickCardException
      */
@@ -339,8 +343,8 @@ public class BoardModel extends Observable {
     }
     
     /**
-     * Obtenir le joueur a qui est le tour de jouer 
-     * @return le joueur a qui est le tour de jouer
+     * Obtenir le joueur à qui est le tour de jouer 
+     * @return le joueur à qui est le tour de jouer
      */
     public PlayerModel getPlayer () {
         return this.players[playerCursor];
@@ -348,8 +352,8 @@ public class BoardModel extends Observable {
     
     /**
      * Obtenir un joueur en particulier
-     * @param index Indique l'indice du joueur souhaite
-     * @return le joueur correspondant a l'index dans l'ensemble
+     * @param index Indique l'indice du joueur souhaité
+     * @return le joueur correspondant à l'index dans l'ensemble
      */
     public PlayerModel getPlayer (int index) {
         return this.players[index];
@@ -364,16 +368,16 @@ public class BoardModel extends Observable {
     }
     
     /**
-     * Obtenir l'ensemble des joueurs participant a la partie
-     * @return l'ensemble des joueurs participant a la partie
+     * Obtenir l'ensemble des joueurs participant à la partie
+     * @return l'ensemble des joueurs participant à la partie
      */
     public PlayerModel [] getPlayers () {
         return this.players;
     }
     
     /**
-     * Informe sur l'indice du joueur a qui est le tour
-     * @return l'indice du joueur a qui est le tour
+     * Informe sur l'indice du joueur à qui est le tour
+     * @return l'indice du joueur à qui est le tour
      */
     public byte getPlayerCursor() {
         return this.playerCursor;
@@ -396,31 +400,31 @@ public class BoardModel extends Observable {
     }
     
     /**
-     * Informe sur le nombre de partie jouee
-     * @return le nombre de partie jouee
+     * Informe sur le nombre de partie jouée
+     * @return le nombre de partie jouée
      */
     public short getNumberGame () {
         return this.numberGame;
     }
     
     /**
-     * Informe sur le nombre de manche jouee
-     * @return le nombre de manche jouee
+     * Informe sur le nombre de manche jouée
+     * @return le nombre de manche jouée
      */
     public short getNumberRound () {
         return this.numberRound;
     }
     
     /**
-     * Donner la main a un joueur en particulier
-     * @param playerCursor indice du joueur pour lequel la main est donnee
+     * Donner la main à un joueur en particulier
+     * @param playerCursor indice du joueur pour lequel la main est donnée
      */
     public void setPlayerCursor(byte playerCursor) {
         this.playerCursor = playerCursor;
     }
     
     /**
-     * Permet d'acceder au setChanged de la classe observable (ignorer sa visibilite protected)
+     * Permet d'accéder au setChanged de la classe observable (ignorer sa visibilité protected)
      */
     public void setChanged () {
         super.setChanged();

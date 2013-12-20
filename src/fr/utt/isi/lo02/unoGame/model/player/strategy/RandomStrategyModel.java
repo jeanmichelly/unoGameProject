@@ -9,30 +9,30 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
 
 /**
- * Correspond a l'une des strategies que peut utiliser un joueur ordinateur. 
- * Elle n'a pas de specifite particuliere pour effectuer une action.
- * Elle permet de jouer n'importe quelle carte jouable ou ne pas jouer avec la meme probabilite. 
+ * Correspond à l'une des stratégies que peut utiliser un joueur ordinateur. 
+ * Elle n'a pas de specifité particuliere pour effectuer une action.
+ * Elle permet de jouer n'importe quelle carte jouable ou ne pas jouer avec la même probabilité. 
  */
 public class RandomStrategyModel extends StrategyModel {
 
     /**
-     * Execute la strategie qui joue aleatoirement
+     * Exécute la stratégie qui joue aléatoirement
      */
     public boolean execute () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
         ArrayList<CardModel> playableCards = getPlayableCards();
         int sizePlayableCards = playableCards.size();
         
-        // Choisit une carte aleatoire parmi les cartes jouables
+        // Choisit une carte aléatoire parmi les cartes jouables
         int random = (int)(Math.random() * (sizePlayableCards+1)); 
 
-        // Laisse une chance de passer son tour si le joueur d'apres a plus de 3 cartes
+        // Laisse une chance de passer son tour si le joueur d'après a plus de 3 cartes
         if ( random == sizePlayableCards && sizePlayableCards > 3 ) { 
             BoardModel.getUniqueInstance().getPlayer().notToPlay();
         } else {
             if ( random == sizePlayableCards )
                 random--;
             
-            /*  Recherche l'indice de la carte choisit de la main du joueur par rapport a 
+            /*  Recherche l'indice de la carte choisit de la main du joueur par rapport à 
                 l'ensemble des cartes jouables
             */
             int indexPlayingCard = super.researchIndexPlayingCard (playableCards.get(random));

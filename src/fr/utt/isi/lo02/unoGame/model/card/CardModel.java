@@ -6,12 +6,12 @@ import fr.utt.isi.lo02.unoGame.model.card.effect.CompositeEffectModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 
 /**
- * Permet de representer les cartes du jeu. Une carte est caracterisee par : 
+ * Permet de representer les cartes du jeu. Une carte est caracterisée par : 
  * <ul>
  *      <li>Un symbole</li>
  *      <li>Une couleur</li>
  *      <li>Un score</li>
- *      <li>Un ensemble d'effet qui peut etre vide</li>
+ *      <li>Un ensemble d'effet qui peut être vide</li>
  * </ul>
  * @see GameRulesModel
  * @see CompositeEffectModel
@@ -50,8 +50,8 @@ public class CardModel {
     }
     
 	/**
-	 * Indique si la carte est jouable par rapport a une carte en particulier
-	 * @param card comparer par rapport a une carte en particulier
+	 * Indique si la carte est jouable par rapport à une carte en particulier
+	 * @param card comparer par rapport à une carte en particulier
 	 * @return true si la carte est jouable, false sinon
 	 */
     public boolean isPlayableCard (CardModel card) {
@@ -61,8 +61,8 @@ public class CardModel {
     }
 
     /**
-     * Indique si la carte est egale a une carte en particulier
-     * @param card comparer par rapport a une carte en particulier
+     * Indique si la carte est égale à une carte en particulier
+     * @param card comparer par rapport à une carte en particulier
      * @return true si la carte est jouable, false sinon
      */
     public boolean equals (CardModel card) {
@@ -80,7 +80,7 @@ public class CardModel {
     }
 
     /**
-     * Informe sur le symbole caracterisant la carte
+     * Informe sur le symbole caractérisant la carte
      * @return le symbole caracterisant la carte
      */
 	public SymbolModel getSymbol () {
@@ -88,41 +88,41 @@ public class CardModel {
 	}
 
 	/**
-     * Informe sur la couleur caracterisant la carte
-     * @return la couleur caracterisant la carte
+     * Informe sur la couleur caractérisant la carte
+     * @return la couleur caractérisant la carte
      */
 	public ColorModel getColor () {
 		return this.color;
 	}
 
 	/**
-     * Informe sur le score caracterisant la carte
-     * @return le score caracterisant la carte
+     * Informe sur le score caractérisant la carte
+     * @return le score caractérisant la carte
      */
 	public byte getScore () {
 		return this.score;
 	}
 	
 	/**
-     * Informe sur l'effet caracterisant la carte (liste d'effet de bas niveau)
-     * @return l'effet caracterisant la carte (liste d'effet de bas niveau)
+     * Informe sur l'effet caractérisant la carte (liste d'effet de bas niveau)
+     * @return l'effet caractérisant la carte (liste d'effet de bas niveau)
      */
 	public CompositeEffectModel getCompositeEffects () {
 	    return this.compositeEffects;
 	}
 	
 	/**
-	 * Represente la description de l'ensemble de la carte sous une chaine de caractere
+	 * Représente la description de l'ensemble de la carte sous une chaine de caractère
 	 * (Symbol Couleur Score Effet)
-	 * @return une chaine de caractere representant la description de l'ensemble de la carte
+	 * @return une chaine de caractere représentant la description de l'ensemble de la carte
 	 */
 	public String getCard () {
         return this.getSymbol()+" "+this.getColor()+" "+this.getScore()+" "+this.getEffects();
 	}
 
 	/**
-	 * Represente la description de l'ensemble des effets de bas niveau d'un effet d'une carte du jeu
-	 * @return une chaine de caractere representant la description de l'effet
+	 * Représente la description de l'ensemble des effets de bas niveau d'un effet d'une carte du jeu
+	 * @return une chaine de caractere représentant la description de l'effet
 	 */
 	public String getEffects () {
 	    Iterator<ComponentEffectModel> iter = this.compositeEffects.getEffects().iterator();
@@ -136,16 +136,16 @@ public class CardModel {
 	}
 	
 	/**
-	 * Modifier le symbole caracterisant la carte
-	 * @param symbol symbole caracterisant la carte
+	 * Modifier le symbole caractérisant la carte
+	 * @param symbol symbole caractérisant la carte
 	 */
 	public void setSymbol (SymbolModel symbol) {
 	    this.symbol = symbol;
 	}
 	
 	/**
-	 * Modifier la couleur caracterisant la carte
-	 * @param color couleur caracterisant la carte
+	 * Modifier la couleur caractérisant la carte
+	 * @param color couleur caractérisant la carte
 	 */
 	public void setColor (ColorModel color) {
 	    this.color = color;

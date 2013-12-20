@@ -33,6 +33,7 @@ public class TesteurConsole {
         ConsoleBoardView consoleBoardView = new ConsoleBoardView(); 
         ConsolePlayerHandView consolePlayerHandView = new ConsolePlayerHandView();
         ConsolePlayersView consolePlayersView = new ConsolePlayersView();
+     
         CardModel initCardOfDiscardPileModel = DiscardPileModel.getUniqueInstance().peek();
         
         if ( initCardOfDiscardPileModel.getCompositeEffects().hasEffect() ) {

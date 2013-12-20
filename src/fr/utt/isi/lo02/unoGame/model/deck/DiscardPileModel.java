@@ -10,20 +10,20 @@ import fr.utt.isi.lo02.unoGame.model.exception.DrawPileIsEmptyAfterReshuffledExc
 
 /**
  * <u>Pattern Singleton : </u> </br> 
- * Represente le talon du jeu par une pile de carte dont le sommet est visible. 
+ * Représente le talon du jeu par une pile de cartes dont le sommet est visible. 
  * Elle n'est instanciable qu'une seule fois.
  * @see DeckModel
  */
 public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
 
     /**
-     * Rends le talon instanciable une seule fois 
+     * Rend le talon instanciable une seule fois 
      */
     private static DiscardPileModel uniqueInstance = null;
     
     /**
-     * Informe sur l'etat de l'effet de la carte du sommet, s'il a deja ete applique. 
-     * Cela permet d'eviter d'appliquer plusieurs fois un effet pour une meme carte qui reste sur le sommet a plusieurs tour.  
+     * Informe sur l'état de l'effet de la carte du sommet, s'il a deja été appliqué. 
+     * Cela permet d'éviter d'appliquer plusieurs fois un effet pour une même carte qui reste sur le sommet à plusieurs tour.  
      */
     private boolean applyEffectLastCard;
     
@@ -34,8 +34,8 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
     private ColorModel colorBeforeWildDrawFour; 
 
     /**
-     * Construit l'unique talon et ne peut etre appele qu'une seule fois. 
-     * Lors de la creation du talon, on recupere une carte de la pioche
+     * Construit l'unique talon et ne peut être appelé qu'une seule fois. 
+     * Lors de la creation du talon, on recupère une carte de la pioche
      */
     private DiscardPileModel () {
         super.cards = new Stack<CardModel>();
@@ -59,12 +59,12 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
 
     /**
      * Ajoute une carte au talon.
-     * Initialise l'etat de l'effet pour indiquer qu'il n'a pas encore ete applique.
-     * Si la carte precedente au sommet de cet ajout a l'effet joker, on reinitialise la couleur a null.
-     * Si la carte posee est une carte +4 alors on stock l'information de la couleur de la carte precedente 
-     * pour prevoir une eventuelle contestation.
-     * @param card carte a ajouter au paquet
-     * @return la carte ajoutee dans le talon
+     * Initialise l'état de l'effet pour indiquer qu'il n'a pas encore ete appliqué.
+     * Si la carte precedente au sommet de cet ajout a l'effet joker, on réinitialise la couleur à null.
+     * Si la carte posée est une carte +4 alors on stock l'information de la couleur de la carte précédente 
+     * pour prévoir une éventuelle contestation.
+     * @param card carte à ajouter au paquet
+     * @return la carte ajoutée dans le talon
      */
     public CardModel push (CardModel card) {
         this.applyEffectLastCard = false;
@@ -90,13 +90,13 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
      * Retire la carte presente sur le sommet du talon
      * @return la carte presente sur le sommet du talon
      */
-    public CardModel pop () { // Public pour reprendre la carte si un poseur de +4 a bluffe
+    public CardModel pop () { // Public pour reprendre la carte si un poseur de +4 a bluffé
         return super.cards.pop();
     }
     
     /**
-     * Permet le remelange de la pioche en conservant son sommet
-     * @return le reste des cartes presente en dessous du sommet
+     * Permet le remélange de la pioche en conservant son sommet
+     * @return le reste des cartes présente en dessous du sommet
      */
     public Stack<CardModel> reshuffled () { // Conserve uniquement son sommet
         CardModel topCard = this.pop(); 
@@ -108,25 +108,25 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
     }
     
     /**
-     * Informe sur l'etat de l'effet de la carte du sommet, s'il a deja ete applique. 
-     * @return true si l'effet a deja ete applique, false sinon
+     * Informe sur l'état de l'effet de la carte du sommet, s'il a deja été appliqué. 
+     * @return true si l'effet a deja été appliqué, false sinon
      */
     public boolean hasApplyEffectLastCard () {
         return this.applyEffectLastCard;
     }
     
     /**
-     * Obtenir la couleur de la carte du sommet avant qu'une carte +4 a ete jouee 
-     * @return la couleur de la carte du sommet avant qu'une carte +4 a ete jouee
+     * Obtenir la couleur de la carte du sommet avant qu'une carte +4 a été jouée 
+     * @return la couleur de la carte du sommet avant qu'une carte +4 a été jouée
      */
     public ColorModel getColorBeforeWildDrawFour () {
         return this.colorBeforeWildDrawFour;
     }
 
     /**
-     * Modifie l'etat de l'effet de la carte du sommet, s'il a deja ete appliquee
+     * Modifie l'état de l'effet de la carte du sommet, s'il a deja été appliquée
      * @param applyEffectLastCard 
-     *      etat de l'effet de la carte du sommet, s'il a deja ete applique, true s'il a deja ete applique, false sinon
+     *      état de l'effet de la carte du sommet, s'il a deja été appliqué, true s'il a deja été appliqué, false sinon
      */
     public void setApplyEffectLastCard (boolean applyEffectLastCard) {
         this.applyEffectLastCard = applyEffectLastCard;
