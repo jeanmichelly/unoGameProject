@@ -95,4 +95,14 @@ public class CompositeEffectModelTest {
         assertEquals(9, board.getPlayer(0).getPlayerHand().numberCards()); // Verifie si le joueur suivant a 2 carte en plus
         assertEquals(0, board.getPlayerCursor()); // Verifie si le curseur se déplace bien 
     }
+    
+    @Test
+    public void isWildDrawFourEffectTest () {
+        CardModel card = new CardModel(null, null, (byte)50, new CompositeEffectModel());
+        assertEquals(false, card.getCompositeEffects().isWildDrawFourEffect());
+        card = new CardModel(null, null, (byte)50, new CompositeEffectModel(CompositeEffectModel.getDrawTwoEffect()));
+        assertEquals(false, card.getCompositeEffects().isWildDrawFourEffect());
+        card = new CardModel(null, null, (byte)50, new CompositeEffectModel(CompositeEffectModel.getWildDrawFourEffect()));
+        assertEquals(true, card.getCompositeEffects().isWildDrawFourEffect());
+    }
 }

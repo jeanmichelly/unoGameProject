@@ -170,6 +170,19 @@ public class CompositeEffectModel extends ComponentEffectModel {
         return this.effects.size();
     }
     
+    public boolean isWildDrawFourEffect () {
+        Iterator<ComponentEffectModel> wildDrawFourEffectIter = wildDrawFourEffect.iterator();
+        Iterator<ComponentEffectModel> thisIter = this.getEffects().iterator();
+
+        if ( !thisIter.hasNext() || wildDrawFourEffect.size() != this.getEffects().size() )
+            return false;
+        
+        while ( thisIter.hasNext() )
+            if ( !(thisIter.next().getPriority() == wildDrawFourEffectIter.next().getPriority()) )
+                return false;
+        return true;
+    }
+    
     /**
      * Obtenir le composite 
      * @return la liste constituee des effets de bas niveau

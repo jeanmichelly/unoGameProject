@@ -9,7 +9,8 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
 
 /**
- * Correspond a l'une des strategies que peut utiliser un joueur ordinateur. Elle n'a pas de specifite particuliere pour effectuer une action.
+ * Correspond a l'une des strategies que peut utiliser un joueur ordinateur. 
+ * Elle n'a pas de specifite particuliere pour effectuer une action.
  * Elle permet de jouer n'importe quelle carte jouable ou ne pas jouer avec la meme probabilite. 
  */
 public class RandomStrategyModel extends StrategyModel {
