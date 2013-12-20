@@ -1,0 +1,110 @@
+
+symbols.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+S
+  rotate: false
+  xy: 1, 2
+  size: 82, 82
+  orig: 82, 82
+  offset: 0, 0
+  index: -1
+4
+  rotate: false
+  xy: 85, 2
+  size: 73, 82
+  orig: 73, 82
+  offset: 0, 0
+  index: -1
+5
+  rotate: false
+  xy: 160, 2
+  size: 72, 82
+  orig: 72, 82
+  offset: 0, 0
+  index: -1
+8
+  rotate: false
+  xy: 234, 2
+  size: 72, 82
+  orig: 72, 82
+  offset: 0, 0
+  index: -1
+3
+  rotate: false
+  xy: 308, 2
+  size: 71, 82
+  orig: 71, 82
+  offset: 0, 0
+  index: -1
+0
+  rotate: false
+  xy: 381, 2
+  size: 70, 82
+  orig: 70, 82
+  offset: 0, 0
+  index: -1
+9
+  rotate: false
+  xy: 453, 2
+  size: 69, 82
+  orig: 69, 82
+  offset: 0, 0
+  index: -1
+6
+  rotate: false
+  xy: 524, 2
+  size: 68, 82
+  orig: 68, 82
+  offset: 0, 0
+  index: -1
+7
+  rotate: false
+  xy: 594, 1
+  size: 67, 83
+  orig: 67, 83
+  offset: 0, 0
+  index: -1
+W
+  rotate: false
+  xy: 663, 1
+  size: 67, 83
+  orig: 67, 83
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 732, 2
+  size: 66, 82
+  orig: 66, 82
+  offset: 0, 0
+  index: -1
+F
+  rotate: false
+  xy: 800, 4
+  size: 68, 80
+  orig: 68, 80
+  offset: 0, 0
+  index: -1
+T
+  rotate: false
+  xy: 870, 2
+  size: 63, 82
+  orig: 63, 82
+  offset: 0, 0
+  index: -1
+1
+  rotate: false
+  xy: 935, 2
+  size: 50, 82
+  orig: 50, 82
+  offset: 0, 0
+  index: -1
+R
+  rotate: false
+  xy: 987, 2
+  size: 36, 82
+  orig: 36, 82
+  offset: 0, 0
+  index: -1
