@@ -42,8 +42,6 @@ public class TesteurConsole {
             if ( initCardOfDiscardPileModel.getCompositeEffects().isWildDrawFourEffect() ) {
                 while( DiscardPileModel.getUniqueInstance().peek().getCompositeEffects().isWildDrawFourEffect() ) {
                     DiscardPileModel.getUniqueInstance().addCard(DrawPileModel.getUniqueInstance().pop());
-                    BoardModel.getUniqueInstance().setChanged();
-                    BoardModel.getUniqueInstance().notifyObservers();
                 }
             }
             
