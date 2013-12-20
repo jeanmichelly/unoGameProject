@@ -3,4 +3,22 @@
 	<output-test url="file://$MODULE_DIR$/out/test/unoGameProject"/>
 	<exclude-output/>
 	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="gdx-backend-lwjgl-natives.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/librairies/gdx-backend-lwjgl-natives.jar!/"/>
+	</lib>
+	<lib name="gdx-backend-lwjgl.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/librairies/gdx-backend-lwjgl.jar!/"/>
+	</lib>
+	<lib name="gdx-natives.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/librairies/gdx-natives.jar!/"/>
+	</lib>
+	<lib name="gdx.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/librairies/gdx.jar!/"/>
+	</lib>
+	<lib name="junit-4.11.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/librairies/junit-4.11.jar!/"/>
+	</lib>
+	<lib name="tween-engine-api.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/librairies/tween-engine-api.jar!/"/>
+	</lib>
 </component>
