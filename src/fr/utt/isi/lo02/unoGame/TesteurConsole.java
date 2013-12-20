@@ -33,12 +33,8 @@ public class TesteurConsole {
         ConsoleBoardView consoleBoardView = new ConsoleBoardView(); 
         ConsolePlayerHandView consolePlayerHandView = new ConsolePlayerHandView();
         ConsolePlayersView consolePlayersView = new ConsolePlayersView();
-<<<<<<< HEAD
      
-        CardModel initCardOfDiscardPileModel = DiscardPileModel.getUniqueInstance().peek();   
-=======
         CardModel initCardOfDiscardPileModel = DiscardPileModel.getUniqueInstance().peek();
->>>>>>> 54eca7e3bc3a2cd14f0e183adabe91e10e433c17
         
         if ( initCardOfDiscardPileModel.getCompositeEffects().hasEffect() ) {
             BoardModel.getUniqueInstance().setChanged();
