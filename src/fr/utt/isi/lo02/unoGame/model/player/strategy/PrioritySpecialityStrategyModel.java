@@ -19,13 +19,19 @@ public class PrioritySpecialityStrategyModel extends StrategyModel {
 
     /**
      * Execute la strategie qui donne la priorite aux cartes avec des effets
+     * @throws InvalidActionPutDownCardException 
      */
-    public boolean execute () { 
+    public boolean execute () throws InvalidActionPutDownCardException { 
         CardModel playableSpecialityCard = getPlayableSpecialityCard(); 
         
         if ( playableSpecialityCard == null )
             return false;
         
+        int indexPlayingCard = super.researchIndexPlayingCard (playableSpecialityCard);
+        if ( indexPlayingCard == -1 )
+            throw new InvalidActionPutDownCardException();
+        
+        BoardModel.getUniqueInstance().getPlayer().putDownCard(indexPlayingCard); 
         return true;
     }
     

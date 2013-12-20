@@ -29,7 +29,7 @@ public class PriorityNumberStrategyModel extends StrategyModel {
         if ( indexPlayingCard == -1 )
             throw new InvalidActionPutDownCardException();
         
-        BoardModel.getUniqueInstance().getPlayer().putDownCard(indexPlayingCard);
+        BoardModel.getUniqueInstance().getPlayer().putDownCard(indexPlayingCard); 
         return true;
     }
     
@@ -40,7 +40,7 @@ public class PriorityNumberStrategyModel extends StrategyModel {
 
         while ( iterPlayerHand.hasNext() ) {
             CardModel card = iterPlayerHand.next();
-            if ( card.getColor() != null) // Compte le nombre de carte par couleur
+            if ( card.getColor() != null ) // Compte le nombre de carte par couleur
                 countColor[card.getColor().getId()]++;
             
             // Stock les cartes avec le meme symbole nombre que le talon 

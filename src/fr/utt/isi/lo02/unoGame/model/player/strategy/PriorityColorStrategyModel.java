@@ -19,7 +19,6 @@ public class PriorityColorStrategyModel extends StrategyModel {
      * Execute la strategie qui donne la priorite aux couleurs
      */
     public boolean execute () throws InvalidActionPutDownCardException {
-        
         CardModel playableColorCard = getPlayableColorCardWithScoreHighestLevel();
         
         if ( playableColorCard == null )
@@ -36,15 +35,16 @@ public class PriorityColorStrategyModel extends StrategyModel {
     private CardModel getPlayableColorCardWithScoreHighestLevel () {
         Iterator<CardModel> iter = BoardModel.getUniqueInstance().getPlayer().getPlayerHand().getCards().iterator();
         CardModel playableColorCard = new CardModel(null, null, (byte) -1, null);
+        
         while ( iter.hasNext() ) {
             CardModel card = iter.next();
-            if ( card.getColor() == DiscardPileModel.getUniqueInstance().peek().getColor() 
+            if ( card.getColor() != null && card.getColor() == DiscardPileModel.getUniqueInstance().peek().getColor() 
                     && playableColorCard.getScore() < card.getScore() ) {
                 playableColorCard = card;
             }      
         }
         
-        if ( playableColorCard.getScore() != -1 )
+        if ( playableColorCard.getScore() != -1 ) // S'il existe au moins 1 carte de la meme couleur
             return playableColorCard;
         
         return null;
