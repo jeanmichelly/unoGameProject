@@ -1,6 +1,6 @@
 package fr.utt.isi.lo02.unoGame.testUnitaire.player.strategy;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 

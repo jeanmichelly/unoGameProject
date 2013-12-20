@@ -10,8 +10,10 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 
 /**
  * <u>Pattern Composite/Strategy : </u> </br>
- * Permet d'avoir des effets du jeu correspondant a un ensemble d'effet dit de bas niveau. Par exemple l'effet d'une carte +4 est composee de draw*4, skip et wild.
- * De ce fait, la manipulation des cartes peut se faire de maniere tres flexible pour eventuellement prevoir un maximum d'extension possible.
+ * Permet d'avoir des effets du jeu correspondant a un ensemble d'effet dit de bas niveau. 
+ * Par exemple l'effet d'une carte +4 est composee de draw*4, skip et wild.
+ * De ce fait, la manipulation des cartes peut se faire de maniere tres flexible 
+ * pour eventuellement prevoir un maximum d'extension possible.
  * Cela permet egalement d'avoir des effets pour les penalites.
  * @see DrawEffectModel
  * @see ReverseEffectModel

@@ -136,7 +136,8 @@ public class ConsoleBoardView implements Observer {
                                                         InvalidGameRulesException, 
                                                         InvalidPlayException {
             
-            if ( !DiscardPileModel.getUniqueInstance().hasApplyEffectLastCard() ) {// Appliquer l'effet d'une carte posee une seule fois
+            // Appliquer l'effet d'une carte posee une seule fois
+            if ( !DiscardPileModel.getUniqueInstance().hasApplyEffectLastCard() ) {
                 if ( DiscardPileModel.getUniqueInstance().peek().getSymbol() == SymbolModel.WILD_DRAW_FOUR 
                         && BoardModel.getUniqueInstance().getNextPlayer() instanceof HumanPlayerModel) {
                     ((HumanPlayerModel)BoardModel.getUniqueInstance().getNextPlayer()).challengeAgainstWildDrawFourCard();

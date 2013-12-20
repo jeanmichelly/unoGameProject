@@ -10,7 +10,8 @@ import fr.utt.isi.lo02.unoGame.model.exception.DrawPileIsEmptyAfterReshuffledExc
 
 /**
  * <u>Pattern Singleton : </u> </br> 
- * Represente le talon du jeu par une pile de carte dont le sommet est visible. Elle n'est instanciable qu'une seule fois.
+ * Represente le talon du jeu par une pile de carte dont le sommet est visible. 
+ * Elle n'est instanciable qu'une seule fois.
  * @see DeckModel
  */
 public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
@@ -60,7 +61,8 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
      * Ajoute une carte au talon.
      * Initialise l'etat de l'effet pour indiquer qu'il n'a pas encore ete applique.
      * Si la carte precedente au sommet de cet ajout a l'effet joker, on reinitialise la couleur a null.
-     * Si la carte posee est une carte +4 alors on stock l'information de la couleur de la carte precedente pour prevoir une eventuelle contestation.
+     * Si la carte posee est une carte +4 alors on stock l'information de la couleur de la carte precedente 
+     * pour prevoir une eventuelle contestation.
      * @param card carte a ajouter au paquet
      * @return la carte ajoutee dans le talon
      */
@@ -123,7 +125,8 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
 
     /**
      * Modifie l'etat de l'effet de la carte du sommet, s'il a deja ete appliquee
-     * @param applyEffectLastCard etat de l'effet de la carte du sommet, s'il a deja ete applique, true s'il a deja ete applique, false sinon
+     * @param applyEffectLastCard 
+     *      etat de l'effet de la carte du sommet, s'il a deja ete applique, true s'il a deja ete applique, false sinon
      */
     public void setApplyEffectLastCard (boolean applyEffectLastCard) {
         this.applyEffectLastCard = applyEffectLastCard;

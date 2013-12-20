@@ -19,7 +19,8 @@ import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
 
 /**
  * <u>Pattern Singleton : </u> </br> 
- * <b>Cette classe contient le coeur du deroulement du jeu Uno. Elle represente le plateau du jeu et elle n'est donc, instanciable qu'une fois. </b> </br>
+ * <b>Cette classe contient le coeur du deroulement du jeu Uno. 
+ * Elle represente le plateau du jeu et elle n'est donc, instanciable qu'une fois. </b> </br>
  * <p> Le plateau est physiquement caracterise par une pioche, un talon et des joueurs.
  *  Pour la gestion du jeu, le plateau comporte egalement :
  *  <ul> 
@@ -71,7 +72,8 @@ public class BoardModel extends Observable {
 	 */
 	private DrawPileModel drawPile;
 	/**
-	 * Stock les joueurs dans un tableau. Si on considere qu'un joueur humain quitte la partie, on le remplace par un ordinateur.
+	 * Stock les joueurs dans un tableau. 
+	 * Si on considere qu'un joueur humain quitte la partie, on le remplace par un ordinateur.
 	 */
 	private PlayerModel [] players;
 	/**
@@ -159,7 +161,8 @@ public class BoardModel extends Observable {
 	 * <ul>
 	 *     <li>Contre uno : +2 cartes sur les joueurs etant vulnerable (flag du joueur a true)</li>
 	 *     <li>Contre +4 : Si le poseur de la carte a bluffe et a ete conteste : +4 cartes contre lui meme</li>
-	 *     <li>Contre +4 : Contestation echouee par la cible : +2 cartes de penalite + 4 cartes de l'effet de la carte, soit 6 cartes</li>
+	 *     <li>Contre +4 : Contestation echouee par la cible : +2 cartes de penalite + 4 cartes de l'effet de la carte, 
+	 *         soit 6 cartes</li>
 	 * </ul> 
 	 */
 	public void initPenaltys () {
@@ -182,7 +185,8 @@ public class BoardModel extends Observable {
 	 * Choix aleatoire du joueur qui va commencer
 	 */
 	public void chooseRandomDealer () {
-	    this.playerCursor = (byte)(Math.random() * (this.players.length)); // Formule utilisee : int random = (int)(Math.random() * (higher-lower)) + lower;
+	    // Formule utilisee : int random = (int)(Math.random() * (higher-lower)) + lower;
+	    this.playerCursor = (byte)(Math.random() * (this.players.length)); 
 	}
 
 	/**
@@ -255,7 +259,8 @@ public class BoardModel extends Observable {
     }
     
     /**
-     * Applique l'effet de la penalite contre un poseur de carte +4 ayant bluffe et decouvert par la cible(+4 cartes sur lui meme)
+     * Applique l'effet de la penalite contre un poseur de carte +4 ayant bluffe et decouvert par la cible
+     * (+4 cartes sur lui meme)
      * @throws InvalidActionPickCardException
      */
     public void applyPenaltyAgainstLauncherWildDrawFourCard () throws InvalidActionPickCardException {
@@ -263,7 +268,8 @@ public class BoardModel extends Observable {
     }
     
     /**
-     * Applique l'effet de la penalite d'une carte +4 sur la cible ayant contestee (+2 cartes en supplement de l'effet de la carte, soit 6 cartes)
+     * Applique l'effet de la penalite d'une carte +4 sur la cible ayant contestee 
+     * (+2 cartes en supplement de l'effet de la carte, soit 6 cartes)
      * @throws InvalidActionPickCardException
      */
     public void applyPenaltyAgainstWildDrawFourCard () throws InvalidActionPickCardException {

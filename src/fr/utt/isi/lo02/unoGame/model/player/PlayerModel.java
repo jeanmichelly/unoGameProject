@@ -55,7 +55,9 @@ public abstract class PlayerModel {
     public void putDownCard (int indexChoiceCard) throws InvalidActionPutDownCardException {
         if ( !BoardModel.getUniqueInstance().getPlayer().getPlayerHand().getCard(indexChoiceCard).isPlayableCard() )
             throw new InvalidActionPutDownCardException();
-        DiscardPileModel.getUniqueInstance().push(BoardModel.getUniqueInstance().getPlayer().getPlayerHand().removeCard(indexChoiceCard));
+        DiscardPileModel.getUniqueInstance().push(
+                BoardModel.getUniqueInstance().getPlayer().getPlayerHand().removeCard(indexChoiceCard)
+        );
     }
 	
     /**
@@ -97,7 +99,9 @@ public abstract class PlayerModel {
 	 * @throws InvalidActionPutDownCardException
 	 * @throws InvalidColorModelException
 	 */
-    public abstract void play () throws InvalidActionPickCardException, InvalidActionPutDownCardException, InvalidColorModelException;
+    public abstract void play () throws InvalidActionPickCardException, 
+                                        InvalidActionPutDownCardException,
+                                        InvalidColorModelException;
     
     /**
      * Permet au joueur de choisir une couleur

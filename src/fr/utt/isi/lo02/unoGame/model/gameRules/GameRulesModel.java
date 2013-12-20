@@ -45,7 +45,11 @@ public abstract class GameRulesModel {
 	/**
 	 * Represente les symboles presents 2 fois par couleur
 	 */
-	public static final SymbolModel [] SYMBOLS2 = { SymbolModel.ONE, SymbolModel.TWO, SymbolModel.THREE, SymbolModel.FOUR, SymbolModel.FIVE, SymbolModel.SIX, SymbolModel.SEVEN, SymbolModel.EIGHT, SymbolModel.NINE, SymbolModel.DRAW_TWO, SymbolModel.SKIP, SymbolModel.REVERSE };
+	public static final SymbolModel [] SYMBOLS2 = { 
+	    SymbolModel.ONE, SymbolModel.TWO, SymbolModel.THREE, SymbolModel.FOUR, SymbolModel.FIVE, 
+	    SymbolModel.SIX, SymbolModel.SEVEN, SymbolModel.EIGHT, SymbolModel.NINE, 
+	    SymbolModel.DRAW_TWO, SymbolModel.SKIP, SymbolModel.REVERSE 
+	};
 	
 	/**
 	 * Represente les symboles presents 4 fois sans couleur

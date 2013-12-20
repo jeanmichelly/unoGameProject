@@ -1,7 +1,5 @@
 package fr.utt.isi.lo02.unoGame.model.card;
 
-import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
-
 /**
  * Permet de lister la representation des couleurs que peut avoir une carte : 
  * <ul>

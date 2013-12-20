@@ -5,11 +5,8 @@ import java.util.Iterator;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
-import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
-import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
-import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
 
 /**
  * Correspond a l'une des strategies que peut utiliser un joueur ordinateur. Elle n'a pas de specifite particuliere pour effectuer une action.

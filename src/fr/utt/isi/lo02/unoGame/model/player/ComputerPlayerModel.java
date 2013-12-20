@@ -1,6 +1,5 @@
 package fr.utt.isi.lo02.unoGame.model.player;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
@@ -16,7 +15,8 @@ import fr.utt.isi.lo02.unoGame.model.player.strategy.StrategyModel;
 import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayerHandView;
 
 /**
- * Represente les joueurs ordinateurs. Les joueurs ordinateurs ont une intelligence artificielle et peuvent alors, jouer automatiquement.
+ * Represente les joueurs ordinateurs. 
+ * Les joueurs ordinateurs ont une intelligence artificielle et peuvent alors, jouer automatiquement.
  */
 public class ComputerPlayerModel extends PlayerModel {
 
