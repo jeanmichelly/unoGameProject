@@ -43,7 +43,7 @@ public class GuiSplashScreenView implements Screen {
 
         Texture splashTexture = new Texture(Gdx.files.internal("ressources/img/misc/splashScreen.png"));
         splash = new Sprite(splashTexture);
-        splash.setPosition(0,0);
+        splash.setPosition(Gdx.graphics.getWidth() / 2 - splash.getWidth() / 2, Gdx.graphics.getHeight() / 2 - splash.getHeight() / 2);
 
         Tween.set(splash, SpriteAccessor.ALPHA).target(0).start(tweenManager);
         Tween.to(splash, SpriteAccessor.ALPHA, .2f).target(1).repeatYoyo(1,.1f).setCallback(new TweenCallback() {

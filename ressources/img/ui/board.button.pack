@@ -1,0 +1,35 @@
+
+board.button.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+button.down
+  rotate: false
+  xy: 0, 0
+  size: 50, 50
+  split: 20, 20, 20, 20
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+button.down
+  rotate: false
+  xy: 0, 0
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+button.up
+  rotate: false
+  xy: 50, 0
+  size: 50, 50
+  split: 20, 20, 20, 20
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+button.up
+  rotate: false
+  xy: 50, 0
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1

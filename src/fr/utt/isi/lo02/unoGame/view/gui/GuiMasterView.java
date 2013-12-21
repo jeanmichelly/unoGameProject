@@ -1,12 +1,13 @@
 package fr.utt.isi.lo02.unoGame.view.gui;
 
+import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
-import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
-import fr.utt.isi.lo02.unoGame.model.user.UserModel;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiSplashScreenView;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import fr.utt.isi.lo02.unoGame.view.gui.card.GuiCardView;
+import fr.utt.isi.lo02.unoGame.view.gui.tween.GuiCardViewAccessor;
+import fr.utt.isi.lo02.unoGame.view.gui.tween.SpriteAccessor;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,9 @@ public class GuiMasterView extends Game {
 
     public GuiMasterView(ArrayList<Screen> screens) {
         GuiMasterView.screens = screens;
+
+        Tween.registerAccessor(GuiCardView.class, new GuiCardViewAccessor());
+        Tween.registerAccessor(Sprite.class, new SpriteAccessor());
     }
 
     public static void setScreen(int screenIndex){

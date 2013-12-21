@@ -29,7 +29,7 @@ public class UserModel {
 	 * Initialise le nombre de joueur
 	 */
     public static void initNumberPlayers () {
-        UserModel.numberPlayers = 3;
+        UserModel.numberPlayers = 12;
     }
 
     /**

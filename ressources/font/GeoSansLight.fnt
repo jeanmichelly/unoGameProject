@@ -1,6 +1,6 @@
 info face="GeosansLight" size=32 bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1 outline=0
 common lineHeight=32 base=26 scaleW=256 scaleH=256 pages=1 packed=0 alphaChnl=0 redChnl=4 greenChnl=4 blueChnl=4
-page id=0 file="whiteGeoSansLight_0.png"
+page id=0 file="GeoSansLight_0.png"
 chars count=235
 char id=5    x=93    y=226   width=7     height=2     xoffset=2     yoffset=10    xadvance=11    page=0  chnl=15
 char id=6    x=123   y=225   width=3     height=2     xoffset=2     yoffset=10    xadvance=9     page=0  chnl=15

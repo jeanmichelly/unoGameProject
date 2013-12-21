@@ -11,13 +11,12 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.language.Expression;
 import fr.utt.isi.lo02.unoGame.model.user.UserModel;
 import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiChangeLanguageScreenView;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiGameScreenView;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiMenuScreenView;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiOptionScreenView;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiSplashScreenView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.*;
 
 public class TesteurGUI {
+
+    public final static int APPLICATION_WIDTH = 1280;
+    public final static int APPLICATION_HEIGHT = 720;
 
     private static ArrayList<Screen> screens = new ArrayList<Screen>();
 
@@ -26,18 +25,18 @@ public class TesteurGUI {
         screens.add(splashScreen);
         GuiMenuScreenView menuScreen = new GuiMenuScreenView(); // 1
         screens.add(menuScreen);
-        GuiGameScreenView gameScreen = new GuiGameScreenView(); // 2
+        GuiBoardScreenView gameScreen = new GuiBoardScreenView(); // 2
         screens.add(gameScreen);
         GuiOptionScreenView optionScreen = new GuiOptionScreenView(); // 3
         screens.add(optionScreen);
-        GuiChangeLanguageScreenView changeLanguageScreen = new GuiChangeLanguageScreenView(); // 4
+        GuiLanguageScreenView changeLanguageScreen = new GuiLanguageScreenView(); // 4
         screens.add(changeLanguageScreen);
 
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "UNO Game";
         cfg.useGL20 = true;
-        cfg.width = 1280;
-        cfg.height = 720;
+        cfg.width = APPLICATION_WIDTH;
+        cfg.height = APPLICATION_HEIGHT;
 
         new LwjglApplication(new GuiMasterView(screens), cfg);
     }

@@ -3,7 +3,6 @@ package fr.utt.isi.lo02.unoGame.view.gui.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -11,15 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-
 import fr.utt.isi.lo02.unoGame.model.language.Expression;
 import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
+import fr.utt.isi.lo02.unoGame.view.gui.utils.SkinLoader;
+import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureAtlasLoader;
 
 public class GuiMenuScreenView implements Screen {
 
     private Stage stage;
-    private TextureAtlas atlas;
-    private Skin skin;
     private Table table;
     private TextButton buttonPlay, buttonExit, buttonOption;
     private Label heading;
@@ -43,18 +41,15 @@ public class GuiMenuScreenView implements Screen {
     @Override
     public void show() {
         stage = new Stage();
-
-        Gdx.input.setInputProcessor(stage);
-
-        atlas = new TextureAtlas("ressources/img/ui/button.pack");
-        skin = new Skin(Gdx.files.internal("ressources/skins/ui/menu.json"),atlas);
-
         table = new Table();
         table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        buttonPlay = new TextButton(Expression.getProperty("BUTTON_PLAY"), skin);
-        buttonOption = new TextButton(Expression.getProperty("BUTTON_OPTIONS"), skin);
-        buttonExit = new TextButton(Expression.getProperty("BUTTON_QUIT"), skin);
+        Gdx.input.setInputProcessor(stage);
+
+        Skin skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_BUTTON_MENU);
+        buttonPlay = new TextButton(Expression.getProperty("BUTTON_MENU_PLAY"), skin);
+        buttonOption = new TextButton(Expression.getProperty("BUTTON_MENU_OPTIONS"), skin);
+        buttonExit = new TextButton(Expression.getProperty("BUTTON_MENU_QUIT"), skin);
 
         buttonPlay.addListener(new ClickListener(){
            public void clicked(InputEvent event, float x, float y){
@@ -71,26 +66,28 @@ public class GuiMenuScreenView implements Screen {
                 GuiMasterView.setScreen(3);
             }
          });
-        
-        buttonPlay.pad(30,80,30,80);
-        buttonOption.pad(30,80,30,80);
-        buttonExit.pad(30,80,30,80);
 
-        heading = new Label(Expression.getProperty("TITLE_MP"), skin);
+        buttonPlay.pad(15,40,15,40);
+        buttonOption.pad(15,40,15,40);
+        buttonExit.pad(15,40,15,40);
+
+        heading = new Label(Expression.getProperty("LABEL_TITLE_MENU_MAIN"), skin);
 
         table.add(heading);
-
         table.getCell(heading).spaceBottom(70);
         table.row();
+
         table.add(buttonPlay);
-
         table.getCell(buttonPlay).spaceBottom(20);
         table.row();
-        table.add(buttonExit);
 
-        table.getCell(buttonPlay).spaceBottom(20);
-        table.row();
         table.add(buttonOption);
+        table.getCell(buttonOption).spaceBottom(20);
+        table.row();
+
+        table.add(buttonExit);
+        table.getCell(buttonExit).spaceBottom(20);
+        table.row();
 
         stage.addActor(table);
     }

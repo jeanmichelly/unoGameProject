@@ -11,11 +11,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-
 import fr.utt.isi.lo02.unoGame.model.language.Expression;
 import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
+import fr.utt.isi.lo02.unoGame.view.gui.utils.SkinLoader;
+import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureAtlasLoader;
 
-public class GuiChangeLanguageScreenView implements Screen {
+import java.util.Observable;
+import java.util.Observer;
+
+public class GuiLanguageScreenView implements Observer, Screen {
 
     private Stage stage;
     private TextureAtlas atlas;
@@ -46,15 +50,14 @@ public class GuiChangeLanguageScreenView implements Screen {
 
         Gdx.input.setInputProcessor(stage);
 
-        atlas = new TextureAtlas("ressources/img/ui/button.pack");
-        skin = new Skin(Gdx.files.internal("ressources/skins/ui/menu.json"),atlas);
+        Skin skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_BUTTON_MENU);
 
         table = new Table();
         table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        buttonFr = new TextButton(Expression.getProperty("BUTTON_FR"), skin);
-        buttonEn = new TextButton(Expression.getProperty("BUTTON_EN"), skin);
-        buttonRetour = new TextButton(Expression.getProperty("BUTTON_RETOUR_MP"), skin);
+        buttonFr = new TextButton(Expression.getProperty("BUTTON_MENU_LANGAGE_FR"), skin);
+        buttonEn = new TextButton(Expression.getProperty("BUTTON_MENU_LANGAGE_EN"), skin);
+        buttonRetour = new TextButton(Expression.getProperty("BUTTON_MENU_RETURN"), skin);
         
         buttonFr.addListener(new ClickListener(){
            public void clicked(InputEvent event, float x, float y){
@@ -72,24 +75,24 @@ public class GuiChangeLanguageScreenView implements Screen {
             }
          });
 
-        buttonFr.pad(30,80,30,80);
-        buttonEn.pad(30,80,30,80);
-        buttonRetour.pad(30,80,30,80);
+        buttonFr.pad(15,40,15,40);
+        buttonEn.pad(15,40,15,40);
+        buttonRetour.pad(15,40,15,40);
 
-        heading = new Label(Expression.getProperty("TITLE_LANGUAGE"), skin);
+        heading = new Label(Expression.getProperty("LABEL_TITLE_MENU_LANGUAGE"), skin);
 
         table.add(heading);
+        table.getCell(heading).spaceBottom(70);
+        table.row();
 
-        table.getCell(heading).spaceBottom(70);
-        table.row();
         table.add(buttonFr);
-        
-        table.getCell(heading).spaceBottom(70);
+        table.getCell(buttonFr).spaceBottom(20);
         table.row();
+
         table.add(buttonEn);
-        
-        table.getCell(heading).spaceBottom(70);
+        table.getCell(buttonEn).spaceBottom(20);
         table.row();
+
         table.add(buttonRetour);
 
         stage.addActor(table);
@@ -113,5 +116,9 @@ public class GuiChangeLanguageScreenView implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
     }
 }

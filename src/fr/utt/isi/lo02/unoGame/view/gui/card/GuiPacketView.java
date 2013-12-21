@@ -24,14 +24,10 @@ public class GuiPacketView extends Group {
         cardView.setPosition(super.getX(), super.getY());
         cardView.resize(customScale);
         if(flipped){
-         cardView.flipCard();
+            cardView.flipCard();
         }
         cardView.build();
         this.addActor(cardView);
-    }
-
-    public boolean isFlipped() {
-        return flipped;
     }
 
     public void setFlipped(boolean flipped) {

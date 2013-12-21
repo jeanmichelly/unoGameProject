@@ -20,6 +20,7 @@ public class SpriteAccessor implements TweenAccessor<Sprite> {
 
     @Override
     public void setValues(Sprite sprite, int i, float[] floats) {
+
         switch(i){
             case ALPHA : sprite.setColor(sprite.getColor().r, sprite.getColor().g, sprite.getColor().b, floats[0]);
                 break;
