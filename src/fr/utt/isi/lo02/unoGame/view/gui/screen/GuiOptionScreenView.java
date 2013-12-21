@@ -15,13 +15,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import fr.utt.isi.lo02.unoGame.model.language.Expression;
 import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
 
-public class GuiMenuScreenView implements Screen {
+public class GuiOptionScreenView implements Screen {
 
     private Stage stage;
     private TextureAtlas atlas;
     private Skin skin;
     private Table table;
-    private TextButton buttonPlay, buttonExit, buttonOption;
+    private TextButton buttonChangeLanguage, buttonRetour;
     private Label heading;
 
     @Override
@@ -52,46 +52,33 @@ public class GuiMenuScreenView implements Screen {
         table = new Table();
         table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        buttonPlay = new TextButton(Expression.getProperty("BUTTON_PLAY"), skin);
-        buttonOption = new TextButton(Expression.getProperty("BUTTON_OPTIONS"), skin);
-        buttonExit = new TextButton(Expression.getProperty("BUTTON_QUIT"), skin);
-
-        buttonPlay.addListener(new ClickListener(){
+        buttonChangeLanguage = new TextButton(Expression.getProperty("BUTTON_CHANGE_LANGUAGE"), skin);
+        buttonRetour = new TextButton(Expression.getProperty("BUTTON_RETOUR_MP"), skin);
+        
+        buttonChangeLanguage.addListener(new ClickListener(){
            public void clicked(InputEvent event, float x, float y){
-               GuiMasterView.setScreen(2);
+               GuiMasterView.setScreen(4);
            }
         });
-        buttonExit.addListener(new ClickListener(){
+        buttonRetour.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
-               Gdx.app.exit();
-            }
-        });
-        buttonOption.addListener(new ClickListener(){
-            public void clicked(InputEvent event, float x, float y){
-                GuiMasterView.setScreen(3);
+                GuiMasterView.setScreen(1);
             }
          });
-        
-        buttonPlay.pad(30,80,30,80);
-        buttonOption.pad(30,80,30,80);
-        buttonExit.pad(30,80,30,80);
 
-        heading = new Label(Expression.getProperty("TITLE_MP"), skin);
+        buttonChangeLanguage.pad(30,80,30,80);
+        buttonRetour.pad(30,80,30,80);
+
+        heading = new Label(Expression.getProperty("TITLE_OPTIONS"), skin);
 
         table.add(heading);
 
         table.getCell(heading).spaceBottom(70);
         table.row();
-        table.add(buttonPlay);
-
-        table.getCell(buttonPlay).spaceBottom(20);
+        table.add(buttonChangeLanguage);
         table.row();
-        table.add(buttonExit);
-
-        table.getCell(buttonPlay).spaceBottom(20);
-        table.row();
-        table.add(buttonOption);
-
+        table.add(buttonRetour);
+        
         stage.addActor(table);
     }
 

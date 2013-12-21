@@ -1,28 +1,37 @@
 package fr.utt.isi.lo02.unoGame;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.backends.lwjgl.*;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
+import fr.utt.isi.lo02.unoGame.model.language.Expression;
 import fr.utt.isi.lo02.unoGame.model.user.UserModel;
 import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiChangeLanguageScreenView;
 import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiGameScreenView;
 import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiMenuScreenView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiOptionScreenView;
 import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiSplashScreenView;
-
-import java.util.ArrayList;
 
 public class TesteurGUI {
 
     private static ArrayList<Screen> screens = new ArrayList<Screen>();
 
     public static void launchApplication(){
-        GuiSplashScreenView splashScreen = new GuiSplashScreenView();
+        GuiSplashScreenView splashScreen = new GuiSplashScreenView(); // 0
         screens.add(splashScreen);
-        GuiMenuScreenView menuScreen = new GuiMenuScreenView();
+        GuiMenuScreenView menuScreen = new GuiMenuScreenView(); // 1
         screens.add(menuScreen);
-        GuiGameScreenView gameScreen = new GuiGameScreenView();
+        GuiGameScreenView gameScreen = new GuiGameScreenView(); // 2
         screens.add(gameScreen);
+        GuiOptionScreenView optionScreen = new GuiOptionScreenView(); // 3
+        screens.add(optionScreen);
+        GuiChangeLanguageScreenView changeLanguageScreen = new GuiChangeLanguageScreenView(); // 4
+        screens.add(changeLanguageScreen);
 
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "UNO Game";
@@ -54,6 +63,7 @@ public class TesteurGUI {
     }
 
     public static void main(String[] args){
+        Expression.initExpression();
         initUnoGame();
         launchApplication();
     }
