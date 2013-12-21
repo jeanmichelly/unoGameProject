@@ -33,7 +33,6 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
         this.initCardsAppearsOneTimeWithSymbolAndColor();
         this.initCardsAppearsTwoTimeWithSymbolAndColor();
         this.initCardsAppearsOneTimeWithSymbolAndWithoutColor();
-        this.push(new CardModel(SymbolModel.WILD_DRAW_FOUR, null, new Integer("0").byteValue(), new CompositeEffectModel()));
 
         super.shuffle();
     }

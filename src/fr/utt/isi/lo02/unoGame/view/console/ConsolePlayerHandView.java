@@ -76,14 +76,13 @@ public class ConsolePlayerHandView implements Observer {
                 int sizePlayerHandBeforePlaying = BoardModel.getUniqueInstance().getPlayer().getPlayerHand().numberCards();
 
                 // Si le joueur suivant lui reste peu de carte, le joueur ordinateur joue agressif !
-                if ( BoardModel.getUniqueInstance().getNextPlayer().getPlayerHand().numberCards() < 3 )
-                     ((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getStrategy(2).execute();
-                else { // Donne la priorite aux nombres ! (Moins de chance de jouer sur des symboles identiques donc faut en profiter!)
+                // if ( BoardModel.getUniqueInstance().getNextPlayer().getPlayerHand().numberCards() < 3 )
+                //      ((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getStrategy(2).execute();
+                // else { // Donne la priorite aux nombres ! (Moins de chance de jouer sur des symboles identiques donc faut en profiter!)
                     if ( !((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getStrategy(1).execute() )
-                       // if ( !((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getStrategy(0).execute() )
-                    ((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getStrategy(3).execute();
-                }
-
+                        //if ( !((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getStrategy(0).execute() )
+                            ((ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer()).getStrategy(3).execute();
+                //}
                 BoardModel.getUniqueInstance().setChanged();
                 BoardModel.getUniqueInstance().notifyObservers(); 
                 if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().numberCards() < sizePlayerHandBeforePlaying )

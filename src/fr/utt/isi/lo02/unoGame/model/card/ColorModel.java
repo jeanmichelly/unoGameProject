@@ -42,8 +42,8 @@ public enum ColorModel {
      */
     private ColorModel (byte id, char label, com.badlogic.gdx.graphics.Color color) {
         this.id = id;
-        this.color = color;
         this.label = label;
+        this.color = color;
     }
     
     /**
