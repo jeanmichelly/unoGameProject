@@ -8,6 +8,7 @@
     },
     "com.badlogic.gdx.graphics.g2d.BitmapFont": {
         "GeoSansLight"   : { "file": "ressources/font/GeoSansLight.fnt" },
+        "Decibel"        : { "file": "ressources/font/Decibel.fnt" }
     },
     "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
         "default"    : { "font": "Decibel", "fontColor": "white" },
