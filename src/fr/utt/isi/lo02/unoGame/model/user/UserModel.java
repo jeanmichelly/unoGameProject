@@ -115,7 +115,7 @@ public class UserModel {
      * Modifie l'ensemble des pseudo des joueurs humain participant à une partie
      * @param pseudonymsHumanPlayers mise à jour des pseudo des joueurs humain participant à une partie
      */
-    public static void setPseudonymsHumanPlayers(Stack<String> pseudonymsHumanPlayers) {
+    public static void setPseudonymsHumanPlayers (Stack<String> pseudonymsHumanPlayers) {
         UserModel.pseudonymsHumanPlayers = pseudonymsHumanPlayers;
     }
     

@@ -15,7 +15,7 @@ public class GameRulesFactoryModel {
      * @return le mode de jeu choisit par l'utilisateur
      */
     public GameRulesModel createGameRules () {
-        switch( UserModel.getChoiceGameRules() ) {
+        switch ( UserModel.getChoiceGameRules() ) {
             case 's' :
                 return new GameRulesStandardModel();
             default :

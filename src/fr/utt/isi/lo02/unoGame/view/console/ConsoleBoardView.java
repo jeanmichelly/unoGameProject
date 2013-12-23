@@ -88,7 +88,7 @@ public class ConsoleBoardView implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
+    public void update (Observable o, Object arg) {
         String build = buildHead()+buildMiddle()+buildTail();
         System.out.println(clear()+build);
     }

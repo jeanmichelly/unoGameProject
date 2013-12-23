@@ -18,7 +18,7 @@ import fr.utt.isi.lo02.unoGame.model.user.UserModel;
 public class PriorityColorStrategyModelTest {
 
     @Test
-    public void executeTest() throws InvalidActionPickCardException, InvalidActionPutDownCardException {
+    public void executeTest () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
         // Mettre que des joueurs ordinateurs pour pouvoir tester
         BoardModel board = BoardModel.getUniqueInstance();
         UserModel.initNumberPlayers();

@@ -1,8 +1,12 @@
 package fr.utt.isi.lo02.unoGame.view.gui.screen;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -16,12 +20,14 @@ import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.SkinLoader;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureAtlasLoader;
 
-public class GuiMenuScreenView implements Screen {
+public class GuiLanguagesScreenView implements Observer, Screen {
 
-    GuiMenuScreenController guiMenuScreenController;
+    GuiChangeLanguageScreenController guiChangeLanguageScreenController;
     private Stage stage;
+    private TextureAtlas atlas;
+    private Skin skin;
     private Table table;
-    private TextButton buttonCreateGame, buttonSettings, buttonExit ;
+    private TextButton buttonFr, buttonEn, buttonMainMenuReturn;
     private Label heading;
 
     @Override
@@ -43,39 +49,40 @@ public class GuiMenuScreenView implements Screen {
     @Override
     public void show () {
         this.stage = new Stage();
-        this.table = new Table();
-        this.table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         Gdx.input.setInputProcessor(this.stage);
 
         Skin skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_BUTTON_MENU);
-        
-        this.buttonCreateGame = new TextButton(Expression.getProperty("BUTTON_CREATE_GAME"), skin);
-        this.buttonSettings = new TextButton(Expression.getProperty("BUTTON_MENU_SETTINGS"), skin);
-        this.buttonExit = new TextButton(Expression.getProperty("BUTTON_MENU_QUIT"), skin);
 
-        this.buttonCreateGame.pad(15,40,15,40);
-        this.buttonSettings.pad(15,40,15,40);
-        this.buttonExit.pad(15,40,15,40);
+        this.table = new Table();
+        this.table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        this.heading = new Label(Expression.getProperty("LABEL_TITLE_MENU_MAIN"), skin);
+        this.buttonFr = new TextButton(Expression.getProperty("BUTTON_MENU_LANGAGE_FR"), skin);
+        this.buttonEn = new TextButton(Expression.getProperty("BUTTON_MENU_LANGAGE_EN"), skin);
+        this.buttonMainMenuReturn = new TextButton(Expression.getProperty("BUTTON_MAIN_MENU_RETURN"), skin);
+
+        this.buttonFr.pad(15,40,15,40);
+        this.buttonEn.pad(15,40,15,40);
+        this.buttonMainMenuReturn.pad(15,40,15,40);
+
+        this.heading = new Label(Expression.getProperty("LABEL_TITLE_MENU_LANGUAGE"), skin);
         this.table.add(this.heading);
         
         this.table.getCell(this.heading).spaceBottom(70);
         this.table.row();
-        this.table.add(this.buttonCreateGame);
+        this.table.add(this.buttonFr);
         
-        this.table.getCell(this.buttonCreateGame).spaceBottom(20);
+        this.table.getCell(this.buttonFr).spaceBottom(20);
         this.table.row();
-        this.table.add(this.buttonSettings);
+        this.table.add(this.buttonEn);
         
-        this.table.getCell(this.buttonSettings).spaceBottom(20);
+        this.table.getCell(this.buttonEn).spaceBottom(20);
         this.table.row();
-        this.table.add(this.buttonExit);
+        this.table.add(this.buttonMainMenuReturn);
 
         this.stage.addActor(this.table);
         
-        this.guiMenuScreenController = new GuiMenuScreenController();
+        this.guiChangeLanguageScreenController = new GuiChangeLanguageScreenController();
     }
 
     @Override
@@ -97,25 +104,32 @@ public class GuiMenuScreenView implements Screen {
     public void dispose () {
 
     }
-    
-    private class GuiMenuScreenController {
+
+    @Override
+    public void update (Observable o, Object arg) {
         
-        public GuiMenuScreenController () {
-            GuiMenuScreenView.this.buttonCreateGame.addListener( new ClickListener() {
+    }
+    
+    private class GuiChangeLanguageScreenController {
+        
+        public GuiChangeLanguageScreenController () {
+            GuiLanguagesScreenView.this.buttonFr.addListener( new ClickListener() {
                 public void clicked (InputEvent event, float x, float y) {
-                    GuiMasterView.setScreen(2);
+                    Expression.initExpression("fr", "FR");
+                    GuiMasterView.setScreen(5);
                 }
             });
-            GuiMenuScreenView.this.buttonSettings.addListener( new ClickListener() {
+            GuiLanguagesScreenView.this.buttonEn.addListener( new ClickListener() {
                 public void clicked (InputEvent event, float x, float y) {
-                    GuiMasterView.setScreen(4);
+                    Expression.initExpression("en", "EN");
+                    GuiMasterView.setScreen(5);
                 }
-            }); 
-            GuiMenuScreenView.this.buttonExit.addListener( new ClickListener() {
+            });
+            GuiLanguagesScreenView.this.buttonMainMenuReturn.addListener( new ClickListener() {
                 public void clicked (InputEvent event, float x, float y) {
-                    Gdx.app.exit();
+                    GuiMasterView.setScreen(1);
                 }
-            });     
+            });
         }
         
     }

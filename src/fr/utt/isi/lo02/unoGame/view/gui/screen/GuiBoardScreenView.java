@@ -1,6 +1,10 @@
 package fr.utt.isi.lo02.unoGame.view.gui.screen;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import aurelienribon.tweenengine.TweenManager;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -17,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Scaling;
+
 import fr.utt.isi.lo02.unoGame.TesteurGUI;
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
@@ -30,9 +35,6 @@ import fr.utt.isi.lo02.unoGame.view.gui.player.GuiPlayerView;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.SkinLoader;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureAtlasLoader;
 
-import java.util.Observable;
-import java.util.Observer;
-
 public class GuiBoardScreenView implements Observer, Screen {
 
     private Stage stage;
@@ -45,104 +47,103 @@ public class GuiBoardScreenView implements Observer, Screen {
     private TweenManager tweenManager = new TweenManager();
 
     @Override
-    public void render(float v) {
+    public void render (float v) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glEnable(GL20.GL_BLEND);
 
-        stage.act(v);
-        batch.begin();
-            boardBackground.draw(batch);
-        batch.end();
+        this.stage.act(v);
+        this.batch.begin();
+        this.boardBackground.draw(this.batch);
+        this.batch.end();
 
-        stage.draw();
+        this.stage.draw();
 
-        tweenManager.update(v);
+        this.tweenManager.update(v);
     }
 
     @Override
-    public void resize(int i, int i2) {
+    public void resize (int i, int i2) {
         Vector2 size = Scaling.fit.apply(TesteurGUI.APPLICATION_WIDTH, TesteurGUI.APPLICATION_HEIGHT, i, i2);
         int viewportX = (int)(i - size.x) / 2;
         int viewportY = (int)(i2 - size.y) / 2;
         int viewportWidth = (int)size.x;
         int viewportHeight = (int)size.y;
         Gdx.gl.glViewport(viewportX, viewportY, viewportWidth, viewportHeight);
-        stage.setViewport(TesteurGUI.APPLICATION_WIDTH, TesteurGUI.APPLICATION_HEIGHT, true, viewportX, viewportY, viewportWidth, viewportHeight);
+        this.stage.setViewport(TesteurGUI.APPLICATION_WIDTH, TesteurGUI.APPLICATION_HEIGHT, true, viewportX, viewportY, viewportWidth, viewportHeight);
     }
 
     @Override
-    public void show() {
-        batch = new SpriteBatch();
-        stage = new Stage();
+    public void show () {
+        this.batch = new SpriteBatch();
+        this.stage = new Stage();
 
-        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setInputProcessor(this.stage);
 
-        boardBackground = new Sprite(new Texture(Gdx.files.internal("ressources/img/misc/boardBackground.png")));
-        boardBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        this.boardBackground = new Sprite(new Texture(Gdx.files.internal("ressources/img/misc/boardBackground.png")));
+        this.boardBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 
-        cardRibbon = new GuiRibbonView(BoardModel.getUniqueInstance().getPlayer(0).getPlayerHand());
-        cardRibbon.setTweenManager(tweenManager);
-        cardRibbon.setBounds(Gdx.graphics.getWidth()/2 - 200, 0, 400, 180);
-        cardRibbon.setCustomScale(.5f);
-        cardRibbon.build();
+        this.cardRibbon = new GuiRibbonView(BoardModel.getUniqueInstance().getPlayer(0).getPlayerHand());
+        this.cardRibbon.setTweenManager(this.tweenManager);
+        this.cardRibbon.setBounds(Gdx.graphics.getWidth()/2 - 200, 0, 400, 180);
+        this.cardRibbon.setCustomScale(.5f);
+        this.cardRibbon.build();
 
-        discardPile = new GuiPacketView(DiscardPileModel.getUniqueInstance().getCards());
-        discardPile.setCustomScale(.5f);
-        discardPile.setSize(GuiCardView.NATIVE_CARD_WIDTH * .5f, GuiCardView.NATIVE_CARD_HEIGHT * .5f);
-        discardPile.build();
+        this.discardPile = new GuiPacketView(DiscardPileModel.getUniqueInstance().getCards());
+        this.discardPile.setCustomScale(.5f);
+        this.discardPile.setSize(GuiCardView.NATIVE_CARD_WIDTH * .5f, GuiCardView.NATIVE_CARD_HEIGHT * .5f);
+        this.discardPile.build();
 
-        drawPile = new GuiPacketView(DrawPileModel.getUniqueInstance().getCards());
-        drawPile.setCustomScale(.5f);
-        drawPile.setSize(GuiCardView.NATIVE_CARD_WIDTH * .5f, GuiCardView.NATIVE_CARD_HEIGHT * .5f);
-        drawPile.setFlipped(true);
-        drawPile.build();
+        this.drawPile = new GuiPacketView(DrawPileModel.getUniqueInstance().getCards());
+        this.drawPile.setCustomScale(.5f);
+        this.drawPile.setSize(GuiCardView.NATIVE_CARD_WIDTH * .5f, GuiCardView.NATIVE_CARD_HEIGHT * .5f);
+        this.drawPile.setFlipped(true);
+        this.drawPile.build();
 
-        discardPileTable = new Table();
-        discardPileTable.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        discardPileTable.add(discardPile);
-        discardPileTable.getCell(discardPile).pad(0,40,0,40);
-        discardPileTable.debug();
+        this.discardPileTable = new Table();
+        this.discardPileTable.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        this.discardPileTable.add(this.discardPile);
+        this.discardPileTable.getCell(this.discardPile).pad(0,40,0,40);
+        this.discardPileTable.debug();
 
-        playersTable = new Table();
-        playersTable.top();
-        playersTable.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        this.playersTable = new Table();
+        this.playersTable.top();
+        this.playersTable.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        for(PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers()){
+        for ( PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers() ) {
             GuiPlayerView playerView = new GuiPlayerView(playerModel);
             playerView.setSize(70,60);
             playerView.build();
-            playersTable.add(playerView);
-            playersTable.getCell(playerView).pad(0,18,0,18);
+            this.playersTable.add(playerView);
+            this.playersTable.getCell(playerView).pad(0,18,0,18);
         }
 
-        playersTable.row();
+        this.playersTable.row();
 
-        for(PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers()){
+        for ( PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers() ) {
             Skin skin = new Skin(SkinLoader.SKIN_BOARD, TextureAtlasLoader.ATLAS_BUTTON_MENU);
             Label pseudonym = new Label(playerModel.getPseudonym(), skin, "playerName");
             pseudonym.setFontScale(0.7f);
-            playersTable.add(pseudonym);
+            this.playersTable.add(pseudonym);
         }
 
-        stage.addActor(cardRibbon);
-        stage.addActor(discardPileTable);
-        stage.addActor(drawPile);
-        stage.addActor(playersTable);
+        this.stage.addActor(this.cardRibbon);
+        this.stage.addActor(this.discardPileTable);
+        this.stage.addActor(this.drawPile);
+        this.stage.addActor(this.playersTable);
 
-        cardRibbon.addListener(new InputListener(){
+        this.cardRibbon.addListener(new InputListener() {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 Actor actor = cardRibbon.hit(x,y,true);
-                if(actor instanceof GuiCardView){
+                if ( actor instanceof GuiCardView ) {
                     GuiCardView cardView = (GuiCardView) actor;
-                    if(cardRibbon.getUppedCard() != null && cardRibbon.getUppedCard().equals(actor) && !cardRibbon.isSelected(cardView)){
+                    if ( cardRibbon.getUppedCard() != null && cardRibbon.getUppedCard().equals(actor) && !cardRibbon.isSelected(cardView) ) {
                         cardRibbon.setSelected(cardView);
                         promptToPlay();
-                    }
-                    else if(cardRibbon.getUppedCard() != null && cardRibbon.getUppedCard().equals(actor) && cardRibbon.isSelected(cardView)){
+                    } else if ( cardRibbon.getUppedCard() != null && cardRibbon.getUppedCard().equals(actor) && cardRibbon.isSelected(cardView) ) {
                         cardRibbon.resetCardSelected();
                     }
                 }
@@ -150,19 +151,19 @@ public class GuiBoardScreenView implements Observer, Screen {
             }
 
             @Override
-            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+            public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 Actor enteredActor = cardRibbon.hit(x,y,true);
-                if(enteredActor instanceof GuiCardView){
+                if ( enteredActor instanceof GuiCardView ) {
                     GuiCardView cardView = (GuiCardView) enteredActor;
-                    if(cardRibbon.getUppedCard() == null){
+                    if ( cardRibbon.getUppedCard() == null ) {
                         cardRibbon.setCardUpped(cardView);
                     }
                 }
             }
 
             @Override
-            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                if(cardRibbon.getUppedCard() != null && !cardRibbon.hasSelectedCard()){
+            public void exit (InputEvent event, float x, float y, int pointer, Actor toActor) {
+                if ( cardRibbon.getUppedCard() != null && !cardRibbon.hasSelectedCard() ) {
                     cardRibbon.resetCardUpped();
                 }
             }
@@ -170,7 +171,7 @@ public class GuiBoardScreenView implements Observer, Screen {
         });
     }
 
-    public void promptToPlay(){
+    public void promptToPlay () {
         Skin skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_BUTTON_MENU);
         TextButton askToPlay = new TextButton(Expression.getProperty("BUTTON_BOARD_PLAY_CARD"), skin);
         askToPlay.pad(10, 20, 10, 20);
@@ -178,31 +179,32 @@ public class GuiBoardScreenView implements Observer, Screen {
         Table table = new Table();
         table.add(askToPlay);
         table.setPosition(1100, 100);
-        stage.addActor(table);
+        this.stage.addActor(table);
     }
 
     @Override
-    public void hide() {
-
-    }
-
-    @Override
-    public void pause() {
+    public void hide () {
 
     }
 
     @Override
-    public void resume() {
+    public void pause () {
 
     }
 
     @Override
-    public void dispose() {
+    public void resume () {
 
     }
 
     @Override
-    public void update(Observable o, Object arg) {
+    public void dispose () {
 
     }
+
+    @Override
+    public void update (Observable o, Object arg) {
+
+    }
+    
 }

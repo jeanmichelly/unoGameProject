@@ -13,20 +13,21 @@ public class GuiPlayerView extends Actor {
     private Color randomColor;
     private PlayerModel playerModel;
 
-    public GuiPlayerView(PlayerModel playerModel){
+    public GuiPlayerView (PlayerModel playerModel) {
         this.playerModel = playerModel;
     }
 
-    public void build(){
+    public void build () {
         this.avatar = new Sprite(TextureLoader.TEXTURE_PLAYER_AVATAR_DEFAULT);
         this.randomColor = new Color((float) (0.5 + (Math.random() * ((1 - 0.5) + 1))), (float) (0.5 + (Math.random() * ((1 - 0.5) + 1))), (float) (0.5 + (Math.random() * ((1 - 0.5) + 1))), 1);
     }
 
-    public void draw(SpriteBatch spriteBatch, float v) {
-        avatar.setSize(super.getWidth(), super.getHeight());
-        avatar.setOrigin(super.getOriginX(), super.getOriginY());
-        avatar.setPosition(super.getX(), super.getY());
-        avatar.setColor(randomColor);
-        avatar.draw(spriteBatch);
+    public void draw (SpriteBatch spriteBatch, float v) {
+        this.avatar.setSize(super.getWidth(), super.getHeight());
+        this.avatar.setOrigin(super.getOriginX(), super.getOriginY());
+        this.avatar.setPosition(super.getX(), super.getY());
+        this.avatar.setColor(randomColor);
+        this.avatar.draw(spriteBatch);
     }
+    
 }

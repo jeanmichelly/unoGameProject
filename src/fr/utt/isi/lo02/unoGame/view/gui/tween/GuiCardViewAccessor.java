@@ -8,9 +8,9 @@ public class GuiCardViewAccessor implements TweenAccessor<GuiCardView> {
     public static final int POSITION_Y = 0;
 
     @Override
-    public int getValues(GuiCardView actor, int i, float[] floats) {
-        switch(i){
-            case POSITION_Y : floats[0] = actor.getY();
+    public int getValues (GuiCardView actor, int i, float[] floats) {
+        switch (i) {
+            case GuiCardViewAccessor.POSITION_Y : floats[0] = actor.getY();
                 return 1;
             default :
                 assert false;
@@ -19,12 +19,13 @@ public class GuiCardViewAccessor implements TweenAccessor<GuiCardView> {
     }
 
     @Override
-    public void setValues(GuiCardView actor, int i, float[] floats) {
-        switch(i){
-            case POSITION_Y : actor.setY(floats[0]);
+    public void setValues (GuiCardView actor, int i, float[] floats) {
+        switch (i) {
+            case GuiCardViewAccessor.POSITION_Y : actor.setY(floats[0]);
                 break;
             default :
                 assert false;
         }
     }
+    
 }

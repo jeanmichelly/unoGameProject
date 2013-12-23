@@ -86,6 +86,6 @@ public class ConsoleDeckView implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) { }
+    public void update (Observable o, Object arg) { }
     
 }

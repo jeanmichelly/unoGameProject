@@ -1,15 +1,17 @@
 package fr.utt.isi.lo02.unoGame.view.gui;
 
+import java.util.ArrayList;
+
 import aurelienribon.tweenengine.Tween;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+
 import fr.utt.isi.lo02.unoGame.view.gui.card.GuiCardView;
 import fr.utt.isi.lo02.unoGame.view.gui.tween.GuiCardViewAccessor;
 import fr.utt.isi.lo02.unoGame.view.gui.tween.SpriteAccessor;
-
-import java.util.ArrayList;
 
 public class GuiMasterView extends Game {
 
@@ -22,36 +24,37 @@ public class GuiMasterView extends Game {
         Tween.registerAccessor(Sprite.class, new SpriteAccessor());
     }
 
-    public static void setScreen(int screenIndex){
+    public static void setScreen (int screenIndex) {
         ((Game)Gdx.app.getApplicationListener()).setScreen(GuiMasterView.screens.get(screenIndex));
     }
 
     @Override
-    public void create() {
+    public void create () {
         GuiMasterView.setScreen(0);
     }
     @Override
-    public void dispose() {
+    public void dispose () {
         super.dispose();
     }
 
     @Override
-    public void render() {
+    public void render () {
         super.render();
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void resize (int width, int height) {
         super.resize(width,height);
     }
 
     @Override
-    public void pause() {
+    public void pause () {
         super.pause();
     }
 
     @Override
-    public void resume() {
+    public void resume () {
         super.resume();
     }
+    
 }

@@ -4,9 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 public class TextureLoader {
+    
     public final static Texture TEXTURE_CARD_BACKGROUND = new Texture(Gdx.files.internal("ressources/img/card/elements/cardBackground.png"));
     public final static Texture TEXTURE_CARD_PATTERN = new Texture(Gdx.files.internal("ressources/img/card/elements/cardPattern.png"));
     public final static Texture TEXTURE_CARD_HIGHLIGHTED = new Texture(Gdx.files.internal("ressources/img/card/elements/cardHighlighted.png"));
     public final static Texture TEXTURE_CARD_PATTERN_FLIPPED = new Texture(Gdx.files.internal("ressources/img/card/elements/cardPatternBack.png"));
     public final static Texture TEXTURE_PLAYER_AVATAR_DEFAULT = new Texture(Gdx.files.internal("ressources/img/player/player.png"));
+
 }

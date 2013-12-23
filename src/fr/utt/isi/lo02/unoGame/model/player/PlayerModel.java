@@ -107,7 +107,7 @@ public abstract class PlayerModel {
      * Permet au joueur de choisir une couleur
      * @throws InvalidColorModelException
      */
-    public abstract void chooseColor() throws InvalidColorModelException;
+    public abstract void chooseColor () throws InvalidColorModelException;
 
     /**
      * Permet au joueur de dire contre uno

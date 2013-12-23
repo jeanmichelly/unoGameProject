@@ -15,7 +15,7 @@ import fr.utt.isi.lo02.unoGame.model.card.effect.WildEffectModel;
 public class CardModelTest {
 
     @Test
-    public void equalsTest() {
+    public void equalsTest () {
         CompositeEffectModel effects1 = new CompositeEffectModel();
         effects1.addEffect(new DrawEffectModel(), 4);
         effects1.addEffect(new SkipEffectModel());
@@ -43,7 +43,7 @@ public class CardModelTest {
     }
     
     @Test
-    public void hasPlayableCardTest() {
+    public void hasPlayableCardTest () {
         CompositeEffectModel effects1 = new CompositeEffectModel();
         effects1.addEffect(new DrawEffectModel(), 2);
         effects1.addEffect(new SkipEffectModel());

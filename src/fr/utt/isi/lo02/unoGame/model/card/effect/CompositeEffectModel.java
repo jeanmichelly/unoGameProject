@@ -49,7 +49,7 @@ public class CompositeEffectModel extends ComponentEffectModel {
         this.effects = effects;
     }
 	
-	private static void initWildDrawFourEffect() {
+	private static void initWildDrawFourEffect () {
 	    CompositeEffectModel.wildDrawFourEffect.add(new WildEffectModel());
 	    CompositeEffectModel.wildDrawFourEffect.add(new DrawEffectModel());
 	    CompositeEffectModel.wildDrawFourEffect.add(new DrawEffectModel());
@@ -58,7 +58,7 @@ public class CompositeEffectModel extends ComponentEffectModel {
 	    CompositeEffectModel.wildDrawFourEffect.add(new SkipEffectModel());
 	}
 	
-	private static void initWildEffect() {
+	private static void initWildEffect () {
         CompositeEffectModel.wildEffect.add(new WildEffectModel());
     }
 	

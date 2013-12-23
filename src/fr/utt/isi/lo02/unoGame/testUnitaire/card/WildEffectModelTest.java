@@ -23,7 +23,7 @@ import fr.utt.isi.lo02.unoGame.model.user.UserModel;
 public class WildEffectModelTest {
 
     @Test
-    public void applyEffectTest() throws InvalidActionPickCardException, InvalidColorModelException {
+    public void applyEffectTest () throws InvalidActionPickCardException, InvalidColorModelException {
         BoardModel board = BoardModel.getUniqueInstance();
         UserModel.setNumberPlayers((byte)3);
         UserModel.setNumberHumanPlayers((byte)3);

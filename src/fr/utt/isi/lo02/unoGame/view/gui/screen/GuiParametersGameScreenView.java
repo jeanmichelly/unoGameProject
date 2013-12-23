@@ -3,6 +3,7 @@ package fr.utt.isi.lo02.unoGame.view.gui.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -16,12 +17,14 @@ import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.SkinLoader;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureAtlasLoader;
 
-public class GuiMenuScreenView implements Screen {
+public class GuiParametersGameScreenView implements Screen {
 
-    GuiMenuScreenController guiMenuScreenController;
+    GuiInitParametersGameScreenController guiInitParametersGameScreenController;
     private Stage stage;
+    private TextureAtlas atlas;
+    private Skin skin;
     private Table table;
-    private TextButton buttonCreateGame, buttonSettings, buttonExit ;
+    private TextButton buttonStartGame, buttonMainMenuReturn;
     private Label heading;
 
     @Override
@@ -43,39 +46,34 @@ public class GuiMenuScreenView implements Screen {
     @Override
     public void show () {
         this.stage = new Stage();
-        this.table = new Table();
-        this.table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         Gdx.input.setInputProcessor(this.stage);
 
         Skin skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_BUTTON_MENU);
-        
-        this.buttonCreateGame = new TextButton(Expression.getProperty("BUTTON_CREATE_GAME"), skin);
-        this.buttonSettings = new TextButton(Expression.getProperty("BUTTON_MENU_SETTINGS"), skin);
-        this.buttonExit = new TextButton(Expression.getProperty("BUTTON_MENU_QUIT"), skin);
 
-        this.buttonCreateGame.pad(15,40,15,40);
-        this.buttonSettings.pad(15,40,15,40);
-        this.buttonExit.pad(15,40,15,40);
+        this.table = new Table();
+        this.table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        this.heading = new Label(Expression.getProperty("LABEL_TITLE_MENU_MAIN"), skin);
+        this.buttonStartGame = new TextButton(Expression.getProperty("BUTTON_START_GAME"), skin);
+        this.buttonMainMenuReturn = new TextButton(Expression.getProperty("BUTTON_MAIN_MENU_RETURN"), skin);
+
+        this.buttonStartGame.pad(15,40,15,40);
+        this.buttonMainMenuReturn.pad(15,40,15,40);
+
+        this.heading = new Label(Expression.getProperty("LABEL_TITLE_PARAMETERS_GAME"), skin);
         this.table.add(this.heading);
         
         this.table.getCell(this.heading).spaceBottom(70);
         this.table.row();
-        this.table.add(this.buttonCreateGame);
+        this.table.add(this.buttonStartGame);
         
-        this.table.getCell(this.buttonCreateGame).spaceBottom(20);
+        this.table.getCell(this.buttonStartGame).spaceBottom(20);
         this.table.row();
-        this.table.add(this.buttonSettings);
+        this.table.add(this.buttonMainMenuReturn);
         
-        this.table.getCell(this.buttonSettings).spaceBottom(20);
-        this.table.row();
-        this.table.add(this.buttonExit);
-
         this.stage.addActor(this.table);
         
-        this.guiMenuScreenController = new GuiMenuScreenController();
+        this.guiInitParametersGameScreenController = new GuiInitParametersGameScreenController();
     }
 
     @Override
@@ -98,24 +96,19 @@ public class GuiMenuScreenView implements Screen {
 
     }
     
-    private class GuiMenuScreenController {
+    private class GuiInitParametersGameScreenController {
         
-        public GuiMenuScreenController () {
-            GuiMenuScreenView.this.buttonCreateGame.addListener( new ClickListener() {
+        public GuiInitParametersGameScreenController () {
+            GuiParametersGameScreenView.this.buttonStartGame.addListener( new ClickListener() {
                 public void clicked (InputEvent event, float x, float y) {
-                    GuiMasterView.setScreen(2);
+                    GuiMasterView.setScreen(3);
                 }
-            });
-            GuiMenuScreenView.this.buttonSettings.addListener( new ClickListener() {
+             });
+            GuiParametersGameScreenView.this.buttonMainMenuReturn.addListener( new ClickListener() {
                 public void clicked (InputEvent event, float x, float y) {
-                    GuiMasterView.setScreen(4);
+                    GuiMasterView.setScreen(1);
                 }
             }); 
-            GuiMenuScreenView.this.buttonExit.addListener( new ClickListener() {
-                public void clicked (InputEvent event, float x, float y) {
-                    Gdx.app.exit();
-                }
-            });     
         }
         
     }

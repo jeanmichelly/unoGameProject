@@ -71,7 +71,7 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
         try {
             if ( this.peek().getCompositeEffects().containsWildEffect() ) // Reinitialise les couleurs des cartes joker
                 this.peek().setColor(null);
-        } catch (EmptyStackException e){ }
+        } catch (EmptyStackException e) { }
         if ( card.getSymbol() == SymbolModel.WILD_DRAW_FOUR ) {
             System.out.println(this.peek());
             colorBeforeWildDrawFour = this.peek().getColor();

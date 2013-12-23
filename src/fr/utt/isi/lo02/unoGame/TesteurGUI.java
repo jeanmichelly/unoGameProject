@@ -11,7 +11,12 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.language.Expression;
 import fr.utt.isi.lo02.unoGame.model.user.UserModel;
 import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.*;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiBoardScreenView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiLanguagesScreenView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiMenuScreenView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiParametersGameScreenView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiSettingsScreenView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiSplashScreenView;
 
 public class TesteurGUI {
 
@@ -20,17 +25,19 @@ public class TesteurGUI {
 
     private static ArrayList<Screen> screens = new ArrayList<Screen>();
 
-    public static void launchApplication(){
+    public static void launchApplication () {
         GuiSplashScreenView splashScreen = new GuiSplashScreenView(); // 0
         screens.add(splashScreen);
         GuiMenuScreenView menuScreen = new GuiMenuScreenView(); // 1
         screens.add(menuScreen);
-        GuiBoardScreenView gameScreen = new GuiBoardScreenView(); // 2
+        GuiParametersGameScreenView initParametersGameScreen = new GuiParametersGameScreenView(); // 2
+        screens.add(initParametersGameScreen);
+        GuiBoardScreenView gameScreen = new GuiBoardScreenView(); // 3
         screens.add(gameScreen);
-        GuiOptionScreenView optionScreen = new GuiOptionScreenView(); // 3
-        screens.add(optionScreen);
-        GuiLanguageScreenView changeLanguageScreen = new GuiLanguageScreenView(); // 4
-        screens.add(changeLanguageScreen);
+        GuiSettingsScreenView settingsScreen = new GuiSettingsScreenView(); // 4
+        screens.add(settingsScreen);
+        GuiLanguagesScreenView languagesScreen = new GuiLanguagesScreenView(); // 5
+        screens.add(languagesScreen);
 
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "UNO Game";
@@ -41,7 +48,7 @@ public class TesteurGUI {
         new LwjglApplication(new GuiMasterView(screens), cfg);
     }
 
-    public static void initUnoGame(){
+    public static void initUnoGame () throws InvalidActionPickCardException {
         UserModel.initNumberPlayers();
         UserModel.initNumberHumanPlayers();
         UserModel.initPseudonymsHumanPlayers();
@@ -53,17 +60,14 @@ public class TesteurGUI {
         boardModel.initHumanPlayers();
         boardModel.initComputerPlayers();
         boardModel.chooseRandomDealer();
-        try {
-            boardModel.dispenseCards();
-        } catch (InvalidActionPickCardException e) {
-            e.printStackTrace();
-        }
+        boardModel.dispenseCards();   
         boardModel.initGame();
     }
 
-    public static void main(String[] args){
+    public static void main (String[] args) throws InvalidActionPickCardException {
         Expression.initExpression();
         initUnoGame();
         launchApplication();
     }
+
 }

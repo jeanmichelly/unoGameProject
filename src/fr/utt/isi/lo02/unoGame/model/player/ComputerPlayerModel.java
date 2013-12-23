@@ -62,7 +62,7 @@ public class ComputerPlayerModel extends PlayerModel {
     /**
      * Choisit la couleur la plus fréquente dans la main du joueur.
      */
-    public void chooseColor() throws InvalidColorModelException {
+    public void chooseColor () throws InvalidColorModelException {
         super.chooseColor(getMaxCountEachColorCard());
     }
     

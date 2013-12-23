@@ -49,7 +49,7 @@ public class TesteurConsole {
         ConsoleBoardView.ConsoleBoardController.play();
     }
 
-    public static void main(String[] args) throws   InvalidActionPickCardException, 
+    public static void main (String[] args) throws   InvalidActionPickCardException, 
                                                     InvalidColorModelException, 
                                                     InvalidGameRulesException, 
                                                     InvalidPlayException, 

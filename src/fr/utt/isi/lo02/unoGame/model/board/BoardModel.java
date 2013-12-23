@@ -413,7 +413,7 @@ public class BoardModel extends Observable {
      * Donner la main a un joueur en particulier
      * @param playerCursor indice du joueur
      */
-    public void setPlayerCursor(byte playerCursor) {
+    public void setPlayerCursor (byte playerCursor) {
         this.playerCursor = playerCursor;
     }
     

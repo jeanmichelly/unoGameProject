@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 public class PriorityNumberStrategyModelTest {
 
     @Test
-    public void executeTest() throws InvalidActionPickCardException, InvalidActionPutDownCardException {
+    public void executeTest () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
         // Mettre que des joueurs ordinateurs pour pouvoir tester
         BoardModel board = BoardModel.getUniqueInstance();
         UserModel.initNumberPlayers();
