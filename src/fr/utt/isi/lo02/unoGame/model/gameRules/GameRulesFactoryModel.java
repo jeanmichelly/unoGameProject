@@ -1,6 +1,6 @@
 package fr.utt.isi.lo02.unoGame.model.gameRules;
 
-import fr.utt.isi.lo02.unoGame.model.user.UserModel;
+import fr.utt.isi.lo02.unoGame.model.board.ConsoleGameParametersModel;
 
 /** 
  * <u>Pattern Fabrique : </u> </br> 
@@ -15,7 +15,7 @@ public class GameRulesFactoryModel {
      * @return le mode de jeu choisit par l'utilisateur
      */
     public GameRulesModel createGameRules () {
-        switch ( UserModel.getChoiceGameRules() ) {
+        switch ( ConsoleGameParametersModel.getChoiceGameRules() ) {
             case 's' :
                 return new GameRulesStandardModel();
             default :

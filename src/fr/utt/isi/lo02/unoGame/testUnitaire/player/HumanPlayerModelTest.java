@@ -3,6 +3,7 @@ package fr.utt.isi.lo02.unoGame.testUnitaire.player;
 import org.junit.Test;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.board.ConsoleGameParametersModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
@@ -11,7 +12,6 @@ import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
-import fr.utt.isi.lo02.unoGame.model.user.UserModel;
 
 public class HumanPlayerModelTest {
 
@@ -23,9 +23,9 @@ public class HumanPlayerModelTest {
         CardModel c9 = new CardModel(SymbolModel.NINE, ColorModel.GREEN, (byte)9, new CompositeEffectModel());
 
 
-        UserModel.initNumberPlayers();
-        UserModel.initNumberHumanPlayers();
-        UserModel.initPseudonymsHumanPlayers();
+        ConsoleGameParametersModel.initNumberPlayers();
+        ConsoleGameParametersModel.initNumberHumanPlayers();
+        ConsoleGameParametersModel.initPseudonymsHumanPlayers();
         BoardModel.getUniqueInstance().createPlayers();
         BoardModel.getUniqueInstance().initHumanPlayers();
         BoardModel.getUniqueInstance().chooseRandomDealer();

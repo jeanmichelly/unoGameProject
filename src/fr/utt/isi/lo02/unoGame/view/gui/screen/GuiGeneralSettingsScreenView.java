@@ -17,14 +17,14 @@ import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.SkinLoader;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureAtlasLoader;
 
-public class GuiParametersGameScreenView implements Screen {
+public class GuiGeneralSettingsScreenView implements Screen {
 
-    GuiInitParametersGameScreenController guiInitParametersGameScreenController;
+    GuiGeneralSettingsScreenController guiGeneralSettingsScreenController;
     private Stage stage;
     private TextureAtlas atlas;
     private Skin skin;
     private Table table;
-    private TextButton buttonStartGame, buttonMainMenuReturn;
+    private TextButton buttonLanguages, buttonInstructions, buttonMainMenuReturn;
     private Label heading;
 
     @Override
@@ -54,26 +54,32 @@ public class GuiParametersGameScreenView implements Screen {
         this.table = new Table();
         this.table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        this.buttonStartGame = new TextButton(Expression.getProperty("BUTTON_START_GAME"), skin);
+        this.buttonLanguages = new TextButton(Expression.getProperty("BUTTON_MENU_LANGUAGES"), skin);
         this.buttonMainMenuReturn = new TextButton(Expression.getProperty("BUTTON_MAIN_MENU_RETURN"), skin);
-
-        this.buttonStartGame.pad(15,40,15,40);
+        this.buttonInstructions= new TextButton(Expression.getProperty("BUTTON_MENU_INSTRUCTIONS"), skin);
+        
+        this.buttonLanguages.pad(15,40,15,40);
         this.buttonMainMenuReturn.pad(15,40,15,40);
+        this.buttonInstructions.pad(15,40,15,40);
 
-        this.heading = new Label(Expression.getProperty("LABEL_TITLE_PARAMETERS_GAME"), skin);
+        this.heading = new Label(Expression.getProperty("LABEL_TITLE_MENU_GENERAL_SETTINGS"), skin);
         this.table.add(this.heading);
         
         this.table.getCell(this.heading).spaceBottom(70);
         this.table.row();
-        this.table.add(this.buttonStartGame);
+        this.table.add(this.buttonLanguages);
         
-        this.table.getCell(this.buttonStartGame).spaceBottom(20);
+        this.table.getCell(this.buttonLanguages).spaceBottom(20);
+        this.table.row();
+        this.table.add(this.buttonInstructions);
+        
+        this.table.getCell(this.buttonInstructions).spaceBottom(20);
         this.table.row();
         this.table.add(this.buttonMainMenuReturn);
         
         this.stage.addActor(this.table);
         
-        this.guiInitParametersGameScreenController = new GuiInitParametersGameScreenController();
+        this.guiGeneralSettingsScreenController = new GuiGeneralSettingsScreenController(); 
     }
 
     @Override
@@ -96,19 +102,24 @@ public class GuiParametersGameScreenView implements Screen {
 
     }
     
-    private class GuiInitParametersGameScreenController {
+    private class GuiGeneralSettingsScreenController {
         
-        public GuiInitParametersGameScreenController () {
-            GuiParametersGameScreenView.this.buttonStartGame.addListener( new ClickListener() {
+        public GuiGeneralSettingsScreenController () {
+            GuiGeneralSettingsScreenView.this.buttonLanguages.addListener( new ClickListener() {
                 public void clicked (InputEvent event, float x, float y) {
-                    GuiMasterView.setScreen(3);
+                    GuiMasterView.setScreen(5);
                 }
              });
-            GuiParametersGameScreenView.this.buttonMainMenuReturn.addListener( new ClickListener() {
+            GuiGeneralSettingsScreenView.this.buttonInstructions.addListener( new ClickListener() {
                 public void clicked (InputEvent event, float x, float y) {
-                    GuiMasterView.setScreen(1);
+                    
                 }
-            }); 
+             });
+            GuiGeneralSettingsScreenView.this.buttonMainMenuReturn.addListener( new ClickListener() {
+                 public void clicked (InputEvent event, float x, float y) {
+                     GuiMasterView.setScreen(1);
+                 }
+             });      
         }
         
     }

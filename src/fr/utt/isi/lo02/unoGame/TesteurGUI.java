@@ -7,16 +7,17 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.board.ConsoleGameParametersModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.language.Expression;
-import fr.utt.isi.lo02.unoGame.model.user.UserModel;
 import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
 import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiBoardScreenView;
 import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiLanguagesScreenView;
 import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiMenuScreenView;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiParametersGameScreenView;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiSettingsScreenView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiGameSettingsScreenView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiGeneralSettingsScreenView;
 import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiSplashScreenView;
+
 
 public class TesteurGUI {
 
@@ -30,14 +31,15 @@ public class TesteurGUI {
         screens.add(splashScreen);
         GuiMenuScreenView menuScreen = new GuiMenuScreenView(); // 1
         screens.add(menuScreen);
-        GuiParametersGameScreenView initParametersGameScreen = new GuiParametersGameScreenView(); // 2
-        screens.add(initParametersGameScreen);
+        GuiGameSettingsScreenView gameSettingsScreen = new GuiGameSettingsScreenView(); // 2
+        screens.add(gameSettingsScreen);
         GuiBoardScreenView gameScreen = new GuiBoardScreenView(); // 3
         screens.add(gameScreen);
-        GuiSettingsScreenView settingsScreen = new GuiSettingsScreenView(); // 4
-        screens.add(settingsScreen);
+        GuiGeneralSettingsScreenView generalSettingsScreen = new GuiGeneralSettingsScreenView(); // 4
+        screens.add(generalSettingsScreen);
         GuiLanguagesScreenView languagesScreen = new GuiLanguagesScreenView(); // 5
         screens.add(languagesScreen);
+     
 
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "UNO Game";
@@ -49,10 +51,10 @@ public class TesteurGUI {
     }
 
     public static void initUnoGame () throws InvalidActionPickCardException {
-        UserModel.initNumberPlayers();
-        UserModel.initNumberHumanPlayers();
-        UserModel.initPseudonymsHumanPlayers();
-        UserModel.initChoiceGameRules();
+        ConsoleGameParametersModel.initNumberPlayers();
+        ConsoleGameParametersModel.initNumberHumanPlayers();
+        ConsoleGameParametersModel.initPseudonymsHumanPlayers();
+        ConsoleGameParametersModel.initChoiceGameRules();
 
         BoardModel boardModel = BoardModel.getUniqueInstance();
         boardModel.initGameRules();

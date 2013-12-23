@@ -21,7 +21,7 @@ public class GuiMenuScreenView implements Screen {
     GuiMenuScreenController guiMenuScreenController;
     private Stage stage;
     private Table table;
-    private TextButton buttonCreateGame, buttonSettings, buttonExit ;
+    private TextButton buttonCreateGame, buttonGeneralSettings, buttonExit ;
     private Label heading;
 
     @Override
@@ -51,11 +51,11 @@ public class GuiMenuScreenView implements Screen {
         Skin skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_BUTTON_MENU);
         
         this.buttonCreateGame = new TextButton(Expression.getProperty("BUTTON_CREATE_GAME"), skin);
-        this.buttonSettings = new TextButton(Expression.getProperty("BUTTON_MENU_SETTINGS"), skin);
+        this.buttonGeneralSettings = new TextButton(Expression.getProperty("BUTTON_MENU_GENERAL_SETTINGS"), skin);
         this.buttonExit = new TextButton(Expression.getProperty("BUTTON_MENU_QUIT"), skin);
 
         this.buttonCreateGame.pad(15,40,15,40);
-        this.buttonSettings.pad(15,40,15,40);
+        this.buttonGeneralSettings.pad(15,40,15,40);
         this.buttonExit.pad(15,40,15,40);
 
         this.heading = new Label(Expression.getProperty("LABEL_TITLE_MENU_MAIN"), skin);
@@ -67,9 +67,9 @@ public class GuiMenuScreenView implements Screen {
         
         this.table.getCell(this.buttonCreateGame).spaceBottom(20);
         this.table.row();
-        this.table.add(this.buttonSettings);
+        this.table.add(this.buttonGeneralSettings);
         
-        this.table.getCell(this.buttonSettings).spaceBottom(20);
+        this.table.getCell(this.buttonGeneralSettings).spaceBottom(20);
         this.table.row();
         this.table.add(this.buttonExit);
 
@@ -106,7 +106,7 @@ public class GuiMenuScreenView implements Screen {
                     GuiMasterView.setScreen(2);
                 }
             });
-            GuiMenuScreenView.this.buttonSettings.addListener( new ClickListener() {
+            GuiMenuScreenView.this.buttonGeneralSettings.addListener( new ClickListener() {
                 public void clicked (InputEvent event, float x, float y) {
                     GuiMasterView.setScreen(4);
                 }

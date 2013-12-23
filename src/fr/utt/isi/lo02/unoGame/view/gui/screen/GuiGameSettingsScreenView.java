@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -17,14 +18,14 @@ import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.SkinLoader;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureAtlasLoader;
 
-public class GuiSettingsScreenView implements Screen {
+public class GuiGameSettingsScreenView implements Screen {
 
-    GuiSettingsScreenController guiSettingsScreenController;
+    GuiInitGameSettingsScreenController guiInitGameSettingsScreenController;
     private Stage stage;
     private TextureAtlas atlas;
     private Skin skin;
     private Table table;
-    private TextButton buttonLanguages, buttonInstructions, buttonMainMenuReturn;
+    private TextButton buttonStartGame, buttonMainMenuReturn;
     private Label heading;
 
     @Override
@@ -54,32 +55,26 @@ public class GuiSettingsScreenView implements Screen {
         this.table = new Table();
         this.table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        this.buttonLanguages = new TextButton(Expression.getProperty("BUTTON_MENU_LANGUAGES"), skin);
+        this.buttonStartGame = new TextButton(Expression.getProperty("BUTTON_START_GAME"), skin);
         this.buttonMainMenuReturn = new TextButton(Expression.getProperty("BUTTON_MAIN_MENU_RETURN"), skin);
-        this.buttonInstructions= new TextButton(Expression.getProperty("BUTTON_MENU_INSTRUCTIONS"), skin);
-        
-        this.buttonLanguages.pad(15,40,15,40);
-        this.buttonMainMenuReturn.pad(15,40,15,40);
-        this.buttonInstructions.pad(15,40,15,40);
 
-        this.heading = new Label(Expression.getProperty("LABEL_TITLE_MENU_SETTINGS"), skin);
+        this.buttonStartGame.pad(15,40,15,40);
+        this.buttonMainMenuReturn.pad(15,40,15,40);
+
+        this.heading = new Label(Expression.getProperty("LABEL_TITLE_GAME_SETTINGS"), skin);
         this.table.add(this.heading);
         
         this.table.getCell(this.heading).spaceBottom(70);
         this.table.row();
-        this.table.add(this.buttonLanguages);
+        this.table.add(this.buttonStartGame);
         
-        this.table.getCell(this.buttonLanguages).spaceBottom(20);
-        this.table.row();
-        this.table.add(this.buttonInstructions);
-        
-        this.table.getCell(this.buttonInstructions).spaceBottom(20);
+        this.table.getCell(this.buttonStartGame).spaceBottom(20);
         this.table.row();
         this.table.add(this.buttonMainMenuReturn);
         
         this.stage.addActor(this.table);
         
-        this.guiSettingsScreenController = new GuiSettingsScreenController(); 
+        this.guiInitGameSettingsScreenController = new GuiInitGameSettingsScreenController();
     }
 
     @Override
@@ -102,24 +97,19 @@ public class GuiSettingsScreenView implements Screen {
 
     }
     
-    private class GuiSettingsScreenController {
+    private class GuiInitGameSettingsScreenController {
         
-        public GuiSettingsScreenController () {
-            GuiSettingsScreenView.this.buttonLanguages.addListener( new ClickListener() {
+        public GuiInitGameSettingsScreenController () {
+            GuiGameSettingsScreenView.this.buttonStartGame.addListener( new ClickListener() {
                 public void clicked (InputEvent event, float x, float y) {
-                    GuiMasterView.setScreen(5);
+                    GuiMasterView.setScreen(3);
                 }
              });
-            GuiSettingsScreenView.this.buttonInstructions.addListener( new ClickListener() {
+            GuiGameSettingsScreenView.this.buttonMainMenuReturn.addListener( new ClickListener() {
                 public void clicked (InputEvent event, float x, float y) {
-                    
+                    GuiMasterView.setScreen(1);
                 }
-             });
-            GuiSettingsScreenView.this.buttonMainMenuReturn.addListener( new ClickListener() {
-                 public void clicked (InputEvent event, float x, float y) {
-                     GuiMasterView.setScreen(1);
-                 }
-             });      
+            }); 
         }
         
     }

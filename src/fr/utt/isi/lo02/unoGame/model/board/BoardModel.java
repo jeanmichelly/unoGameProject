@@ -14,7 +14,6 @@ import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
 import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
 import fr.utt.isi.lo02.unoGame.model.player.HumanPlayerModel;
 import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
-import fr.utt.isi.lo02.unoGame.model.user.UserModel;
 import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
 
 /**
@@ -125,15 +124,15 @@ public class BoardModel extends Observable {
 	 * Initialisation du tableau de joueurs
 	 */
 	public void createPlayers () {
-	    this.players = new PlayerModel[UserModel.getNumberPlayers()];
+	    this.players = new PlayerModel[ConsoleGameParametersModel.getNumberPlayers()];
 	}
 
 	/**
 	 * Initialisation et insertion des joueurs humains dans le tableau de joueurs
 	 */
 	public void initHumanPlayers () {
-		for ( int i=0; i<UserModel.getNumberHumanPlayers(); i++ ) {
-		    this.players[i] = new HumanPlayerModel(UserModel.getPseudonymHumanPlayer());
+		for ( int i=0; i<ConsoleGameParametersModel.getNumberHumanPlayers(); i++ ) {
+		    this.players[i] = new HumanPlayerModel(ConsoleGameParametersModel.getPseudonymHumanPlayer());
 		}
 	}
 
@@ -141,7 +140,7 @@ public class BoardModel extends Observable {
 	 * Initialisation et insertion des joueurs ordinateurs dans le tableau de joueurs
 	 */
 	public void initComputerPlayers () {
-		for ( int i=UserModel.getNumberHumanPlayers(), j=1; i<UserModel.getNumberPlayers(); i++, j++ ) {
+		for ( int i=ConsoleGameParametersModel.getNumberHumanPlayers(), j=1; i<ConsoleGameParametersModel.getNumberPlayers(); i++, j++ ) {
 		    this.players[i] = new ComputerPlayerModel("Computer"+j);
 		}
 	}

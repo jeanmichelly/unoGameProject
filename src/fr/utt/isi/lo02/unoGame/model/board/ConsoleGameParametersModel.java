@@ -1,4 +1,4 @@
-package fr.utt.isi.lo02.unoGame.model.user;
+package fr.utt.isi.lo02.unoGame.model.board;
 
 import java.util.Stack;
 
@@ -6,7 +6,7 @@ import java.util.Stack;
  * Exclusivement constituée de membres statiques. 
  * Elle définit l'utilisateur qui manipule l'application hormis le deroulement d'une partie.
  */
-public class UserModel {
+public class ConsoleGameParametersModel {
 	
     /**
      * Stock le nombre de joueur participant à une partie
@@ -29,30 +29,30 @@ public class UserModel {
 	 * Initialise le nombre de joueur
 	 */
     public static void initNumberPlayers () {
-        UserModel.numberPlayers = 12;
+        ConsoleGameParametersModel.numberPlayers = 3;
     }
 
     /**
      * Initialise le nombre de joueur humain
      */
     public static void initNumberHumanPlayers () {
-        UserModel.numberHumanPlayers = 0;    	
+        ConsoleGameParametersModel.numberHumanPlayers = 0;    	
     }
 
     /**
      * Initialise les pseudo associés à chaque joueur humain
      */
     public static void initPseudonymsHumanPlayers () {
-        UserModel.pseudonymsHumanPlayers.push("Pablo");
-        UserModel.pseudonymsHumanPlayers.push("JM");
-        UserModel.pseudonymsHumanPlayers.push("Mario");
+        ConsoleGameParametersModel.pseudonymsHumanPlayers.push("Pablo");
+        ConsoleGameParametersModel.pseudonymsHumanPlayers.push("JM");
+        ConsoleGameParametersModel.pseudonymsHumanPlayers.push("Mario");
     }
     
     /**
      * Initialise le mode de jeu choisit par l'utilisateur
      */
     public static void initChoiceGameRules () {
-        UserModel.choiceGameRules = 's';
+        ConsoleGameParametersModel.choiceGameRules = 's';
     }
     
     /**
@@ -60,7 +60,7 @@ public class UserModel {
      * @return le nombre de joueur participant à une partie
      */
     public static byte getNumberPlayers () {
-        return UserModel.numberPlayers;
+        return ConsoleGameParametersModel.numberPlayers;
     }
 
     /**
@@ -68,7 +68,7 @@ public class UserModel {
      * @return le nombre de joueur humain participant à une partie
      */
     public static byte getNumberHumanPlayers () {
-        return UserModel.numberHumanPlayers;
+        return ConsoleGameParametersModel.numberHumanPlayers;
     }
 
     /**
@@ -76,7 +76,7 @@ public class UserModel {
      * @return les pseudo des joueurs humain participant à une partie
      */
     public static Stack<String> getPseudonymsHumanPlayer () {
-        return UserModel.pseudonymsHumanPlayers;
+        return ConsoleGameParametersModel.pseudonymsHumanPlayers;
     }
     
     /**
@@ -84,7 +84,7 @@ public class UserModel {
      * @return le dernier pseudo
      */
     public static String getPseudonymHumanPlayer () {
-        return UserModel.pseudonymsHumanPlayers.pop();
+        return ConsoleGameParametersModel.pseudonymsHumanPlayers.pop();
     }
     
     /**
@@ -92,7 +92,7 @@ public class UserModel {
      * @return le mode de jeu choisit par l'utilisateur
      */
     public static char getChoiceGameRules () {
-        return UserModel.choiceGameRules;
+        return ConsoleGameParametersModel.choiceGameRules;
     }
     
     /**
@@ -100,7 +100,7 @@ public class UserModel {
      * @param numberPlayers mise à jour du nombre de joueur participant à une partie
      */
     public static void setNumberPlayers (byte numberPlayers) {
-        UserModel.numberPlayers = numberPlayers;
+        ConsoleGameParametersModel.numberPlayers = numberPlayers;
     }
     
     /**
@@ -108,7 +108,7 @@ public class UserModel {
      * @param numberHumanPlayers mise à jour du nombre de joueur humain participant à une partie
      */
     public static void setNumberHumanPlayers (byte numberHumanPlayers) {
-        UserModel.numberHumanPlayers = numberHumanPlayers;
+        ConsoleGameParametersModel.numberHumanPlayers = numberHumanPlayers;
     }
     
     /**
@@ -116,7 +116,7 @@ public class UserModel {
      * @param pseudonymsHumanPlayers mise à jour des pseudo des joueurs humain participant à une partie
      */
     public static void setPseudonymsHumanPlayers (Stack<String> pseudonymsHumanPlayers) {
-        UserModel.pseudonymsHumanPlayers = pseudonymsHumanPlayers;
+        ConsoleGameParametersModel.pseudonymsHumanPlayers = pseudonymsHumanPlayers;
     }
     
 }

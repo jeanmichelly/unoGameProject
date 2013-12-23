@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.board.ConsoleGameParametersModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
@@ -13,7 +14,6 @@ import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
 import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
-import fr.utt.isi.lo02.unoGame.model.user.UserModel;
 
 public class PriorityColorStrategyModelTest {
 
@@ -21,7 +21,7 @@ public class PriorityColorStrategyModelTest {
     public void executeTest () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
         // Mettre que des joueurs ordinateurs pour pouvoir tester
         BoardModel board = BoardModel.getUniqueInstance();
-        UserModel.initNumberPlayers();
+        ConsoleGameParametersModel.initNumberPlayers();
         board.createPlayers();
         board.initComputerPlayers();
         board.setPlayerCursor((byte)0);
