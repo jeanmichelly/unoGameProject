@@ -1,7 +1,7 @@
 package fr.utt.isi.lo02.unoGame;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
-import fr.utt.isi.lo02.unoGame.model.board.ConsoleGameParametersModel;
+import fr.utt.isi.lo02.unoGame.model.board.ConsoleGameSettingsModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
@@ -56,10 +56,10 @@ public class TesteurConsole {
                                                     DrawPileIsEmptyAfterReshuffledException {
         
         BoardModel board = BoardModel.getUniqueInstance();
-        ConsoleGameParametersModel.initNumberPlayers();
-        ConsoleGameParametersModel.initNumberHumanPlayers();
-        ConsoleGameParametersModel.initPseudonymsHumanPlayers();
-        ConsoleGameParametersModel.initChoiceGameRules();
+        ConsoleGameSettingsModel.initNumberPlayers();
+        ConsoleGameSettingsModel.initNumberHumanPlayers();
+        ConsoleGameSettingsModel.initPseudonymsHumanPlayers();
+        ConsoleGameSettingsModel.initChoiceGameRules();
         board.createPlayers();
         board.initHumanPlayers();
         board.initComputerPlayers();

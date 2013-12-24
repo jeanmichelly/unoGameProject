@@ -3,7 +3,7 @@ package fr.utt.isi.lo02.unoGame.testUnitaire.player;
 import org.junit.Test;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
-import fr.utt.isi.lo02.unoGame.model.board.ConsoleGameParametersModel;
+import fr.utt.isi.lo02.unoGame.model.board.ConsoleGameSettingsModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
@@ -23,9 +23,9 @@ public class HumanPlayerModelTest {
         CardModel c9 = new CardModel(SymbolModel.NINE, ColorModel.GREEN, (byte)9, new CompositeEffectModel());
 
 
-        ConsoleGameParametersModel.initNumberPlayers();
-        ConsoleGameParametersModel.initNumberHumanPlayers();
-        ConsoleGameParametersModel.initPseudonymsHumanPlayers();
+        ConsoleGameSettingsModel.initNumberPlayers();
+        ConsoleGameSettingsModel.initNumberHumanPlayers();
+        ConsoleGameSettingsModel.initPseudonymsHumanPlayers();
         BoardModel.getUniqueInstance().createPlayers();
         BoardModel.getUniqueInstance().initHumanPlayers();
         BoardModel.getUniqueInstance().chooseRandomDealer();

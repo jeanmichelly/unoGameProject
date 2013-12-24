@@ -1,7 +1,7 @@
 package fr.utt.isi.lo02.unoGame.testUnitaire.player.strategy;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
-import fr.utt.isi.lo02.unoGame.model.board.ConsoleGameParametersModel;
+import fr.utt.isi.lo02.unoGame.model.board.ConsoleGameSettingsModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
@@ -21,7 +21,7 @@ public class PriorityNumberStrategyModelTest {
     public void executeTest () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
         // Mettre que des joueurs ordinateurs pour pouvoir tester
         BoardModel board = BoardModel.getUniqueInstance();
-        ConsoleGameParametersModel.initNumberPlayers();
+        ConsoleGameSettingsModel.initNumberPlayers();
         board.createPlayers();
         board.initComputerPlayers();
         board.setPlayerCursor((byte)0);

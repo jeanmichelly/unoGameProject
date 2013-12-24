@@ -124,15 +124,15 @@ public class BoardModel extends Observable {
 	 * Initialisation du tableau de joueurs
 	 */
 	public void createPlayers () {
-	    this.players = new PlayerModel[ConsoleGameParametersModel.getNumberPlayers()];
+	    this.players = new PlayerModel[ConsoleGameSettingsModel.getNumberPlayers()];
 	}
 
 	/**
 	 * Initialisation et insertion des joueurs humains dans le tableau de joueurs
 	 */
 	public void initHumanPlayers () {
-		for ( int i=0; i<ConsoleGameParametersModel.getNumberHumanPlayers(); i++ ) {
-		    this.players[i] = new HumanPlayerModel(ConsoleGameParametersModel.getPseudonymHumanPlayer());
+		for ( int i=0; i<ConsoleGameSettingsModel.getNumberHumanPlayers(); i++ ) {
+		    this.players[i] = new HumanPlayerModel(ConsoleGameSettingsModel.getPseudonymHumanPlayer());
 		}
 	}
 
@@ -140,7 +140,7 @@ public class BoardModel extends Observable {
 	 * Initialisation et insertion des joueurs ordinateurs dans le tableau de joueurs
 	 */
 	public void initComputerPlayers () {
-		for ( int i=ConsoleGameParametersModel.getNumberHumanPlayers(), j=1; i<ConsoleGameParametersModel.getNumberPlayers(); i++, j++ ) {
+		for ( int i=ConsoleGameSettingsModel.getNumberHumanPlayers(), j=1; i<ConsoleGameSettingsModel.getNumberPlayers(); i++, j++ ) {
 		    this.players[i] = new ComputerPlayerModel("Computer"+j);
 		}
 	}

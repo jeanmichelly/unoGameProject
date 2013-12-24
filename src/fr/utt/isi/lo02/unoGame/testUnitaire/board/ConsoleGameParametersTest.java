@@ -5,22 +5,22 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
-import fr.utt.isi.lo02.unoGame.model.board.ConsoleGameParametersModel;
+import fr.utt.isi.lo02.unoGame.model.board.ConsoleGameSettingsModel;
 import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesFactoryModel;
 
 public class ConsoleGameParametersTest {
 
     @Test
     public void initHumanPlayersTest () {
-        ConsoleGameParametersModel.initNumberHumanPlayers();
-        ConsoleGameParametersModel.initPseudonymsHumanPlayers();
+        ConsoleGameSettingsModel.initNumberHumanPlayers();
+        ConsoleGameSettingsModel.initPseudonymsHumanPlayers();
                 
-        assertEquals(ConsoleGameParametersModel.getNumberHumanPlayers(), ConsoleGameParametersModel.getPseudonymsHumanPlayer().size());
+        assertEquals(ConsoleGameSettingsModel.getNumberHumanPlayers(), ConsoleGameSettingsModel.getPseudonymsHumanPlayer().size());
     }
     
     @Test
     public void initChoiceGameRulesTest () {
-        ConsoleGameParametersModel.initChoiceGameRules();
+        ConsoleGameSettingsModel.initChoiceGameRules();
         
         assertNotNull(new GameRulesFactoryModel().createGameRules());
     }

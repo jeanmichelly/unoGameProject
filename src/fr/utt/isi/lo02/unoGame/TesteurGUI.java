@@ -7,7 +7,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
-import fr.utt.isi.lo02.unoGame.model.board.ConsoleGameParametersModel;
+import fr.utt.isi.lo02.unoGame.model.board.ConsoleGameSettingsModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.language.Expression;
 import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
@@ -51,10 +51,10 @@ public class TesteurGUI {
     }
 
     public static void initUnoGame () throws InvalidActionPickCardException {
-        ConsoleGameParametersModel.initNumberPlayers();
-        ConsoleGameParametersModel.initNumberHumanPlayers();
-        ConsoleGameParametersModel.initPseudonymsHumanPlayers();
-        ConsoleGameParametersModel.initChoiceGameRules();
+        ConsoleGameSettingsModel.initNumberPlayers();
+        ConsoleGameSettingsModel.initNumberHumanPlayers();
+        ConsoleGameSettingsModel.initPseudonymsHumanPlayers();
+        ConsoleGameSettingsModel.initChoiceGameRules();
 
         BoardModel boardModel = BoardModel.getUniqueInstance();
         boardModel.initGameRules();
