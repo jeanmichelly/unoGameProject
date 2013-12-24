@@ -12,7 +12,6 @@ import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.board.GameSettingsModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
-import fr.utt.isi.lo02.unoGame.view.gui.board.GuiGameSettingsView;
 
 public class GameSettingsController {
     
@@ -108,8 +107,11 @@ public class GameSettingsController {
         }
         
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            System.out.println(event.getTarget());
-            return true;                      
+            if ( event.getListenerActor() instanceof CheckBox ) {
+                CheckBox checkbox = (CheckBox) event.getListenerActor();    
+                System.out.println(checkbox.isChecked()+"\n"+checkbox.getName());
+            }
+            return true;                    
         }
     }
     

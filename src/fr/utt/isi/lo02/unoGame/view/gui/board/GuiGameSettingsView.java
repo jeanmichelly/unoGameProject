@@ -15,9 +15,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 import fr.utt.isi.lo02.unoGame.controller.board.GameSettingsController;
-import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.board.GameSettingsModel;
-import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
+import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
 import fr.utt.isi.lo02.unoGame.model.language.Expression;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.SkinLoader;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureAtlasLoader;
@@ -93,7 +92,11 @@ public class GuiGameSettingsView implements Screen {
         this.table.getCell(this.heading).spaceBottom(70).colspan(2);
         this.table.row();
 
-        String [] choiceNumberPlayers = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+        int numberPlayersTotal = GameRulesModel.NUMBER_PLAYERS_MAX-GameRulesModel.NUMBER_PLAYERS_MIN+1;
+        String [] choiceNumberPlayers = new String [numberPlayersTotal];
+        for ( int i=0, j=GameRulesModel.NUMBER_PLAYERS_MIN; i<numberPlayersTotal; i++, j++) {
+            choiceNumberPlayers[i] = String.valueOf(j);
+        }
         this.selectBoxNumberPlayers = new SelectBox(choiceNumberPlayers, skin);
         Label selectBoxLabel = new Label("Nombre de joueurs : ", skin);
         this.table.add(selectBoxLabel);
