@@ -1,6 +1,7 @@
 package fr.utt.isi.lo02.unoGame.view.gui.screen.board;
 
-import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -13,15 +14,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 import fr.utt.isi.lo02.unoGame.controller.board.GameSettingsController;
 import fr.utt.isi.lo02.unoGame.model.board.GameSettingsModel;
+import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesFactoryModel;
 import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
 import fr.utt.isi.lo02.unoGame.model.language.Expression;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.SkinLoader;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureAtlasLoader;
 
-public class GuiGameSettingsScreenView implements Screen {
+public class GuiGameSettingsScreenView implements Screen, Observer {
 
     GameSettingsModel gameSettingsModel;
     GameSettingsController gameSettingsController;
@@ -30,13 +33,14 @@ public class GuiGameSettingsScreenView implements Screen {
     private Label heading;
     private TextButton buttonStartGame, buttonMainMenuReturn;
     private SelectBox selectBoxNumberPlayers, selectBoxNumberHumanPlayers;
-    private ArrayList<CheckBox> checkBoxes = new ArrayList<CheckBox>();
+    private CheckBox checkBoxes [] = new CheckBox[GameRulesFactoryModel.numberGameRules];
     Table checkBoxesTable;
     private Table table;
     
     public GuiGameSettingsScreenView(GameSettingsModel gameSettingsModel, GameSettingsController gameSettingsController) {
         super();
         this.gameSettingsModel = gameSettingsModel;
+        gameSettingsModel.addObserver(this);
         this.gameSettingsController = gameSettingsController;
     }
 
@@ -44,7 +48,7 @@ public class GuiGameSettingsScreenView implements Screen {
     public void render (float v) {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        
         this.stage.act(v);
         this.stage.draw();
 //        Table.drawDebug(this.stage);
@@ -61,6 +65,7 @@ public class GuiGameSettingsScreenView implements Screen {
         this.buttonStartGame.addListener(gameSettingsController.getButtonController());
         this.buttonMainMenuReturn.addListener(gameSettingsController.getButtonController());
         this.selectBoxNumberPlayers.addListener(gameSettingsController.getSelectBoxController());
+        this.selectBoxNumberHumanPlayers.addListener(gameSettingsController.getSelectBoxController());
         // TODO : écouter chaque checkbox pour déterminer le mode de jeu choisit
         for ( CheckBox checkBox : checkBoxes ) {
             checkBox.addListener(gameSettingsController.getCheckBoxController());
@@ -98,20 +103,29 @@ public class GuiGameSettingsScreenView implements Screen {
             choiceNumberPlayers[i] = String.valueOf(j);
         }
         this.selectBoxNumberPlayers = new SelectBox(choiceNumberPlayers, skin);
+        this.selectBoxNumberPlayers.setName("NP");
+        this.selectBoxNumberPlayers.setSelection(gameSettingsModel.getNumberPlayers()-GameRulesModel.NUMBER_PLAYERS_MIN);
         
-        this.selectBoxNumberHumanPlayers = new SelectBox(choiceNumberPlayers, skin);
+        int numberHumanPlayersTotal = gameSettingsModel.getNumberPlayers()-GameRulesModel.NUMBER_PLAYERS_MIN+1;
+        String [] choiceNumberHumanPlayers = new String [numberHumanPlayersTotal];
+        for ( int i=0, j=GameRulesModel.NUMBER_PLAYERS_MIN; i<numberHumanPlayersTotal; i++, j++) {
+            choiceNumberHumanPlayers[i] = String.valueOf(j);
+        }
+        this.selectBoxNumberHumanPlayers = new SelectBox(choiceNumberHumanPlayers, skin);
+        this.selectBoxNumberHumanPlayers.setName("NHP");
     }
     
     public void initCheckBoxes () {
         this.checkBoxesTable = new Table();
         
-        CheckBox standardBox= new CheckBox("Standard", skin);
-        CheckBox epicBox = new CheckBox("Epic", skin);
+        CheckBox standardBox= new CheckBox(Expression.getProperty("LABEL_GAME_RULES_ORIGINAL"), skin);
+        CheckBox epicBox = new CheckBox(Expression.getProperty("LABEL_GAME_RULES_EPIC"), skin);
+        
         standardBox.setName("s");
         epicBox.setName("e");
         
-        this.checkBoxes.add(standardBox);
-        this.checkBoxes.add(epicBox);
+        this.checkBoxes[0] = standardBox;
+        this.checkBoxes[1] = epicBox;
         
         ButtonGroup buttonGroup = new ButtonGroup();
         
@@ -132,17 +146,17 @@ public class GuiGameSettingsScreenView implements Screen {
         
         this.table.getCell(this.heading).spaceBottom(70).colspan(2);
         this.table.row();
-        Label selectBoxNumberPlayersLabel = new Label("Nombre de joueurs : ", skin);
+        Label selectBoxNumberPlayersLabel = new Label(Expression.getProperty("LABEL_NUMBER_PLAYERS")+" : ", skin);
         this.table.add(selectBoxNumberPlayersLabel);
         this.table.add(selectBoxNumberPlayers);
         
         this.table.row();
-        Label selectBoxNumberHumanPlayersLabel = new Label("Nombre de joueurs humains : ", skin);
+        Label selectBoxNumberHumanPlayersLabel = new Label(Expression.getProperty("LABEL_NUMBER_HUMAN_PLAYERS")+" : ", skin);
         this.table.add(selectBoxNumberHumanPlayersLabel);
         this.table.add(selectBoxNumberHumanPlayers);
         
         this.table.row();
-        Label checkBoxesLabel = new Label("Mode de jeu : ", skin);
+        Label checkBoxesLabel = new Label(Expression.getProperty("LABEL_VARIATIONS")+" : ", skin);
         this.table.add(checkBoxesLabel);
         this.table.add(checkBoxesTable);
         
@@ -163,7 +177,8 @@ public class GuiGameSettingsScreenView implements Screen {
         initCheckBoxes();
         initTable();
 
-        initListener();        
+        initListener(); 
+        
         this.stage.addActor(this.table);
     }
 
@@ -185,6 +200,11 @@ public class GuiGameSettingsScreenView implements Screen {
     @Override
     public void dispose () {
 
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        show();
     }
 
 }

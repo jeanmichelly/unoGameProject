@@ -63,7 +63,7 @@ public class TesteurConsole {
         GameSettingsModel.getUniqueInstance().initNumberPlayers((byte)3);
         GameSettingsModel.getUniqueInstance().initNumberHumanPlayers((byte)0);
         GameSettingsModel.getUniqueInstance().initPseudonymsHumanPlayers();
-        GameSettingsModel.getUniqueInstance().initChoiceGameRules();
+        GameSettingsModel.getUniqueInstance().initChoiceGameRules('s');
         board.createPlayers();
         board.initHumanPlayers();
         board.initComputerPlayers();

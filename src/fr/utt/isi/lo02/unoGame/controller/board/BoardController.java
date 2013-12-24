@@ -1,7 +1,6 @@
 package fr.utt.isi.lo02.unoGame.controller.board;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
-import fr.utt.isi.lo02.unoGame.model.board.GameSettingsModel;
 
 public class BoardController {
     

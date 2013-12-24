@@ -10,6 +10,7 @@ import fr.utt.isi.lo02.unoGame.model.board.GameSettingsModel;
  */
 public class GameRulesFactoryModel {
 
+    public static final int numberGameRules = 2;
     /**
      * Créer le mode de jeu choisit par l'utilisateur
      * @return le mode de jeu choisit par l'utilisateur
@@ -19,7 +20,7 @@ public class GameRulesFactoryModel {
             case 's' :
                 return new GameRulesStandardModel();
             default :
-                return null;
+                return new GameRulesStandardModel();
         }
     }
     

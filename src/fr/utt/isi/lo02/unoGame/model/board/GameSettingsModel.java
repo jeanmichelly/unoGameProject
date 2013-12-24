@@ -1,17 +1,13 @@
 package fr.utt.isi.lo02.unoGame.model.board;
 
+import java.util.Observable;
 import java.util.Stack;
-
-import fr.utt.isi.lo02.unoGame.model.card.effect.CompositeEffectModel;
-import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
-import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
-import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesFactoryModel;
 
 /**
  * Exclusivement constituée de membres statiques. 
  * Elle définit l'utilisateur qui manipule l'application hormis le deroulement d'une partie.
  */
-public class GameSettingsModel {
+public class GameSettingsModel extends Observable {
     
     private static GameSettingsModel uniqueInstance = null;
     /**
@@ -34,6 +30,7 @@ public class GameSettingsModel {
     private GameSettingsModel () {
         this.pseudonymsHumanPlayers = new Stack<String>();
         this.numberPlayers = 2;
+        this.choiceGameRules = 's';
     }
 
     public static GameSettingsModel getUniqueInstance () {
@@ -63,14 +60,25 @@ public class GameSettingsModel {
     public void initPseudonymsHumanPlayers () {
         this.pseudonymsHumanPlayers.push("Pablo");
         this.pseudonymsHumanPlayers.push("JM");
+        this.pseudonymsHumanPlayers.push("Jeremie");
+        this.pseudonymsHumanPlayers.push("Cindy");
+        this.pseudonymsHumanPlayers.push("Isabelle");
         this.pseudonymsHumanPlayers.push("Mario");
+        this.pseudonymsHumanPlayers.push("Annie");
+        this.pseudonymsHumanPlayers.push("Francois");
+        this.pseudonymsHumanPlayers.push("Antoine");
+        this.pseudonymsHumanPlayers.push("Sabrina");
     }
     
     /**
      * Initialise le mode de jeu choisit par l'utilisateur
      */
-    public void initChoiceGameRules () {
-        this.choiceGameRules = 's';
+    public void initChoiceGameRules (char choiceGameRules) {
+        this.choiceGameRules = choiceGameRules;
+    }
+    
+    public void setChanged () {
+        super.setChanged();
     }
     
     /**

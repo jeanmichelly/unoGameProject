@@ -20,7 +20,7 @@ public class ConsoleGameSettingsTest {
     
     @Test
     public void initChoiceGameRulesTest () {
-        GameSettingsModel.getUniqueInstance().initChoiceGameRules();
+        GameSettingsModel.getUniqueInstance().initChoiceGameRules('s');
         
         assertNotNull(new GameRulesFactoryModel().createGameRules());
     }

@@ -51,7 +51,8 @@ public class GameSettingsController {
                     } catch (InvalidActionPickCardException e) {
                         e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                     }
-                    GuiMasterView.setScreen(3);                    
+                    System.out.println(gameSettingsModel.getNumberPlayers()+" "+gameSettingsModel.getNumberHumanPlayers());
+                    GuiMasterView.setScreen(3);   
                     break;
                 case "BMMR" :
                     GuiMasterView.setScreen(1);
@@ -60,13 +61,17 @@ public class GameSettingsController {
         }
         
         public void createGame() throws InvalidActionPickCardException {
-            gameSettingsModel.initNumberHumanPlayers((byte)2);
             gameSettingsModel.initPseudonymsHumanPlayers();
-            gameSettingsModel.initChoiceGameRules();
+            
             BoardModel boardModel = BoardModel.getUniqueInstance();
             boardModel.initGameRules();
             boardModel.createPlayers();
-            boardModel.initHumanPlayers();
+            try {
+                boardModel.initHumanPlayers();
+            } catch ( ArrayIndexOutOfBoundsException e ) {
+                gameSettingsModel.setNumberHumanPlayers((byte)2);
+                boardModel.initHumanPlayers();
+            }
             boardModel.initComputerPlayers();
             boardModel.chooseRandomDealer();
             boardModel.dispenseCards();
@@ -87,10 +92,20 @@ public class GameSettingsController {
         @Override
         public void changed(ChangeEvent changeEvent, Actor actor) {
             if ( actor instanceof SelectBox ) {
-                SelectBox selectBox = (SelectBox) actor;
-                int numberOfPlayers = Integer.parseInt(selectBox.getSelection());
-                System.out.println(numberOfPlayers);
-                gameSettingsModel.initNumberPlayers((byte)numberOfPlayers);
+                switch ( actor.getName() ) {
+                    case "NP" :
+                        SelectBox selectBoxNumberPlayers = (SelectBox) actor;
+                        int numberOfPlayers = Integer.parseInt(selectBoxNumberPlayers.getSelection());
+                        gameSettingsModel.initNumberPlayers((byte)numberOfPlayers);
+                        gameSettingsModel.setChanged();
+                        gameSettingsModel.notifyObservers();
+                        break;
+                    case "NHP" :
+                        SelectBox selectBoxNumberHumanPlayers = (SelectBox) actor;
+                        int numberHumanOfPlayers = Integer.parseInt(selectBoxNumberHumanPlayers.getSelection());
+                        gameSettingsModel.initNumberHumanPlayers((byte)numberHumanOfPlayers);
+                        break;
+                }
             }
         }
         
@@ -108,7 +123,8 @@ public class GameSettingsController {
         
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             if ( event.getListenerActor() instanceof CheckBox ) {
-                CheckBox checkbox = (CheckBox) event.getListenerActor();   
+                CheckBox checkbox = (CheckBox) event.getListenerActor();
+                gameSettingsModel.initChoiceGameRules(checkbox.getName().charAt(0));
                 System.out.println(checkbox.isChecked()+"\n"+checkbox.getName());
             }
             return true;                    
