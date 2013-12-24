@@ -1,4 +1,4 @@
-package fr.utt.isi.lo02.unoGame.view.gui.board;
+package fr.utt.isi.lo02.unoGame.view.gui.screen.board;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -35,7 +35,7 @@ import fr.utt.isi.lo02.unoGame.view.gui.player.GuiPlayerView;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.SkinLoader;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureAtlasLoader;
 
-public class GuiBoardView implements Observer, Screen {
+public class GuiBoardScreenView implements Observer, Screen {
 
     private Stage stage;
     private Sprite boardBackground;

@@ -1,4 +1,4 @@
-package fr.utt.isi.lo02.unoGame.view.gui.board;
+package fr.utt.isi.lo02.unoGame.view.gui.screen.board;
 
 import java.util.ArrayList;
 
@@ -21,18 +21,20 @@ import fr.utt.isi.lo02.unoGame.model.language.Expression;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.SkinLoader;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureAtlasLoader;
 
-public class GuiGameSettingsView implements Screen {
+public class GuiGameSettingsScreenView implements Screen {
 
     GameSettingsModel gameSettingsModel;
     GameSettingsController gameSettingsController;
     private Stage stage;
-    private Table table;
-    private TextButton buttonStartGame, buttonMainMenuReturn;
+    private Skin skin;
     private Label heading;
-    private SelectBox selectBoxNumberPlayers;
+    private TextButton buttonStartGame, buttonMainMenuReturn;
+    private SelectBox selectBoxNumberPlayers, selectBoxNumberHumanPlayers;
     private ArrayList<CheckBox> checkBoxes = new ArrayList<CheckBox>();
+    Table checkBoxesTable;
+    private Table table;
     
-    public GuiGameSettingsView(GameSettingsModel gameSettingsModel, GameSettingsController gameSettingsController) {
+    public GuiGameSettingsScreenView(GameSettingsModel gameSettingsModel, GameSettingsController gameSettingsController) {
         super();
         this.gameSettingsModel = gameSettingsModel;
         this.gameSettingsController = gameSettingsController;
@@ -64,20 +66,21 @@ public class GuiGameSettingsView implements Screen {
             checkBox.addListener(gameSettingsController.getCheckBoxController());
         }
     }
-
-    @Override
-    public void show () {
+    
+    public void initStage () {
         this.stage = new Stage();
-
         Gdx.input.setInputProcessor(this.stage);
-
-        Skin skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_MENU);
-
-        this.table = new Table();
-        this.table.defaults().space(20);
-        this.table.debug();
-        this.table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
+    }
+    
+    public void initSkin () {
+        this.skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_MENU);
+    }
+    
+    public void initHeading () {
+        this.heading = new Label(Expression.getProperty("LABEL_TITLE_GAME_CREATION"), skin, "heading");
+    }
+    
+    public void initButtons () {
         this.buttonStartGame = new TextButton(Expression.getProperty("BUTTON_START_GAME"), skin);
         this.buttonMainMenuReturn = new TextButton(Expression.getProperty("BUTTON_MAIN_MENU_RETURN"), skin);
         
@@ -86,27 +89,21 @@ public class GuiGameSettingsView implements Screen {
         
         this.buttonStartGame.pad(15,40,15,40);
         this.buttonMainMenuReturn.pad(15,40,15,40);
-
-        this.heading = new Label(Expression.getProperty("LABEL_TITLE_GAME_CREATION"), skin, "heading");
-        this.table.add(this.heading);
-        this.table.getCell(this.heading).spaceBottom(70).colspan(2);
-        this.table.row();
-
+    }
+    
+    public void initSelectBoxes () {
         int numberPlayersTotal = GameRulesModel.NUMBER_PLAYERS_MAX-GameRulesModel.NUMBER_PLAYERS_MIN+1;
         String [] choiceNumberPlayers = new String [numberPlayersTotal];
         for ( int i=0, j=GameRulesModel.NUMBER_PLAYERS_MIN; i<numberPlayersTotal; i++, j++) {
             choiceNumberPlayers[i] = String.valueOf(j);
         }
         this.selectBoxNumberPlayers = new SelectBox(choiceNumberPlayers, skin);
-        Label selectBoxLabel = new Label("Nombre de joueurs : ", skin);
-        this.table.add(selectBoxLabel);
-        this.table.add(selectBoxNumberPlayers);
-        this.table.row();
-
-        Label checkBoxesLabel = new Label("Mode de jeu : ", skin);
-        this.table.add(checkBoxesLabel);
-
-        Table checkboxesTable = new Table();
+        
+        this.selectBoxNumberHumanPlayers = new SelectBox(choiceNumberPlayers, skin);
+    }
+    
+    public void initCheckBoxes () {
+        this.checkBoxesTable = new Table();
         
         CheckBox standardBox= new CheckBox("Standard", skin);
         CheckBox epicBox = new CheckBox("Epic", skin);
@@ -120,21 +117,53 @@ public class GuiGameSettingsView implements Screen {
         
         for ( CheckBox checkBox : this.checkBoxes ) {
             buttonGroup.add(checkBox);
-            checkboxesTable.add(checkBox).left();
-            checkboxesTable.row();
+            checkBoxesTable.add(checkBox).left();
+            checkBoxesTable.row();
         }
-
-        this.table.add(checkboxesTable);
+    }
+    
+    public void initTable () {
+        this.table = new Table();
+        this.table.defaults().space(20);
+        this.table.debug();
+        this.table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        
+        this.table.add(this.heading);
+        
+        this.table.getCell(this.heading).spaceBottom(70).colspan(2);
         this.table.row();
-
+        Label selectBoxNumberPlayersLabel = new Label("Nombre de joueurs : ", skin);
+        this.table.add(selectBoxNumberPlayersLabel);
+        this.table.add(selectBoxNumberPlayers);
+        
+        this.table.row();
+        Label selectBoxNumberHumanPlayersLabel = new Label("Nombre de joueurs humains : ", skin);
+        this.table.add(selectBoxNumberHumanPlayersLabel);
+        this.table.add(selectBoxNumberHumanPlayers);
+        
+        this.table.row();
+        Label checkBoxesLabel = new Label("Mode de jeu : ", skin);
+        this.table.add(checkBoxesLabel);
+        this.table.add(checkBoxesTable);
+        
+        this.table.row();
         this.table.add(this.buttonStartGame);
         this.table.getCell(this.buttonStartGame).spaceTop(70).width(300);
-
         this.table.add(this.buttonMainMenuReturn);
         this.table.getCell(this.buttonMainMenuReturn).spaceTop(70);
-        
-        initListener();
-        
+    }
+
+    @Override
+    public void show () {
+        initStage();
+        initSkin();
+        initHeading();
+        initButtons();
+        initSelectBoxes();
+        initCheckBoxes();
+        initTable();
+
+        initListener();        
         this.stage.addActor(this.table);
     }
 

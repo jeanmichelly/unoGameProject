@@ -11,12 +11,12 @@ import fr.utt.isi.lo02.unoGame.model.board.GameSettingsModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.language.Expression;
 import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
-import fr.utt.isi.lo02.unoGame.view.gui.board.GuiBoardView;
-import fr.utt.isi.lo02.unoGame.view.gui.board.GuiGameSettingsView;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiLanguagesScreenView;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiMenuScreenView;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiSettingsScreenView;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiSplashScreenView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.board.GuiBoardScreenView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.board.GuiGameSettingsScreenView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.menu.GuiLanguagesScreenView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.menu.GuiMainMenuScreenView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.menu.GuiSettingsScreenView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.menu.GuiSplashScreenView;
 
 
 public class TesteurGUI {
@@ -29,23 +29,23 @@ public class TesteurGUI {
     public static void launchApplication () {
         GuiSplashScreenView splashScreen = new GuiSplashScreenView(); // 0
         screens.add(splashScreen);
-        GuiMenuScreenView menuScreen = new GuiMenuScreenView(); // 1
-        screens.add(menuScreen);
+        GuiMainMenuScreenView mainMenuScreen = new GuiMainMenuScreenView(); // 1
+        screens.add(mainMenuScreen);
         
         GameSettingsController gameSettingsController = new GameSettingsController (GameSettingsModel.getUniqueInstance());
-        GuiGameSettingsView gameSettingsView = new GuiGameSettingsView(
+        GuiGameSettingsScreenView gameSettingsView = new GuiGameSettingsScreenView(
                 GameSettingsModel.getUniqueInstance(), gameSettingsController
                 ); // 2
         screens.add(gameSettingsView);
         
-        GuiBoardView board = new GuiBoardView(); // 3
+        GuiBoardScreenView board = new GuiBoardScreenView(); // 3
         screens.add(board);
         GuiSettingsScreenView settingsScreen = new GuiSettingsScreenView(); // 4
         screens.add(settingsScreen);
         GuiLanguagesScreenView languagesScreen = new GuiLanguagesScreenView(); // 5
         screens.add(languagesScreen);
      
-
+        
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "UNO Game";
         cfg.useGL20 = true;

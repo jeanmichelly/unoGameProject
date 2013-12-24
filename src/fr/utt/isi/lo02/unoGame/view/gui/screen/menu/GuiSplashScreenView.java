@@ -1,4 +1,4 @@
-package fr.utt.isi.lo02.unoGame.view.gui.screen;
+package fr.utt.isi.lo02.unoGame.view.gui.screen.menu;
 
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;

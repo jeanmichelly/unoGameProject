@@ -1,12 +1,8 @@
-package fr.utt.isi.lo02.unoGame.view.gui.screen;
-
-import java.util.Observable;
-import java.util.Observer;
+package fr.utt.isi.lo02.unoGame.view.gui.screen.menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -20,15 +16,14 @@ import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.SkinLoader;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureAtlasLoader;
 
-public class GuiLanguagesScreenView implements Observer, Screen {
+public class GuiLanguagesScreenView implements Screen {
 
     GuiChangeLanguageScreenController guiChangeLanguageScreenController;
     private Stage stage;
-    private TextureAtlas atlas;
     private Skin skin;
-    private Table table;
-    private TextButton buttonFr, buttonEn, buttonMainMenuReturn;
     private Label heading;
+    private TextButton buttonFr, buttonEn, buttonMainMenuReturn;
+    private Table table;
 
     @Override
     public void render (float v) {
@@ -45,18 +40,21 @@ public class GuiLanguagesScreenView implements Observer, Screen {
         this.table.invalidateHierarchy();
         this.table.setSize(i,i2);
     }
-
-    @Override
-    public void show () {
+    
+    public void initStage () {
         this.stage = new Stage();
-
-        Gdx.input.setInputProcessor(this.stage);
-
-        Skin skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_MENU);
-
-        this.table = new Table();
-        this.table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
+        Gdx.input.setInputProcessor(this.stage);    
+    }
+    
+    public void initSkin () {
+        this.skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_MENU);
+    }
+    
+    public void initHeading () {
+        this.heading = new Label(Expression.getProperty("LABEL_TITLE_MENU_LANGUAGE"), skin, "heading");
+    }
+    
+    public void initButtons () {
         this.buttonFr = new TextButton(Expression.getProperty("BUTTON_MENU_LANGAGE_FR"), skin);
         this.buttonEn = new TextButton(Expression.getProperty("BUTTON_MENU_LANGAGE_EN"), skin);
         this.buttonMainMenuReturn = new TextButton(Expression.getProperty("BUTTON_MAIN_MENU_RETURN"), skin);
@@ -64,8 +62,12 @@ public class GuiLanguagesScreenView implements Observer, Screen {
         this.buttonFr.pad(15,40,15,40);
         this.buttonEn.pad(15,40,15,40);
         this.buttonMainMenuReturn.pad(15,40,15,40);
+    }
+    
+    public void initTable () {
+        this.table = new Table();
+        this.table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        this.heading = new Label(Expression.getProperty("LABEL_TITLE_MENU_LANGUAGE"), skin, "heading");
         this.table.add(this.heading);
         
         this.table.getCell(this.heading).spaceBottom(70);
@@ -79,9 +81,17 @@ public class GuiLanguagesScreenView implements Observer, Screen {
         this.table.getCell(this.buttonEn).spaceBottom(20);
         this.table.row();
         this.table.add(this.buttonMainMenuReturn);
+    }
 
-        this.stage.addActor(this.table);
+    @Override
+    public void show () {
+        initStage();
+        initSkin();
+        initHeading();
+        initButtons();
+        initTable();
         
+        this.stage.addActor(this.table);
         this.guiChangeLanguageScreenController = new GuiChangeLanguageScreenController();
     }
 
@@ -103,11 +113,6 @@ public class GuiLanguagesScreenView implements Observer, Screen {
     @Override
     public void dispose () {
 
-    }
-
-    @Override
-    public void update (Observable o, Object arg) {
-        
     }
     
     private class GuiChangeLanguageScreenController {

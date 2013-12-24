@@ -15,10 +15,10 @@ import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
 
 public class GameSettingsController {
     
-    GameSettingsModel gameSettingsModel;
+    private static GameSettingsModel gameSettingsModel;
     
     public GameSettingsController(GameSettingsModel gameSettingsModel) {
-        this.gameSettingsModel = gameSettingsModel;
+        GameSettingsController.gameSettingsModel = gameSettingsModel;
     }
     
     public ButtonController getButtonController () {
@@ -60,9 +60,9 @@ public class GameSettingsController {
         }
         
         public void createGame() throws InvalidActionPickCardException {
-            GameSettingsModel.getUniqueInstance().initNumberHumanPlayers((byte)2);
-            GameSettingsModel.getUniqueInstance().initPseudonymsHumanPlayers();
-            GameSettingsModel.getUniqueInstance().initChoiceGameRules();
+            gameSettingsModel.initNumberHumanPlayers((byte)2);
+            gameSettingsModel.initPseudonymsHumanPlayers();
+            gameSettingsModel.initChoiceGameRules();
             BoardModel boardModel = BoardModel.getUniqueInstance();
             boardModel.initGameRules();
             boardModel.createPlayers();
@@ -90,7 +90,7 @@ public class GameSettingsController {
                 SelectBox selectBox = (SelectBox) actor;
                 int numberOfPlayers = Integer.parseInt(selectBox.getSelection());
                 System.out.println(numberOfPlayers);
-                GameSettingsModel.getUniqueInstance().initNumberPlayers((byte)numberOfPlayers);
+                gameSettingsModel.initNumberPlayers((byte)numberOfPlayers);
             }
         }
         
@@ -108,7 +108,7 @@ public class GameSettingsController {
         
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             if ( event.getListenerActor() instanceof CheckBox ) {
-                CheckBox checkbox = (CheckBox) event.getListenerActor();    
+                CheckBox checkbox = (CheckBox) event.getListenerActor();   
                 System.out.println(checkbox.isChecked()+"\n"+checkbox.getName());
             }
             return true;                    

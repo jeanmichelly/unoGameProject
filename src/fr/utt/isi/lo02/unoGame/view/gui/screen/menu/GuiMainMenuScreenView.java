@@ -1,4 +1,4 @@
-package fr.utt.isi.lo02.unoGame.view.gui.screen;
+package fr.utt.isi.lo02.unoGame.view.gui.screen.menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -16,14 +16,15 @@ import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.SkinLoader;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureAtlasLoader;
 
-public class GuiMenuScreenView implements Screen {
+public class GuiMainMenuScreenView implements Screen {
 
-    GuiMenuScreenController guiMenuScreenController;
+    GuiMainMenuScreenController guiMainMenuScreenController;
     private Stage stage;
-    private Table table;
-    private TextButton buttonCreateGame, buttonGeneralSettings, buttonExit ;
+    private Skin skin;
     private Label heading;
-
+    private TextButton buttonCreateGame, buttonGeneralSettings, buttonExit ;
+    private Table table;
+    
     @Override
     public void render (float v) {
         Gdx.gl.glClearColor(0,0,0,1);
@@ -39,17 +40,21 @@ public class GuiMenuScreenView implements Screen {
         this.table.invalidateHierarchy();
         this.table.setSize(i,i2);
     }
-
-    @Override
-    public void show () {
+    
+    public void initStage () {
         this.stage = new Stage();
-        this.table = new Table();
-        this.table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
         Gdx.input.setInputProcessor(this.stage);
-
-        Skin skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_MENU);
-        
+    }
+    
+    public void initSkin () {
+        this.skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_MENU);
+    }
+    
+    public void initHeading () {
+        this.heading = new Label(Expression.getProperty("LABEL_TITLE_MENU_MAIN"), skin, "heading");
+    }
+    
+    public void initButtons () {
         this.buttonCreateGame = new TextButton(Expression.getProperty("BUTTON_CREATE_GAME"), skin);
         this.buttonGeneralSettings = new TextButton(Expression.getProperty("BUTTON_MENU_SETTINGS"), skin);
         this.buttonExit = new TextButton(Expression.getProperty("BUTTON_MENU_QUIT"), skin);
@@ -57,8 +62,12 @@ public class GuiMenuScreenView implements Screen {
         this.buttonCreateGame.pad(15,40,15,40);
         this.buttonGeneralSettings.pad(15,40,15,40);
         this.buttonExit.pad(15,40,15,40);
-
-        this.heading = new Label(Expression.getProperty("LABEL_TITLE_MENU_MAIN"), skin, "heading");
+    }
+    
+    public void initTable () {
+        this.table = new Table();
+        this.table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        
         this.table.add(this.heading);
         
         this.table.getCell(this.heading).spaceBottom(70);
@@ -72,10 +81,18 @@ public class GuiMenuScreenView implements Screen {
         this.table.getCell(this.buttonGeneralSettings).spaceBottom(20);
         this.table.row();
         this.table.add(this.buttonExit);
+    }
 
-        this.stage.addActor(this.table);
-        
-        this.guiMenuScreenController = new GuiMenuScreenController();
+    @Override
+    public void show () {
+        initStage();
+        initSkin();
+        initHeading();
+        initButtons();
+        initTable();
+
+        this.stage.addActor(this.table);        
+        this.guiMainMenuScreenController = new GuiMainMenuScreenController();
     }
 
     @Override
@@ -98,20 +115,20 @@ public class GuiMenuScreenView implements Screen {
 
     }
     
-    private class GuiMenuScreenController {
+    private class GuiMainMenuScreenController {
         
-        public GuiMenuScreenController () {
-            GuiMenuScreenView.this.buttonCreateGame.addListener( new ClickListener() {
+        public GuiMainMenuScreenController () {
+            GuiMainMenuScreenView.this.buttonCreateGame.addListener( new ClickListener() {
                 public void clicked (InputEvent event, float x, float y) {
                     GuiMasterView.setScreen(2);
                 }
             });
-            GuiMenuScreenView.this.buttonGeneralSettings.addListener( new ClickListener() {
+            GuiMainMenuScreenView.this.buttonGeneralSettings.addListener( new ClickListener() {
                 public void clicked (InputEvent event, float x, float y) {
                     GuiMasterView.setScreen(4);
                 }
             }); 
-            GuiMenuScreenView.this.buttonExit.addListener( new ClickListener() {
+            GuiMainMenuScreenView.this.buttonExit.addListener( new ClickListener() {
                 public void clicked (InputEvent event, float x, float y) {
                     Gdx.app.exit();
                 }
