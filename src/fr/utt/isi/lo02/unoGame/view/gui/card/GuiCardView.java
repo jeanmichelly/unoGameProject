@@ -32,7 +32,7 @@ public class GuiCardView extends Actor {
     public GuiCardView(CardModel cardModel) {
         this.cardModel = cardModel;
         this.setSize(GuiCardView.NATIVE_CARD_WIDTH, GuiCardView.NATIVE_CARD_HEIGHT);
-        TextureAtlas atlas = TextureAtlasLoader.ATLAS_CARD_SYMBOLS;
+        TextureAtlas atlas = TextureAtlasLoader.ATLAS_CARD;
         this.symbolRegion = atlas.findRegion(Character.toString(this.cardModel.getSymbol().getLabel()));
         this.cardSymbol = new Sprite(this.symbolRegion);
         this.cardPattern = new Sprite(TextureLoader.TEXTURE_CARD_PATTERN);

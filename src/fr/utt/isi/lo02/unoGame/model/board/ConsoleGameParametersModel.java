@@ -11,7 +11,7 @@ public class ConsoleGameParametersModel {
     /**
      * Stock le nombre de joueur participant à une partie
      */
-	private static  byte numberPlayers;
+	private static byte numberPlayers;
 	/**
 	 * Stock le nombre de joueur humain participant à une partie
 	 */
@@ -28,8 +28,8 @@ public class ConsoleGameParametersModel {
 	/**
 	 * Initialise le nombre de joueur
 	 */
-    public static void initNumberPlayers () {
-        ConsoleGameParametersModel.numberPlayers = 3;
+    public static void initNumberPlayers (byte numberPlayers) {
+        ConsoleGameParametersModel.numberPlayers = numberPlayers;
     }
 
     /**

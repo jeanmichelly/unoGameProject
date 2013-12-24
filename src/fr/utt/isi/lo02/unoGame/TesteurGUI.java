@@ -11,12 +11,8 @@ import fr.utt.isi.lo02.unoGame.model.board.ConsoleGameParametersModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.language.Expression;
 import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiBoardScreenView;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiLanguagesScreenView;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiMenuScreenView;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiGameSettingsScreenView;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiGeneralSettingsScreenView;
-import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiSplashScreenView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.*;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.GuiGameCreationScreenView;
 
 
 public class TesteurGUI {
@@ -31,11 +27,11 @@ public class TesteurGUI {
         screens.add(splashScreen);
         GuiMenuScreenView menuScreen = new GuiMenuScreenView(); // 1
         screens.add(menuScreen);
-        GuiGameSettingsScreenView gameSettingsScreen = new GuiGameSettingsScreenView(); // 2
+        GuiGameCreationScreenView gameSettingsScreen = new GuiGameCreationScreenView(); // 2
         screens.add(gameSettingsScreen);
         GuiBoardScreenView gameScreen = new GuiBoardScreenView(); // 3
         screens.add(gameScreen);
-        GuiGeneralSettingsScreenView generalSettingsScreen = new GuiGeneralSettingsScreenView(); // 4
+        GuiSettingsScreenView generalSettingsScreen = new GuiSettingsScreenView(); // 4
         screens.add(generalSettingsScreen);
         GuiLanguagesScreenView languagesScreen = new GuiLanguagesScreenView(); // 5
         screens.add(languagesScreen);
@@ -51,19 +47,8 @@ public class TesteurGUI {
     }
 
     public static void initUnoGame () throws InvalidActionPickCardException {
-        ConsoleGameParametersModel.initNumberPlayers();
-        ConsoleGameParametersModel.initNumberHumanPlayers();
-        ConsoleGameParametersModel.initPseudonymsHumanPlayers();
-        ConsoleGameParametersModel.initChoiceGameRules();
 
-        BoardModel boardModel = BoardModel.getUniqueInstance();
-        boardModel.initGameRules();
-        boardModel.createPlayers();
-        boardModel.initHumanPlayers();
-        boardModel.initComputerPlayers();
-        boardModel.chooseRandomDealer();
-        boardModel.dispenseCards();   
-        boardModel.initGame();
+
     }
 
     public static void main (String[] args) throws InvalidActionPickCardException {

@@ -56,7 +56,7 @@ public class TesteurConsole {
                                                     DrawPileIsEmptyAfterReshuffledException {
         
         BoardModel board = BoardModel.getUniqueInstance();
-        ConsoleGameParametersModel.initNumberPlayers();
+        ConsoleGameParametersModel.initNumberPlayers((byte) 3);
         ConsoleGameParametersModel.initNumberHumanPlayers();
         ConsoleGameParametersModel.initPseudonymsHumanPlayers();
         ConsoleGameParametersModel.initChoiceGameRules();

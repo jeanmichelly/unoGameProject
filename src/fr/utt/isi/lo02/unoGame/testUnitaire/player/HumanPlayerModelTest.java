@@ -23,7 +23,7 @@ public class HumanPlayerModelTest {
         CardModel c9 = new CardModel(SymbolModel.NINE, ColorModel.GREEN, (byte)9, new CompositeEffectModel());
 
 
-        ConsoleGameParametersModel.initNumberPlayers();
+        ConsoleGameParametersModel.initNumberPlayers((byte) 3);
         ConsoleGameParametersModel.initNumberHumanPlayers();
         ConsoleGameParametersModel.initPseudonymsHumanPlayers();
         BoardModel.getUniqueInstance().createPlayers();

@@ -122,7 +122,7 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.playersTable.row();
 
         for ( PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers() ) {
-            Skin skin = new Skin(SkinLoader.SKIN_BOARD, TextureAtlasLoader.ATLAS_BUTTON_MENU);
+            Skin skin = new Skin(SkinLoader.SKIN_BOARD, TextureAtlasLoader.ATLAS_MENU);
             Label pseudonym = new Label(playerModel.getPseudonym(), skin, "playerName");
             pseudonym.setFontScale(0.7f);
             this.playersTable.add(pseudonym);
@@ -172,7 +172,7 @@ public class GuiBoardScreenView implements Observer, Screen {
     }
 
     public void promptToPlay () {
-        Skin skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_BUTTON_MENU);
+        Skin skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_MENU);
         TextButton askToPlay = new TextButton(Expression.getProperty("BUTTON_BOARD_PLAY_CARD"), skin);
         askToPlay.pad(10, 20, 10, 20);
 

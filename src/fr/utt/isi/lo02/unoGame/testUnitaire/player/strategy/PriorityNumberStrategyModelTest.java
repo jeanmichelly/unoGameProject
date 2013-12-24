@@ -21,7 +21,7 @@ public class PriorityNumberStrategyModelTest {
     public void executeTest () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
         // Mettre que des joueurs ordinateurs pour pouvoir tester
         BoardModel board = BoardModel.getUniqueInstance();
-        ConsoleGameParametersModel.initNumberPlayers();
+        ConsoleGameParametersModel.initNumberPlayers((byte) 3);
         board.createPlayers();
         board.initComputerPlayers();
         board.setPlayerCursor((byte)0);
