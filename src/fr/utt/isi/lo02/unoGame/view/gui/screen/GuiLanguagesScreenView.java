@@ -52,7 +52,7 @@ public class GuiLanguagesScreenView implements Observer, Screen {
 
         Gdx.input.setInputProcessor(this.stage);
 
-        Skin skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_BUTTON_MENU);
+        Skin skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_MENU);
 
         this.table = new Table();
         this.table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -65,7 +65,7 @@ public class GuiLanguagesScreenView implements Observer, Screen {
         this.buttonEn.pad(15,40,15,40);
         this.buttonMainMenuReturn.pad(15,40,15,40);
 
-        this.heading = new Label(Expression.getProperty("LABEL_TITLE_MENU_LANGUAGE"), skin);
+        this.heading = new Label(Expression.getProperty("LABEL_TITLE_MENU_LANGUAGE"), skin, "heading");
         this.table.add(this.heading);
         
         this.table.getCell(this.heading).spaceBottom(70);

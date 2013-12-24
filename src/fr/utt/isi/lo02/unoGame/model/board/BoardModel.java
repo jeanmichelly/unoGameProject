@@ -60,6 +60,8 @@ public class BoardModel extends Observable {
 	 * Contient les différentes penalités (contre uno, +4)
 	 */
 	private CompositeEffectModel [] penaltys;
+
+	private GameSettingsModel gameSettingsModel;
 	/**
 	 * Contient la pile de cartes correspondant à la défausse (sommet visible par les joueurs)
 	 */
@@ -86,6 +88,7 @@ public class BoardModel extends Observable {
 	 * Lors de la création du plateau, on crée également la pioche, le talon, le mode de jeu et les pénalités.
 	 */
 	private BoardModel () {
+	    this.gameSettingsModel = GameSettingsModel.getUniqueInstance(); 
 	    this.drawPile = DrawPileModel.getUniqueInstance();
 	    this.discardPile = DiscardPileModel.getUniqueInstance();
 		this.gameRulesFactory = new GameRulesFactoryModel();
@@ -124,15 +127,15 @@ public class BoardModel extends Observable {
 	 * Initialisation du tableau de joueurs
 	 */
 	public void createPlayers () {
-	    this.players = new PlayerModel[ConsoleGameSettingsModel.getNumberPlayers()];
+	    this.players = new PlayerModel[gameSettingsModel.getNumberPlayers()];
 	}
 
 	/**
 	 * Initialisation et insertion des joueurs humains dans le tableau de joueurs
 	 */
 	public void initHumanPlayers () {
-		for ( int i=0; i<ConsoleGameSettingsModel.getNumberHumanPlayers(); i++ ) {
-		    this.players[i] = new HumanPlayerModel(ConsoleGameSettingsModel.getPseudonymHumanPlayer());
+		for ( int i=0; i<gameSettingsModel.getNumberHumanPlayers(); i++ ) {
+		    this.players[i] = new HumanPlayerModel(gameSettingsModel.getPseudonymHumanPlayer());
 		}
 	}
 
@@ -140,7 +143,7 @@ public class BoardModel extends Observable {
 	 * Initialisation et insertion des joueurs ordinateurs dans le tableau de joueurs
 	 */
 	public void initComputerPlayers () {
-		for ( int i=ConsoleGameSettingsModel.getNumberHumanPlayers(), j=1; i<ConsoleGameSettingsModel.getNumberPlayers(); i++, j++ ) {
+		for ( int i=gameSettingsModel.getNumberHumanPlayers(), j=1; i<gameSettingsModel.getNumberPlayers(); i++, j++ ) {
 		    this.players[i] = new ComputerPlayerModel("Computer"+j);
 		}
 	}

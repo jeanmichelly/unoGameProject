@@ -1,12 +1,16 @@
 package fr.utt.isi.lo02.unoGame;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
-import fr.utt.isi.lo02.unoGame.model.board.ConsoleGameSettingsModel;
+import fr.utt.isi.lo02.unoGame.model.board.GameSettingsModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
-import fr.utt.isi.lo02.unoGame.model.exception.*;
+import fr.utt.isi.lo02.unoGame.model.exception.DrawPileIsEmptyAfterReshuffledException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidGameRulesException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidPlayException;
 import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
 import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayerHandView;
 import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayersView;
@@ -56,10 +60,10 @@ public class TesteurConsole {
                                                     DrawPileIsEmptyAfterReshuffledException {
         
         BoardModel board = BoardModel.getUniqueInstance();
-        ConsoleGameSettingsModel.initNumberPlayers();
-        ConsoleGameSettingsModel.initNumberHumanPlayers();
-        ConsoleGameSettingsModel.initPseudonymsHumanPlayers();
-        ConsoleGameSettingsModel.initChoiceGameRules();
+        GameSettingsModel.getUniqueInstance().initNumberPlayers((byte)3);
+        GameSettingsModel.getUniqueInstance().initNumberHumanPlayers((byte)0);
+        GameSettingsModel.getUniqueInstance().initPseudonymsHumanPlayers();
+        GameSettingsModel.getUniqueInstance().initChoiceGameRules();
         board.createPlayers();
         board.initHumanPlayers();
         board.initComputerPlayers();

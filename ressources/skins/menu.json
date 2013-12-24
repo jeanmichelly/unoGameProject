@@ -8,13 +8,20 @@
     },
     "com.badlogic.gdx.graphics.g2d.BitmapFont": {
         "GeoSansLight"   : { "file": "ressources/font/GeoSansLight.fnt" },
-        "Decibel"        : { "file": "ressources/font/Decibel.fnt" }
+        "Carrington"     : { "file": "ressources/font/Carrington.fnt" },
+        "Jadefedga"      : { "file": "ressources/font/Jadefedga.fnt" }
     },
     "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
-        "default" : { "font": "Decibel", "fontColor": "white" }
+        "default" : { "font": "GeoSansLight", "fontColor": "white" },
+        "heading" : { "font": "Jadefedga", "fontColor": "white" }
     },
     "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
         "default" : { "up": "button.up", "down": "button.down", "font": "GeoSansLight", "fontColor": "black", "pressedOffsetX": 1, "pressedOffsetY": -1 }
+    },
+    "com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle": {
+        "default": { "font": "Carrington", "fontColor": "white", "background": "select", "scrollStyle": { "background": "selection" }, "listStyle": { "font": "Carrington", "selection": "selection" } }
+    },
+    "com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle": {
+        "default": { "font": "Carrington", "checkboxOn": "checkbox.checked", "checkboxOff": "checkbox.unchecked"}
     }
-
 }

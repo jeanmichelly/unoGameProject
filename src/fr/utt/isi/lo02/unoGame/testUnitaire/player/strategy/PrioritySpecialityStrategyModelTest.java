@@ -1,11 +1,11 @@
 package fr.utt.isi.lo02.unoGame.testUnitaire.player.strategy;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
-import fr.utt.isi.lo02.unoGame.model.board.ConsoleGameSettingsModel;
+import fr.utt.isi.lo02.unoGame.model.board.GameSettingsModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
@@ -21,7 +21,7 @@ public class PrioritySpecialityStrategyModelTest {
     public void executeTest () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
         // Mettre que des joueurs ordinateurs pour pouvoir tester
         BoardModel board = BoardModel.getUniqueInstance();
-        ConsoleGameSettingsModel.initNumberPlayers();
+        GameSettingsModel.getUniqueInstance().initNumberPlayers((byte)3);
         board.createPlayers();
         board.initComputerPlayers();
         board.setPlayerCursor((byte)0);

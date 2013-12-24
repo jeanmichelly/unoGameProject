@@ -9,7 +9,7 @@ import java.util.Stack;
 import org.junit.Test;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
-import fr.utt.isi.lo02.unoGame.model.board.ConsoleGameSettingsModel;
+import fr.utt.isi.lo02.unoGame.model.board.GameSettingsModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
@@ -27,13 +27,13 @@ public class CompositeEffectModelTest {
     @Test
     public void applyWildDrawFourEffectsTest () throws InvalidActionPickCardException, InvalidColorModelException {
         BoardModel board = BoardModel.getUniqueInstance();
-        ConsoleGameSettingsModel.setNumberPlayers((byte)3);
-        ConsoleGameSettingsModel.setNumberHumanPlayers((byte)3);
+        GameSettingsModel.getUniqueInstance().setNumberPlayers((byte)3);
+        GameSettingsModel.getUniqueInstance().setNumberHumanPlayers((byte)3);
         Stack<String> pseudonymsHumanPlayers = new Stack<String>();
         pseudonymsHumanPlayers.push("Pablo");
         pseudonymsHumanPlayers.push("JM");
         pseudonymsHumanPlayers.push("Mario");
-        ConsoleGameSettingsModel.setPseudonymsHumanPlayers(pseudonymsHumanPlayers);
+        GameSettingsModel.getUniqueInstance().setPseudonymsHumanPlayers(pseudonymsHumanPlayers);
         board.createPlayers();
         board.initHumanPlayers();
         board.initComputerPlayers();
@@ -70,13 +70,13 @@ public class CompositeEffectModelTest {
     @Test
     public void  applyWildDrawTwoEffectsTest () throws InvalidActionPickCardException, InvalidColorModelException {
         BoardModel board = BoardModel.getUniqueInstance();
-        ConsoleGameSettingsModel.setNumberPlayers((byte)3);
-        ConsoleGameSettingsModel.setNumberHumanPlayers((byte)3);
+        GameSettingsModel.getUniqueInstance().setNumberPlayers((byte)3);
+        GameSettingsModel.getUniqueInstance().setNumberHumanPlayers((byte)3);
         Stack<String> pseudonymsHumanPlayers = new Stack<String>();
         pseudonymsHumanPlayers.push("Pablo");
         pseudonymsHumanPlayers.push("JM");
         pseudonymsHumanPlayers.push("Mario");
-        ConsoleGameSettingsModel.setPseudonymsHumanPlayers(pseudonymsHumanPlayers);
+        GameSettingsModel.getUniqueInstance().setPseudonymsHumanPlayers(pseudonymsHumanPlayers);
         board.createPlayers();
         board.initHumanPlayers();
         board.initComputerPlayers();
