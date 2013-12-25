@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -23,14 +22,11 @@ import fr.utt.isi.lo02.unoGame.TesteurGUI;
 import fr.utt.isi.lo02.unoGame.controller.board.BoardController;
 import fr.utt.isi.lo02.unoGame.controller.board.PlayerHandController;
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
-import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
-import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
 import fr.utt.isi.lo02.unoGame.model.language.Expression;
-import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
-import fr.utt.isi.lo02.unoGame.view.gui.card.GuiCardView;
-import fr.utt.isi.lo02.unoGame.view.gui.card.GuiPacketView;
-import fr.utt.isi.lo02.unoGame.view.gui.card.GuiRibbonView;
-import fr.utt.isi.lo02.unoGame.view.gui.player.GuiPlayerView;
+import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiDiscardPileView;
+import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiDrawPileView;
+import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiRibbonView;
+import fr.utt.isi.lo02.unoGame.view.gui.player.GuiPlayersView;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.SkinLoader;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureAtlasLoader;
 
@@ -43,8 +39,9 @@ public class GuiBoardScreenView implements Observer, Screen {
     private Sprite boardBackground;
     private SpriteBatch batch;
     private GuiRibbonView cardRibbon;
-    private GuiPacketView drawPile, discardPile;
-    private Table discardPileTable, playersTable;
+    private GuiDiscardPileView discardPile;
+    private GuiDrawPileView drawPile;
+    private GuiPlayersView players;
     private Table saveGameTable, askToPlayTable;
     private TweenManager tweenManager = new TweenManager();
     private TextButton buttonAskToPlay, buttonSaveGame;
@@ -103,32 +100,24 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.skinMenu = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_MENU);
     }
 
-    public void initCardRibbon () {
-        this.cardRibbon = new GuiRibbonView(this.boardModel.getPlayer().getPlayerHand());
+    public void initComponentView () {
+        this.discardPile = new GuiDiscardPileView();
+        this.drawPile = new GuiDrawPileView();
+        
+        this.cardRibbon = new GuiRibbonView(this.boardModel.getPlayer().getPlayerHand(), this.tweenManager);
         PlayerHandController playerHandController = new PlayerHandController(this.boardModel.getPlayer().getPlayerHand(), this.cardRibbon);
         this.cardRibbon.addListener(playerHandController);
         
-        this.cardRibbon.setTweenManager(this.tweenManager);
-        this.cardRibbon.setBounds(Gdx.graphics.getWidth()/2 - 200, 0, 400, 180);
-        this.cardRibbon.setCustomScale(.5f);
-        this.cardRibbon.build();
+        this.players = new GuiPlayersView();  
     }
 
-    public void initDiscardPile () {
-        this.discardPile = new GuiPacketView(DiscardPileModel.getUniqueInstance().getCards());
-        this.discardPile.setCustomScale(.5f);
-        this.discardPile.setSize(GuiCardView.NATIVE_CARD_WIDTH * .5f, GuiCardView.NATIVE_CARD_HEIGHT * .5f);
+    public void build () {
         this.discardPile.build();
+        this.drawPile.build();
+        this.cardRibbon.build();
+        this.players.build();
     }
 
-    public void initDrawPile () {
-        this.drawPile = new GuiPacketView(DrawPileModel.getUniqueInstance().getCards());
-        this.drawPile.setCustomScale(.5f);
-        this.drawPile.setSize(GuiCardView.NATIVE_CARD_WIDTH * .5f, GuiCardView.NATIVE_CARD_HEIGHT * .5f);
-        this.drawPile.setFlipped(true);
-        this.drawPile.build();
-    }
-    
     public void initButtons () {
         this.buttonSaveGame = new TextButton(Expression.getProperty("LABEL_SAVE_GAME"), skinMenu);
         this.buttonSaveGame.setName("SG");
@@ -139,31 +128,6 @@ public class GuiBoardScreenView implements Observer, Screen {
     }
 
     public void initTables () {
-        this.discardPileTable = new Table();
-        this.discardPileTable.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        this.discardPileTable.add(this.discardPile);
-        this.discardPileTable.getCell(this.discardPile).pad(0,40,0,40);
-        this.discardPileTable.debug();
-
-        this.playersTable = new Table();
-        this.playersTable.top();
-        this.playersTable.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-        for ( PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers() ) {
-            GuiPlayerView playerView = new GuiPlayerView(playerModel);
-            playerView.setSize(70,60);
-            playerView.build();
-            this.playersTable.add(playerView);
-            this.playersTable.getCell(playerView).pad(0,18,0,18);
-        }
-        this.playersTable.row();
-
-        for ( PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers() ) {
-            Label pseudonym = new Label(playerModel.getPseudonym(), skinBoard, "playerName");
-            pseudonym.setFontScale(0.7f);
-            this.playersTable.add(pseudonym);
-        }
-        
         this.saveGameTable = new Table();
         this.saveGameTable.add(this.buttonSaveGame);
         this.saveGameTable.setPosition(1200, 700);
@@ -176,9 +140,9 @@ public class GuiBoardScreenView implements Observer, Screen {
     public void initStage () {
         this.stage = new Stage();
         this.stage.addActor(this.cardRibbon);
-        this.stage.addActor(this.discardPileTable);
+        this.stage.addActor(this.discardPile.getTable());
         this.stage.addActor(this.drawPile);
-        this.stage.addActor(this.playersTable);
+        this.stage.addActor(this.players.getTable());
         this.stage.addActor(saveGameTable);
         this.stage.addActor(askToPlayTable);
         Gdx.input.setInputProcessor(this.stage);
@@ -190,19 +154,12 @@ public class GuiBoardScreenView implements Observer, Screen {
         initBatch();
         initSkin();
         initBoardBackGround();
-        initCardRibbon();
-        initDiscardPile();
-        initDrawPile();
+        initComponentView();
+        build();
         initButtons();
         initTables();
         initStage();
         initListener();
-    }
-
-    public void promptToPlay () {
-
-
-
     }
 
     @Override

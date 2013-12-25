@@ -1,14 +1,16 @@
-package fr.utt.isi.lo02.unoGame.view.gui.card;
+package fr.utt.isi.lo02.unoGame.view.gui.deck;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.deck.PlayerHandModel;
+import fr.utt.isi.lo02.unoGame.view.gui.card.GuiCardView;
 import fr.utt.isi.lo02.unoGame.view.gui.tween.GuiCardViewAccessor;
 
 public class GuiRibbonView extends Group {
@@ -21,6 +23,13 @@ public class GuiRibbonView extends Group {
 
     public GuiRibbonView (PlayerHandModel playerHandModel) {
         this.playerHandModel = playerHandModel;
+        this.setBounds(Gdx.graphics.getWidth()/2 - 200, 0, 400, 180);
+        this.setCustomScale(.5f);
+    }
+    
+    public GuiRibbonView (PlayerHandModel playerHandModel, TweenManager tween) {
+        this(playerHandModel);
+        this.tweenManager = tween;
     }
 
     public void setTweenManager (TweenManager tween) {

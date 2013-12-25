@@ -16,6 +16,8 @@ public class GuiPlayerView extends Actor {
 
     public GuiPlayerView (PlayerModel playerModel) {
         this.playerModel = playerModel;
+        this.setSize(70,60);
+        this.build();
     }
 
     public void build () {

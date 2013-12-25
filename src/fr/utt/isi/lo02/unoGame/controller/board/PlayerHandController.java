@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 import fr.utt.isi.lo02.unoGame.model.deck.PlayerHandModel;
 import fr.utt.isi.lo02.unoGame.view.gui.card.GuiCardView;
-import fr.utt.isi.lo02.unoGame.view.gui.card.GuiRibbonView;
+import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiRibbonView;
 
 public class PlayerHandController extends InputListener {
         
