@@ -44,14 +44,13 @@ public class GameSettingsController {
         }
         
         public void clicked (InputEvent event, float x, float y) {
-            switch ( String.valueOf(event.getTarget()) ) {
+            switch ( String.valueOf(event.getListenerActor()) ) {
                 case "BSG" :
                     try {
                         createGame();
                     } catch (InvalidActionPickCardException e) {
                         e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                     }
-                    System.out.println(gameSettingsModel.getNumberPlayers()+" "+gameSettingsModel.getNumberHumanPlayers());
                     GuiMasterView.setScreen(3);   
                     break;
                 case "BMMR" :

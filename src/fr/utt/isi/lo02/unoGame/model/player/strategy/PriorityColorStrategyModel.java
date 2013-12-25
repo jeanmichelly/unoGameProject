@@ -1,5 +1,6 @@
 package fr.utt.isi.lo02.unoGame.model.player.strategy;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
@@ -11,7 +12,12 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException
  * Correspond à l'une des stratégies que peut utiliser un joueur ordinateur.
  * Elle permet de jouer en priorité les cartes avec une couleur jouables avec le score le plus élevé.
  */
-public class PriorityColorStrategyModel extends StrategyModel {
+public class PriorityColorStrategyModel extends StrategyModel implements Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
     /**
      * Exécute la stratégie qui donne la priorité aux couleurs

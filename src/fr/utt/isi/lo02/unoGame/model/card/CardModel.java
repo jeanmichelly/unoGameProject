@@ -1,9 +1,12 @@
 package fr.utt.isi.lo02.unoGame.model.card;
 
+import java.io.Serializable;
 import java.util.Iterator;
+
 import fr.utt.isi.lo02.unoGame.model.card.effect.ComponentEffectModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.CompositeEffectModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
+import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
 
 /**
  * Permet de representer les cartes du jeu. Une carte est caracterisée par : 
@@ -16,8 +19,12 @@ import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
  * @see GameRulesModel
  * @see CompositeEffectModel
  */
-public class CardModel {
+public class CardModel implements Serializable {
     
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private SymbolModel symbol;
 	private ColorModel color;
 	private byte score;

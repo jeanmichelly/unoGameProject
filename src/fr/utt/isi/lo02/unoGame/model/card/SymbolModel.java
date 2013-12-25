@@ -1,4 +1,7 @@
 package fr.utt.isi.lo02.unoGame.model.card;
+
+import java.io.Serializable;
+
 /**
  * Permet de lister la représentation des symboles que peut avoir une carte : 
  * <ul>
@@ -31,7 +34,7 @@ package fr.utt.isi.lo02.unoGame.model.card;
  * </ul>
  * Un symbole est representé par un label
  */
-public enum SymbolModel {
+public enum SymbolModel implements Serializable {
 
     ZERO           ('0'),
     ONE            ('1'),

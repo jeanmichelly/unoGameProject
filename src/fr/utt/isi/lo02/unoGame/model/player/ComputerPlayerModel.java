@@ -1,5 +1,6 @@
 package fr.utt.isi.lo02.unoGame.model.player;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
@@ -18,8 +19,12 @@ import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayerHandView;
  * Représente les joueurs ordinateurs. 
  * Les joueurs ordinateurs ont une intelligence artificielle et peuvent alors, jouer automatiquement.
  */
-public class ComputerPlayerModel extends PlayerModel {
+public class ComputerPlayerModel extends PlayerModel implements Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     /**
      * Comporte différentes stratégies
      * @see PlayerModel

@@ -1,5 +1,6 @@
 package fr.utt.isi.lo02.unoGame.model.deck;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -9,8 +10,13 @@ import fr.utt.isi.lo02.unoGame.model.card.CardModel;
  * Représente les mains des joueurs.
  * @see DeckModel
  */
-public class PlayerHandModel extends DeckModel<ArrayList<CardModel>> {
+public class PlayerHandModel extends DeckModel<ArrayList<CardModel>> implements Serializable {
     
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     /**
      * Initialise la main du joueur 
      */

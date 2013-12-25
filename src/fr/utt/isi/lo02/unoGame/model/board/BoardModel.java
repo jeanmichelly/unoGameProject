@@ -1,5 +1,11 @@
 package fr.utt.isi.lo02.unoGame.model.board;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Observable;
 
 import fr.utt.isi.lo02.unoGame.model.card.effect.CompositeEffectModel;
@@ -35,7 +41,11 @@ import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
  * @see GameRulesFactoryModel
  * @see GameRulesModel
  */
-public class BoardModel extends Observable {
+public class BoardModel extends Observable implements Serializable {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     /**
      * Contient l'instance unique du plateau de jeu
      */
@@ -236,7 +246,7 @@ public class BoardModel extends Observable {
 	public void applyCardEffect () throws InvalidActionPickCardException, 
 	                                      InvalidColorModelException {
 	    
-        this.discardPile.peek().getCompositeEffects().applyEffect();
+	    DiscardPileModel.getUniqueInstance().peek().getCompositeEffects().applyEffect();
 	    DiscardPileModel.getUniqueInstance().setApplyEffectLastCard(true);
 	}
     
@@ -261,7 +271,7 @@ public class BoardModel extends Observable {
      * @throws InvalidActionPickCardException
      */
     public void applyPenaltyAgainstLauncherWildDrawFourCard () throws InvalidActionPickCardException {
-        penaltys[1].applyEffect(this.getPlayerCursor());
+        this.penaltys[1].applyEffect(this.getPlayerCursor());
     }
     
     /**
@@ -269,7 +279,7 @@ public class BoardModel extends Observable {
      * @throws InvalidActionPickCardException
      */
     public void applyPenaltyAgainstWildDrawFourCard () throws InvalidActionPickCardException {
-        penaltys[2].applyEffect(this.getToNextPlayer());
+        this.penaltys[2].applyEffect(this.getToNextPlayer());
     }
     
     /**
@@ -411,6 +421,14 @@ public class BoardModel extends Observable {
         return this.numberRound;
     }
     
+    public DiscardPileModel getDiscardPile () {
+        return this.discardPile;
+    }
+    
+    public DrawPileModel getDrawPile () {
+        return this.drawPile;
+    }
+    
     /**
      * Donner la main a un joueur en particulier
      * @param playerCursor indice du joueur
@@ -431,6 +449,22 @@ public class BoardModel extends Observable {
      */
     public void setDirectionOfPlay () {
         this.directionOfPlay *= -1;
+    }
+    
+    public void saveBoardModel () throws IOException, ClassNotFoundException {
+        FileOutputStream fos = new FileOutputStream("saveGame.ser");
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(uniqueInstance);
+        fos.close();
+    }
+    
+    public void loadBoardModel () throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream("saveGame.ser");
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        uniqueInstance = (BoardModel)ois.readObject();
+        DrawPileModel.getUniqueInstance().loadDrawPileModel();
+        DiscardPileModel.getUniqueInstance().loadDiscardPileModel();
+        fis.close();    
     }
 
 }

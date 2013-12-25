@@ -1,5 +1,6 @@
 package fr.utt.isi.lo02.unoGame.model.deck;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,8 +14,12 @@ import fr.utt.isi.lo02.unoGame.model.card.CardModel;
  * @see DrawPileModel
  * @see PlayerHandModel
  */
-public abstract class DeckModel <T extends List<CardModel>> {
+public abstract class DeckModel <T extends List<CardModel>> implements Serializable {
     
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     /**
      * Ensemble de carte correspondant au paquet
      */

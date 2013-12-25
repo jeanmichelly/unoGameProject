@@ -1,5 +1,7 @@
 package fr.utt.isi.lo02.unoGame.model.card;
 
+import java.io.Serializable;
+
 /**
  * Permet de lister la représentation des couleurs que peut avoir une carte : 
  * <ul>
@@ -10,7 +12,7 @@ package fr.utt.isi.lo02.unoGame.model.card;
  * </ul>
  * Une couleur est representée par un identifiant, un label, et une composante couleur RGB
  */
-public enum ColorModel {
+public enum ColorModel implements Serializable {
     
     YELLOW ((byte)0, 'Y', new com.badlogic.gdx.graphics.Color(.86f, .84f,  0,    1)),
     RED    ((byte)1, 'R', new com.badlogic.gdx.graphics.Color(.78f, .098f, .098f,1)),

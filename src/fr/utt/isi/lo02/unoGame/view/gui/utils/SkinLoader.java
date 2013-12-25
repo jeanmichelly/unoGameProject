@@ -7,5 +7,6 @@ public class SkinLoader {
     
     public final static FileHandle SKIN_MENU = Gdx.files.internal("ressources/skins/menu.json");
     public final static FileHandle SKIN_BOARD = Gdx.files.internal("ressources/skins/board.json");
+    public final static FileHandle SKIN_TEXT_FIELD = Gdx.files.internal("ressources/skins/ui/defaultskin.json");
 
 }

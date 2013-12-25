@@ -1,5 +1,6 @@
 package fr.utt.isi.lo02.unoGame.model.player.strategy;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
@@ -11,7 +12,12 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException
  * <u>Pattern Strategy : </u> </br>
  *  Définit le modèle commun des stratégies
  */
-public abstract class StrategyModel {
+public abstract class StrategyModel implements Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
     /**
      * Exécute une stratégie 

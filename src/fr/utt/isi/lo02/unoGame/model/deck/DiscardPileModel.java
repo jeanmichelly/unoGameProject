@@ -1,8 +1,10 @@
 package fr.utt.isi.lo02.unoGame.model.deck;
 
+import java.io.Serializable;
 import java.util.EmptyStackException;
 import java.util.Stack;
 
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
@@ -14,7 +16,12 @@ import fr.utt.isi.lo02.unoGame.model.exception.DrawPileIsEmptyAfterReshuffledExc
  * Elle n'est instanciable qu'une seule fois.
  * @see DeckModel
  */
-public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
+public class DiscardPileModel extends DeckModel<Stack<CardModel>> implements Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
     /**
      * Rend le talon instanciable une seule fois 
@@ -132,6 +139,10 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> {
      */
     public void setApplyEffectLastCard (boolean applyEffectLastCard) {
         this.applyEffectLastCard = applyEffectLastCard;
+    }
+    
+    public void loadDiscardPileModel () {
+        uniqueInstance = BoardModel.getUniqueInstance().getDiscardPile();
     }
         
 }

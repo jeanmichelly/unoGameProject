@@ -1,13 +1,19 @@
 package fr.utt.isi.lo02.unoGame.model.card.effect;
 
+import java.io.Serializable;
+
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 
 /**
  * Représente le modèle des effets de bas niveau
  */
-public abstract class ComponentEffectModel {
+public abstract class ComponentEffectModel implements Serializable {
     
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     /**
      * La priorité d'un effet doit être defini car l'exécution d'un composite d'effet peut changer en fonction de l'ordre des effets
      * @see CompositeEffectModel

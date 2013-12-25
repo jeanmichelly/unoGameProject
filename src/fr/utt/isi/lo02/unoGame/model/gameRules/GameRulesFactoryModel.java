@@ -1,5 +1,7 @@
 package fr.utt.isi.lo02.unoGame.model.gameRules;
 
+import java.io.Serializable;
+
 import fr.utt.isi.lo02.unoGame.model.board.GameSettingsModel;
 
 /** 
@@ -8,8 +10,12 @@ import fr.utt.isi.lo02.unoGame.model.board.GameSettingsModel;
  * @see GameRulesModel
  * @see GameRulesStandardModel
  */
-public class GameRulesFactoryModel {
+public class GameRulesFactoryModel implements Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     public static final int numberGameRules = 2;
     /**
      * Créer le mode de jeu choisit par l'utilisateur

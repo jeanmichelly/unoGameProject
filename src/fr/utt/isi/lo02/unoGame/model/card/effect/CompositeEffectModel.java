@@ -1,5 +1,6 @@
 package fr.utt.isi.lo02.unoGame.model.card.effect;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,8 +21,12 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
  * @see SkipEffectModel
  * @see WildEffectModel
  */
-public class CompositeEffectModel extends ComponentEffectModel {
+public class CompositeEffectModel extends ComponentEffectModel implements Serializable {
     
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     /**
      * Liste d'effet correspondant à un effet du jeu officiel
      */

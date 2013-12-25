@@ -1,5 +1,6 @@
 package fr.utt.isi.lo02.unoGame.model.player;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
@@ -16,8 +17,12 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 /**
  * Définit le modèle commun d'un joueur
  */
-public abstract class PlayerModel {
+public abstract class PlayerModel implements Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     /**
      * Identifie le joueur avec un pseudo
      */

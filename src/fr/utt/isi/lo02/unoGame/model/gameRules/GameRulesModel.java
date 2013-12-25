@@ -1,5 +1,7 @@
 package fr.utt.isi.lo02.unoGame.model.gameRules;
 
+import java.io.Serializable;
+
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
 
@@ -10,7 +12,11 @@ import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
  * @see ColorModel
  * @see SymbolModel
  */
-public abstract class GameRulesModel {
+public abstract class GameRulesModel implements Serializable {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     /**
      * Définit le nombre minimum de joueur que peut avoir une partie du jeu
      */

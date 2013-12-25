@@ -1,8 +1,10 @@
 package fr.utt.isi.lo02.unoGame.model.deck;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
@@ -16,8 +18,12 @@ import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
  * Représente la pioche du jeu par une pile de cartes. Elle n'est instanciable qu'une seule fois.
  * @see DeckModel
  */
-public class DrawPileModel extends DeckModel<Stack<CardModel>> {
+public class DrawPileModel extends DeckModel<Stack<CardModel>> implements Serializable {
      
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     /**
      * Rend la pioche instanciable une seule fois 
      */
@@ -159,6 +165,10 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> {
         }
         
         return super.cards.pop();
+    }
+    
+    public void loadDrawPileModel () {
+        uniqueInstance = BoardModel.getUniqueInstance().getDrawPile();
     }
     
 }

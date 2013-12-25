@@ -1,5 +1,6 @@
 package fr.utt.isi.lo02.unoGame.model.language;
 
+import java.io.Serializable;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
 
@@ -7,8 +8,12 @@ import java.util.PropertyResourceBundle;
  * Permet la selection de la langue utilise au cours de l'application.
  * Elle peut etre definit par l'utilisateur.
  */
-public class Expression {
+public class Expression implements Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private static String language; //System.getProperty("user.language");
     private static String country; //System.getProperty("user.country");
 

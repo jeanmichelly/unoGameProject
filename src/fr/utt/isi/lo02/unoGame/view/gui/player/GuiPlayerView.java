@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+
 import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureLoader;
 

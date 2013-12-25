@@ -1,5 +1,7 @@
 package fr.utt.isi.lo02.unoGame.model.card.effect;
 
+import java.io.Serializable;
+
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 
@@ -7,7 +9,12 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
  * Permet d'effectuer un effet pour faire piocher une carte au prochain joueur.
  * @see ComponentEffectModel
  */
-public class DrawEffectModel extends ComponentEffectModel {
+public class DrawEffectModel extends ComponentEffectModel implements Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
     /**
      * Construit un effet pour piocher avec une priorité de 20

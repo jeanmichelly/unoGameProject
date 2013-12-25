@@ -1,5 +1,6 @@
 package fr.utt.isi.lo02.unoGame.model.player.strategy;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -13,7 +14,12 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException
  * Elle n'a pas de specifité particuliere pour effectuer une action.
  * Elle permet de jouer n'importe quelle carte jouable ou ne pas jouer avec la même probabilité. 
  */
-public class RandomStrategyModel extends StrategyModel {
+public class RandomStrategyModel extends StrategyModel implements Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
     /**
      * Exécute la stratégie qui joue aléatoirement

@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Scaling;
 
 import fr.utt.isi.lo02.unoGame.TesteurGUI;
+import fr.utt.isi.lo02.unoGame.controller.board.BoardController;
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
@@ -37,6 +38,8 @@ import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureAtlasLoader;
 
 public class GuiBoardScreenView implements Observer, Screen {
 
+    BoardModel boardModel;
+    BoardController boardController;
     private Stage stage;
     private Sprite boardBackground;
     private SpriteBatch batch;
@@ -45,6 +48,12 @@ public class GuiBoardScreenView implements Observer, Screen {
     private Table discardPileTable;
     private Table playersTable;
     private TweenManager tweenManager = new TweenManager();
+    private TextButton buttonSaveGame;
+    
+    public GuiBoardScreenView (BoardModel boardModel, BoardController boardController) {
+        this.boardModel = boardModel;
+        this.boardController = boardController;
+    }
 
     @Override
     public void render (float v) {
@@ -72,9 +81,14 @@ public class GuiBoardScreenView implements Observer, Screen {
         Gdx.gl.glViewport(viewportX, viewportY, viewportWidth, viewportHeight);
         this.stage.setViewport(TesteurGUI.APPLICATION_WIDTH, TesteurGUI.APPLICATION_HEIGHT, true, viewportX, viewportY, viewportWidth, viewportHeight);
     }
+    
+    public void initListener () {
+        this.buttonSaveGame.addListener(boardController.getButtonController());
+    }
 
     @Override
     public void show () {
+        this.boardModel = BoardModel.getUniqueInstance(); // Pour le load
         this.batch = new SpriteBatch();
         this.stage = new Stage();
 
@@ -84,7 +98,7 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.boardBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 
-        this.cardRibbon = new GuiRibbonView(BoardModel.getUniqueInstance().getPlayer(0).getPlayerHand());
+        this.cardRibbon = new GuiRibbonView(this.boardModel.getPlayer().getPlayerHand());
         this.cardRibbon.setTweenManager(this.tweenManager);
         this.cardRibbon.setBounds(Gdx.graphics.getWidth()/2 - 200, 0, 400, 180);
         this.cardRibbon.setCustomScale(.5f);
@@ -169,6 +183,8 @@ public class GuiBoardScreenView implements Observer, Screen {
             }
 
         });
+        initButtonSaveGame();
+        initListener();
     }
 
     public void promptToPlay () {
@@ -179,6 +195,17 @@ public class GuiBoardScreenView implements Observer, Screen {
         Table table = new Table();
         table.add(askToPlay);
         table.setPosition(1100, 100);
+        this.stage.addActor(table);
+    }
+    
+    public void initButtonSaveGame () {
+        Skin skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_MENU);
+        this.buttonSaveGame = new TextButton(Expression.getProperty("LABEL_SAVE_GAME"), skin);
+        this.buttonSaveGame.setName("SG");
+        this.buttonSaveGame.pad(10, 20, 10, 20);
+        Table table = new Table();
+        table.add(this.buttonSaveGame);
+        table.setPosition(1200, 700);
         this.stage.addActor(table);
     }
 

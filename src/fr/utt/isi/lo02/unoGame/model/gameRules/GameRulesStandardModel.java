@@ -1,5 +1,7 @@
 package fr.utt.isi.lo02.unoGame.model.gameRules;
 
+import java.io.Serializable;
+
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
@@ -9,7 +11,12 @@ import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
  * @see GameRulesFactoryModel
  * @see GameRulesModel
  */
-public class GameRulesStandardModel extends GameRulesModel {
+public class GameRulesStandardModel extends GameRulesModel implements Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
     /**
      * Comptabilisation des points pour chaque joueur du mode de jeu standard.

@@ -1,5 +1,7 @@
 package fr.utt.isi.lo02.unoGame.model.player;
 
+import java.io.Serializable;
+
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayerHandView;
@@ -8,8 +10,13 @@ import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayerHandView;
  * Représente les joueurs humains. Elle requiert donc une présence humaine pour effectuer les actions de jeu.
  * @see PlayerModel
  */
-public class HumanPlayerModel extends PlayerModel {
+public class HumanPlayerModel extends PlayerModel implements Serializable {
     
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     /**
      * Construit un joueur humain 
      * @param pseudonym represente le pseudo du joueur

@@ -1,5 +1,6 @@
 package fr.utt.isi.lo02.unoGame.model.board;
 
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Stack;
 
@@ -7,8 +8,12 @@ import java.util.Stack;
  * Exclusivement constituée de membres statiques. 
  * Elle définit l'utilisateur qui manipule l'application hormis le deroulement d'une partie.
  */
-public class GameSettingsModel extends Observable {
+public class GameSettingsModel extends Observable implements Serializable {
     
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private static GameSettingsModel uniqueInstance = null;
     /**
      * Stock le nombre de joueur participant à une partie
@@ -30,6 +35,7 @@ public class GameSettingsModel extends Observable {
     private GameSettingsModel () {
         this.pseudonymsHumanPlayers = new Stack<String>();
         this.numberPlayers = 2;
+        this.numberHumanPlayers = 2;
         this.choiceGameRules = 's';
     }
 
