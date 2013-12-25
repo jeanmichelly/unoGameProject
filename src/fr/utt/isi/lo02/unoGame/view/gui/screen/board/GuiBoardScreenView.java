@@ -12,9 +12,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -24,6 +21,7 @@ import com.badlogic.gdx.utils.Scaling;
 
 import fr.utt.isi.lo02.unoGame.TesteurGUI;
 import fr.utt.isi.lo02.unoGame.controller.board.BoardController;
+import fr.utt.isi.lo02.unoGame.controller.board.PlayerHandController;
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
@@ -41,14 +39,15 @@ public class GuiBoardScreenView implements Observer, Screen {
     BoardModel boardModel;
     BoardController boardController;
     private Stage stage;
+    Skin skinBoard, skinMenu; 
     private Sprite boardBackground;
     private SpriteBatch batch;
     private GuiRibbonView cardRibbon;
     private GuiPacketView drawPile, discardPile;
-    private Table discardPileTable;
-    private Table playersTable;
+    private Table discardPileTable, playersTable;
+    private Table saveGameTable, askToPlayTable;
     private TweenManager tweenManager = new TweenManager();
-    private TextButton buttonSaveGame;
+    private TextButton buttonAskToPlay, buttonSaveGame;
     
     public GuiBoardScreenView (BoardModel boardModel, BoardController boardController) {
         this.boardModel = boardModel;
@@ -86,35 +85,60 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.buttonSaveGame.addListener(boardController.getButtonController());
     }
 
-    @Override
-    public void show () {
+    public void refreshBoardModel () {
         this.boardModel = BoardModel.getUniqueInstance(); // Pour le load
+    }
+
+    public void initBatch () {
         this.batch = new SpriteBatch();
-        this.stage = new Stage();
+    }
 
-        Gdx.input.setInputProcessor(this.stage);
-
+    public void initBoardBackGround () {
         this.boardBackground = new Sprite(new Texture(Gdx.files.internal("ressources/img/misc/boardBackground.png")));
         this.boardBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    }
 
+    public void initSkin () {
+        this.skinBoard = new Skin(SkinLoader.SKIN_BOARD, TextureAtlasLoader.ATLAS_MENU);
+        this.skinMenu = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_MENU);
+    }
 
+    public void initCardRibbon () {
         this.cardRibbon = new GuiRibbonView(this.boardModel.getPlayer().getPlayerHand());
+        PlayerHandController playerHandController = new PlayerHandController(this.boardModel.getPlayer().getPlayerHand(), this.cardRibbon);
+        this.cardRibbon.addListener(playerHandController);
+        
         this.cardRibbon.setTweenManager(this.tweenManager);
         this.cardRibbon.setBounds(Gdx.graphics.getWidth()/2 - 200, 0, 400, 180);
         this.cardRibbon.setCustomScale(.5f);
         this.cardRibbon.build();
+    }
 
+    public void initDiscardPile () {
         this.discardPile = new GuiPacketView(DiscardPileModel.getUniqueInstance().getCards());
         this.discardPile.setCustomScale(.5f);
         this.discardPile.setSize(GuiCardView.NATIVE_CARD_WIDTH * .5f, GuiCardView.NATIVE_CARD_HEIGHT * .5f);
         this.discardPile.build();
+    }
 
+    public void initDrawPile () {
         this.drawPile = new GuiPacketView(DrawPileModel.getUniqueInstance().getCards());
         this.drawPile.setCustomScale(.5f);
         this.drawPile.setSize(GuiCardView.NATIVE_CARD_WIDTH * .5f, GuiCardView.NATIVE_CARD_HEIGHT * .5f);
         this.drawPile.setFlipped(true);
         this.drawPile.build();
+    }
+    
+    public void initButtons () {
+        this.buttonSaveGame = new TextButton(Expression.getProperty("LABEL_SAVE_GAME"), skinMenu);
+        this.buttonSaveGame.setName("SG");
+        this.buttonSaveGame.pad(10, 20, 10, 20);
+        
+        this.buttonAskToPlay = new TextButton(Expression.getProperty("BUTTON_BOARD_PLAY_CARD"), skinMenu);
+        this.buttonAskToPlay.pad(10, 20, 10, 20);
+    }
 
+    public void initTables () {
         this.discardPileTable = new Table();
         this.discardPileTable.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         this.discardPileTable.add(this.discardPile);
@@ -132,81 +156,53 @@ public class GuiBoardScreenView implements Observer, Screen {
             this.playersTable.add(playerView);
             this.playersTable.getCell(playerView).pad(0,18,0,18);
         }
-
         this.playersTable.row();
 
         for ( PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers() ) {
-            Skin skin = new Skin(SkinLoader.SKIN_BOARD, TextureAtlasLoader.ATLAS_MENU);
-            Label pseudonym = new Label(playerModel.getPseudonym(), skin, "playerName");
+            Label pseudonym = new Label(playerModel.getPseudonym(), skinBoard, "playerName");
             pseudonym.setFontScale(0.7f);
             this.playersTable.add(pseudonym);
         }
+        
+        this.saveGameTable = new Table();
+        this.saveGameTable.add(this.buttonSaveGame);
+        this.saveGameTable.setPosition(1200, 700);
+        
+        this.askToPlayTable = new Table();
+        this.askToPlayTable.add(buttonAskToPlay);
+        this.askToPlayTable.setPosition(1100, 100);
+    }
 
+    public void initStage () {
+        this.stage = new Stage();
         this.stage.addActor(this.cardRibbon);
         this.stage.addActor(this.discardPileTable);
         this.stage.addActor(this.drawPile);
         this.stage.addActor(this.playersTable);
+        this.stage.addActor(saveGameTable);
+        this.stage.addActor(askToPlayTable);
+        Gdx.input.setInputProcessor(this.stage);
+    }
 
-        this.cardRibbon.addListener(new InputListener() {
-
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                Actor actor = cardRibbon.hit(x,y,true);
-                if ( actor instanceof GuiCardView ) {
-                    GuiCardView cardView = (GuiCardView) actor;
-                    if ( cardRibbon.getUppedCard() != null && cardRibbon.getUppedCard().equals(actor) && !cardRibbon.isSelected(cardView) ) {
-                        cardRibbon.setSelected(cardView);
-                        promptToPlay();
-                    } else if ( cardRibbon.getUppedCard() != null && cardRibbon.getUppedCard().equals(actor) && cardRibbon.isSelected(cardView) ) {
-                        cardRibbon.resetCardSelected();
-                    }
-                }
-                return super.touchDown(event, x, y, pointer, button);    //To change body of overridden methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                Actor enteredActor = cardRibbon.hit(x,y,true);
-                if ( enteredActor instanceof GuiCardView ) {
-                    GuiCardView cardView = (GuiCardView) enteredActor;
-                    if ( cardRibbon.getUppedCard() == null ) {
-                        cardRibbon.setCardUpped(cardView);
-                    }
-                }
-            }
-
-            @Override
-            public void exit (InputEvent event, float x, float y, int pointer, Actor toActor) {
-                if ( cardRibbon.getUppedCard() != null && !cardRibbon.hasSelectedCard() ) {
-                    cardRibbon.resetCardUpped();
-                }
-            }
-
-        });
-        initButtonSaveGame();
+    @Override
+    public void show () {
+        refreshBoardModel();
+        initBatch();
+        initSkin();
+        initBoardBackGround();
+        initCardRibbon();
+        initDiscardPile();
+        initDrawPile();
+        initButtons();
+        initTables();
+        initStage();
         initListener();
     }
 
     public void promptToPlay () {
-        Skin skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_MENU);
-        TextButton askToPlay = new TextButton(Expression.getProperty("BUTTON_BOARD_PLAY_CARD"), skin);
-        askToPlay.pad(10, 20, 10, 20);
 
-        Table table = new Table();
-        table.add(askToPlay);
-        table.setPosition(1100, 100);
-        this.stage.addActor(table);
-    }
-    
-    public void initButtonSaveGame () {
-        Skin skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_MENU);
-        this.buttonSaveGame = new TextButton(Expression.getProperty("LABEL_SAVE_GAME"), skin);
-        this.buttonSaveGame.setName("SG");
-        this.buttonSaveGame.pad(10, 20, 10, 20);
-        Table table = new Table();
-        table.add(this.buttonSaveGame);
-        table.setPosition(1200, 700);
-        this.stage.addActor(table);
+
+
     }
 
     @Override

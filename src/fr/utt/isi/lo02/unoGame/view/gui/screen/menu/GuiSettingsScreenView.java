@@ -41,11 +41,6 @@ public class GuiSettingsScreenView implements Screen {
         this.table.setSize(i,i2);
     }
     
-    public void initStage () {
-        this.stage = new Stage();
-        Gdx.input.setInputProcessor(this.stage);
-    }
-    
     public void initSkin () {
         this.skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_MENU);
     }
@@ -82,16 +77,20 @@ public class GuiSettingsScreenView implements Screen {
         this.table.row();
         this.table.add(this.buttonMainMenuReturn);
     }
+    
+    public void initStage () {
+        this.stage = new Stage();
+        Gdx.input.setInputProcessor(this.stage);
+        this.stage.addActor(this.table);
+    }
 
     @Override
     public void show () {
-        initStage();
         initSkin();
         initHeading();
         initButtons();
         initTable();
-        
-        this.stage.addActor(this.table);
+        initStage();
         this.guiSettingsScreenController = new GuiSettingsScreenController(); 
     }
 

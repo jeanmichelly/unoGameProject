@@ -2,7 +2,6 @@ package fr.utt.isi.lo02.unoGame.view.console;
 
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Scanner;
 import java.util.Stack;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;

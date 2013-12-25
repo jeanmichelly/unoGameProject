@@ -71,11 +71,6 @@ public class GuiGameSettingsScreenView implements Screen, Observer {
         }
     }
     
-    public void initStage () {
-        this.stage = new Stage();
-        Gdx.input.setInputProcessor(this.stage);
-    }
-    
     public void initSkin () {
         this.skin = new Skin(SkinLoader.SKIN_MENU, TextureAtlasLoader.ATLAS_MENU);
     }
@@ -165,20 +160,23 @@ public class GuiGameSettingsScreenView implements Screen, Observer {
         this.table.add(this.buttonMainMenuReturn);
         this.table.getCell(this.buttonMainMenuReturn).spaceTop(70);
     }
+    
+    public void initStage () {
+        this.stage = new Stage();
+        Gdx.input.setInputProcessor(this.stage);
+        this.stage.addActor(this.table);
+    }
 
     @Override
     public void show () {
-        initStage();
         initSkin();
         initHeading();
         initButtons();
         initSelectBoxes();
         initCheckBoxes();
         initTable();
-
         initListener(); 
-        
-        this.stage.addActor(this.table);
+        initStage();
     }
 
     @Override

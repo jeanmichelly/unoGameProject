@@ -51,7 +51,7 @@ public class GuiCardView extends Actor {
 
     public void flipCard () {
         this.flipped = !this.flipped;
-        if ( this.flipped) {
+        if ( this.flipped ) {
             this.cardPattern = new Sprite(TextureLoader.TEXTURE_CARD_PATTERN_FLIPPED);
         } else {
             this.cardPattern = new Sprite(TextureLoader.TEXTURE_CARD_PATTERN_FLIPPED);
@@ -63,7 +63,7 @@ public class GuiCardView extends Actor {
 
         this.tweenManager.killTarget(this.cardHighlighted);
 
-        if ( this.highlited) {
+        if ( this.highlited ) {
             Tween.set(this.cardHighlighted, SpriteAccessor.ALPHA).target(0).start(this.tweenManager);
             Tween.to(this.cardHighlighted, SpriteAccessor.ALPHA, .15f).target(1).start(this.tweenManager);
         } else {
@@ -82,7 +82,6 @@ public class GuiCardView extends Actor {
     }
 
     public void draw (SpriteBatch spriteBatch, float v) {
-
         this.cardPattern.setSize(super.getWidth(), super.getHeight());
         this.cardPattern.setPosition(super.getX(), super.getY());
         this.cardPattern.setOrigin(super.getOriginX(), super.getOriginY());

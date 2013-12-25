@@ -35,11 +35,6 @@ public class GuiSplashScreenView implements Screen {
     }
 
     @Override
-    public void resize (int i, int i2) {
-        
-    }
-
-    @Override
     public void show () {
         this.batch = new SpriteBatch();
         this.tweenManager = new TweenManager();
@@ -54,6 +49,11 @@ public class GuiSplashScreenView implements Screen {
         this.guiSplashScreenController = new GuiSplashScreenController();
     }
 
+    @Override
+    public void resize (int i, int i2) {
+        
+    }
+    
     @Override
     public void hide () {
         
