@@ -19,10 +19,6 @@ public abstract class GuiPacketView extends Group {
         this.setSize(GuiCardView.NATIVE_CARD_WIDTH * .5f, GuiCardView.NATIVE_CARD_HEIGHT * .5f);
     }
 
-    public void setCustomScale (float scale) {
-        this.customScale = scale;
-    }
-
     public void build () {
         GuiCardView topCardView = new GuiCardView(this.cardPacket.peek());
         topCardView.setPosition(super.getX(), super.getY());
@@ -33,6 +29,10 @@ public abstract class GuiPacketView extends Group {
         }
         topCardView.build();
         this.addActor(topCardView);
+    }
+    
+    public void setCustomScale (float scale) {
+        this.customScale = scale;
     }
 
     public void setFlipped (boolean flipped) {

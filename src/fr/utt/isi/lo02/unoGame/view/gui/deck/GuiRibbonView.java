@@ -31,53 +31,7 @@ public class GuiRibbonView extends Group {
         this(playerHandModel);
         this.tweenManager = tween;
     }
-
-    public void setTweenManager (TweenManager tween) {
-        this.tweenManager = tween;
-    }
-
-    public boolean isSelected (GuiCardView cardView) {
-        return cardView.equals(this.selectedCard);
-    }
-
-    public boolean hasSelectedCard () {
-        return this.selectedCard != null;
-    }
-
-    public void setSelected (GuiCardView cardView) {
-        this.selectedCard = cardView;
-        this.selectedCard.setHighlited(true);
-    }
-
-    public void setCustomScale (float scale) {
-        this.customScale = scale;
-    }
-
-    public void resetCardUpped () {
-        this.tweenManager.killTarget(this.uppedCard);
-        Tween.to(this.uppedCard, GuiCardViewAccessor.POSITION_Y, .2f).target(0).start(this.tweenManager);
-        this.uppedCard = null;
-    }
-
-    public void resetCardSelected () {
-        this.selectedCard.setHighlited(false);
-        this.selectedCard = null;
-    }
-
-    public boolean setCardUpped(GuiCardView cardView) {
-        if ( this.uppedCard == null ) {
-            this.uppedCard = cardView;
-            this.tweenManager.killTarget(this.uppedCard);
-            Tween.to(this.uppedCard, GuiCardViewAccessor.POSITION_Y, .2f).target(40).start(this.tweenManager);
-            return true;
-        }
-        return false;
-    }
-
-    public GuiCardView getUppedCard() {
-        return this.uppedCard;
-    }
-
+    
     public void build () {
         int cardNumber = this.playerHandModel.getCards().size();
         float spaceBetweenCards = (((cardNumber * GuiCardView.NATIVE_CARD_WIDTH * this.customScale) - super.getWidth()) / cardNumber);
@@ -95,6 +49,59 @@ public class GuiRibbonView extends Group {
             this.addActor(cardView);
             a++;
         }
+    }
+
+    public void resetCardUpped () {
+        this.tweenManager.killTarget(this.uppedCard);
+        Tween.to(this.uppedCard, GuiCardViewAccessor.POSITION_Y, .2f).target(0).start(this.tweenManager);
+        this.uppedCard = null;
+        if ( this.selectedCard != null ) {
+            this.selectedCard.setHighlited(false);
+            this.selectedCard = null;
+        }
+    }
+
+    public void resetCardSelected () {
+        this.selectedCard.setHighlited(false);
+        this.selectedCard = null;
+    }
+    
+    public boolean isSelected (GuiCardView cardView) {
+        return cardView.equals(this.selectedCard);
+    }
+
+    public boolean hasSelectedCard () {
+        return this.selectedCard != null;
+    }
+    
+    public GuiCardView getUppedCard() {
+        return this.uppedCard;
+    }
+    
+    public void setCustomScale (float scale) {
+        this.customScale = scale;
+    }
+
+    public boolean setCardUpped(GuiCardView cardView) {
+        if ( this.uppedCard == null ) {
+            this.uppedCard = cardView;
+            this.tweenManager.killTarget(this.uppedCard);
+            
+            Tween.to(this.uppedCard, GuiCardViewAccessor.POSITION_Y, .2f).target(40).start(this.tweenManager);
+            return true;
+        }
+        return false;
+    }
+    
+    public void setSelected (GuiCardView cardView) {
+        if ( cardView.getModel().isPlayableCard() && !cardView.equals(selectedCard) ) {
+            this.selectedCard = cardView;
+            this.selectedCard.setHighlited(true);
+        }
+    }
+    
+    public void setTweenManager (TweenManager tween) {
+        this.tweenManager = tween;
     }
     
 }

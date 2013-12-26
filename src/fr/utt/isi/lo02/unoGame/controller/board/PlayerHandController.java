@@ -4,7 +4,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.deck.PlayerHandModel;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
+import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
 import fr.utt.isi.lo02.unoGame.view.gui.card.GuiCardView;
 import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiRibbonView;
 
@@ -23,10 +26,25 @@ public class PlayerHandController extends InputListener {
         Actor actor = this.cardRibbon.hit(x, y, true);
         if ( actor instanceof GuiCardView ) {
             GuiCardView cardView = (GuiCardView) actor;
-            if ( this.cardRibbon.getUppedCard() != null && this.cardRibbon.getUppedCard().equals(actor) && !this.cardRibbon.isSelected(cardView) ) {
+            
+            if ( this.cardRibbon.getUppedCard() != null && this.cardRibbon.getUppedCard().equals(actor) 
+                    && this.cardRibbon.isSelected(cardView) && cardView.isHighlited() ) {
+                try {
+                    BoardModel.getUniqueInstance().getPlayer().putDownCard(cardView.getZIndex());
+                    BoardModel.getUniqueInstance().moveCursorToNextPlayer();
+                    GuiMasterView.setScreen(3);
+                } catch (InvalidActionPutDownCardException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if ( this.cardRibbon.getUppedCard() != null && this.cardRibbon.getUppedCard().equals(actor) 
+                    && !this.cardRibbon.isSelected(cardView) ) {
                 this.cardRibbon.setSelected(cardView);
-            } else if ( cardRibbon.getUppedCard() != null && this.cardRibbon.getUppedCard().equals(actor) && this.cardRibbon.isSelected(cardView) ) {
+            } else if ( cardRibbon.getUppedCard() != null && this.cardRibbon.getUppedCard().equals(actor) 
+                    && this.cardRibbon.isSelected(cardView) ) {
                 this.cardRibbon.resetCardSelected();
+            } else {
+                this.cardRibbon.resetCardUpped();
             }
         }
         return super.touchDown(event, x, y, pointer, button);    //To change body of overridden methods use File | Settings | File Templates.
