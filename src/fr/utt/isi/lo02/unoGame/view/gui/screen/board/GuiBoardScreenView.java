@@ -42,9 +42,9 @@ public class GuiBoardScreenView implements Observer, Screen {
     private GuiDiscardPileView discardPile;
     private GuiDrawPileView drawPile;
     private GuiPlayersView players;
-    private Table saveGameTable, askToPlayTable;
+    private Table saveGameTable;
     private TweenManager tweenManager = new TweenManager();
-    private TextButton buttonAskToPlay, buttonSaveGame;
+    private TextButton buttonSaveGame;
     
     public GuiBoardScreenView (BoardModel boardModel, BoardController boardController) {
         this.boardModel = boardModel;
@@ -83,7 +83,7 @@ public class GuiBoardScreenView implements Observer, Screen {
     }
 
     public void refreshBoardModel () {
-        this.boardModel = BoardModel.getUniqueInstance(); // Pour le load
+        this.boardModel = BoardModel.getUniqueInstance();
     }
 
     public void initBatch () {
@@ -122,19 +122,12 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.buttonSaveGame = new TextButton(Expression.getProperty("LABEL_SAVE_GAME"), skinMenu);
         this.buttonSaveGame.setName("SG");
         this.buttonSaveGame.pad(10, 20, 10, 20);
-        
-        this.buttonAskToPlay = new TextButton(Expression.getProperty("BUTTON_BOARD_PLAY_CARD"), skinMenu);
-        this.buttonAskToPlay.pad(10, 20, 10, 20);
     }
 
     public void initTables () {
         this.saveGameTable = new Table();
         this.saveGameTable.add(this.buttonSaveGame);
         this.saveGameTable.setPosition(1200, 700);
-        
-        this.askToPlayTable = new Table();
-        this.askToPlayTable.add(buttonAskToPlay);
-        this.askToPlayTable.setPosition(1100, 100);
     }
 
     public void initStage () {
@@ -144,7 +137,6 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.stage.addActor(this.drawPile);
         this.stage.addActor(this.players.getTable());
         this.stage.addActor(saveGameTable);
-        this.stage.addActor(askToPlayTable);
         Gdx.input.setInputProcessor(this.stage);
     }
 

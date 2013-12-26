@@ -13,13 +13,13 @@ public class PlayerHandController extends InputListener {
     private PlayerHandModel playerHandModel;
     private GuiRibbonView cardRibbon;
     
-    public PlayerHandController(PlayerHandModel playerHandModel, GuiRibbonView cardRibbon) {
+    public PlayerHandController (PlayerHandModel playerHandModel, GuiRibbonView cardRibbon) {
         this.playerHandModel = playerHandModel;
         this.cardRibbon = cardRibbon;
     }
 
     @Override
-    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
         Actor actor = this.cardRibbon.hit(x, y, true);
         if ( actor instanceof GuiCardView ) {
             GuiCardView cardView = (GuiCardView) actor;

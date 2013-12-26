@@ -24,14 +24,15 @@ public abstract class GuiPacketView extends Group {
     }
 
     public void build () {
-        GuiCardView cardView = new GuiCardView(this.cardPacket.peek());
-        cardView.setPosition(super.getX(), super.getY());
-        cardView.resize(customScale);
+        GuiCardView topCardView = new GuiCardView(this.cardPacket.peek());
+        topCardView.setPosition(super.getX(), super.getY());
+        topCardView.resize(customScale);
+      
         if ( this.flipped ) {
-            cardView.flipCard();
+            topCardView.flipCard();
         }
-        cardView.build();
-        this.addActor(cardView);
+        topCardView.build();
+        this.addActor(topCardView);
     }
 
     public void setFlipped (boolean flipped) {

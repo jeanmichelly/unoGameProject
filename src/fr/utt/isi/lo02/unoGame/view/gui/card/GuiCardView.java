@@ -74,7 +74,7 @@ public class GuiCardView extends Actor {
 
     public void build () {
         if ( this.tweenManager != null )
-        Tween.set(this.cardHighlighted, SpriteAccessor.ALPHA).target(0).start(this.tweenManager);
+            Tween.set(this.cardHighlighted, SpriteAccessor.ALPHA).target(0).start(this.tweenManager);
     }
 
     public void resize (float factor) {

@@ -32,20 +32,46 @@ public class GuiPlayersView {
             score.setFontScale(0.7f);
             this.playersTable.add(score);
         }
-        this.playersTable.row();
         
+        this.playersTable.row();
+        if ( BoardModel.getUniqueInstance().getDirectionOfPlay() == -1 ) {
+            Label numberCards = new Label("<-----", skinBoard, "playerName");
+            numberCards.setFontScale(0.7f);
+            this.playersTable.add(numberCards);
+        }
         for ( PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers() ) {
             GuiPlayerView playerView = new GuiPlayerView(playerModel);
             this.playersTable.add(playerView);
             this.playersTable.getCell(playerView).pad(0,18,0,18);
         }
+        if ( BoardModel.getUniqueInstance().getDirectionOfPlay() == 1 ) {
+            Label numberCards = new Label("----->", skinBoard, "playerName");
+            numberCards.setFontScale(0.7f);
+            this.playersTable.add(numberCards);
+        }
+        
         this.playersTable.row();
-
         for ( PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers() ) {
             Label pseudonym = new Label(playerModel.getPseudonym(), skinBoard, "playerName");
             pseudonym.setFontScale(0.7f);
             this.playersTable.add(pseudonym);
-        }    
+        }   
+        
+        this.playersTable.row();
+        for ( PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers() ) {
+            Label numberCards = new Label(String.valueOf(playerModel.getPlayerHand().getCards().size()), skinBoard, "playerName");
+            numberCards.setFontScale(0.7f);
+            this.playersTable.add(numberCards);
+        }   
+        
+        this.playersTable.row();
+        for ( PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers() ) {
+            Label cursorPlayer = new Label("", skinBoard, "playerName");
+            if ( playerModel == BoardModel.getUniqueInstance().getPlayer() )
+                cursorPlayer = new Label("~•~", skinBoard, "playerName");
+            cursorPlayer.setFontScale(0.7f);
+            this.playersTable.add(cursorPlayer);
+        }   
     }
     
     public Table getTable () {
