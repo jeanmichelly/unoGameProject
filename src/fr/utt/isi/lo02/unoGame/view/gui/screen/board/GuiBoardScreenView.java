@@ -21,15 +21,19 @@ import com.badlogic.gdx.utils.Scaling;
 
 import fr.utt.isi.lo02.unoGame.TesteurGUI;
 import fr.utt.isi.lo02.unoGame.controller.board.BoardController;
+import fr.utt.isi.lo02.unoGame.controller.board.ComputerPlayerController;
 import fr.utt.isi.lo02.unoGame.controller.board.DrawPileController;
-import fr.utt.isi.lo02.unoGame.controller.board.PlayerController;
+import fr.utt.isi.lo02.unoGame.controller.board.HumanPlayerController;
 import fr.utt.isi.lo02.unoGame.controller.board.PlayerHandController;
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.model.language.Expression;
+import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
+import fr.utt.isi.lo02.unoGame.model.player.HumanPlayerModel;
 import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiDiscardPileView;
 import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiDrawPileView;
 import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiRibbonView;
@@ -112,16 +116,17 @@ public class GuiBoardScreenView implements Observer, Screen {
 
     public void initComponentView () {
         this.discardPile = new GuiDiscardPileView();
-
         this.drawPile = new GuiDrawPileView();
-        DrawPileController drawPileController = new DrawPileController(
-            DrawPileModel.getUniqueInstance(), this.drawPile);
-        this.drawPile.addListener(drawPileController);
-        
         this.cardRibbon = new GuiRibbonView(this.boardModel.getPlayer().getPlayerHand(), this.tweenManager);
-        PlayerHandController playerHandController = new PlayerHandController(
-            this.boardModel.getPlayer().getPlayerHand(), this.cardRibbon);
-        this.cardRibbon.addListener(playerHandController);
+        
+        if ( BoardModel.getUniqueInstance().getPlayer() instanceof HumanPlayerModel ) {
+            DrawPileController drawPileController = new DrawPileController(
+                    DrawPileModel.getUniqueInstance(), this.drawPile);
+                this.drawPile.addListener(drawPileController);
+            PlayerHandController playerHandController = new PlayerHandController(
+                this.boardModel.getPlayer().getPlayerHand(), this.cardRibbon);
+            this.cardRibbon.addListener(playerHandController);
+        }
         
         this.players = new GuiPlayersView();  
     }
@@ -138,18 +143,19 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.buttonSaveGame.setName("SG");
         this.buttonSaveGame.pad(10, 20, 10, 20);
         
-        PlayerController playerController = new PlayerController(BoardModel.getUniqueInstance().getPlayer());
+        HumanPlayerController humanPlayerController = new HumanPlayerController(
+                (HumanPlayerModel)BoardModel.getUniqueInstance().getPlayer());
         this.buttonNotToPlay = new TextButton ("Next", skinMenu);
         this.buttonNotToPlay.setName("NTP");
         this.buttonNotToPlay.pad(10, 20, 10, 20);
         this.buttonNotToPlay.setVisible(false);
-        this.buttonNotToPlay.addListener(playerController);
+        this.buttonNotToPlay.addListener(humanPlayerController);
 
         Texture colorsTexture = new Texture(Gdx.files.internal("ressources/img/card/colors.png"));
         this.choiceColors = new Image(colorsTexture);
         this.choiceColors.setBounds(0, 0, 200, 200);
         this.choiceColors.setName("CC");
-        this.choiceColors.addListener(playerController);
+        this.choiceColors.addListener(humanPlayerController);
         this.choiceColors.setVisible(colors);
     }
 
@@ -174,11 +180,11 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.stage.addActor(this.discardPile.getTable());
         this.stage.addActor(this.drawPile);
         this.stage.addActor(this.players.getTable());
-        this.stage.addActor(this.saveGameTable);
-        this.stage.addActor(this.notToPlayTable);
-        
-        this.stage.addActor(this.choiceColorsTable);
-
+        if ( BoardModel.getUniqueInstance().getPlayer() instanceof HumanPlayerModel ) {
+            this.stage.addActor(this.saveGameTable);
+            this.stage.addActor(this.notToPlayTable);
+            this.stage.addActor(this.choiceColorsTable);
+        }
         Gdx.input.setInputProcessor(this.stage);
     }
 
@@ -190,10 +196,16 @@ public class GuiBoardScreenView implements Observer, Screen {
         initBoardBackGround();
         initComponentView();
         build();
-        initButtons();
-        initTables();
+        if ( BoardModel.getUniqueInstance().getPlayer() instanceof HumanPlayerModel ) {
+            initButtons();
+            initTables();
+            initListener();
+        } else {
+            ComputerPlayerController computerPlayerController = new ComputerPlayerController(
+                    (ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer());
+            computerPlayerController.play();
+        }
         initStage();
-        initListener();
     }
 
     @Override
@@ -224,13 +236,11 @@ public class GuiBoardScreenView implements Observer, Screen {
             if ( !DiscardPileModel.getUniqueInstance().hasApplyEffectLastCard() ) { 
                 try {
                     BoardModel.getUniqueInstance().applyCardEffect();
-                    BoardModel.getUniqueInstance().moveCursorToNextPlayer();
-                } catch (InvalidActionPickCardException e) {
-                    e.printStackTrace();
-                } catch (InvalidColorModelException e) {
+                } catch (InvalidActionPickCardException | InvalidColorModelException e) {
                     e.printStackTrace();
                 }
             }
+            BoardModel.getUniqueInstance().moveCursorToNextPlayer();
             this.show();
             if ( !DrawPileModel.getUniqueInstance().isDrawable() ) {
                 this.buttonNotToPlay.setVisible(true);

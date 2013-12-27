@@ -110,7 +110,10 @@ public class ConsoleBoardView implements Observer {
             BoardModel.getUniqueInstance().notifyObservers();
             
             try {
-                BoardModel.getUniqueInstance().getPlayer().play();
+                if ( BoardModel.getUniqueInstance().getPlayer() instanceof HumanPlayerModel )
+                    ConsolePlayerHandView.ConsolePlayerHandController.playHumanPlayerModel();
+                else
+                    ConsolePlayerHandView.ConsolePlayerHandController.playComputerPlayerModel();
             } catch (Exception e) {
                 InvalidPlayException ipe = new InvalidPlayException();
                 ipe.initCause(e);

@@ -2,7 +2,6 @@ package fr.utt.isi.lo02.unoGame.model.player;
 
 import java.io.Serializable;
 import java.util.Iterator;
-import java.util.Observable;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
@@ -105,9 +104,6 @@ public abstract class PlayerModel implements Serializable {
 	 * @throws InvalidActionPutDownCardException
 	 * @throws InvalidColorModelException
 	 */
-    public abstract void play () throws InvalidActionPickCardException, 
-                                        InvalidActionPutDownCardException,
-                                        InvalidColorModelException;
     
     /**
      * Permet au joueur de choisir une couleur

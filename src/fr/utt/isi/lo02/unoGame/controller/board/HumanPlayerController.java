@@ -6,15 +6,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
-import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
+import fr.utt.isi.lo02.unoGame.model.player.HumanPlayerModel;
 import fr.utt.isi.lo02.unoGame.view.gui.screen.board.GuiBoardScreenView;
 
-public class PlayerController extends ClickListener {
+public class HumanPlayerController extends ClickListener {
 
-    PlayerModel playerModel;
+    HumanPlayerModel humanPlayerModel;
 
-    public PlayerController(PlayerModel playerModel) {
-        this.playerModel = playerModel;
+    public HumanPlayerController(HumanPlayerModel humanPlayerModel) {
+        this.humanPlayerModel = humanPlayerModel;
     }
     
     public void clicked (InputEvent event, float x, float y) {
@@ -25,13 +25,13 @@ public class PlayerController extends ClickListener {
                 break;
             case "CC" :
                 if ( x<100 && y>100 )
-                    playerModel.chooseColor(ColorModel.YELLOW);
+                    this.humanPlayerModel.chooseColor(ColorModel.YELLOW);
                 else if ( x>100 && y>100 )
-                    playerModel.chooseColor(ColorModel.GREEN);
+                    this.humanPlayerModel.chooseColor(ColorModel.GREEN);
                 else if ( x<100 && y<100 )
-                    playerModel.chooseColor(ColorModel.BLUE);
+                    this.humanPlayerModel.chooseColor(ColorModel.BLUE);
                 else
-                    playerModel.chooseColor(ColorModel.RED);
+                    this.humanPlayerModel.chooseColor(ColorModel.RED);
                 GuiBoardScreenView.colors = false;
                 break; 
         }

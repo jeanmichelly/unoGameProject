@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
-import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.PlayerHandModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;

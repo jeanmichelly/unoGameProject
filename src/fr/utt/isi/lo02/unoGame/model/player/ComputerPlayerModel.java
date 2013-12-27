@@ -3,6 +3,7 @@ package fr.utt.isi.lo02.unoGame.model.player;
 import java.io.Serializable;
 import java.util.Iterator;
 
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
@@ -57,11 +58,19 @@ public class ComputerPlayerModel extends PlayerModel implements Serializable {
     }
     
     /**
-     * Permettre la gestion du moteur d'un joueur ordinateur 
-     * en choisissant de manière intelligente le choix de la stratégie au cours du temps.
+     * Permettre de jouer une strategie d'un joueur ordinateur.
+     * Le choix de la strategie est choisie de manière 
+     * intelligente grâce au controller qui lui est associé
      */
-    public void play () throws InvalidActionPickCardException, InvalidActionPutDownCardException {
-        ConsolePlayerHandView.ConsolePlayerHandController.playComputerPlayerModel();
+    
+    public boolean play (int i) {
+        try {
+            return this.getStrategy(i).execute();
+        } catch (InvalidActionPickCardException
+                | InvalidActionPutDownCardException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
     
     /**
