@@ -33,8 +33,11 @@ public class PlayerHandController extends InputListener {
                     BoardModel.getUniqueInstance().getPlayer().putDownCard(cardView.getZIndex());
                     DrawPileModel.getUniqueInstance().setDrawable(true);
                     BoardModel.getUniqueInstance().moveCursorToNextPlayer();
+<<<<<<< HEAD
                     BoardModel.getUniqueInstance().setChanged();
                     BoardModel.getUniqueInstance().notifyObservers();
+=======
+>>>>>>> 0992f6915566c62a36a52bb7d64e3336547c4a98
                 } catch (InvalidActionPutDownCardException e) {
                     e.printStackTrace();
                 }
