@@ -21,7 +21,7 @@ public class GuiCardView extends Actor {
     public final static int NATIVE_CARD_WIDTH = 220;
     public final static int NATIVE_CARD_HEIGHT = 288;
 
-    private Sprite cardPattern, cardSymbol, cardBackground, cardHighlighted;
+    private Sprite cardPattern, cardSymbol, cardLittleSymbol, cardBackground, cardHighlighted;
     private TextureRegion symbolRegion;
     private CardModel cardModel;
     private TweenManager tweenManager;
@@ -35,6 +35,7 @@ public class GuiCardView extends Actor {
         TextureAtlas atlas = TextureAtlasLoader.ATLAS_CARD;
         this.symbolRegion = atlas.findRegion(Character.toString(this.cardModel.getSymbol().getLabel()));
         this.cardSymbol = new Sprite(this.symbolRegion);
+        this.cardLittleSymbol = new Sprite(this.symbolRegion);
         this.cardPattern = new Sprite(TextureLoader.TEXTURE_CARD_PATTERN);
         this.cardBackground = new Sprite(TextureLoader.TEXTURE_CARD_BACKGROUND);
         this.cardHighlighted = new Sprite(TextureLoader.TEXTURE_CARD_HIGHLIGHTED);
@@ -79,14 +80,20 @@ public class GuiCardView extends Actor {
         this.cardPattern.setRotation(super.getRotation());
     }
     
-    private void initLocationCardSymbol () {
+    private void initLocationCardSymbols () {
         Vector2 symbolSize = new Vector2(this.symbolRegion.getRegionWidth() / (NATIVE_CARD_WIDTH / super.getWidth()), this.symbolRegion.getRegionHeight() / (NATIVE_CARD_HEIGHT / super.getHeight()));
         this.cardSymbol.setSize(symbolSize.x, symbolSize.y);
         this.cardSymbol.setPosition(super.getX() + super.getWidth() / 2 - this.cardSymbol.getWidth() / 2 , super.getY() + super.getHeight() / 2 - this.cardSymbol.getHeight() / 2);
         this.cardSymbol.setOrigin(super.getOriginX(), super.getOriginY());
         this.cardSymbol.setRotation(super.getRotation());
+
+        Vector2 littleSymbolSize = new Vector2((this.symbolRegion.getRegionWidth() / (NATIVE_CARD_WIDTH / super.getWidth())) / 2, (this.symbolRegion.getRegionHeight() / (NATIVE_CARD_HEIGHT / super.getHeight())) / 2);
+        this.cardLittleSymbol.setSize(littleSymbolSize.x, littleSymbolSize.y);
+        this.cardLittleSymbol.setPosition(super.getX() + super.getWidth() / 6 - this.cardLittleSymbol.getWidth() / 2 , super.getY() + (super.getHeight() - super.getHeight() / 7) - this.cardLittleSymbol.getHeight() / 2);
+        this.cardLittleSymbol.setOrigin(super.getOriginX(), super.getOriginY());
+        this.cardLittleSymbol.setRotation(super.getRotation());
     }
-    
+
     private void initLocationCardHighlighted () {
         this.cardHighlighted.setSize(super.getWidth() * 1.17f, super.getHeight() * 1.118f);
         this.cardHighlighted.setPosition(super.getX() - (this.cardHighlighted.getWidth() - super.getWidth()) / 2, super.getY() - (this.cardHighlighted.getHeight() - super.getHeight()) / 2);
@@ -97,7 +104,7 @@ public class GuiCardView extends Actor {
     private void initLocationSprite () {
         this.initLocationCardBackground();
         this.initLocationCardPattern();
-        this.initLocationCardSymbol();
+        this.initLocationCardSymbols();
         this.initLocationCardHighlighted();
     }
 
@@ -110,6 +117,7 @@ public class GuiCardView extends Actor {
             this.cardBackground.draw(spriteBatch);
             this.cardPattern.draw(spriteBatch);
             this.cardSymbol.draw(spriteBatch);
+            this.cardLittleSymbol.draw(spriteBatch);
         }
 
         if ( highlited )
