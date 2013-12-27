@@ -34,7 +34,7 @@ public class GuiRibbonView extends Group {
     
     public void build () {
         int cardNumber = this.playerHandModel.getCards().size();
-        float spaceBetweenCards = (((cardNumber * GuiCardView.NATIVE_CARD_WIDTH * this.customScale) - super.getWidth()) / cardNumber);
+        float spaceBetweenCards = (((7 * GuiCardView.NATIVE_CARD_WIDTH * this.customScale ) - super.getWidth()) / cardNumber);
         int a = 0;
         for ( CardModel cardModel : this.playerHandModel.getCards() ) {
             GuiCardView cardView = new GuiCardView(cardModel);

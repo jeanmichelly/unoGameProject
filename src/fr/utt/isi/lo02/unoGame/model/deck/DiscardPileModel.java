@@ -80,7 +80,6 @@ public class DiscardPileModel extends DeckModel<Stack<CardModel>> implements Ser
                 this.peek().setColor(null);
         } catch (EmptyStackException e) { }
         if ( card.getSymbol() == SymbolModel.WILD_DRAW_FOUR ) {
-            System.out.println(this.peek());
             colorBeforeWildDrawFour = this.peek().getColor();
         }
         

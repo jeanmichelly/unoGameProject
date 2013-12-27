@@ -2,6 +2,7 @@ package fr.utt.isi.lo02.unoGame.model.player;
 
 import java.io.Serializable;
 import java.util.Iterator;
+import java.util.Observable;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;

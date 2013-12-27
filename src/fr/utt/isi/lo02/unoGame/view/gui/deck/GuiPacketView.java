@@ -9,6 +9,7 @@ import fr.utt.isi.lo02.unoGame.view.gui.card.GuiCardView;
 
 public abstract class GuiPacketView extends Group {
 
+    GuiCardView topCardView;
     private Stack<CardModel> cardPacket;
     private float customScale;
     private boolean flipped;
@@ -20,15 +21,15 @@ public abstract class GuiPacketView extends Group {
     }
 
     public void build () {
-        GuiCardView topCardView = new GuiCardView(this.cardPacket.peek());
-        topCardView.setPosition(super.getX(), super.getY());
-        topCardView.resize(customScale);
+        this.topCardView = new GuiCardView(this.cardPacket.peek());
+        this.topCardView.setPosition(super.getX(), super.getY());
+        this.topCardView.resize(this.customScale);
       
         if ( this.flipped ) {
-            topCardView.flipCard();
+            this.topCardView.flipCard();
         }
-        topCardView.build();
-        this.addActor(topCardView);
+        this.topCardView.build();
+        this.addActor(this.topCardView);
     }
     
     public void setCustomScale (float scale) {

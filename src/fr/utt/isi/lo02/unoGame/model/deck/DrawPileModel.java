@@ -28,6 +28,8 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> implements Serial
      * Rend la pioche instanciable une seule fois 
      */
     private static DrawPileModel uniqueInstance = null;
+    
+    private boolean drawable;
 
     /**
      * Construit l'unique pioche et ne peut être appelé qu'une seule fois. 
@@ -35,6 +37,7 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> implements Serial
      */
     private DrawPileModel () {
         super.cards = new Stack<CardModel>();
+        this.drawable = true;
 
         this.initCardsAppearsOneTimeWithSymbolAndColor();
         this.initCardsAppearsTwoTimeWithSymbolAndColor();
@@ -130,6 +133,14 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> implements Serial
     public void reshuffled () {
         super.addCards(DiscardPileModel.getUniqueInstance().reshuffled());
         super.shuffle();
+    }
+    
+    public boolean isDrawable () {
+        return this.drawable;
+    }
+    
+    public void setDrawable (boolean drawable) {
+        this.drawable = drawable;
     }
 
     /**

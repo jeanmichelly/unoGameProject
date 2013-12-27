@@ -20,8 +20,11 @@ import com.badlogic.gdx.utils.Scaling;
 
 import fr.utt.isi.lo02.unoGame.TesteurGUI;
 import fr.utt.isi.lo02.unoGame.controller.board.BoardController;
+import fr.utt.isi.lo02.unoGame.controller.board.DrawPileController;
+import fr.utt.isi.lo02.unoGame.controller.board.PlayerController;
 import fr.utt.isi.lo02.unoGame.controller.board.PlayerHandController;
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
 import fr.utt.isi.lo02.unoGame.model.language.Expression;
 import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiDiscardPileView;
 import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiDrawPileView;
@@ -42,13 +45,14 @@ public class GuiBoardScreenView implements Observer, Screen {
     private GuiDiscardPileView discardPile;
     private GuiDrawPileView drawPile;
     private GuiPlayersView players;
-    private Table saveGameTable;
+    private Table saveGameTable, notToPlayTable;
     private TweenManager tweenManager = new TweenManager();
-    private TextButton buttonSaveGame;
+    private TextButton buttonSaveGame, buttonNotToPlay;
     
     public GuiBoardScreenView (BoardModel boardModel, BoardController boardController) {
         this.boardModel = boardModel;
         this.boardController = boardController;
+        this.boardModel.addObserver(this);
     }
 
     @Override
@@ -102,10 +106,15 @@ public class GuiBoardScreenView implements Observer, Screen {
 
     public void initComponentView () {
         this.discardPile = new GuiDiscardPileView();
+
         this.drawPile = new GuiDrawPileView();
+        DrawPileController drawPileController = new DrawPileController(
+            DrawPileModel.getUniqueInstance(), this.drawPile);
+        this.drawPile.addListener(drawPileController);
         
         this.cardRibbon = new GuiRibbonView(this.boardModel.getPlayer().getPlayerHand(), this.tweenManager);
-        PlayerHandController playerHandController = new PlayerHandController(this.boardModel.getPlayer().getPlayerHand(), this.cardRibbon);
+        PlayerHandController playerHandController = new PlayerHandController(
+            this.boardModel.getPlayer().getPlayerHand(), this.cardRibbon);
         this.cardRibbon.addListener(playerHandController);
         
         this.players = new GuiPlayersView();  
@@ -122,12 +131,23 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.buttonSaveGame = new TextButton(Expression.getProperty("LABEL_SAVE_GAME"), skinMenu);
         this.buttonSaveGame.setName("SG");
         this.buttonSaveGame.pad(10, 20, 10, 20);
+        
+        PlayerController playerController = new PlayerController(BoardModel.getUniqueInstance().getPlayer());
+        this.buttonNotToPlay = new TextButton ("not to play", skinMenu);
+        this.buttonNotToPlay.setName("NTP");
+        this.buttonNotToPlay.pad(10, 20, 10, 20);
+        this.buttonNotToPlay.setVisible(false);
+        this.buttonNotToPlay.addListener(playerController);
     }
 
     public void initTables () {
         this.saveGameTable = new Table();
         this.saveGameTable.add(this.buttonSaveGame);
         this.saveGameTable.setPosition(1200, 700);
+        
+        this.notToPlayTable = new Table();
+        this.notToPlayTable.add(this.buttonNotToPlay);
+        this.notToPlayTable.setPosition(1200, 100);
     }
 
     public void initStage () {
@@ -136,7 +156,8 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.stage.addActor(this.discardPile.getTable());
         this.stage.addActor(this.drawPile);
         this.stage.addActor(this.players.getTable());
-        this.stage.addActor(saveGameTable);
+        this.stage.addActor(this.saveGameTable);
+        this.stage.addActor(this.notToPlayTable);
         Gdx.input.setInputProcessor(this.stage);
     }
 
@@ -176,7 +197,9 @@ public class GuiBoardScreenView implements Observer, Screen {
 
     @Override
     public void update (Observable o, Object arg) {
-
+        this.show();
+        if ( !DrawPileModel.getUniqueInstance().isDrawable() )
+            this.buttonNotToPlay.setVisible(true);
     }
     
 }

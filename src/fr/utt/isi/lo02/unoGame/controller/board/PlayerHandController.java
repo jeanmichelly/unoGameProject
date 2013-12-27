@@ -5,9 +5,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.PlayerHandModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
-import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
 import fr.utt.isi.lo02.unoGame.view.gui.card.GuiCardView;
 import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiRibbonView;
 
@@ -31,8 +31,10 @@ public class PlayerHandController extends InputListener {
                     && this.cardRibbon.isSelected(cardView) && cardView.isHighlited() ) {
                 try {
                     BoardModel.getUniqueInstance().getPlayer().putDownCard(cardView.getZIndex());
+                    DrawPileModel.getUniqueInstance().setDrawable(true);
                     BoardModel.getUniqueInstance().moveCursorToNextPlayer();
-                    GuiMasterView.setScreen(3);
+                    BoardModel.getUniqueInstance().setChanged();
+                    BoardModel.getUniqueInstance().notifyObservers();
                 } catch (InvalidActionPutDownCardException e) {
                     e.printStackTrace();
                 }
