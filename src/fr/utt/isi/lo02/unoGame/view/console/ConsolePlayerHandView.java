@@ -44,6 +44,8 @@ public class ConsolePlayerHandView implements Observer {
 
     @Override
     public void update (Observable o, Object arg) {
+        if ( arg instanceof String && arg.equals("CC") )
+            ConsolePlayerHandView.ConsolePlayerHandController.chooseColor();
         ConsoleDeckView.build(BoardModel.getUniqueInstance().getPlayer().getPlayerHand().getCards());   
     }
     

@@ -14,7 +14,7 @@ public class GuiDiscardPileView extends GuiPacketView {
         this.discardPileTable = new Table();
         this.discardPileTable.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         this.discardPileTable.add(this);
-        this.discardPileTable.getCell(this).pad(0,40,0,40);
+        this.discardPileTable.getCell(this).pad(0, 40, 0, 40);
         this.discardPileTable.debug();
     }
     

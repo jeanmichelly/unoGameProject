@@ -245,9 +245,9 @@ public class BoardModel extends Observable implements Serializable {
 	 */
 	public void applyCardEffect () throws InvalidActionPickCardException, 
 	                                      InvalidColorModelException {
-	    
-	    DiscardPileModel.getUniqueInstance().peek().getCompositeEffects().applyEffect();
+
 	    DiscardPileModel.getUniqueInstance().setApplyEffectLastCard(true);
+	    DiscardPileModel.getUniqueInstance().peek().getCompositeEffects().applyEffect();
 	}
     
 	/**

@@ -22,7 +22,8 @@ public class WildEffectModel extends ComponentEffectModel implements Serializabl
 
     /**
      * Applique l'effet pour choisir une couleur
-     */      public void applyEffect () throws InvalidColorModelException {
+     */      
+    public void applyEffect () throws InvalidColorModelException {
         BoardModel.getUniqueInstance().getPlayer().chooseColor();
     }
     

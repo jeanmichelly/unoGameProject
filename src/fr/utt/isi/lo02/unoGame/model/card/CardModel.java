@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import fr.utt.isi.lo02.unoGame.model.card.effect.ComponentEffectModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.CompositeEffectModel;
+import fr.utt.isi.lo02.unoGame.model.card.effect.WildEffectModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
 
@@ -64,6 +65,13 @@ public class CardModel implements Serializable {
     public boolean isPlayableCard (CardModel card) {
         if ( this.color==null || this.symbol.equals(card.getSymbol()) || this.color.equals(card.getColor()) )
             return true;
+        return false;
+    }
+    
+    public boolean hasWildEffect () {
+        for ( ComponentEffectModel effect : compositeEffects.getEffects() )
+            if ( effect instanceof WildEffectModel )
+                return true;
         return false;
     }
 

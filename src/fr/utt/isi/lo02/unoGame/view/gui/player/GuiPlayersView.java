@@ -27,6 +27,9 @@ public class GuiPlayersView {
     }
     
     public void build () {
+        Label cellEmpty = new Label("", skinBoard, "playerName");
+        cellEmpty.setFontScale(0.7f);
+        this.playersTable.add(cellEmpty);
         for ( PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers() ) {
             Label score = new Label(String.valueOf(playerModel.getScore()), skinBoard, "playerName");
             score.setFontScale(0.7f);
@@ -34,23 +37,26 @@ public class GuiPlayersView {
         }
         
         this.playersTable.row();
+        Label antiClockWiseDirection = new Label("", skinBoard, "playerName");
+        antiClockWiseDirection.setFontScale(0.7f);
         if ( BoardModel.getUniqueInstance().getDirectionOfPlay() == -1 ) {
-            Label numberCards = new Label("<-----", skinBoard, "playerName");
-            numberCards.setFontScale(0.7f);
-            this.playersTable.add(numberCards);
+            antiClockWiseDirection.setText("<-----");
         }
+        this.playersTable.add(antiClockWiseDirection);
+
         for ( PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers() ) {
             GuiPlayerView playerView = new GuiPlayerView(playerModel);
             this.playersTable.add(playerView);
             this.playersTable.getCell(playerView).pad(0,18,0,18);
         }
         if ( BoardModel.getUniqueInstance().getDirectionOfPlay() == 1 ) {
-            Label numberCards = new Label("----->", skinBoard, "playerName");
-            numberCards.setFontScale(0.7f);
-            this.playersTable.add(numberCards);
+            Label clockWiseDirection = new Label("----->", skinBoard, "playerName");
+            clockWiseDirection.setFontScale(0.7f);
+            this.playersTable.add(clockWiseDirection);
         }
         
         this.playersTable.row();
+        this.playersTable.add(cellEmpty);
         for ( PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers() ) {
             Label pseudonym = new Label(playerModel.getPseudonym(), skinBoard, "playerName");
             pseudonym.setFontScale(0.7f);
@@ -58,6 +64,7 @@ public class GuiPlayersView {
         }   
         
         this.playersTable.row();
+        this.playersTable.add(cellEmpty);
         for ( PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers() ) {
             Label numberCards = new Label(String.valueOf(playerModel.getPlayerHand().getCards().size()), skinBoard, "playerName");
             numberCards.setFontScale(0.7f);
@@ -65,6 +72,7 @@ public class GuiPlayersView {
         }   
         
         this.playersTable.row();
+        this.playersTable.add(cellEmpty);
         for ( PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers() ) {
             Label cursorPlayer = new Label("", skinBoard, "playerName");
             if ( playerModel == BoardModel.getUniqueInstance().getPlayer() )

@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -24,7 +25,10 @@ import fr.utt.isi.lo02.unoGame.controller.board.DrawPileController;
 import fr.utt.isi.lo02.unoGame.controller.board.PlayerController;
 import fr.utt.isi.lo02.unoGame.controller.board.PlayerHandController;
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
+import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.model.language.Expression;
 import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiDiscardPileView;
 import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiDrawPileView;
@@ -45,9 +49,11 @@ public class GuiBoardScreenView implements Observer, Screen {
     private GuiDiscardPileView discardPile;
     private GuiDrawPileView drawPile;
     private GuiPlayersView players;
-    private Table saveGameTable, notToPlayTable;
+    private Image choiceColors;
+    private Table saveGameTable, notToPlayTable, choiceColorsTable;
     private TweenManager tweenManager = new TweenManager();
     private TextButton buttonSaveGame, buttonNotToPlay;
+    public static boolean colors = false;
     
     public GuiBoardScreenView (BoardModel boardModel, BoardController boardController) {
         this.boardModel = boardModel;
@@ -133,11 +139,18 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.buttonSaveGame.pad(10, 20, 10, 20);
         
         PlayerController playerController = new PlayerController(BoardModel.getUniqueInstance().getPlayer());
-        this.buttonNotToPlay = new TextButton ("not to play", skinMenu);
+        this.buttonNotToPlay = new TextButton ("Next", skinMenu);
         this.buttonNotToPlay.setName("NTP");
         this.buttonNotToPlay.pad(10, 20, 10, 20);
         this.buttonNotToPlay.setVisible(false);
         this.buttonNotToPlay.addListener(playerController);
+
+        Texture colorsTexture = new Texture(Gdx.files.internal("ressources/img/card/colors.png"));
+        this.choiceColors = new Image(colorsTexture);
+        this.choiceColors.setBounds(0, 0, 200, 200);
+        this.choiceColors.setName("CC");
+        this.choiceColors.addListener(playerController);
+        this.choiceColors.setVisible(colors);
     }
 
     public void initTables () {
@@ -148,6 +161,11 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.notToPlayTable = new Table();
         this.notToPlayTable.add(this.buttonNotToPlay);
         this.notToPlayTable.setPosition(1200, 100);
+        
+        this.choiceColorsTable = new Table();
+        this.choiceColorsTable.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        this.choiceColorsTable.add(choiceColors);
+        this.choiceColorsTable.getCell(choiceColors).pad(0, 40, 0, 40);
     }
 
     public void initStage () {
@@ -158,6 +176,9 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.stage.addActor(this.players.getTable());
         this.stage.addActor(this.saveGameTable);
         this.stage.addActor(this.notToPlayTable);
+        
+        this.stage.addActor(this.choiceColorsTable);
+
         Gdx.input.setInputProcessor(this.stage);
     }
 
@@ -197,9 +218,25 @@ public class GuiBoardScreenView implements Observer, Screen {
 
     @Override
     public void update (Observable o, Object arg) {
-        this.show();
-        if ( !DrawPileModel.getUniqueInstance().isDrawable() )
-            this.buttonNotToPlay.setVisible(true);
+        if ( arg instanceof String && arg.equals("CC") ) {
+            colors = true;
+        } else {
+            if ( !DiscardPileModel.getUniqueInstance().hasApplyEffectLastCard() ) { 
+                try {
+                    BoardModel.getUniqueInstance().applyCardEffect();
+                    BoardModel.getUniqueInstance().moveCursorToNextPlayer();
+                } catch (InvalidActionPickCardException e) {
+                    e.printStackTrace();
+                } catch (InvalidColorModelException e) {
+                    e.printStackTrace();
+                }
+            }
+            this.show();
+            if ( !DrawPileModel.getUniqueInstance().isDrawable() ) {
+                this.buttonNotToPlay.setVisible(true);
+                drawPile.setHighlited(false);
+            }
+        }
     }
     
 }
