@@ -48,6 +48,7 @@ public class GuiBoardScreenView implements Observer, Screen {
     
     public GuiBoardScreenView (BoardModel boardModel, BoardController boardController) {
         this.boardModel = boardModel;
+        this.boardModel.addObserver(this);
         this.boardController = boardController;
     }
 
@@ -176,7 +177,7 @@ public class GuiBoardScreenView implements Observer, Screen {
 
     @Override
     public void update (Observable o, Object arg) {
-
+        this.show();
     }
     
 }

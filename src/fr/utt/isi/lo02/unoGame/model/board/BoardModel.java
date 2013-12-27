@@ -235,7 +235,10 @@ public class BoardModel extends Observable implements Serializable {
 	 * @return Indice du joueur suivant
 	 */
 	public byte moveCursorToNextPlayer () {
-		return this.playerCursor = this.getToNextPlayer();
+        byte newValue = this.playerCursor = this.getToNextPlayer();
+        this.setChanged();
+        this.notifyObservers();
+        return newValue;
 	}
 	
 	/**

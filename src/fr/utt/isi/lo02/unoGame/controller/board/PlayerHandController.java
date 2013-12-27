@@ -32,12 +32,10 @@ public class PlayerHandController extends InputListener {
                 try {
                     BoardModel.getUniqueInstance().getPlayer().putDownCard(cardView.getZIndex());
                     BoardModel.getUniqueInstance().moveCursorToNextPlayer();
-                    GuiMasterView.setScreen(3);
                 } catch (InvalidActionPutDownCardException e) {
                     e.printStackTrace();
                 }
-            }
-            else if ( this.cardRibbon.getUppedCard() != null && this.cardRibbon.getUppedCard().equals(actor) 
+            } else if ( this.cardRibbon.getUppedCard() != null && this.cardRibbon.getUppedCard().equals(actor)
                     && !this.cardRibbon.isSelected(cardView) ) {
                 this.cardRibbon.setSelected(cardView);
             } else if ( cardRibbon.getUppedCard() != null && this.cardRibbon.getUppedCard().equals(actor) 
