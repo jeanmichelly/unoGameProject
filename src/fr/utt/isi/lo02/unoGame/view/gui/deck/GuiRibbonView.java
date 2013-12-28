@@ -77,6 +77,10 @@ public class GuiRibbonView extends Group {
     public GuiCardView getUppedCard() {
         return this.uppedCard;
     }
+
+    public TweenManager getTweenManager () {
+        return this.tweenManager;
+    }
     
     public void setCustomScale (float scale) {
         this.customScale = scale;

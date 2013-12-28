@@ -17,6 +17,7 @@ import fr.utt.isi.lo02.unoGame.view.gui.screen.board.GuiBoardScreenView;
 import fr.utt.isi.lo02.unoGame.view.gui.screen.board.GuiGameSettingsScreenView;
 import fr.utt.isi.lo02.unoGame.view.gui.screen.menu.GuiLanguagesScreenView;
 import fr.utt.isi.lo02.unoGame.view.gui.screen.menu.GuiMainMenuScreenView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.menu.GuiScoringScreenView;
 import fr.utt.isi.lo02.unoGame.view.gui.screen.menu.GuiSettingsScreenView;
 import fr.utt.isi.lo02.unoGame.view.gui.screen.menu.GuiSplashScreenView;
 
@@ -48,6 +49,8 @@ public class TesteurGUI {
         screens.add(settingsScreen);
         GuiLanguagesScreenView languagesScreen = new GuiLanguagesScreenView(); // 5
         screens.add(languagesScreen);
+        GuiScoringScreenView scoringScreen = new GuiScoringScreenView(); // 6
+        screens.add(scoringScreen);
         
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "UNO Game";

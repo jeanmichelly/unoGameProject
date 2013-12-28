@@ -37,6 +37,7 @@ public class GameSettingsModel extends Observable implements Serializable {
         this.numberPlayers = 2;
         this.numberHumanPlayers = 1;
         this.choiceGameRules = 's';
+        this.initPseudonymsHumanPlayers();
     }
 
     public static GameSettingsModel getUniqueInstance () {

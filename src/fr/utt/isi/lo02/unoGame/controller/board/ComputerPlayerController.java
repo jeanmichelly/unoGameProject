@@ -1,11 +1,16 @@
 package fr.utt.isi.lo02.unoGame.controller.board;
 
+import java.util.Scanner;
+
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
 
 
-public class ComputerPlayerController {
+public class ComputerPlayerController extends ClickListener {
 
     ComputerPlayerModel computerPlayerModel;
 
@@ -36,6 +41,9 @@ public class ComputerPlayerController {
         } catch (InvalidActionPickCardException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void clicked (InputEvent event, float x, float y) {
         BoardModel.getUniqueInstance().setChanged();
         BoardModel.getUniqueInstance().notifyObservers();
     }

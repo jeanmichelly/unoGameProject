@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Observable;
+import java.util.Stack;
 
 import fr.utt.isi.lo02.unoGame.model.card.effect.CompositeEffectModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.DrawEffectModel;
@@ -93,10 +94,13 @@ public class BoardModel extends Observable implements Serializable {
 	 */
 	private GameRulesModel gameRules; 
 
+	private Stack<String> playersWinnerGame = new Stack<String>(); 
+	
 	/**
 	 * Construit l'unique plateau et ne peut être appelé qu'une seule fois. 
 	 * Lors de la création du plateau, on crée également la pioche, le talon, le mode de jeu et les pénalités.
 	 */
+	
 	private BoardModel () {
 	    this.gameSettingsModel = GameSettingsModel.getUniqueInstance(); 
 	    this.drawPile = DrawPileModel.getUniqueInstance();
@@ -427,6 +431,10 @@ public class BoardModel extends Observable implements Serializable {
     
     public DrawPileModel getDrawPile () {
         return this.drawPile;
+    }
+    
+    public Stack<String> getPlayersWinnerGame () {
+        return this.playersWinnerGame;
     }
     
     /**

@@ -2,6 +2,7 @@ package fr.utt.isi.lo02.unoGame.view.gui.screen.board;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Scanner;
 
 import aurelienribon.tweenengine.TweenManager;
 
@@ -26,6 +27,7 @@ import fr.utt.isi.lo02.unoGame.controller.board.DrawPileController;
 import fr.utt.isi.lo02.unoGame.controller.board.HumanPlayerController;
 import fr.utt.isi.lo02.unoGame.controller.board.PlayerHandController;
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
@@ -33,6 +35,8 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.model.language.Expression;
 import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
 import fr.utt.isi.lo02.unoGame.model.player.HumanPlayerModel;
+import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
+import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
 import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiDiscardPileView;
 import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiDrawPileView;
 import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiRibbonView;
@@ -53,9 +57,9 @@ public class GuiBoardScreenView implements Observer, Screen {
     private GuiDrawPileView drawPile;
     private GuiPlayersView players;
     private Image choiceColors;
-    private Table saveGameTable, notToPlayTable, choiceColorsTable;
+    private Table saveGameTable, notToPlayTable, choiceColorsTable, computerTable;
     private TweenManager tweenManager = new TweenManager();
-    private TextButton buttonSaveGame, buttonNotToPlay;
+    private TextButton buttonSaveGame, buttonNotToPlay, buttonComputer;
     public static boolean colors = false;
     
     public GuiBoardScreenView (BoardModel boardModel, BoardController boardController) {
@@ -118,7 +122,8 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.drawPile = new GuiDrawPileView();
         this.cardRibbon = new GuiRibbonView(this.boardModel.getPlayer().getPlayerHand(), this.tweenManager);
         
-        if ( BoardModel.getUniqueInstance().getPlayer() instanceof HumanPlayerModel ) {
+        if ( BoardModel.getUniqueInstance().getPlayer() instanceof HumanPlayerModel 
+                && !colors ) {
             DrawPileController drawPileController = new DrawPileController(
                     DrawPileModel.getUniqueInstance(), this.drawPile);
                 this.drawPile.addListener(drawPileController);
@@ -172,6 +177,16 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.choiceColorsTable.add(choiceColors);
         this.choiceColorsTable.getCell(choiceColors).pad(0, 40, 0, 40);
     }
+    
+    public void initComputer () {
+        this.buttonComputer = new TextButton(Expression.getProperty("BUTTON_NEXT"), skinMenu);
+        this.buttonComputer.setName("BC");
+        this.buttonComputer.pad(10, 20, 10, 20);
+        this.computerTable = new Table();
+        this.computerTable.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()-280);
+        this.computerTable.add(this.buttonComputer);
+        this.computerTable.getCell(buttonComputer).pad(0, 40, 0, 40);
+    }
 
     public void initStage () {
         this.stage = new Stage();
@@ -183,6 +198,8 @@ public class GuiBoardScreenView implements Observer, Screen {
             this.stage.addActor(this.saveGameTable);
             this.stage.addActor(this.notToPlayTable);
             this.stage.addActor(this.choiceColorsTable);
+        } else {
+            this.stage.addActor(this.computerTable);
         }
         Gdx.input.setInputProcessor(this.stage);
     }
@@ -200,8 +217,10 @@ public class GuiBoardScreenView implements Observer, Screen {
             initTables();
             initListener();
         } else {
+            initComputer();
             ComputerPlayerController computerPlayerController = new ComputerPlayerController(
                     (ComputerPlayerModel)BoardModel.getUniqueInstance().getPlayer());
+            this.buttonComputer.addListener(computerPlayerController);
             computerPlayerController.play();
         }
         initStage();
@@ -226,11 +245,12 @@ public class GuiBoardScreenView implements Observer, Screen {
     public void dispose () {
 
     }
-
-    @Override
-    public void update (Observable o, Object arg) {
-        if ( arg instanceof String && arg.equals("CC") ) {
+    
+    private void roundNotFinish () {
+        if ( DiscardPileModel.getUniqueInstance().peek().getColor() == null
+                && BoardModel.getUniqueInstance().getPlayer() instanceof HumanPlayerModel ) {
             colors = true;
+            this.show();
         } else {
             if ( !DiscardPileModel.getUniqueInstance().hasApplyEffectLastCard() ) { 
                 try {
@@ -239,12 +259,50 @@ public class GuiBoardScreenView implements Observer, Screen {
                     e.printStackTrace();
                 }
             }
-            BoardModel.getUniqueInstance().moveCursorToNextPlayer();
+            
             this.show();
             if ( !DrawPileModel.getUniqueInstance().isDrawable() ) {
                 this.buttonNotToPlay.setVisible(true);
                 drawPile.setHighlited(false);
             }
+        }
+    }
+    
+    private void roundFinish () {
+        try {
+            BoardModel.getUniqueInstance().applyCardEffect();// Le joueur a forcément posé une carte
+        } catch (InvalidActionPickCardException | InvalidColorModelException e) {
+            e.printStackTrace();
+        } 
+        
+        // Si les effets de la dernière carte a changé le curseur alors on remet 
+        // le cursor en gagnant
+        for (int i=0; i<BoardModel.getUniqueInstance().getPlayers().length; i++) {
+            if ( BoardModel.getUniqueInstance().getPlayer(i)
+                    .getPlayerHand().getCards().size() == 0 ) {
+                BoardModel.getUniqueInstance().setPlayerCursor((byte)i);
+            }
+        }
+                
+        BoardModel.getUniqueInstance().getGameRules().countScore();
+        if ( BoardModel.getUniqueInstance().getGameRules().isWinner() ) {
+            BoardModel.getUniqueInstance().getPlayersWinnerGame()
+                .push(BoardModel.getUniqueInstance().getPlayer().getPseudonym());
+        }
+        GuiMasterView.setScreen(6);
+    }
+    
+    private void controlStateRound () {
+        if ( !BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasNotCard() )
+            roundNotFinish();
+        else
+            roundFinish();
+    }
+
+    @Override
+    public void update (Observable o, Object arg) {
+        if ( !(arg instanceof String && arg.equals("CC")) ) {
+            controlStateRound();
         }
     }
     
