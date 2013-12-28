@@ -260,6 +260,9 @@ public class GuiBoardScreenView implements Observer, Screen {
                 }
             }
             
+            if ( !(DiscardPileModel.getUniqueInstance().peek().getSymbol() == SymbolModel.REVERSE) ) {
+                BoardModel.getUniqueInstance().moveCursorToNextPlayer();
+            }
             this.show();
             if ( !DrawPileModel.getUniqueInstance().isDrawable() ) {
                 this.buttonNotToPlay.setVisible(true);
