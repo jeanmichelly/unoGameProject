@@ -57,10 +57,10 @@ public class GuiBoardScreenView implements Observer, Screen {
     private GuiDrawPileView drawPile;
     private GuiPlayersView players;
     private Image choiceColors;
-    private Table saveGameTable, notToPlayTable, choiceColorsTable, computerTable;
+    private Table saveGameTable, notToPlayTable, choiceColorsTable, computerTable, unoTable;
     private TweenManager tweenManager = new TweenManager();
-    private TextButton buttonSaveGame, buttonNotToPlay, buttonComputer;
-    public static boolean colors = false;
+    private TextButton buttonSaveGame, buttonUno, buttonAgainstUno, buttonNotToPlay, buttonComputer;
+    public static boolean uno;
     
     public GuiBoardScreenView (BoardModel boardModel, BoardController boardController) {
         this.boardModel = boardModel;
@@ -123,7 +123,7 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.cardRibbon = new GuiRibbonView(this.boardModel.getPlayer().getPlayerHand(), this.tweenManager);
         
         if ( BoardModel.getUniqueInstance().getPlayer() instanceof HumanPlayerModel 
-                && !colors ) {
+                && DiscardPileModel.getUniqueInstance().peek().getColor() != null ) {
             DrawPileController drawPileController = new DrawPileController(
                     DrawPileModel.getUniqueInstance(), this.drawPile);
                 this.drawPile.addListener(drawPileController);
@@ -143,16 +143,26 @@ public class GuiBoardScreenView implements Observer, Screen {
     }
 
     public void initButtons () {
-        this.buttonSaveGame = new TextButton(Expression.getProperty("LABEL_SAVE_GAME"), skinMenu);
+        this.buttonSaveGame = new TextButton(Expression.getProperty("BUTTON_SAVE_GAME"), skinMenu);
         this.buttonSaveGame.setName("SG");
         this.buttonSaveGame.pad(10, 20, 10, 20);
+        
+        this.buttonUno = new TextButton(Expression.getProperty("BUTTON_UNO"), skinMenu);
+        this.buttonUno.setName("BU");
+        this.buttonUno.pad(10, 20, 10, 20);
+        
+        this.buttonAgainstUno = new TextButton(Expression.getProperty("BUTTON_AGAINST_UNO"), skinMenu);
+        this.buttonAgainstUno.setName("BAU");
+        this.buttonAgainstUno.pad(10, 20, 10, 20);
         
         HumanPlayerController humanPlayerController = new HumanPlayerController(
                 (HumanPlayerModel)BoardModel.getUniqueInstance().getPlayer());
         this.buttonNotToPlay = new TextButton ("Next", skinMenu);
         this.buttonNotToPlay.setName("NTP");
         this.buttonNotToPlay.pad(10, 20, 10, 20);
-        this.buttonNotToPlay.setVisible(false);
+        
+        this.buttonUno.addListener(humanPlayerController);
+        this.buttonAgainstUno.addListener(humanPlayerController);
         this.buttonNotToPlay.addListener(humanPlayerController);
 
         Texture colorsTexture = new Texture(Gdx.files.internal("ressources/img/card/colors.png"));
@@ -160,13 +170,22 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.choiceColors.setBounds(0, 0, 200, 200);
         this.choiceColors.setName("CC");
         this.choiceColors.addListener(humanPlayerController);
-        this.choiceColors.setVisible(colors);
+        this.choiceColors.setVisible(false);
+        if ( DiscardPileModel.getUniqueInstance().peek().getColor() == null )
+            this.choiceColors.setVisible(true);
     }
 
     public void initTables () {
         this.saveGameTable = new Table();
         this.saveGameTable.add(this.buttonSaveGame);
         this.saveGameTable.setPosition(1200, 700);
+        
+        uno = false;
+        this.unoTable = new Table();
+        this.unoTable.add(this.buttonUno);
+        this.unoTable.setPosition(200, 400);
+        this.unoTable.add(this.buttonAgainstUno);
+        this.unoTable.setPosition(200, 400);
         
         this.notToPlayTable = new Table();
         this.notToPlayTable.add(this.buttonNotToPlay);
@@ -196,6 +215,7 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.stage.addActor(this.players.getTable());
         if ( BoardModel.getUniqueInstance().getPlayer() instanceof HumanPlayerModel ) {
             this.stage.addActor(this.saveGameTable);
+            this.stage.addActor(this.unoTable);
             this.stage.addActor(this.notToPlayTable);
             this.stage.addActor(this.choiceColorsTable);
         } else {
@@ -249,7 +269,6 @@ public class GuiBoardScreenView implements Observer, Screen {
     private void roundNotFinish () {
         if ( DiscardPileModel.getUniqueInstance().peek().getColor() == null
                 && BoardModel.getUniqueInstance().getPlayer() instanceof HumanPlayerModel ) {
-            colors = true;
             this.show();
         } else {
             if ( !DiscardPileModel.getUniqueInstance().hasApplyEffectLastCard() ) { 
@@ -260,7 +279,8 @@ public class GuiBoardScreenView implements Observer, Screen {
                 }
             }
             
-            if ( !(DiscardPileModel.getUniqueInstance().peek().getSymbol() == SymbolModel.REVERSE) ) {
+            if ( !(BoardModel.getUniqueInstance().getPlayers().length == 2
+                    && DiscardPileModel.getUniqueInstance().peek().getSymbol() == SymbolModel.REVERSE) ) {
                 BoardModel.getUniqueInstance().moveCursorToNextPlayer();
             }
             this.show();

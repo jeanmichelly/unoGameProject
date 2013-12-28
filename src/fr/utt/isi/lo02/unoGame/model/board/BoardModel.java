@@ -262,8 +262,6 @@ public class BoardModel extends Observable implements Serializable {
         for (int i=0; i<this.players.length; i++) {
             if ( this.players[i].getUno() ) {
                 this.penaltys[0].applyEffect(i);
-                this.setChanged();
-                this.notifyObservers();
                 ConsoleBoardView.update(this.players[i].getPseudonym()+" a pioche 2 cartes\n");
                 this.players[i].setUno(false);
             }

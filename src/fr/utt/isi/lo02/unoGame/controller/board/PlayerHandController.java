@@ -10,6 +10,7 @@ import fr.utt.isi.lo02.unoGame.model.deck.PlayerHandModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
 import fr.utt.isi.lo02.unoGame.view.gui.card.GuiCardView;
 import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiRibbonView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.board.GuiBoardScreenView;
 
 public class PlayerHandController extends InputListener {
         
@@ -30,6 +31,10 @@ public class PlayerHandController extends InputListener {
             if ( this.cardRibbon.getUppedCard() != null && this.cardRibbon.getUppedCard().equals(actor) 
                     && this.cardRibbon.isSelected(cardView) && cardView.isHighlited() ) {
                 try {
+                    if ( BoardModel.getUniqueInstance().getPlayer().getPlayerHand().numberCards() == 2 
+                            && !BoardModel.getUniqueInstance().getPlayer().getUno() && !GuiBoardScreenView.uno ) {
+                        BoardModel.getUniqueInstance().getPlayer().canReceiveAgainstUno();
+                    }
                     BoardModel.getUniqueInstance().getPlayer().putDownCard(cardView.getZIndex());
                     DrawPileModel.getUniqueInstance().setDrawable(true);
                     BoardModel.getUniqueInstance().setChanged();
