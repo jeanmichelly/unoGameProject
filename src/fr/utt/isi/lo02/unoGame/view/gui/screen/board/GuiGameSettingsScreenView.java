@@ -100,13 +100,14 @@ public class GuiGameSettingsScreenView implements Screen, Observer {
         this.selectBoxNumberPlayers.setName("NP");
         this.selectBoxNumberPlayers.setSelection(gameSettingsModel.getNumberPlayers()-GameRulesModel.NUMBER_PLAYERS_MIN);
         
-        int numberHumanPlayersTotal = gameSettingsModel.getNumberPlayers()-GameRulesModel.NUMBER_PLAYERS_MIN+1;
+        int numberHumanPlayersTotal = gameSettingsModel.getNumberPlayers();
         String [] choiceNumberHumanPlayers = new String [numberHumanPlayersTotal];
-        for ( int i=0, j=GameRulesModel.NUMBER_PLAYERS_MIN; i<numberHumanPlayersTotal; i++, j++) {
-            choiceNumberHumanPlayers[i] = String.valueOf(j);
+        for ( int i=1; i<=numberHumanPlayersTotal; i++) {
+            choiceNumberHumanPlayers[i-1] = String.valueOf(i);
         }
         this.selectBoxNumberHumanPlayers = new SelectBox(choiceNumberHumanPlayers, skin);
         this.selectBoxNumberHumanPlayers.setName("NHP");
+        this.selectBoxNumberHumanPlayers.setSelection(gameSettingsModel.getNumberHumanPlayers()-1);
     }
     
     public void initCheckBoxes () {

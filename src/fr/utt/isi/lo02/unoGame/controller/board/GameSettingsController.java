@@ -68,7 +68,7 @@ public class GameSettingsController {
             try {
                 boardModel.initHumanPlayers();
             } catch ( ArrayIndexOutOfBoundsException e ) {
-                gameSettingsModel.setNumberHumanPlayers((byte)2);
+                gameSettingsModel.setNumberHumanPlayers((byte)1);
                 boardModel.initHumanPlayers();
             }
             boardModel.initComputerPlayers();
@@ -95,6 +95,10 @@ public class GameSettingsController {
                     case "NP" :
                         SelectBox selectBoxNumberPlayers = (SelectBox) actor;
                         int numberOfPlayers = Integer.parseInt(selectBoxNumberPlayers.getSelection());
+                        if ( numberOfPlayers < gameSettingsModel.getNumberPlayers() && 
+                                gameSettingsModel.getNumberHumanPlayers() > numberOfPlayers ) {
+                            gameSettingsModel.initNumberHumanPlayers((byte)numberOfPlayers);
+                        }
                         gameSettingsModel.initNumberPlayers((byte)numberOfPlayers);
                         gameSettingsModel.setChanged();
                         gameSettingsModel.notifyObservers();

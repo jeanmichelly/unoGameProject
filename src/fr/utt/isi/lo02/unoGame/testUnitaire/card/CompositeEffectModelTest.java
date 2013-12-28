@@ -21,6 +21,8 @@ import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
+import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
+import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayerHandView;
 
 public class CompositeEffectModelTest {
 
@@ -53,7 +55,7 @@ public class CompositeEffectModelTest {
         assertNull(DiscardPileModel.getUniqueInstance().peek().getColor());
         
         board.applyCardEffect();
-        
+        ConsolePlayerHandView.ConsolePlayerHandController.chooseColor();
         assertEquals(11, board.getPlayer(0).getPlayerHand().numberCards()); // Verifie si le joueur suivant a 4 carte en plus     
 
         assertNotNull(DiscardPileModel.getUniqueInstance().peek().getColor()); // Verifie la couleur

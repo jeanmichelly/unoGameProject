@@ -3,7 +3,6 @@ package fr.utt.isi.lo02.unoGame.model.player;
 import java.io.Serializable;
 import java.util.Iterator;
 
-import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
@@ -14,7 +13,6 @@ import fr.utt.isi.lo02.unoGame.model.player.strategy.PriorityNumberStrategyModel
 import fr.utt.isi.lo02.unoGame.model.player.strategy.PrioritySpecialityStrategyModel;
 import fr.utt.isi.lo02.unoGame.model.player.strategy.RandomStrategyModel;
 import fr.utt.isi.lo02.unoGame.model.player.strategy.StrategyModel;
-import fr.utt.isi.lo02.unoGame.view.console.ConsolePlayerHandView;
 
 /**
  * Représente les joueurs ordinateurs. 

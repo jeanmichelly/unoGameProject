@@ -22,6 +22,7 @@ public class PriorityNumberStrategyModelTest {
         // Mettre que des joueurs ordinateurs pour pouvoir tester
         BoardModel board = BoardModel.getUniqueInstance();
         GameSettingsModel.getUniqueInstance().initNumberPlayers((byte)3);
+        GameSettingsModel.getUniqueInstance().initNumberHumanPlayers((byte)0);
         board.createPlayers();
         board.initComputerPlayers();
         board.setPlayerCursor((byte)0);

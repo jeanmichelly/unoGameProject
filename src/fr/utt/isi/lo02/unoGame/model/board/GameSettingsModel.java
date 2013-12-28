@@ -35,7 +35,7 @@ public class GameSettingsModel extends Observable implements Serializable {
     private GameSettingsModel () {
         this.pseudonymsHumanPlayers = new Stack<String>();
         this.numberPlayers = 2;
-        this.numberHumanPlayers = 2;
+        this.numberHumanPlayers = 1;
         this.choiceGameRules = 's';
     }
 

@@ -12,7 +12,7 @@ public class GameSettingsTest {
 
     @Test
     public void initHumanPlayersTest () {
-        GameSettingsModel.getUniqueInstance().initNumberHumanPlayers((byte)3);
+        GameSettingsModel.getUniqueInstance().initNumberHumanPlayers((byte)10);
         GameSettingsModel.getUniqueInstance().initPseudonymsHumanPlayers();
                 
         assertEquals(GameSettingsModel.getUniqueInstance().getNumberHumanPlayers(), 
