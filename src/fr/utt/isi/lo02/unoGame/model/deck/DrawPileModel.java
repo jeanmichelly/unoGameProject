@@ -5,10 +5,14 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.board.GameSettingsModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
+import fr.utt.isi.lo02.unoGame.model.card.effect.ComponentEffectModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.CompositeEffectModel;
+import fr.utt.isi.lo02.unoGame.model.card.effect.ReverseEffectModel;
+import fr.utt.isi.lo02.unoGame.model.card.effect.SkipEffectModel;
 import fr.utt.isi.lo02.unoGame.model.exception.DrawPileIsEmptyAfterReshuffledException;
 import fr.utt.isi.lo02.unoGame.model.gameRules.GameRulesModel;
 import fr.utt.isi.lo02.unoGame.view.console.ConsoleBoardView;
@@ -42,12 +46,7 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> implements Serial
     private DrawPileModel () {
         super.cards = new Stack<CardModel>();
         this.drawable = true;
-
-        this.initCardsAppearsOneTimeWithSymbolAndColor();
-        this.initCardsAppearsTwoTimeWithSymbolAndColor();
-        this.initCardsAppearsOneTimeWithSymbolAndWithoutColor();
-
-        super.shuffle();
+        initDrawPileModel();
     }
 
     /**
@@ -59,6 +58,17 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> implements Serial
             uniqueInstance = new DrawPileModel();
         
         return uniqueInstance;
+    }
+    
+    /**
+     * Elle est utile lorsque l'on change de variante de jeu
+     */
+    public void initDrawPileModel () { 
+        this.cards.clear();
+        this.initCardsAppearsOneTimeWithSymbolAndColor();
+        this.initCardsAppearsTwoTimeWithSymbolAndColor();
+        this.initCardsAppearsOneTimeWithSymbolAndWithoutColor();
+        super.shuffle();
     }
         
     /**
@@ -83,10 +93,16 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> implements Serial
         for ( int j=0; j<2; j++, i=0 ) {
             for ( SymbolModel symbol : GameRulesModel.SYMBOLS2 ) {
                 for ( ColorModel color : GameRulesModel.COLORS ) {
-                    CompositeEffectModel effects;
+                    CompositeEffectModel effects = new CompositeEffectModel();
                     switch ( symbol ) {
                         case REVERSE : 
-                            effects = new CompositeEffectModel(CompositeEffectModel.getReverseEffect());
+                            // Pour la variante de jeu à 2 joueurs
+                            if (  GameSettingsModel.getUniqueInstance().getNumberPlayers() == 2 ) {
+                                effects.addEffect(new ReverseEffectModel());
+                                effects.addEffect(new SkipEffectModel()); 
+                            } else {
+                                effects = new CompositeEffectModel(CompositeEffectModel.getReverseEffect());    
+                            }
                             break;
                         case DRAW_TWO :
                             effects = new CompositeEffectModel(CompositeEffectModel.getDrawTwoEffect());

@@ -284,12 +284,7 @@ public class GuiBoardScreenView implements Observer, Screen {
                     e.printStackTrace();
                 }
             }
-            
-            if ( !(BoardModel.getUniqueInstance().getPlayers().length == 2
-                    && DiscardPileModel.getUniqueInstance().peek().getSymbol() == SymbolModel.REVERSE
-                    && DrawPileModel.getUniqueInstance().isDrawable()) ) {
-                BoardModel.getUniqueInstance().moveCursorToNextPlayer();
-            }
+            BoardModel.getUniqueInstance().moveCursorToNextPlayer();
             this.show();
         }
     }

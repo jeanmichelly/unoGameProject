@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.board.GameSettingsModel;
+import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
 
@@ -61,10 +62,11 @@ public class GameSettingsController {
         
         public void createGame() throws InvalidActionPickCardException {
             gameSettingsModel.initPseudonymsHumanPlayers();
-            
             BoardModel boardModel = BoardModel.getUniqueInstance();
             boardModel.initGameRules();
             boardModel.createPlayers();
+            // Permet de réinitialiser les cartes selon le mode de jeu
+            DrawPileModel.getUniqueInstance().initDrawPileModel();
             try {
                 boardModel.initHumanPlayers();
             } catch ( ArrayIndexOutOfBoundsException e ) {
