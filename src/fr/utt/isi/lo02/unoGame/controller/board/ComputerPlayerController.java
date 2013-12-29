@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
 
@@ -26,6 +27,7 @@ public class ComputerPlayerController extends ClickListener {
             
             if ( !computerPlayerModel.getPlayerHand().hasPlayableCard() ) {
                 computerPlayerModel.pickCard();
+                DrawPileModel.getUniqueInstance().setDrawable(false);
             } else {
             // Si le joueur suivant lui reste peu de carte, le joueur ordinateur joue agressif !
                 if ( BoardModel.getUniqueInstance().getNextPlayer().getPlayerHand().numberCards() < 3 ) {
@@ -44,6 +46,7 @@ public class ComputerPlayerController extends ClickListener {
     }
     
     public void clicked (InputEvent event, float x, float y) {
+        DrawPileModel.getUniqueInstance().setDrawable(true);
         BoardModel.getUniqueInstance().setChanged();
         BoardModel.getUniqueInstance().notifyObservers();
     }

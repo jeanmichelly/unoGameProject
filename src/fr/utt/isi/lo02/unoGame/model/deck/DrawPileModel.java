@@ -29,6 +29,10 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> implements Serial
      */
     private static DrawPileModel uniqueInstance = null;
     
+    /**
+     * Indique si on peut piocher ou pas.
+     * Un joueur ne peut pas piocher plusieurs fois dans le même tour
+     */
     private boolean drawable;
 
     /**
@@ -174,7 +178,6 @@ public class DrawPileModel extends DeckModel<Stack<CardModel>> implements Serial
             if ( super.numberCards() == 1 )
                 throw new DrawPileIsEmptyAfterReshuffledException();
         }
-        
         return super.cards.pop();
     }
     

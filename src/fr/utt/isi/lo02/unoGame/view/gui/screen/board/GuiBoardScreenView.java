@@ -2,7 +2,6 @@ package fr.utt.isi.lo02.unoGame.view.gui.screen.board;
 
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Scanner;
 
 import aurelienribon.tweenengine.TweenManager;
 
@@ -35,7 +34,6 @@ import fr.utt.isi.lo02.unoGame.model.exception.InvalidColorModelException;
 import fr.utt.isi.lo02.unoGame.model.language.Expression;
 import fr.utt.isi.lo02.unoGame.model.player.ComputerPlayerModel;
 import fr.utt.isi.lo02.unoGame.model.player.HumanPlayerModel;
-import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
 import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
 import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiDiscardPileView;
 import fr.utt.isi.lo02.unoGame.view.gui.deck.GuiDrawPileView;
@@ -147,6 +145,18 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.buttonSaveGame.setName("SG");
         this.buttonSaveGame.pad(10, 20, 10, 20);
         
+        this.buttonNotToPlay = new TextButton ("Next", skinMenu);
+        this.buttonNotToPlay.setName("NTP");
+        this.buttonNotToPlay.pad(10, 20, 10, 20);
+        System.out.println(DrawPileModel.getUniqueInstance().isDrawable());
+        
+        if ( !DrawPileModel.getUniqueInstance().isDrawable() ) {
+            this.buttonNotToPlay.setVisible(true);
+            drawPile.setHighlited(false);
+        } else {
+            this.buttonNotToPlay.setVisible(false);
+        }
+        
         this.buttonUno = new TextButton(Expression.getProperty("BUTTON_UNO"), skinMenu);
         this.buttonUno.setName("BU");
         this.buttonUno.pad(10, 20, 10, 20);
@@ -157,10 +167,7 @@ public class GuiBoardScreenView implements Observer, Screen {
         
         HumanPlayerController humanPlayerController = new HumanPlayerController(
                 (HumanPlayerModel)BoardModel.getUniqueInstance().getPlayer());
-        this.buttonNotToPlay = new TextButton ("Next", skinMenu);
-        this.buttonNotToPlay.setName("NTP");
-        this.buttonNotToPlay.pad(10, 20, 10, 20);
-        
+
         this.buttonUno.addListener(humanPlayerController);
         this.buttonAgainstUno.addListener(humanPlayerController);
         this.buttonNotToPlay.addListener(humanPlayerController);
@@ -283,11 +290,8 @@ public class GuiBoardScreenView implements Observer, Screen {
                     && DiscardPileModel.getUniqueInstance().peek().getSymbol() == SymbolModel.REVERSE) ) {
                 BoardModel.getUniqueInstance().moveCursorToNextPlayer();
             }
+            
             this.show();
-            if ( !DrawPileModel.getUniqueInstance().isDrawable() ) {
-                this.buttonNotToPlay.setVisible(true);
-                drawPile.setHighlited(false);
-            }
         }
     }
     
@@ -324,7 +328,9 @@ public class GuiBoardScreenView implements Observer, Screen {
 
     @Override
     public void update (Observable o, Object arg) {
-        if ( !(arg instanceof String && arg.equals("CC")) ) {
+        if (arg instanceof String && arg.equals("ST")) {
+            this.show();
+        } else if ( !(arg instanceof String && arg.equals("CC")) ) {
             controlStateRound();
         }
     }

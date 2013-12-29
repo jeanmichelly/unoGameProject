@@ -318,6 +318,8 @@ public class BoardModel extends Observable implements Serializable {
             player.setUno(false);
         }
         DrawPileModel.getUniqueInstance().addCards(DiscardPileModel.getUniqueInstance().getCards());
+        DrawPileModel.getUniqueInstance().setDrawable(true);
+
         DiscardPileModel.getUniqueInstance().clear();
         
         DrawPileModel.getUniqueInstance().shuffle();

@@ -101,13 +101,14 @@ public class GuiScoringScreenView implements Screen {
         
         this.table.getCell(this.scoresTable).spaceBottom(20);
         this.table.row();
-        this.table.add(this.nextRound);
-        
-        this.table.getCell(this.nextRound).spaceBottom(20);
-        this.table.row();
-        this.table.add(this.nextGame);
-        
-        this.table.getCell(this.nextGame).spaceBottom(20);
+        if ( BoardModel.getUniqueInstance().getGameRules().isWinner() ) {
+            this.table.add(this.nextGame);
+            this.table.getCell(this.nextGame).spaceBottom(20);
+        }
+        else {
+            this.table.add(this.nextRound);
+            this.table.getCell(this.nextRound).spaceBottom(20);
+        }
         this.table.row();
         this.table.add(this.buttonMainMenuReturn);
     }

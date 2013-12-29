@@ -23,14 +23,14 @@ public class DrawPileController extends InputListener {
         try {
             if ( drawPileModel.isDrawable() ) {
                 BoardModel.getUniqueInstance().getPlayer().pickCard();
-                guiDrawPileView.setHighlited(false);
                 drawPileModel.setDrawable(false);
+                guiDrawPileView.setHighlited(false);
+                BoardModel.getUniqueInstance().setChanged();
+                BoardModel.getUniqueInstance().notifyObservers("ST"); // Same turn
             }
         } catch (InvalidActionPickCardException e) {
             e.printStackTrace();
         }
-        BoardModel.getUniqueInstance().setChanged();
-        BoardModel.getUniqueInstance().notifyObservers(); 
         return super.touchDown(event, x, y, pointer, button);    //To change body of overridden methods use File | Settings | File Templates.
     }
     

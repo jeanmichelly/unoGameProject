@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
+import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPutDownCardException;
 
@@ -34,6 +35,7 @@ public class RandomStrategyModel extends StrategyModel implements Serializable {
         // Laisse une chance de passer son tour si le joueur d'après a plus de 3 cartes
         if ( random == sizePlayableCards && sizePlayableCards > 3 ) { 
             BoardModel.getUniqueInstance().getPlayer().notToPlay();
+            DrawPileModel.getUniqueInstance().setDrawable(false);
         } else {
             if ( random == sizePlayableCards )
                 random--;

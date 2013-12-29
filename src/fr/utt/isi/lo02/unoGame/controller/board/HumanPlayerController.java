@@ -1,5 +1,6 @@
 package fr.utt.isi.lo02.unoGame.controller.board;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
@@ -19,9 +20,10 @@ public class HumanPlayerController extends ClickListener {
     }
     
     public void clicked (InputEvent event, float x, float y) {
-        switch ( String.valueOf(event.getListenerActor()) ) {
+        Actor actor = event.getListenerActor();
+        switch ( String.valueOf(actor) ) {
             case "NTP" :
-                BoardModel.getUniqueInstance().moveCursorToNextPlayer();
+                actor.setVisible(false);
                 DrawPileModel.getUniqueInstance().setDrawable(true);
                 BoardModel.getUniqueInstance().setChanged();
                 BoardModel.getUniqueInstance().notifyObservers();
@@ -40,6 +42,7 @@ public class HumanPlayerController extends ClickListener {
                 break; 
             case "BU" :
                 GuiBoardScreenView.uno = true;
+                BoardModel.getUniqueInstance().getPlayer().setUno(false);
                 break;
             case "BAU" :
             try {

@@ -13,7 +13,8 @@ public class GuiDrawPileView extends GuiPacketView {
     
     public void build () {
         super.build();
-        if ( !BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasPlayableCard() ) {
+        if ( !BoardModel.getUniqueInstance().getPlayer().getPlayerHand().hasPlayableCard() 
+                && DrawPileModel.getUniqueInstance().isDrawable() ) {
             setHighlited(true);
         }
     }
