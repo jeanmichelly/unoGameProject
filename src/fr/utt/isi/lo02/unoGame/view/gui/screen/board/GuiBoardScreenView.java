@@ -148,7 +148,6 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.buttonNotToPlay = new TextButton ("Next", skinMenu);
         this.buttonNotToPlay.setName("NTP");
         this.buttonNotToPlay.pad(10, 20, 10, 20);
-        System.out.println(DrawPileModel.getUniqueInstance().isDrawable());
         
         if ( !DrawPileModel.getUniqueInstance().isDrawable() ) {
             this.buttonNotToPlay.setVisible(true);
@@ -287,10 +286,10 @@ public class GuiBoardScreenView implements Observer, Screen {
             }
             
             if ( !(BoardModel.getUniqueInstance().getPlayers().length == 2
-                    && DiscardPileModel.getUniqueInstance().peek().getSymbol() == SymbolModel.REVERSE) ) {
+                    && DiscardPileModel.getUniqueInstance().peek().getSymbol() == SymbolModel.REVERSE
+                    && DrawPileModel.getUniqueInstance().isDrawable()) ) {
                 BoardModel.getUniqueInstance().moveCursorToNextPlayer();
             }
-            
             this.show();
         }
     }
@@ -303,7 +302,7 @@ public class GuiBoardScreenView implements Observer, Screen {
         } 
         
         // Si les effets de la dernière carte a changé le curseur alors on remet 
-        // le cursor en gagnant
+        // le cursor sur le gagnant
         for (int i=0; i<BoardModel.getUniqueInstance().getPlayers().length; i++) {
             if ( BoardModel.getUniqueInstance().getPlayer(i)
                     .getPlayerHand().getCards().size() == 0 ) {
