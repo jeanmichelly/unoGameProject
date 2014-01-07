@@ -58,8 +58,10 @@ public abstract class PlayerModel implements Serializable {
 	 * @throws InvalidActionPutDownCardException
 	 */
     public void putDownCard (int indexChoiceCard) throws InvalidActionPutDownCardException {
-        if ( !BoardModel.getUniqueInstance().getPlayer().getPlayerHand().getCard(indexChoiceCard).isPlayableCard() )
+        if ( !BoardModel.getUniqueInstance().getPlayer().getPlayerHand().getCard(indexChoiceCard).isPlayableCard() ) {
+        	System.out.println(BoardModel.getUniqueInstance().getPlayer().getPlayerHand().getCard(indexChoiceCard).getCard());
             throw new InvalidActionPutDownCardException();
+        }
         DiscardPileModel.getUniqueInstance().push(
                 BoardModel.getUniqueInstance().getPlayer().getPlayerHand().removeCard(indexChoiceCard)
         );

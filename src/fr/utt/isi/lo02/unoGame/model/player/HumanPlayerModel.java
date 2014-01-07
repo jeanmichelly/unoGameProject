@@ -29,7 +29,7 @@ public class HumanPlayerModel extends PlayerModel implements Serializable {
     /**
      * Permet au joueur humain de choisir une couleur
      */
-    public void chooseColor () { 
+    public void chooseColor () { // Traitement différent selon l'interface
         BoardModel.getUniqueInstance().setChanged();
         BoardModel.getUniqueInstance().notifyObservers(new String("CC"));
     }

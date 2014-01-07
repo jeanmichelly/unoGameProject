@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.language.Expression;
 import fr.utt.isi.lo02.unoGame.view.gui.GuiMasterView;
+import fr.utt.isi.lo02.unoGame.view.gui.screen.board.GuiBoardScreenView;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.SkinLoader;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureAtlasLoader;
 
@@ -135,6 +136,7 @@ public class GuiMainMenuScreenView implements Screen {
                 public void clicked (InputEvent event, float x, float y) {
                     try {
                         BoardModel.getUniqueInstance().loadBoardModel();
+                        ((GuiBoardScreenView)(GuiMasterView.getScreen(3))).loadBoardModel(BoardModel.getUniqueInstance());
                         GuiMasterView.setScreen(3);   
                     } catch (IOException e) {
                         e.printStackTrace();

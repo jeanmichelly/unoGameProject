@@ -329,4 +329,9 @@ public class GuiBoardScreenView implements Observer, Screen {
         }
     }
     
+    public void loadBoardModel (BoardModel boardModel) {
+        this.boardModel = boardModel;
+        this.boardModel.addObserver(this);    
+    }
+    
 }

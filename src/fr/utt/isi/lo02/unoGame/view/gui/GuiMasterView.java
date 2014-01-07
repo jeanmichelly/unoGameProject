@@ -23,6 +23,10 @@ public class GuiMasterView extends Game {
         Tween.registerAccessor(GuiCardView.class, new GuiCardViewAccessor());
         Tween.registerAccessor(Sprite.class, new SpriteAccessor());
     }
+    
+    public static Screen getScreen (int screenIndex) {
+        return screens.get(screenIndex);
+    }
 
     public static void setScreen (int screenIndex) {
         ((Game)Gdx.app.getApplicationListener()).setScreen(GuiMasterView.screens.get(screenIndex));
