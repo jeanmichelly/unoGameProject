@@ -44,7 +44,7 @@ public class GuiSplashScreenView implements Screen {
         this.splash = new Sprite(splashTexture);
         this.splash.setPosition(Gdx.graphics.getWidth() / 2 - this.splash.getWidth() / 2, Gdx.graphics.getHeight() / 2 - this.splash.getHeight() / 2);
 
-        Tween.set(this.splash, SpriteAccessor.ALPHA).target(0).start(this.tweenManager);
+        Tween.set(this.splash, 1000).target(0).start(this.tweenManager);
         
         this.guiSplashScreenController = new GuiSplashScreenController();
     }

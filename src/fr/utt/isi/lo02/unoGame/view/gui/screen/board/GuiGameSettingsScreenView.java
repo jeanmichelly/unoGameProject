@@ -114,13 +114,13 @@ public class GuiGameSettingsScreenView implements Screen, Observer {
         this.checkBoxesTable = new Table();
         
         CheckBox standardBox= new CheckBox(Expression.getProperty("LABEL_GAME_RULES_ORIGINAL"), skin);
-        CheckBox epicBox = new CheckBox(Expression.getProperty("LABEL_GAME_RULES_EPIC"), skin);
+        CheckBox fastGameBox = new CheckBox(Expression.getProperty("LABEL_GAME_RULES_FAST_GAME"), skin);
         
         standardBox.setName("s");
-        epicBox.setName("e");
+        fastGameBox.setName("f");
         
         this.checkBoxes[0] = standardBox;
-        this.checkBoxes[1] = epicBox;
+        this.checkBoxes[1] = fastGameBox;
         
         ButtonGroup buttonGroup = new ButtonGroup();
         

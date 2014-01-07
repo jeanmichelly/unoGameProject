@@ -1,7 +1,5 @@
 package fr.utt.isi.lo02.unoGame.controller.board;
 
-import java.util.Scanner;
-
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 

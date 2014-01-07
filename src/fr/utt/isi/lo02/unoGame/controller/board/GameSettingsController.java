@@ -130,7 +130,6 @@ public class GameSettingsController {
             if ( event.getListenerActor() instanceof CheckBox ) {
                 CheckBox checkbox = (CheckBox) event.getListenerActor();
                 gameSettingsModel.initChoiceGameRules(checkbox.getName().charAt(0));
-                System.out.println(checkbox.isChecked()+"\n"+checkbox.getName());
             }
             return true;                    
         }

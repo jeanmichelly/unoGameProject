@@ -25,6 +25,8 @@ public class GameRulesFactoryModel implements Serializable {
         switch ( GameSettingsModel.getUniqueInstance().getChoiceGameRules() ) {
             case 's' :
                 return new GameRulesStandardModel();
+            case 'f' : 
+                return new GameRulesFastGameModel();
             default :
                 return new GameRulesStandardModel();
         }

@@ -9,7 +9,6 @@ import fr.utt.isi.lo02.unoGame.model.board.GameSettingsModel;
 import fr.utt.isi.lo02.unoGame.model.card.CardModel;
 import fr.utt.isi.lo02.unoGame.model.card.ColorModel;
 import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
-import fr.utt.isi.lo02.unoGame.model.card.effect.ComponentEffectModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.CompositeEffectModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.ReverseEffectModel;
 import fr.utt.isi.lo02.unoGame.model.card.effect.SkipEffectModel;

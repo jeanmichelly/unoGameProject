@@ -29,6 +29,15 @@ public class GuiPlayersView {
     public void build () {
         Label cellEmpty = new Label("", skinBoard, "playerName");
         cellEmpty.setFontScale(0.7f);
+
+        this.playersTable.add(cellEmpty);
+        this.playersTable.add(cellEmpty);
+        Label numberGameRound = new Label("Partie n°"+BoardModel.getUniqueInstance().getNumberGame()+
+                " - Round n°"+BoardModel.getUniqueInstance().getNumberRound(), skinBoard, "playerName");
+        numberGameRound.setFontScale(0.7f);
+        this.playersTable.add(numberGameRound);
+
+        this.playersTable.row();
         this.playersTable.add(cellEmpty);
         for ( PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers() ) {
             Label score = new Label(String.valueOf(playerModel.getScore()), skinBoard, "playerName");
