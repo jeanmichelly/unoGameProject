@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 public enum ColorModel implements Serializable {
     
-    YELLOW ((byte)0, 'Y', new com.badlogic.gdx.graphics.Color(.86f, .84f,  0,    1)),
+    YELLOW ((byte)0, 'Y', new com.badlogic.gdx.graphics.Color(.91f, .84f,  0,    1)),
     RED    ((byte)1, 'R', new com.badlogic.gdx.graphics.Color(.78f, .098f, .098f,1)),
     GREEN  ((byte)2, 'G', new com.badlogic.gdx.graphics.Color(.043f,.60f,  .13f, 1)),
     BLUE   ((byte)3, 'B', new com.badlogic.gdx.graphics.Color(.098f,.35f,  .78f, 1));

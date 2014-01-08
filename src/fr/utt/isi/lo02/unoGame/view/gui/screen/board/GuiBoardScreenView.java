@@ -26,7 +26,6 @@ import fr.utt.isi.lo02.unoGame.controller.board.DrawPileController;
 import fr.utt.isi.lo02.unoGame.controller.board.HumanPlayerController;
 import fr.utt.isi.lo02.unoGame.controller.board.PlayerHandController;
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
-import fr.utt.isi.lo02.unoGame.model.card.SymbolModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DiscardPileModel;
 import fr.utt.isi.lo02.unoGame.model.deck.DrawPileModel;
 import fr.utt.isi.lo02.unoGame.model.exception.InvalidActionPickCardException;
@@ -145,7 +144,7 @@ public class GuiBoardScreenView implements Observer, Screen {
         this.buttonSaveGame.setName("SG");
         this.buttonSaveGame.pad(10, 20, 10, 20);
         
-        this.buttonNotToPlay = new TextButton ("Next", skinMenu);
+        this.buttonNotToPlay = new TextButton (Expression.getProperty("BUTTON_NOT_TO_PLAY"), skinMenu);
         this.buttonNotToPlay.setName("NTP");
         this.buttonNotToPlay.pad(10, 20, 10, 20);
         

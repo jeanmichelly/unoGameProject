@@ -44,7 +44,7 @@ public class GuiSplashScreenView implements Screen {
         this.splash = new Sprite(splashTexture);
         this.splash.setPosition(Gdx.graphics.getWidth() / 2 - this.splash.getWidth() / 2, Gdx.graphics.getHeight() / 2 - this.splash.getHeight() / 2);
 
-        Tween.set(this.splash, 1000).target(0).start(this.tweenManager);
+        Tween.set(GuiSplashScreenView.this.splash, SpriteAccessor.ALPHA).target(0).start(this.tweenManager);
         
         this.guiSplashScreenController = new GuiSplashScreenController();
     }
@@ -77,7 +77,7 @@ public class GuiSplashScreenView implements Screen {
     private class GuiSplashScreenController implements TweenCallback {
         
         public GuiSplashScreenController () { 
-            Tween.to(GuiSplashScreenView.this.splash, SpriteAccessor.ALPHA, .2f).target(1).repeatYoyo(1,.1f).setCallback(this).start(GuiSplashScreenView.this.tweenManager);
+            Tween.to(GuiSplashScreenView.this.splash, SpriteAccessor.ALPHA, .5f).target(1).repeatYoyo(1,.5f).setCallback(this).start(GuiSplashScreenView.this.tweenManager);
         }
 
         @Override

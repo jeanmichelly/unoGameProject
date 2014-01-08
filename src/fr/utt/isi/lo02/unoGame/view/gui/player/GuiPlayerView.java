@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
 import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureLoader;
 
@@ -22,14 +23,19 @@ public class GuiPlayerView extends Actor {
 
     public void build () {
         this.avatar = new Sprite(TextureLoader.TEXTURE_PLAYER_AVATAR_DEFAULT);
-        this.randomColor = new Color((float) (0.5 + (Math.random() * ((1 - 0.5) + 1))), (float) (0.5 + (Math.random() * ((1 - 0.5) + 1))), (float) (0.5 + (Math.random() * ((1 - 0.5) + 1))), 1);
     }
 
     public void draw (SpriteBatch spriteBatch, float v) {
         this.avatar.setSize(super.getWidth(), super.getHeight());
         this.avatar.setOrigin(super.getOriginX(), super.getOriginY());
         this.avatar.setPosition(super.getX(), super.getY());
-        this.avatar.setColor(randomColor);
+         
+        if ( BoardModel.getUniqueInstance().getPlayer().getPseudonym().equals(playerModel.getPseudonym()) )
+            this.avatar.setColor(new Color(0, 1f, 0, 1f));
+        else
+            this.avatar.setColor(new Color(1f, 0, 0, 1f));
+            
+        
         this.avatar.draw(spriteBatch);
     }
     

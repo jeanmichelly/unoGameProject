@@ -22,7 +22,7 @@ public class GuiSettingsScreenView implements Screen {
     private Stage stage;
     private Skin skin;
     private Label heading;
-    private TextButton buttonLanguages, buttonInstructions, buttonMainMenuReturn;
+    private TextButton buttonLanguages, buttonMainMenuReturn;
     private Table table;
     
     @Override
@@ -52,11 +52,9 @@ public class GuiSettingsScreenView implements Screen {
     public void initButtons () {
         this.buttonLanguages = new TextButton(Expression.getProperty("BUTTON_MENU_LANGUAGES"), skin);
         this.buttonMainMenuReturn = new TextButton(Expression.getProperty("BUTTON_MAIN_MENU_RETURN"), skin);
-        this.buttonInstructions= new TextButton(Expression.getProperty("BUTTON_MENU_INSTRUCTIONS"), skin);
         
         this.buttonLanguages.pad(15,40,15,40);
         this.buttonMainMenuReturn.pad(15,40,15,40);
-        this.buttonInstructions.pad(15,40,15,40);
     }
     
     public void initTable () {
@@ -70,10 +68,6 @@ public class GuiSettingsScreenView implements Screen {
         this.table.add(this.buttonLanguages);
         
         this.table.getCell(this.buttonLanguages).spaceBottom(20);
-        this.table.row();
-        this.table.add(this.buttonInstructions);
-        
-        this.table.getCell(this.buttonInstructions).spaceBottom(20);
         this.table.row();
         this.table.add(this.buttonMainMenuReturn);
     }
@@ -120,11 +114,6 @@ public class GuiSettingsScreenView implements Screen {
             GuiSettingsScreenView.this.buttonLanguages.addListener( new ClickListener() {
                 public void clicked (InputEvent event, float x, float y) {
                     GuiMasterView.setScreen(5);
-                }
-             });
-            GuiSettingsScreenView.this.buttonInstructions.addListener( new ClickListener() {
-                public void clicked (InputEvent event, float x, float y) {
-                    
                 }
              });
             GuiSettingsScreenView.this.buttonMainMenuReturn.addListener( new ClickListener() {

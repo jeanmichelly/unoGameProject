@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 import fr.utt.isi.lo02.unoGame.model.board.BoardModel;
+import fr.utt.isi.lo02.unoGame.model.language.Expression;
 import fr.utt.isi.lo02.unoGame.model.player.PlayerModel;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.SkinLoader;
 import fr.utt.isi.lo02.unoGame.view.gui.utils.TextureAtlasLoader;
@@ -32,8 +33,8 @@ public class GuiPlayersView {
 
         this.playersTable.add(cellEmpty);
         this.playersTable.add(cellEmpty);
-        Label numberGameRound = new Label("Partie n°"+BoardModel.getUniqueInstance().getNumberGame()+
-                " - Round n°"+BoardModel.getUniqueInstance().getNumberRound(), skinBoard, "playerName");
+        Label numberGameRound = new Label(Expression.getProperty("LABEL_GAME")+" n°"+BoardModel.getUniqueInstance().getNumberGame()+
+                " - "+Expression.getProperty("LABEL_ROUND")+" n°"+BoardModel.getUniqueInstance().getNumberRound(), skinBoard, "playerName");
         numberGameRound.setFontScale(0.7f);
         this.playersTable.add(numberGameRound);
 
@@ -78,16 +79,6 @@ public class GuiPlayersView {
             Label numberCards = new Label(String.valueOf(playerModel.getPlayerHand().getCards().size()), skinBoard, "playerName");
             numberCards.setFontScale(0.7f);
             this.playersTable.add(numberCards);
-        }   
-        
-        this.playersTable.row();
-        this.playersTable.add(cellEmpty);
-        for ( PlayerModel playerModel : BoardModel.getUniqueInstance().getPlayers() ) {
-            Label cursorPlayer = new Label("", skinBoard, "playerName");
-            if ( playerModel == BoardModel.getUniqueInstance().getPlayer() )
-                cursorPlayer = new Label("~•~", skinBoard, "playerName");
-            cursorPlayer.setFontScale(0.7f);
-            this.playersTable.add(cursorPlayer);
         }   
     }
     

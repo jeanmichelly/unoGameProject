@@ -34,6 +34,7 @@ public class GuiScoringScreenView implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         this.stage.act(v);
+        
         this.stage.draw();
     }
 
@@ -99,18 +100,19 @@ public class GuiScoringScreenView implements Screen {
         
         this.table.add(scoresTable);
         
-        this.table.getCell(this.scoresTable).spaceBottom(20);
+        this.table.getCell(this.scoresTable).spaceBottom(50).spaceTop(50).colspan(2);
         this.table.row();
         if ( BoardModel.getUniqueInstance().getGameRules().isWinner() ) {
             this.table.add(this.nextGame);
-            this.table.getCell(this.nextGame).spaceBottom(20);
+            this.table.getCell(this.nextGame).spaceBottom(20).colspan(2);
         }
         else {
             this.table.add(this.nextRound);
-            this.table.getCell(this.nextRound).spaceBottom(20);
+            this.table.getCell(this.nextRound).spaceBottom(20).colspan(2);
         }
         this.table.row();
         this.table.add(this.buttonMainMenuReturn);
+        this.table.getCell(this.buttonMainMenuReturn).colspan(2);
     }
     
     public void initStage () {

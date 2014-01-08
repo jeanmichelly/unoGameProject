@@ -65,9 +65,6 @@ public class GameSettingsModel extends Observable implements Serializable {
      * Initialise les pseudo associés à chaque joueur humain
      */
     public void initPseudonymsHumanPlayers () {
-        this.pseudonymsHumanPlayers.push("Pablo");
-        this.pseudonymsHumanPlayers.push("JM");
-        this.pseudonymsHumanPlayers.push("Jeremie");
         this.pseudonymsHumanPlayers.push("Cindy");
         this.pseudonymsHumanPlayers.push("Isabelle");
         this.pseudonymsHumanPlayers.push("Mario");
@@ -75,6 +72,9 @@ public class GameSettingsModel extends Observable implements Serializable {
         this.pseudonymsHumanPlayers.push("Francois");
         this.pseudonymsHumanPlayers.push("Antoine");
         this.pseudonymsHumanPlayers.push("Sabrina");
+        this.pseudonymsHumanPlayers.push("Jeremie");
+        this.pseudonymsHumanPlayers.push("Pablo");
+        this.pseudonymsHumanPlayers.push("JM");
     }
     
     /**
